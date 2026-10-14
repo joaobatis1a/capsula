@@ -127,6 +127,7 @@ Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (
 | 2. Visão do Produto e Product Goal | Redigiu a visão e o Product Goal a partir do escopo do projeto e separou fatos, hipóteses, dúvidas e riscos | Pendente de validação do time |
 | 3. Product Backlog e critérios de aceitação | Converteu as tarefas dos guias individuais em 16 itens com critérios no formato Dado/Quando/Então, propôs a ordem e criou as issues e labels | Ordem pendente de validação do PO. O pitch entrou no backlog marcado como entrega final, fora da Sprint 1 |
 | 4. Definition of Done e registros leves | Ampliou a definição de pronto do manual do colaborador para uma DoD em cinco blocos e redigiu os modelos de Review e Retrospective | Pendente de validação do time |
+| 5. Ambiente colaborativo | Configurou o quadro do GitHub Projects com colunas do Scrum, criou os modelos de PR e issue e documentou acessos | A proteção da `main` sugerida no manual não está disponível no GitHub Free para repositório privado. Virou acordo do time |
 
 ## Dados e confidencialidade
 
