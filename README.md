@@ -124,6 +124,7 @@ Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (
 | Missão | Em que a IA ajudou | O que foi corrigido ou rejeitado pelo time |
 |---|---|---|
 | 1. Organização do Scrum Team | Explicou as responsabilidades do Scrum, propôs a divisão PO/SM e redigiu o acordo de trabalho a partir do manual do colaborador | O time escolheu PO, SM e canal da daily. A IA sugeriu acumular PO e SM numa pessoa só como opção, e a ideia foi rejeitada para separar valor de processo |
+| 2. Visão do Produto e Product Goal | Redigiu a visão e o Product Goal a partir do escopo do projeto e separou fatos, hipóteses, dúvidas e riscos | Pendente de validação do time |
 
 ## Dados e confidencialidade
 
