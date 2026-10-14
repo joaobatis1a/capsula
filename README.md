@@ -44,13 +44,32 @@ O nome tem três sentidos: cápsula de remédio (o cliente é uma farmácia), c�
 
 O planejamento está pronto: escopo, guias individuais, manual do colaborador, design system e pitch. O código ainda não começou. Este repositório está na fase de estrutura inicial e vai receber o scaffold do Next.js quando o time entrar.
 
-## Equipe
+## Scrum Team
 
-| Pessoa | Frente | GitHub |
-|---|---|---|
-| João Batista (coordenação) | Frontend: Estúdio, galeria, Memória, aprovação e painel de ganho | [@joaobatis1a](https://github.com/joaobatis1a) |
-| Ivaldo | Motor criativo, templates e rotas de API (back e front) | — |
-| Hector | Backend de dados, Supabase, Radar e governança | — |
+| Pessoa | Responsabilidade no Scrum | Frente como Developer | GitHub |
+|---|---|---|---|
+| João Batista | **Product Owner** | Frontend: Estúdio, galeria, Memória, aprovação, painel de ganho e pitch | [@joaobatis1a](https://github.com/joaobatis1a) |
+| Hector | **Scrum Master** | Backend de dados: Supabase, adaptador de dados, Radar e governança | — |
+| Ivaldo | Developer | Motor criativo, templates e rotas de API (back e front) | — |
+
+Num time de três, os três são Developers. PO e Scrum Master acumulam essas responsabilidades com a sua frente técnica.
+
+### Responsabilidades
+
+- **Product Owner (João Batista):** mantém e ordena o Product Backlog, escreve os critérios de aceitação com o time, aceita ou recusa os itens na Sprint Review e responde pelo valor do produto diante da banca, inclusive no pitch.
+- **Scrum Master (Hector):** facilita Planning, Review e Retrospective, acompanha a daily, remove impedimentos e garante que o acordo de trabalho e a Definition of Done sejam seguidos.
+- **Developers (os três):** definem como o trabalho é feito, quebram os itens em tasks, estimam e entregam incrementos que cumprem a Definition of Done.
+
+### Acordo de trabalho
+
+- **Daily assíncrona no grupo do WhatsApp**, todo dia até as 10h: o que fiz, o que vou fazer e o que me bloqueia. Bloqueio é marcado como **[BLOQUEIO]** e o Scrum Master responde no mesmo dia.
+- **Decisão só vale no grupo do time.** Decisão por mensagem privada não conta.
+- **Cada task tem um dono só** e fica no quadro do GitHub Projects com status atualizado.
+- **Ninguém commita direto na `main`.** Tudo entra por Pull Request revisado, no padrão descrito em [Fluxo de trabalho](#fluxo-de-trabalho-git).
+- **Revisão de PR no mesmo dia** em que ele é aberto, seguindo o rodízio João → Ivaldo → Hector → João.
+- **Travou por mais de 2 horas?** Avise no grupo em vez de esperar a daily seguinte.
+- **Confidencialidade:** nada do enunciado, nem o nome da empresa cliente, sai do time. Nenhum dado real entra no repositório e nenhuma chave entra em commit.
+- **Mudança neste acordo** é proposta na Retrospective e só vale com o aceite dos três.
 
 ## Stack
 
@@ -91,13 +110,20 @@ Chaves ficam só no `.env.local`, que nunca entra em commit.
 - **Commits:** `tipo(escopo): descrição`, por exemplo `feat(galeria): gera variações nos três formatos`
 - **Tipos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 - **Revisão:** rodízio João → Ivaldo → Hector → João; merge com **Squash and merge**
-
 O passo a passo completo (primeiro acesso, branches, commits, PRs e problemas comuns) está no Manual do Colaborador, nos documentos de planejamento do time.
 
 ## Documentação do projeto
 
 - [`docs/`](docs/) — atividades das aulas do hackathon
 - Escopo geral, guias individuais, manual do colaborador, design system e pitch — fora deste repositório, nos documentos de planejamento do time
+
+## Uso de IA generativa
+
+Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (Anthropic)**, no claude.ai e no Claude Code.
+
+| Missão | Em que a IA ajudou | O que foi corrigido ou rejeitado pelo time |
+|---|---|---|
+| 1. Organização do Scrum Team | Explicou as responsabilidades do Scrum, propôs a divisão PO/SM e redigiu o acordo de trabalho a partir do manual do colaborador | O time escolheu PO, SM e canal da daily. A IA sugeriu acumular PO e SM numa pessoa só como opção, e a ideia foi rejeitada para separar valor de processo |
 
 ## Dados e confidencialidade
 
