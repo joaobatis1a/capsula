@@ -125,6 +125,7 @@ Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (
 |---|---|---|
 | 1. Organização do Scrum Team | Explicou as responsabilidades do Scrum, propôs a divisão PO/SM e redigiu o acordo de trabalho a partir do manual do colaborador | O time escolheu PO, SM e canal da daily. A IA sugeriu acumular PO e SM numa pessoa só como opção, e a ideia foi rejeitada para separar valor de processo |
 | 2. Visão do Produto e Product Goal | Redigiu a visão e o Product Goal a partir do escopo do projeto e separou fatos, hipóteses, dúvidas e riscos | Pendente de validação do time |
+| 3. Product Backlog e critérios de aceitação | Converteu as tarefas dos guias individuais em 16 itens com critérios no formato Dado/Quando/Então, propôs a ordem e criou as issues e labels | Ordem pendente de validação do PO. O pitch entrou no backlog marcado como entrega final, fora da Sprint 1 |
 
 ## Dados e confidencialidade
 
