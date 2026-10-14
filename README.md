@@ -42,7 +42,7 @@ O nome tem três sentidos: cápsula de remédio (o cliente é uma farmácia), c�
 
 ## Status atual
 
-O planejamento está pronto: escopo, guias individuais, manual do colaborador, design system e pitch. O código ainda não começou. Este repositório está na fase de estrutura inicial e vai receber o scaffold do Next.js quando o time entrar.
+**Sprint 0 concluída** (14/10): Scrum Team, visão, Product Backlog, Definition of Done, ambiente e Sprint Planning 1 estão em [`docs/`](docs/) e no [quadro do projeto](https://github.com/users/joaobatis1a/projects/1). A **Sprint 1** vai de 15/10 a 20/10 e começa pelo scaffold do Next.js.
 
 ## Scrum Team
 
@@ -83,7 +83,13 @@ Tudo em planos gratuitos:
 ## Estrutura de pastas
 
 ```
-docs/           # atividades e entregas das aulas do hackathon
+.github/        # modelos de PR e de issue
+docs/
+  visao-produto.md          # visão e Product Goal
+  definition-of-done.md     # DoD
+  ambiente-colaborativo.md  # acessos e quadro
+  sprints/                  # planning, review e retro de cada sprint
+  templates/                # modelos de Review e Retrospective
 ```
 
 A estrutura do código (`app/`, `lib/`, `supabase/`) entra junto com o scaffold do Next.js.
@@ -128,6 +134,7 @@ Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (
 | 3. Product Backlog e critérios de aceitação | Converteu as tarefas dos guias individuais em 16 itens com critérios no formato Dado/Quando/Então, propôs a ordem e criou as issues e labels | Ordem pendente de validação do PO. O pitch entrou no backlog marcado como entrega final, fora da Sprint 1 |
 | 4. Definition of Done e registros leves | Ampliou a definição de pronto do manual do colaborador para uma DoD em cinco blocos e redigiu os modelos de Review e Retrospective | Pendente de validação do time |
 | 5. Ambiente colaborativo | Configurou o quadro do GitHub Projects com colunas do Scrum, criou os modelos de PR e issue e documentou acessos | A proteção da `main` sugerida no manual não está disponível no GitHub Free para repositório privado. Virou acordo do time |
+| 6. Sprint Planning 1 e tasks | Propôs as datas das sprints e o Sprint Goal 1, quebrou os itens #1 a #5 em 16 tasks com dono e criou o campo Sprint no quadro | Datas aprovadas pelo PO. As tasks precisam do aceite dos Developers, que são donos do plano de execução |
 
 ## Dados e confidencialidade
 
