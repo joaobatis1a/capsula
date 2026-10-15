@@ -50,6 +50,10 @@ describe("governança", () => {
     expect(falhas("Alívio para a congestão nasal.", { advertencia: ADVERTENCIA_MIP }, b)).toEqual([]);
   });
 
+  it("bloqueia termos que o manual de marca pede para evitar", () => {
+    expect(falhas("Protetor imperdível até 15/11.")).toContain("tom-marca");
+  });
+
   it("bloqueia diagnóstico e superlativo absoluto", () => {
     expect(falhas("Você está com gripe? Leve o melhor antigripal.")).toEqual(expect.arrayContaining(["diagnostico", "superlativo"]));
   });

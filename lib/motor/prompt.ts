@@ -1,3 +1,4 @@
+import { MARCA } from "@/lib/marca";
 import { rotular } from "@/lib/memoria/ranking";
 import { ROTULOS, type Briefing, type Canal, type Formato } from "@/types/briefing";
 import { dataCurta, mesesPorExtenso, type Contexto } from "./contexto";
@@ -28,6 +29,11 @@ export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido):
   const preco = o.precoDe && o.precoPor ? ` De R$ ${o.precoDe.toFixed(2).replace(".", ",")} por R$ ${o.precoPor.toFixed(2).replace(".", ",")}.` : "";
 
   const linhas = [
+    "## Manual de marca",
+    `Tom de voz: ${MARCA.tomDeVoz.descricao}`,
+    `Faça: ${MARCA.tomDeVoz.faca.join(" ")}`,
+    `Nunca use: ${MARCA.tomDeVoz.evite.map((t) => `"${t}"`).join(", ")}.`,
+    "",
     "## Briefing",
     `Produto: ${briefing.produto} (${briefing.categoria}, ${ROTULOS.tipoProduto[briefing.tipoProduto]})`,
     `Oferta: ${o.descricao}.${preco} Válida até ${dataCurta(o.validade)}.${o.condicao ? ` Condição: ${o.condicao}` : ""}`,

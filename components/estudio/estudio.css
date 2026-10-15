@@ -239,6 +239,28 @@ select.cp-input {
 .galeria-grade .cp-piece {
   max-width: none;
 }
+/* A miniatura mostra a peça inteira, na proporção real do formato */
+.galeria-grade .cp-piece-thumb {
+  aspect-ratio: auto;
+}
+.galeria-grade .cp-piece-story .cp-piece-thumb {
+  width: 62%;
+  justify-self: center;
+}
+.galeria-formatos {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+.galeria-formato {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--surface-sunken);
+}
+.galeria-formato-story {
+  width: 62%;
+}
 .galeria-roteiros {
   list-style: none;
   margin: 0;

@@ -1,0 +1,39 @@
+{
+  "nome": "Farmácia Exemplo",
+  "aviso": "Marca fictícia criada pelo time para demonstração. Não representa nenhuma empresa real.",
+  "versao": "1.0",
+  "atualizadoEm": "2026-10-15",
+  "cores": {
+    "primaria": { "valor": "#0B6E4F", "uso": "Fundo principal das peças e botão de ação.", "fonte": "Decisão do time (marca fictícia)", "data": "2026-10-15" },
+    "primariaEscura": { "valor": "#06402E", "uso": "Faixas e contraste sobre a primária.", "fonte": "Decisão do time (marca fictícia)", "data": "2026-10-15" },
+    "clara": { "valor": "#E6F4EC", "uso": "Fundo da faixa legal e de áreas de respiro.", "fonte": "Decisão do time (marca fictícia)", "data": "2026-10-15" },
+    "destaque": { "valor": "#FFC93C", "uso": "Selo de oferta e preço. Nunca como fundo de texto longo.", "fonte": "Decisão do time (marca fictícia)", "data": "2026-10-15" },
+    "texto": { "valor": "#10231A", "uso": "Texto sobre fundos claros e sobre o destaque.", "fonte": "Decisão do time (marca fictícia)", "data": "2026-10-15" },
+    "branco": { "valor": "#FFFFFF", "uso": "Texto sobre a primária (contraste 6,4:1).", "fonte": "Decisão do time (marca fictícia)", "data": "2026-10-15" }
+  },
+  "tipografia": {
+    "titulo": { "familia": "Poppins", "peso": 800, "uso": "Títulos e preço.", "fonte": "Google Fonts, licença aberta (OFL)", "data": "2026-10-15" },
+    "texto": { "familia": "Nunito Sans", "peso": 600, "uso": "Texto de apoio, CTA e faixa legal.", "fonte": "Google Fonts, licença aberta (OFL)", "data": "2026-10-15" }
+  },
+  "logo": {
+    "posicao": "Canto superior esquerdo, com respiro mínimo de 56px nas peças de 1080px.",
+    "versoes": "Branca sobre a primária; primária sobre fundos claros.",
+    "proibido": "Girar, mudar a cor fora das versões, aplicar sombra ou colocar sobre o destaque.",
+    "fonte": "Decisão do time (marca fictícia)",
+    "data": "2026-10-15"
+  },
+  "tomDeVoz": {
+    "descricao": "Próximo e cuidadoso, como um farmacêutico de confiança. Fala com \"você\", frases curtas, sem alarmismo e sem exagero.",
+    "faca": ["Fale de cuidado, prevenção e praticidade.", "Mostre preço e validade com clareza.", "Convide a pedir orientação ao farmacêutico."],
+    "evite": ["barato", "baratinho", "imperdível", "corre", "último dia para salvar", "não perca"],
+    "fonte": "Decisão do time (marca fictícia)",
+    "data": "2026-10-15"
+  },
+  "pecas": {
+    "faixaLegal": "Toda peça com oferta traz validade e condição na faixa legal, legível no formato final.",
+    "advertencia": "Em medicamento isento de prescrição, a advertência da Anvisa ocupa uma faixa própria, em caixa alta, nunca menor que o texto legal.",
+    "imagens": "Nenhuma imagem gerada por IA. O visual vem só dos templates: cor, forma e tipografia.",
+    "fonte": "Decisão do time (marca fictícia) e RDC 96/2008",
+    "data": "2026-10-15"
+  }
+}

@@ -2,8 +2,23 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Bula, Button, Icon, PieceCard, Roteiro, StatusPill, type BulaEvidencia } from "@/components/ds";
-import { ROTULOS, type Canal } from "@/types/briefing";
+import { baixarPng, PecaEscalada, type ConteudoPeca } from "@/components/pecas/Peca";
+import { FORMATOS, ROTULOS, type Briefing, type Canal, type Formato } from "@/types/briefing";
 import { tempoDaCena, type RespostaGeracao, type Variacao } from "@/types/variacao";
+
+function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
+  return {
+    titulo: v.titulo,
+    texto: v.texto,
+    cta: v.cta,
+    selo: v.selo,
+    precoDe: b.oferta.precoDe,
+    precoPor: b.oferta.precoPor,
+    validade: b.oferta.validade,
+    condicao: b.oferta.condicao,
+    advertencia: v.advertencia,
+  };
+}
 
 /* Galeria de variações (#29) com filtro por público e canal e a Bula aberta ao lado. */
 
@@ -60,7 +75,9 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
           <ul className="galeria-grade">
             {g.pecas.map((v) => (
               <li key={v.id}>
-                <PieceCard titulo={v.titulo} texto={v.texto} canal={ROTULOS.canal[v.canal]} formato={v.formato} memoria={v.dose} status={v.status} selo={v.selo} onBula={() => setAberta(v)} />
+                <PieceCard titulo={v.titulo} texto={v.texto} canal={ROTULOS.canal[v.canal]} formato={v.formato} memoria={v.dose} status={v.status} selo={v.selo} onBula={() => setAberta(v)}>
+                  <PecaEscalada conteudo={conteudoDe(v, resposta.briefing)} formato={v.formato} />
+                </PieceCard>
               </li>
             ))}
           </ul>
@@ -101,6 +118,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
                 Fechar
               </Button>
             </div>
+            <VerFormatos key={aberta.id} variacao={aberta} briefing={resposta.briefing} />
             <div className="galeria-peca">
               <p className="t-data t-muted">
                 {aberta.publico} · {ROTULOS.canal[aberta.canal]} · {ROTULOS.formato[aberta.formato]}
@@ -127,6 +145,43 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
           </div>
         ) : null}
       </dialog>
+    </section>
+  );
+}
+
+/** A variação nos três formatos, em tamanho de leitura, com download do PNG em tamanho real. */
+function VerFormatos({ variacao, briefing }: { variacao: Variacao; briefing: Briefing }) {
+  const [formato, setFormato] = useState<Formato>(variacao.formato);
+  const [baixando, setBaixando] = useState(false);
+  const pecaRef = useRef<HTMLDivElement>(null);
+
+  async function baixar() {
+    if (!pecaRef.current) return;
+    setBaixando(true);
+    try {
+      await baixarPng(pecaRef.current, formato, variacao.id);
+    } finally {
+      setBaixando(false);
+    }
+  }
+
+  return (
+    <section className="galeria-formatos" aria-label="Peça nos três formatos">
+      <ul className="estudio-chips" role="group" aria-label="Formato">
+        {FORMATOS.map((f) => (
+          <li key={f}>
+            <button type="button" className={formato === f ? "estudio-chip is-on" : "estudio-chip"} aria-pressed={formato === f} onClick={() => setFormato(f)}>
+              {ROTULOS.formato[f]}
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div className={`galeria-formato galeria-formato-${formato}`}>
+        <PecaEscalada conteudo={conteudoDe(variacao, briefing)} formato={formato} pecaRef={pecaRef} />
+      </div>
+      <Button variant="secondary" icon="arrow" onClick={baixar} disabled={baixando || variacao.status === "bloqueado"}>
+        {variacao.status === "bloqueado" ? "Peça bloqueada" : baixando ? "Gerando PNG…" : "Baixar PNG"}
+      </Button>
     </section>
   );
 }
