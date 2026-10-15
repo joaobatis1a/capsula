@@ -102,6 +102,9 @@ a {
 
 /* Estrutura das telas */
 .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -114,6 +117,10 @@ a {
 .app-logo {
   display: inline-flex;
   border-radius: var(--radius-sm);
+  transition: transform var(--dur-2) var(--ease-mola);
+}
+.app-logo:hover {
+  transform: rotate(-4deg) scale(1.04);
 }
 .app-logo img {
   display: block;
@@ -138,11 +145,24 @@ a {
   display: block;
 }
 .app-nav {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
 }
+.app-nav-pilula {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  box-shadow: var(--shadow-seam);
+  transition:
+    transform var(--dur-3) var(--ease-mola),
+    width var(--dur-3) var(--ease-mola);
+}
 .app-nav a {
+  position: relative;
   font-size: 15px;
   line-height: 20px;
   font-weight: 600;
@@ -152,12 +172,14 @@ a {
   display: inline-flex;
   align-items: center;
   border-radius: var(--radius-pill);
+  transition:
+    color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
 }
-.app-nav a:hover {
+.app-nav a:not([aria-current="page"]):hover {
   background: var(--surface-sunken);
 }
 .app-nav a[aria-current="page"] {
-  background: var(--action);
   color: var(--on-action);
 }
 .app-main {
@@ -172,4 +194,9 @@ a {
   padding: var(--space-6) var(--space-4);
   border-top: 1px solid var(--line);
   text-align: center;
+}
+
+/* Antes de a pílula do menu ser medida, a página atual ainda aparece marcada */
+.app-nav:not(:has(.app-nav-pilula)) a[aria-current="page"] {
+  background: var(--action);
 }

@@ -7,6 +7,8 @@ import { FORMATOS, ROTULOS, type Briefing, type Canal, type Formato } from "@/ty
 import { tempoDaCena, type RespostaGeracao, type Variacao } from "@/types/variacao";
 import type { Registro } from "@/lib/governanca/fluxo";
 import { Aprovacao, guardarPublicada } from "./Aprovacao";
+import { useAvisar } from "@/components/motion/Avisos";
+import { Conta } from "@/components/motion/Revela";
 
 function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
   return {
@@ -37,7 +39,28 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
     if (abertaId) dialogRef.current?.showModal();
   }, [abertaId]);
 
+  const avisar = useAvisar();
+  const [carimbo, setCarimbo] = useState<{ id: string; status: "aprovado" | "publicado"; n: number } | null>(null);
+
+  function fechar() {
+    const d = dialogRef.current;
+    if (!d || !d.open) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return d.close();
+    d.classList.add("is-fechando");
+    d.addEventListener(
+      "animationend",
+      () => {
+        d.classList.remove("is-fechando");
+        d.close();
+      },
+      { once: true },
+    );
+  }
+
   function mudou(peca: Variacao, registro: Registro) {
+    const mensagens = { revisao: "Peça enviada para revisão", aprovado: "Peça aprovada", publicado: "Peça publicada e guardada na Memória", rascunho: "Peça devolvida para rascunho", bloqueado: "" };
+    avisar(mensagens[peca.status]);
+    if (peca.status === "aprovado" || peca.status === "publicado") setCarimbo({ id: peca.id, status: peca.status, n: Date.now() });
     setPecas((lista) => lista.map((p) => (p.id === peca.id ? peca : p)));
     setHistorico((h) => ({ ...h, [peca.id]: [...(h[peca.id] ?? []), registro] }));
     if (peca.status === "publicado") guardarPublicada(peca, resposta.briefing, registro);
@@ -57,7 +80,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
     <section className="galeria" aria-labelledby="titulo-galeria">
       <header className="galeria-head">
         <h2 id="titulo-galeria" className="t-h1">
-          {resposta.variacoes.length} variações
+          <Conta valor={resposta.variacoes.length} duracao={700} /> variações
         </h2>
         <p className="t-data t-muted">
           {resposta.modelo === "sem-ia" ? "Moldes fixos, sem IA" : `Modelo ${resposta.modelo}`}
@@ -84,9 +107,9 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
       {porPublico.map((g) => (
         <section key={g.publico} className="galeria-grupo" aria-label={g.publico}>
           <h3 className="t-h2">{g.publico}</h3>
-          <ul className="galeria-grade">
-            {g.pecas.map((v) => (
-              <li key={v.id}>
+          <ul className="galeria-grade" key={`${publico}-${canal}`}>
+            {g.pecas.map((v, i) => (
+              <li key={v.id} style={{ "--i": i } as React.CSSProperties}>
                 <PieceCard titulo={v.titulo} texto={v.texto} canal={ROTULOS.canal[v.canal]} formato={v.formato} memoria={v.dose} status={v.status} selo={v.selo} onBula={() => setAbertaId(v.id)}>
                   <PecaEscalada conteudo={conteudoDe(v, resposta.briefing)} formato={v.formato} />
                 </PieceCard>
@@ -104,8 +127,8 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
           <ul className="galeria-roteiros">
             {resposta.roteiros
               .filter((r) => publico === "todos" || r.publico === publico)
-              .map((r) => (
-                <li key={r.id} className="galeria-roteiro">
+              .map((r, i) => (
+                <li key={r.id} className="galeria-roteiro" style={{ "--i": i } as React.CSSProperties}>
                   <Roteiro titulo={r.titulo} formato={`${r.plataforma === "reels" ? "Reels" : r.plataforma === "tiktok" ? "TikTok" : "Comercial"} · ${r.publico}`} duracao={`${r.duracaoSeg}s`} cenas={r.cenas.map((c) => ({ tempo: tempoDaCena(c), visual: c.visual, fala: c.fala, tela: c.tela }))} />
                   {r.musica ? (
                     <p className="galeria-musica t-body-sm">
@@ -121,17 +144,22 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
         </section>
       ) : null}
 
-      <dialog ref={dialogRef} className="galeria-dialogo" aria-label="Bula da peça" onClose={() => setAbertaId(null)} onClick={(e) => e.target === dialogRef.current && dialogRef.current?.close()}>
+      <dialog ref={dialogRef} className="galeria-dialogo" aria-label="Bula da peça" onClose={() => setAbertaId(null)} onCancel={(e) => {
+          e.preventDefault();
+          fechar();
+        }}
+        onClick={(e) => e.target === dialogRef.current && fechar()}
+      >
         {aberta ? (
           <div className="galeria-dialogo-corpo">
             <div className="galeria-dialogo-topo">
-              <StatusPill status={aberta.status} />
-              <Button variant="ghost" icon="x" onClick={() => dialogRef.current?.close()}>
+              <StatusPill key={aberta.status} status={aberta.status} />
+              <Button variant="ghost" icon="x" onClick={fechar}>
                 Fechar
               </Button>
             </div>
             <Aprovacao key={`ap-${aberta.id}`} peca={aberta} briefing={resposta.briefing} historico={historico[aberta.id] ?? []} onMudou={mudou} />
-            <VerFormatos key={aberta.id} variacao={aberta} briefing={resposta.briefing} />
+            <VerFormatos key={aberta.id} variacao={aberta} briefing={resposta.briefing} carimbo={carimbo?.id === aberta.id ? carimbo : null} />
             <div className="galeria-peca">
               <p className="t-data t-muted">
                 {aberta.publico} · {ROTULOS.canal[aberta.canal]} · {ROTULOS.formato[aberta.formato]}
@@ -163,7 +191,8 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
 }
 
 /** A variação nos três formatos, em tamanho de leitura, com download do PNG em tamanho real. */
-function VerFormatos({ variacao, briefing }: { variacao: Variacao; briefing: Briefing }) {
+function VerFormatos({ variacao, briefing, carimbo }: { variacao: Variacao; briefing: Briefing; carimbo: { status: "aprovado" | "publicado"; n: number } | null }) {
+  const avisar = useAvisar();
   const [formato, setFormato] = useState<Formato>(variacao.formato);
   const [baixando, setBaixando] = useState(false);
   const pecaRef = useRef<HTMLDivElement>(null);
@@ -173,6 +202,7 @@ function VerFormatos({ variacao, briefing }: { variacao: Variacao; briefing: Bri
     setBaixando(true);
     try {
       await baixarPng(pecaRef.current, formato, variacao.id);
+      avisar(`PNG de ${ROTULOS.formato[formato]} baixado`);
     } finally {
       setBaixando(false);
     }
@@ -190,6 +220,11 @@ function VerFormatos({ variacao, briefing }: { variacao: Variacao; briefing: Bri
         ))}
       </ul>
       <div className={`galeria-formato galeria-formato-${formato}`}>
+        {carimbo ? (
+          <span key={carimbo.n} className={carimbo.status === "publicado" ? "carimbo is-publicado" : "carimbo"} aria-hidden="true">
+            {carimbo.status === "publicado" ? "Publicado" : "Aprovado"}
+          </span>
+        ) : null}
         <PecaEscalada conteudo={conteudoDe(variacao, briefing)} formato={formato} pecaRef={pecaRef} />
       </div>
       <Button variant="secondary" icon="arrow" onClick={baixar} disabled={baixando || variacao.status === "bloqueado"}>

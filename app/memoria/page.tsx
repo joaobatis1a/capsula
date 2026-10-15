@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { OriginTag } from "@/components/ds";
 import { Publicadas } from "@/components/memoria/Publicadas";
+import { Conta, Revela } from "@/components/motion/Revela";
 import { getDataSource } from "@/lib/data";
 import { rankear, rotular, type ItemRanking } from "@/lib/memoria/ranking";
 import { CANAIS, ROTULOS, type Canal } from "@/types/briefing";
@@ -52,8 +53,8 @@ async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: strin
   return (
     <>
       <section className="memoria-resumo" aria-label="Resumo do histórico">
-        <Numero valor={todas.length.toLocaleString("pt-BR")} rotulo="campanhas no histórico" />
-        <Numero valor={filtradas.length.toLocaleString("pt-BR")} rotulo="no filtro atual" />
+        <Numero valor={<Conta valor={todas.length} />} rotulo="campanhas no histórico" />
+        <Numero valor={<Conta key={filtradas.length} valor={filtradas.length} />} rotulo="no filtro atual" />
         <Numero valor={`${dataCurta(datas[0])} a ${dataCurta(datas.at(-1)!)}`} rotulo="período" />
         <p className="memoria-origem">
           <OriginTag origin="memoria">{fonte.origem === "sintetico" ? "Dados de teste" : "Dados reais"}</OriginTag>
@@ -92,7 +93,7 @@ async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: strin
         </div>
       </nav>
 
-      <div className="memoria-colunas">
+      <div className="memoria-colunas" key={`${canal}-${publico}`}>
         <Lista titulo="O que funcionou" vazio="Poucas campanhas neste filtro para recomendar algo." itens={ranking.melhores} />
         <Lista titulo="O que evitar" vazio="Nenhuma combinação abaixo da média neste filtro." itens={ranking.piores} />
       </div>
@@ -106,15 +107,16 @@ function Lista({ titulo, itens, vazio }: { titulo: string; itens: ItemRanking[];
       <h2 className="t-h2">{titulo}</h2>
       {itens.length ? (
         <ol>
-          {itens.map((i) => (
-            <li key={i.id} className="memoria-item">
-              <span className={i.lift >= 1 ? "memoria-lift is-alto" : "memoria-lift is-baixo"}>{i.lift.toLocaleString("pt-BR", { maximumFractionDigits: 1, minimumFractionDigits: 1 })}×</span>
+          {itens.map((item, n) => (
+            <Revela as="li" key={item.id} i={n} className="memoria-item">
+              <span className={item.lift >= 1 ? "memoria-lift is-alto" : "memoria-lift is-baixo"}>{item.lift.toLocaleString("pt-BR", { maximumFractionDigits: 1, minimumFractionDigits: 1 })}×</span>
               <div>
-                <p className="t-h3">{capitalizar(rotular(i.combinacao))}</p>
-                <p className="t-body-sm">{i.texto}</p>
-                <p className="t-data t-muted">{i.fonte}</p>
+                <p className="t-h3">{capitalizar(rotular(item.combinacao))}</p>
+                <span className={item.lift >= 1 ? "memoria-barra is-alto" : "memoria-barra is-baixo"} style={{ "--w": `${Math.min(100, (item.lift / 2) * 100)}%` } as React.CSSProperties} aria-hidden="true" />
+                <p className="t-body-sm">{item.texto}</p>
+                <p className="t-data t-muted">{item.fonte}</p>
               </div>
-            </li>
+            </Revela>
           ))}
         </ol>
       ) : (
@@ -124,7 +126,7 @@ function Lista({ titulo, itens, vazio }: { titulo: string; itens: ItemRanking[];
   );
 }
 
-function Numero({ valor, rotulo }: { valor: string; rotulo: string }) {
+function Numero({ valor, rotulo }: { valor: React.ReactNode; rotulo: string }) {
   return (
     <div className="memoria-numero">
       <span className="t-h2">{valor}</span>

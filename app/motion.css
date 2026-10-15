@@ -1,0 +1,172 @@
+/* Movimento da Cápsula. Regra: entra subindo, o que age responde ao toque, o que encaixa usa mola.
+   Com prefers-reduced-motion, globals.css desliga tudo. */
+
+@keyframes cp-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes cp-aparece {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes cp-pop {
+  0% {
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes cp-treme {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+@keyframes cp-brilho {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes cp-destaque {
+  0% {
+    box-shadow: 0 0 0 0 var(--memoria-fill);
+  }
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+@keyframes cp-desenha {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes cp-carimbo {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-14deg) scale(2.4);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(0.94);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1);
+  }
+}
+@keyframes cp-desliza {
+  from {
+    transform: translateX(48px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes cp-sai {
+  to {
+    transform: translateX(48px);
+    opacity: 0;
+  }
+}
+
+/* Revelação ao rolar: o componente <Revela> acrescenta .is-visivel */
+.revela {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+.revela.is-visivel {
+  opacity: 1;
+  transform: none;
+}
+
+/* Entrada de cada página (app/template.tsx) */
+.pagina {
+  display: grid;
+  gap: var(--space-8);
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+}
+
+/* Itens em sequência: defina --i no item */
+.em-sequencia > * {
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+/* Esqueleto de carregamento */
+.esqueleto {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: linear-gradient(100deg, var(--surface-raised) 30%, var(--surface-sunken) 50%, var(--surface-raised) 70%);
+  background-size: 300% 100%;
+  animation: cp-brilho 1.6s linear infinite;
+}
+
+/* Campo que acabou de ser preenchido por uma sugestão */
+.is-preenchido .cp-input {
+  animation: cp-destaque 900ms var(--ease-out);
+  border-color: var(--memoria-fill);
+}
+
+/* Avisos rápidos */
+.avisos-rapidos {
+  position: fixed;
+  z-index: 50;
+  left: 50%;
+  bottom: var(--space-6);
+  transform: translateX(-50%);
+  display: grid;
+  gap: var(--space-2);
+  width: min(calc(100vw - 2 * var(--space-4)), 420px);
+  pointer-events: none;
+}
+.aviso-rapido {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  box-shadow: var(--shadow-float);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  animation: cp-sobe var(--dur-2) var(--ease-mola) both;
+}
+.aviso-rapido .cp-icon {
+  color: var(--aprovado-soft);
+}

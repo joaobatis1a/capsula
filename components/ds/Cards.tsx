@@ -40,7 +40,7 @@ export function PieceCard({ titulo, texto, canal = "Instagram", formato = "feed"
         {texto ? <p className="cp-piece-text">{texto}</p> : null}
       </div>
       <footer className="cp-piece-foot">
-        <StatusPill status={status} />
+        <StatusPill key={status} status={status} />
         {onBula ? (
           <button type="button" className="cp-link" onClick={onBula}>
             Ver bula

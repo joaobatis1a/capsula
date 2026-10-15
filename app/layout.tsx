@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AppNav } from "@/components/AppNav";
 import "@/components/ds/ds.css";
+import { AvisosProvider } from "@/components/motion/Avisos";
 import { instrumentSans, plexMono, unbounded } from "./fonts";
 import "./globals.css";
+import "./motion.css";
 import "./tokens.css";
 
 export const metadata: Metadata = {
@@ -24,7 +26,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </Link>
           <AppNav />
         </header>
-        <main className="app-main">{children}</main>
+        <AvisosProvider>
+          <main className="app-main">{children}</main>
+        </AvisosProvider>
         <footer className="app-footer t-caption t-muted">
           Protótipo do hackathon. Todos os dados de campanha são sintéticos.
         </footer>

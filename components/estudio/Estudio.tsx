@@ -1,12 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Field, Icon, OriginTag } from "@/components/ds";
 import type { PublicoSugerido, Sazonalidade } from "@/lib/data/types";
 import { CANAIS, FORMATOS, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Formato, type Objetivo, type TipoProduto } from "@/types/briefing";
 import type { ErroApi, RespostaGeracao } from "@/types/variacao";
+import { useAvisar } from "@/components/motion/Avisos";
+import { CapsulaViva } from "./CapsulaViva";
+import { Dosagem } from "./Dosagem";
 import { Galeria } from "./Galeria";
 import "./estudio.css";
+import "./movimento.css";
 
 /* Tela do Estúdio (#25, #26): briefing → /api/gerar → galeria. */
 
@@ -57,7 +61,23 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
   const [estado, setEstado] = useState<"parado" | "gerando" | "erro">("parado");
   const [mensagemErro, setMensagemErro] = useState("");
   const [resposta, setResposta] = useState<RespostaGeracao | null>(null);
+  const [pronto, setPronto] = useState(false);
+  const [preenchidos, setPreenchidos] = useState<string[]>([]);
   const resultadoRef = useRef<HTMLDivElement>(null);
+  const avisar = useAvisar();
+
+  // O brilho de "pronto" e o destaque dos campos preenchidos duram pouco.
+  useEffect(() => {
+    if (!pronto) return;
+    const t = setTimeout(() => setPronto(false), 1200);
+    return () => clearTimeout(t);
+  }, [pronto]);
+  useEffect(() => {
+    if (!preenchidos.length) return;
+    const t = setTimeout(() => setPreenchidos([]), 1000);
+    return () => clearTimeout(t);
+  }, [preenchidos]);
+  const marca = (campo: string) => (preenchidos.includes(campo) ? "is-preenchido" : undefined);
 
   const set = <K extends keyof Form>(k: K, v: Form[K]) => setForm((f) => ({ ...f, [k]: v }));
   const alternar = <T,>(lista: T[], item: T) => (lista.includes(item) ? lista.filter((x) => x !== item) : [...lista, item]);
@@ -77,6 +97,7 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
       radarIds: f.radarIds.includes(s.id) ? f.radarIds : [...f.radarIds, s.id],
       observacoes: f.observacoes || `Ângulo da época: ${s.angulo}`,
     }));
+    setPreenchidos(["categoria", "tipo", "observacoes"]);
     document.getElementById("cp-f-produto")?.focus();
   }
 
@@ -96,6 +117,7 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
       formatos: ["feed", "story", "banner"],
     });
     setErros({});
+    setPreenchidos(["produto", "categoria", "oferta", "precoDe", "precoPor", "validade", "condicao"]);
   }
 
   function paraBriefing(): BriefingEntrada {
@@ -127,8 +149,13 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
     }
     setErros({});
     setEstado("gerando");
+    requestAnimationFrame(() => resultadoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
     try {
-      const res = await fetch("/api/gerar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(v.briefing) });
+      // A dosagem fica na tela pelo menos 1,8s, para não piscar quando a resposta vem do cache ou dos moldes.
+      const [res] = await Promise.all([
+        fetch("/api/gerar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(v.briefing) }),
+        new Promise((r) => setTimeout(r, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800)),
+      ]);
       const json = await res.json();
       if (!res.ok) {
         const err = json as ErroApi;
@@ -137,6 +164,8 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
       }
       setResposta(json as RespostaGeracao);
       setEstado("parado");
+      setPronto(true);
+      avisar(`${(json as RespostaGeracao).variacoes.length} variações prontas`);
       requestAnimationFrame(() => resultadoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
     } catch (err) {
       setMensagemErro(err instanceof Error && err.message !== "Failed to fetch" ? err.message : "Sem conexão com o servidor.");
@@ -148,6 +177,19 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
 
   return (
     <div className="estudio">
+      <header className="estudio-hero">
+        <div className="estudio-hero-texto">
+          <h1 className="t-display estudio-hero-titulo">
+            <span>Criatividade</span> <span>na</span> <span className="is-dose">dose</span> <span>certa</span>
+          </h1>
+          <p>
+            Escreva um briefing e a Cápsula gera variações para cada público e canal, juntando o que funcionou nas campanhas
+            anteriores com o que está em alta e a época do ano. Cada peça sai com a sua Bula.
+          </p>
+        </div>
+        <CapsulaViva estado={estado === "gerando" ? "dosando" : pronto ? "pronto" : "parado"} />
+      </header>
+
       {sazonalidade.length ? (
         <section className="estudio-epoca" aria-labelledby="titulo-epoca">
           <div className="estudio-epoca-head">
@@ -158,7 +200,7 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
           </div>
           <ul className="estudio-epoca-lista">
             {sazonalidade.map((s) => (
-              <li key={s.id} className="estudio-epoca-item">
+              <li key={s.id} className={form.radarIds.includes(s.id) ? "estudio-epoca-item is-escolhido" : "estudio-epoca-item"}>
                 <div className="estudio-epoca-top">
                   <OriginTag origin="tendencia">Sazonalidade</OriginTag>
                   <span className="t-data t-muted">pico {s.mesesPico.map((m) => MESES[m - 1]).join(", ")}</span>
@@ -193,10 +235,11 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
         <fieldset className="estudio-grupo">
           <legend className="estudio-legenda">Produto e oferta</legend>
           <div className="estudio-grade">
-            <Field id="cp-f-produto" label="Produto" value={form.produto} onChange={(e) => set("produto", e.target.value)} error={erros.produto} placeholder="Protetor solar FPS 50" />
-            <Field label="Categoria" value={form.categoria} onChange={(e) => set("categoria", e.target.value)} error={erros.categoria} placeholder="Protetor solar" />
+            <Field id="cp-f-produto" className={marca("produto")} label="Produto" value={form.produto} onChange={(e) => set("produto", e.target.value)} error={erros.produto} placeholder="Protetor solar FPS 50" />
+            <Field className={marca("categoria")} label="Categoria" value={form.categoria} onChange={(e) => set("categoria", e.target.value)} error={erros.categoria} placeholder="Protetor solar" />
             <Field
               as="select"
+              className={marca("tipo")}
               label="Tipo de produto"
               value={form.tipoProduto}
               onChange={(e) => set("tipoProduto", e.target.value as TipoProduto)}
@@ -208,11 +251,11 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
                 </option>
               ))}
             </Field>
-            <Field label="Oferta" value={form.descricao} onChange={(e) => set("descricao", e.target.value)} error={erros["oferta.descricao"]} placeholder="30% off no protetor FPS 50" />
-            <Field label="Preço normal (R$)" inputMode="decimal" value={form.precoDe} onChange={(e) => set("precoDe", e.target.value)} error={erros["oferta.precoDe"]} placeholder="79,90" />
-            <Field label="Preço da oferta (R$)" inputMode="decimal" value={form.precoPor} onChange={(e) => set("precoPor", e.target.value)} error={erros["oferta.precoPor"]} placeholder="55,90" />
-            <Field label="Validade da oferta" type="date" value={form.validade} onChange={(e) => set("validade", e.target.value)} error={erros["oferta.validade"] && "Informe até quando a oferta vale."} />
-            <Field label="Condição" value={form.condicao} onChange={(e) => set("condicao", e.target.value)} placeholder="No app e nas lojas, enquanto durar o estoque" />
+            <Field className={marca("oferta")} label="Oferta" value={form.descricao} onChange={(e) => set("descricao", e.target.value)} error={erros["oferta.descricao"]} placeholder="30% off no protetor FPS 50" />
+            <Field className={marca("precoDe")} label="Preço normal (R$)" inputMode="decimal" value={form.precoDe} onChange={(e) => set("precoDe", e.target.value)} error={erros["oferta.precoDe"]} placeholder="79,90" />
+            <Field className={marca("precoPor")} label="Preço da oferta (R$)" inputMode="decimal" value={form.precoPor} onChange={(e) => set("precoPor", e.target.value)} error={erros["oferta.precoPor"]} placeholder="55,90" />
+            <Field className={marca("validade")} label="Validade da oferta" type="date" value={form.validade} onChange={(e) => set("validade", e.target.value)} error={erros["oferta.validade"] && "Informe até quando a oferta vale."} />
+            <Field className={marca("condicao")} label="Condição" value={form.condicao} onChange={(e) => set("condicao", e.target.value)} placeholder="No app e nas lojas, enquanto durar o estoque" />
           </div>
         </fieldset>
 
@@ -286,11 +329,11 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
             <input type="checkbox" checked={form.incluirRoteiros} onChange={(e) => set("incluirRoteiros", e.target.checked)} />
             Incluir roteiro de vídeo curto (Reels ou TikTok) com sugestão de música
           </label>
-          <Field as="textarea" label="Observações" value={form.observacoes} onChange={(e) => set("observacoes", e.target.value)} placeholder="Algo que a peça precisa ou não pode dizer" />
+          <Field as="textarea" className={marca("observacoes")} label="Observações" value={form.observacoes} onChange={(e) => set("observacoes", e.target.value)} placeholder="Algo que a peça precisa ou não pode dizer" />
         </fieldset>
 
         <div className="estudio-acoes">
-          <Button variant="capsula" type="submit" disabled={estado === "gerando"} icon={estado === "gerando" ? "clock" : "arrow"}>
+          <Button variant="capsula" type="submit" className={estado === "gerando" ? "is-dosando" : undefined} disabled={estado === "gerando"} icon={estado === "gerando" ? "clock" : "arrow"}>
             {estado === "gerando" ? "Gerando variações…" : "Gerar variações"}
           </Button>
           <p className="t-body-sm t-muted" aria-live="polite">
@@ -310,7 +353,11 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
       </form>
 
       <div ref={resultadoRef} className="estudio-resultado">
-        {resposta ? <Galeria key={resposta.geradoEm} resposta={resposta} /> : null}
+        {estado === "gerando" ? (
+          <Dosagem pecas={form.publicos.length * form.canais.length * form.variacoesPorCanal} />
+        ) : resposta ? (
+          <Galeria key={resposta.geradoEm} resposta={resposta} />
+        ) : null}
       </div>
     </div>
   );
