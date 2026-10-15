@@ -51,7 +51,7 @@ export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido):
     ...ctx.radar.slice(0, 6).map((i) => `- [${i.id}] ${i.plataforma} · ${i.tipo}: ${i.termo}. ${i.ideia}`),
     "",
     "## Época do ano (sazonalidade de saúde)",
-    ...ctx.sazonalidade.slice(0, 4).map((s) => `- [${s.id}] ${s.condicao} (pico em ${mesesPorExtenso(s.mesesPico)}). Ângulo: ${s.angulo}`),
+    ...ctx.sazonalidade.slice(0, 4).map((s) => `- [${s.id}] ${s.condicao} (pico em ${mesesPorExtenso(s.mesesPico)}). Ângulo: ${s.angulo} Cuidado: ${s.cuidado}`),
     "",
     "## Peças pedidas",
     ...pedido.pecas.map((p, i) => `${i + 1}. ${ROTULOS.canal[p.canal]} · ${ROTULOS.formato[p.formato]}`),

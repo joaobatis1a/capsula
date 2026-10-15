@@ -24,13 +24,14 @@ export async function montarContexto(briefing: Briefing, fonte: CampaignDataSour
   const ranking = rankear(campanhas, { limite: 12, fonte: fonte.nome });
   const filtro = { publicos: briefing.publicos, canais: briefing.canais };
   const escolhidos = new Set(briefing.radarIds);
+  const mesAtual = hoje.getMonth() + 1;
 
   return {
     melhores: relevantesPara(ranking.melhores, filtro).slice(0, 6),
     piores: relevantesPara(ranking.piores, filtro).slice(0, 4),
     radar: radarTodo.filter((i) => i.tipo !== "musica").sort((a, b) => Number(escolhidos.has(b.id)) - Number(escolhidos.has(a.id))),
     musicas: radarTodo.filter((i) => i.tipo === "musica"),
-    sazonalidade: sazonais.sort((a, b) => Number(escolhidos.has(b.id)) - Number(escolhidos.has(a.id))),
+    sazonalidade: sazonais.sort((a, b) => Number(escolhidos.has(b.id)) - Number(escolhidos.has(a.id)) || b.intensidade[mesAtual - 1] - a.intensidade[mesAtual - 1]),
     fonteMemoria: fonte.nome,
   };
 }

@@ -1,54 +1,29 @@
-/* Fundo vivo: relevo de cartela em todo o app, mais nítido em volta do cursor. E a onda do clique. */
+/* Fundo liso com grão fino de papel, e a onda do clique. */
 
-.fundo-vivo {
+.fundo-grao {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  --mx: 70vw;
-  --my: 20vh;
-}
-.fundo-relevo,
-.fundo-luz {
-  position: absolute;
-  inset: 0;
-}
-/* Fileiras de cavidades em ovo, desencontradas como numa cartela */
-.fundo-relevo {
-  background-image:
-    radial-gradient(ellipse 11px 6px at 50% 50%, var(--fundo-cavidade) 92%, transparent 100%),
-    radial-gradient(ellipse 11px 6px at 50% 50%, var(--fundo-cavidade) 92%, transparent 100%);
-  background-size: 56px 40px;
-  background-position:
-    0 0,
-    28px 20px;
-  opacity: 0.9;
-  mask-image: radial-gradient(520px circle at var(--mx) var(--my), #000 0%, #0008 40%, #0003 100%);
-  transition: mask-position 200ms linear;
-}
-.fundo-luz {
-  background: radial-gradient(380px circle at var(--mx) var(--my), var(--fundo-luz), transparent 70%);
-  opacity: 0;
-  transition: opacity 600ms var(--ease-out);
-}
-.fundo-vivo.is-ativo .fundo-luz {
-  opacity: 1;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.55  0 0 0 0.22 0'/></filter><rect width='160' height='160' filter='url(%23r)'/></svg>");
+  mix-blend-mode: soft-light;
 }
 
-/* Conteúdo sobre o fundo: o cabeçalho deixa o relevo aparecer */
 body {
   background: var(--surface);
 }
 .app-header {
-  background: color-mix(in srgb, var(--surface-raised) 82%, transparent);
+  background: color-mix(in srgb, var(--surface-raised) 86%, transparent);
   backdrop-filter: blur(12px) saturate(1.2);
 }
 
 /* Onda do clique */
 .cp-btn,
 .estudio-chip,
-.seg-op,
-.interruptor {
+.interruptor,
+.agora-item,
+.saude-th-mes button {
   position: relative;
   overflow: hidden;
   isolation: isolate;
