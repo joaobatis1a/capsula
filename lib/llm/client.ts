@@ -44,7 +44,7 @@ function provedores(): Provedor[] {
       id: "gemini",
       url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
       chave: process.env.GEMINI_API_KEY,
-      modelo: process.env.GEMINI_MODEL || "gemini-2.5-flash",
+      modelo: process.env.GEMINI_MODEL || "gemini-3.8-flash",
     },
   ];
   return lista.filter((p) => p.chave);
