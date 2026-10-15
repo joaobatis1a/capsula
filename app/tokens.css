@@ -1,0 +1,144 @@
+/* Cápsula: tokens do design system (v1), gerados a partir de tokens.json.
+   Não escreva cor nem medida solta no código: use estas variáveis. */
+
+:root {
+  /* Escalas */
+  --anil-50: #EEF0FF;
+  --anil-100: #DCE0FF;
+  --anil-300: #A9AEFF;
+  --anil-500: #4C4FE8;
+  --anil-700: #2F2BB3;
+  --anil-900: #191565;
+  --brasa-50: #FFF0EA;
+  --brasa-100: #FFD9C9;
+  --brasa-300: #FF9C76;
+  --brasa-500: #FF5A1F;
+  --brasa-700: #B8360A;
+  --brasa-900: #5E1A04;
+  --nevoa-0: #FFFFFF;
+  --nevoa-50: #F6F6FA;
+  --nevoa-100: #ECECF3;
+  --nevoa-200: #DCDCE7;
+  --nevoa-400: #8A8AA3;
+  --nevoa-500: #5F5F78;
+  --nevoa-700: #3C3C52;
+  --nevoa-900: #14142A;
+
+  /* Tema claro */
+  --surface: var(--nevoa-50);
+  --surface-raised: var(--nevoa-0);
+  --surface-sunken: var(--nevoa-100);
+  --line: var(--nevoa-200);
+  --line-strong: var(--nevoa-400);
+  --ink: var(--nevoa-900);
+  --ink-muted: var(--nevoa-500);
+  --action: var(--nevoa-900);
+  --on-action: #FFFFFF;
+  --memoria: var(--anil-700);
+  --memoria-fill: var(--anil-500);
+  --memoria-soft: var(--anil-50);
+  --on-memoria: #FFFFFF;
+  --tendencia: var(--brasa-700);
+  --tendencia-fill: var(--brasa-500);
+  --tendencia-soft: var(--brasa-50);
+  --on-tendencia: var(--nevoa-900);
+  --aprovado: #087449;
+  --aprovado-soft: #E1F5EA;
+  --revisao: #0A6676;
+  --revisao-soft: #DFF2F5;
+  --bloqueado: #B0143C;
+  --bloqueado-soft: #FCE7ED;
+  --focus: var(--anil-500);
+
+  --shadow-seam: 0 2px 0 #14142A26;
+  --shadow-float: 0 16px 32px -16px #19156559;
+  --focus-ring: 0 0 0 2px #F6F6FA, 0 0 0 4px #4C4FE8;
+
+  /* Espaço (base 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Raios: tudo que age é cápsula */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  /* Famílias (as fontes vêm de next/font em app/fonts.ts) */
+  --font-display: var(--font-unbounded), "Arial Black", system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  color-scheme: light;
+}
+
+/* Tema escuro: segue o sistema, a menos que data-theme="light" force o claro */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #0F0F1E;
+    --surface-raised: #1A1A31;
+    --surface-sunken: #0A0A16;
+    --line: #2B2B45;
+    --line-strong: #6A6A8C;
+    --ink: #F1F1F8;
+    --ink-muted: #A3A3BC;
+    --action: #F1F1F8;
+    --on-action: #0F0F1E;
+    --memoria: var(--anil-300);
+    --memoria-fill: #8B90FF;
+    --memoria-soft: #201D5C;
+    --on-memoria: #0F0F1E;
+    --tendencia: var(--brasa-300);
+    --tendencia-fill: #FF6A33;
+    --tendencia-soft: #3B1607;
+    --on-tendencia: #0F0F1E;
+    --aprovado: #5FD3A0;
+    --aprovado-soft: #0E2E21;
+    --revisao: #5CCBDC;
+    --revisao-soft: #0D2A30;
+    --bloqueado: #FF7A9A;
+    --bloqueado-soft: #3A0F1B;
+    --focus: var(--anil-300);
+    --shadow-seam: 0 2px 0 #00000099;
+    --shadow-float: 0 16px 40px -12px #000000cc;
+    --focus-ring: 0 0 0 2px #0F0F1E, 0 0 0 4px #A9AEFF;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface: #0F0F1E;
+  --surface-raised: #1A1A31;
+  --surface-sunken: #0A0A16;
+  --line: #2B2B45;
+  --line-strong: #6A6A8C;
+  --ink: #F1F1F8;
+  --ink-muted: #A3A3BC;
+  --action: #F1F1F8;
+  --on-action: #0F0F1E;
+  --memoria: var(--anil-300);
+  --memoria-fill: #8B90FF;
+  --memoria-soft: #201D5C;
+  --on-memoria: #0F0F1E;
+  --tendencia: var(--brasa-300);
+  --tendencia-fill: #FF6A33;
+  --tendencia-soft: #3B1607;
+  --on-tendencia: #0F0F1E;
+  --aprovado: #5FD3A0;
+  --aprovado-soft: #0E2E21;
+  --revisao: #5CCBDC;
+  --revisao-soft: #0D2A30;
+  --bloqueado: #FF7A9A;
+  --bloqueado-soft: #3A0F1B;
+  --focus: var(--anil-300);
+  --shadow-seam: 0 2px 0 #00000099;
+  --shadow-float: 0 16px 40px -12px #000000cc;
+  --focus-ring: 0 0 0 2px #0F0F1E, 0 0 0 4px #A9AEFF;
+  color-scheme: dark;
+}
