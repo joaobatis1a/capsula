@@ -23,6 +23,8 @@ export interface RespostaLLM {
   avisos: string[];
 }
 
+const TENTATIVAS = 3;
+
 export class SemProvedorError extends Error {}
 export class ProvedoresFalharamError extends Error {}
 
@@ -44,7 +46,7 @@ function provedores(): Provedor[] {
       id: "gemini",
       url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
       chave: process.env.GEMINI_API_KEY,
-      modelo: process.env.GEMINI_MODEL || "gemini-3.8-flash",
+      modelo: process.env.GEMINI_MODEL || "gemini-3.5-flash",
     },
   ];
   return lista.filter((p) => p.chave);
@@ -60,14 +62,14 @@ export function provedorAtivo(): "Groq" | "OpenRouter" | "Gemini" | null {
   return p ? ({ groq: "Groq", openrouter: "OpenRouter", gemini: "Gemini" } as const)[p.id] : null;
 }
 
-/** Pede uma resposta em JSON. Tenta cada provedor uma vez, com uma nova tentativa em caso de 429. */
+/** Pede uma resposta em JSON. Tenta cada provedor até 3 vezes quando há cota ou sobrecarga passageira. */
 export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura?: number; timeoutMs?: number } = {}): Promise<RespostaLLM> {
   const lista = provedores();
   if (lista.length === 0) throw new SemProvedorError("Nenhuma chave de modelo configurada.");
 
   const avisos: string[] = [];
   for (const p of lista) {
-    for (let tentativa = 0; tentativa < 2; tentativa++) {
+    for (let tentativa = 0; tentativa < TENTATIVAS; tentativa++) {
       try {
         const res = await fetch(p.url, {
           method: "POST",
@@ -85,8 +87,9 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
           signal: AbortSignal.timeout(opcoes.timeoutMs ?? 45_000),
         });
 
-        if (res.status === 429 && tentativa === 0) {
-          await new Promise((r) => setTimeout(r, 1500));
+        // Cota (429) ou sobrecarga passageira (503, 502, 504): espera um pouco e tenta de novo no mesmo provedor.
+        if ((res.status === 429 || res.status === 502 || res.status === 503 || res.status === 504) && tentativa < TENTATIVAS - 1) {
+          await new Promise((r) => setTimeout(r, 1500 * (tentativa + 1)));
           continue;
         }
         if (!res.ok) {
