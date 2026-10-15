@@ -1,38 +1,59 @@
 /* Telas da Memória e do Radar. Só tokens do design system. */
 
-.memoria-resumo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4) var(--space-8);
-  align-items: flex-end;
+/* Memória: cada seção é um painel. Os itens dentro dele são faixas suaves, sem bordas. */
+
+.memoria-numeros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
 }
 .memoria-numero {
   display: grid;
   gap: 2px;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--fill-suave);
 }
-.memoria-numero .t-h2 {
+.memoria-numero-valor {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
-.memoria-origem {
-  display: flex;
-  flex-wrap: wrap;
+.memoria-filtros {
+  display: grid;
+  gap: var(--space-4);
+}
+.memoria-limpar {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  flex: 1 1 260px;
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--memoria);
+  border-radius: var(--radius-pill);
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+.memoria-limpar:hover {
+  background: var(--hover);
 }
 
 .memoria-colunas {
   display: grid;
   gap: var(--space-6);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  align-items: stretch;
+}
+.painel-evitar {
+  --acento: var(--ink-muted);
 }
 .memoria-lista {
-  display: grid;
-  gap: var(--space-3);
-  align-content: start;
-}
-.memoria-lista ol {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -41,11 +62,10 @@
 }
 .memoria-item {
   display: grid;
-  grid-template-columns: 72px 1fr;
+  grid-template-columns: 64px 1fr;
   gap: var(--space-3);
   align-items: start;
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
+  background: var(--fill-suave);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
 }
@@ -79,9 +99,9 @@
 .memoria-publicada {
   display: grid;
   gap: var(--space-2);
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
+  align-content: start;
+  background: var(--fill-suave);
+  border-radius: var(--radius-md);
   padding: var(--space-4);
 }
 .memoria-publicada-topo {
@@ -98,15 +118,40 @@
   padding: 0;
   display: grid;
   gap: var(--space-4);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  /* Todas as linhas com a mesma altura: os cards nunca ficam de tamanhos diferentes */
+  grid-auto-rows: 1fr;
+}
+.radar-grade > li {
+  display: flex;
+  min-width: 0;
 }
 .radar-grade .cp-trend {
   max-width: none;
+  width: 100%;
+  min-height: 262px;
+  border: 0;
+  background: var(--fill-suave);
+  box-shadow: none;
 }
-.radar-secao {
-  display: grid;
-  gap: var(--space-3);
+.radar-grade .cp-trend:hover {
+  background: var(--hover);
+}
+.radar-grade .cp-trend-idea {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--ink-muted);
+}
+.radar-meta-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.painel-lado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
 }
 .radar-uso {
   display: inline-flex;
@@ -133,7 +178,7 @@
 }
 .memoria-item.is-visivel:hover {
   transform: translateX(4px);
-  border-color: var(--line-strong);
+  background: var(--hover);
 }
 .memoria-barra {
   display: block;

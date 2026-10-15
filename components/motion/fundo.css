@@ -1,21 +1,33 @@
-/* Fundo liso com grão fino de papel, e a onda do clique. */
+/* Fundo com luz: dois campos de cor muito suaves à deriva, anil no alto e brasa embaixo, mais um grão fino de papel.
+   Dá profundidade sem desenhar nada. Parado quando a pessoa pede menos movimento. */
 
-.fundo-grao {
+.fundo-ambiente {
   position: fixed;
-  inset: 0;
+  inset: -12%;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.35;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.55  0 0 0 0.22 0'/></filter><rect width='160' height='160' filter='url(%23r)'/></svg>");
+  background:
+    radial-gradient(46% 40% at 14% 8%, var(--amb-1), transparent 72%),
+    radial-gradient(40% 38% at 90% 92%, var(--amb-2), transparent 72%),
+    radial-gradient(30% 28% at 80% 14%, color-mix(in srgb, var(--anil-500) 8%, transparent), transparent 70%);
+  animation: cp-deriva 42s ease-in-out infinite alternate;
+}
+.fundo-ambiente::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.32;
   mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.55  0 0 0 0.22 0'/></filter><rect width='160' height='160' filter='url(%23r)'/></svg>");
+}
+@keyframes cp-deriva {
+  to {
+    transform: translate3d(3%, 2.5%, 0) scale(1.06);
+  }
 }
 
 body {
   background: var(--surface);
-}
-.app-header {
-  background: color-mix(in srgb, var(--surface-raised) 86%, transparent);
-  backdrop-filter: blur(12px) saturate(1.2);
 }
 
 /* Onda do clique */
@@ -33,7 +45,7 @@ body {
   z-index: -1;
   border-radius: 50%;
   background: currentColor;
-  opacity: 0.18;
+  opacity: 0.16;
   transform: scale(0);
   pointer-events: none;
   animation: cp-onda 600ms var(--ease-out) forwards;

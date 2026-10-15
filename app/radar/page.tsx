@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import Link from "next/link";
+import { Forma, Icon, OriginTag, TrendItem } from "@/components/ds";
 import { Revela } from "@/components/motion/Revela";
 import { FaixaAno } from "@/components/saude/FaixaAno";
-import { Forma, Icon, OriginTag, TrendItem } from "@/components/ds";
-import "@/components/saude/saude.css";
 import { getDataSource } from "@/lib/data";
 import type { ItemRadar } from "@/lib/data/types";
 import "@/components/estudio/estudio.css";
 import "@/components/memoria/memoria.css";
+import "@/components/saude/saude.css";
 
 export const metadata: Metadata = { title: "Radar · Cápsula" };
 
@@ -18,21 +18,20 @@ const TIPO: Record<ItemRadar["tipo"], string> = { hashtag: "Hashtag", formato: "
 
 export default function RadarPage() {
   return (
-    <>
-      <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 720 }}>
+    <div className="pg pg-radar">
+      <header className="pg-cabeca">
         <div className="titulo-forma tem-forma">
           <Forma tipo="softgel" size={56} className="forma-entra" />
-          <h1 className="t-h1">Radar</h1>
+          <div>
+            <h1 className="t-h1">Radar</h1>
+            <p className="pg-sub">O que está em alta agora e o que vem pela frente. Todo item tem fonte, data e validade, e sai das sugestões quando vence.</p>
+          </div>
         </div>
-        <p>
-          O que está em alta agora e o que vem pela frente na saúde. Todo item tem fonte, data e validade, e sai das sugestões quando vence. A
-          coleta é manual, em fontes públicas, sem raspar os aplicativos.
-        </p>
       </header>
-      <Suspense fallback={<p className="t-muted">Carregando o radar…</p>}>
+      <Suspense fallback={<div className="esqueleto" style={{ height: 320 }} />}>
         <Itens />
       </Suspense>
-    </>
+    </div>
   );
 }
 
@@ -49,61 +48,65 @@ async function Itens() {
 
   return (
     <>
-      <Secao titulo="Sazonalidade de saúde" descricao="O que mais pede atenção neste mês e nos dois seguintes, com a categoria de produto ligada.">
+      <Painel
+        i={0}
+        id="r-saz"
+        titulo="Sazonalidade de saúde"
+        nota={`${emAlta.length} em alta agora`}
+        extra={
+          <Link href="/saude" className="memoria-limpar">
+            Ver as 33 condições
+          </Link>
+        }
+      >
         {emAlta.map((s, n) => (
-          <li key={s.id} className="estudio-epoca-item" style={{ "--i": n } as React.CSSProperties}>
-            <div className="estudio-epoca-top">
-              <OriginTag origin="tendencia">Sazonalidade</OriginTag>
-              <span className="t-data t-muted">pico {s.mesesPico.map((m) => MESES[m - 1]).join(", ")}</span>
-            </div>
-            <h3 className="t-h3">{s.condicao}</h3>
-            <p className="t-body-sm">{s.angulo}</p>
-            <FaixaAno intensidade={s.intensidade} mes={mes} nome={s.condicao} />
-            <p className="t-body-sm">{s.categorias.join(" · ")}</p>
-            <p className="t-data t-muted">
-              {s.regiao} ·{" "}
-              <a href={s.fonteUrl} target="_blank" rel="noreferrer">
-                {s.fonte}
-              </a>
-            </p>
+          <li key={s.id} style={{ "--i": n } as React.CSSProperties}>
+            <article className="cp-trend radar-card">
+              <div className="cp-trend-top">
+                <OriginTag origin="tendencia">Sazonalidade</OriginTag>
+                <span className="cp-trend-tipo">pico {s.mesesPico.map((m) => MESES[m - 1]).slice(0, 3).join(", ")}</span>
+              </div>
+              <h3 className="cp-trend-term">{s.condicao}</h3>
+              <p className="cp-trend-idea">{s.angulo}</p>
+              <FaixaAno intensidade={s.intensidade} mes={mes} nome={s.condicao} />
+              <dl className="cp-trend-meta radar-meta-2">
+                <div>
+                  <dt>Categorias</dt>
+                  <dd>{s.categorias.slice(0, 2).join(" · ")}</dd>
+                </div>
+                <div>
+                  <dt>Fonte</dt>
+                  <dd>{s.fonte}</dd>
+                </div>
+              </dl>
+            </article>
           </li>
         ))}
-      </Secao>
+      </Painel>
 
-      <p className="radar-ver-mais">
-        <Link href="/saude" className="abertura-link">
-          Ver as 33 condições e o calendário de campanhas no Ano da saúde
-          <Icon name="arrow" size={16} />
-        </Link>
-      </p>
-
-      <Secao titulo="Tendências" descricao="Formatos e hashtags em alta nas plataformas.">
+      <Painel i={1} id="r-tend" titulo="Tendências" nota={`${tendencias.length} itens`}>
         {tendencias.map((i, n) => (
           <li key={i.id} style={{ "--i": n } as React.CSSProperties}>
             <Item item={i} />
           </li>
         ))}
-      </Secao>
+      </Painel>
 
-      <Secao titulo="Músicas e áudios" descricao="Perfis de marca só podem usar áudio liberado para uso comercial. Os roteiros só sugerem os liberados.">
+      <Painel i={2} id="r-mus" titulo="Músicas e áudios" nota="só as liberadas são sugeridas nos roteiros">
         {musicas.map((i, n) => (
           <li key={i.id} style={{ "--i": n } as React.CSSProperties}>
             <Item item={i} />
-            <p className={i.usoComercial ? "radar-uso is-ok" : "radar-uso is-nao"}>
-              <Icon name={i.usoComercial ? "check" : "x"} size={16} />
-              {i.usoComercial ? "Liberada para uso comercial" : "Sem liberação para marcas"}
-            </p>
           </li>
         ))}
-      </Secao>
+      </Painel>
 
-      <Secao titulo="Datas do calendário" descricao="Datas comerciais e campanhas de saúde próximas.">
+      <Painel i={3} id="r-datas" titulo="Datas do calendário" nota={`${datas.length} datas`}>
         {datas.map((i, n) => (
           <li key={i.id} style={{ "--i": n } as React.CSSProperties}>
             <Item item={i} />
           </li>
         ))}
-      </Secao>
+      </Painel>
     </>
   );
 }
@@ -118,15 +121,33 @@ function Item({ item: i }: { item: ItemRadar }) {
       fonte={i.fonte}
       data={curta(i.vistoEm)}
       validade={curta(i.validade)}
+      rodape={
+        i.tipo === "musica" ? (
+          <p className={i.usoComercial ? "radar-uso is-ok" : "radar-uso is-nao"}>
+            <Icon name={i.usoComercial ? "check" : "x"} size={16} />
+            {i.usoComercial ? "Liberada para uso comercial" : "Sem liberação para marcas"}
+          </p>
+        ) : null
+      }
     />
   );
 }
 
-function Secao({ titulo, descricao, children }: { titulo: string; descricao: string; children: React.ReactNode }) {
+function Painel({ i, id, titulo, nota, extra, children }: { i: number; id: string; titulo: string; nota: string; extra?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <Revela as="section" className="radar-secao" aria-label={titulo}>
-      <h2 className="t-h2">{titulo}</h2>
-      <p className="t-body-sm t-muted">{descricao}</p>
+    <Revela as="section" i={i} className="painel" aria-labelledby={id}>
+      <header className="painel-topo">
+        <div className="painel-titulo">
+          <span className="painel-ponto" aria-hidden="true" />
+          <h2 id={id} className="t-h2">
+            {titulo}
+          </h2>
+        </div>
+        <div className="painel-lado">
+          <span className="painel-nota">{nota}</span>
+          {extra}
+        </div>
+      </header>
       <ul className="radar-grade">{children}</ul>
     </Revela>
   );

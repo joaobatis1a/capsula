@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button, Field, Forma, Icon } from "@/components/ds";
+import { Button, Field, Forma, Icon, Selecao } from "@/components/ds";
 import type { PublicoSugerido, Sazonalidade } from "@/lib/data/types";
 import { CANAIS, FORMATOS, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Formato, type Objetivo, type TipoProduto } from "@/types/briefing";
 import type { ErroApi, RespostaGeracao } from "@/types/variacao";
@@ -257,20 +257,15 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
           <div className="estudio-grade">
             <Field id="cp-f-produto" className={marca("produto")} label="Produto" value={form.produto} onChange={(e) => set("produto", e.target.value)} error={erros.produto} placeholder="Protetor solar FPS 50" />
             <Field className={marca("categoria")} label="Categoria" value={form.categoria} onChange={(e) => set("categoria", e.target.value)} error={erros.categoria} placeholder="Protetor solar" />
-            <Field
-              as="select"
+            <Selecao
+              id="cp-f-tipo-de-produto"
               className={marca("tipo")}
-              label="Tipo de produto"
-              value={form.tipoProduto}
-              onChange={(e) => set("tipoProduto", e.target.value as TipoProduto)}
-              hint={form.tipoProduto === "medicamento_prescricao" ? "Não pode ter propaganda para o público. As peças sairão bloqueadas." : form.tipoProduto === "medicamento_isento" ? "As peças levam a advertência obrigatória da Anvisa." : undefined}
-            >
-              {TIPOS_PRODUTO.map((t) => (
-                <option key={t} value={t}>
-                  {ROTULOS.tipoProduto[t]}
-                </option>
-              ))}
-            </Field>
+              rotulo="Tipo de produto"
+              valor={form.tipoProduto}
+              mudar={(v) => set("tipoProduto", v)}
+              opcoes={TIPOS_PRODUTO.map((t) => ({ valor: t, nome: ROTULOS.tipoProduto[t] }))}
+              dica={form.tipoProduto === "medicamento_prescricao" ? "Não pode ter propaganda para o público. As peças sairão bloqueadas." : form.tipoProduto === "medicamento_isento" ? "As peças levam a advertência obrigatória da Anvisa." : undefined}
+            />
             <Field id="cp-f-oferta" className={marca("oferta")} label="Oferta" value={form.descricao} onChange={(e) => set("descricao", e.target.value)} error={erros["oferta.descricao"]} placeholder="30% off no protetor FPS 50" />
             <Field className={marca("precoDe")} label="Preço normal (R$)" inputMode="decimal" value={form.precoDe} onChange={(e) => set("precoDe", e.target.value)} error={erros["oferta.precoDe"]} placeholder="79,90" />
             <Field className={marca("precoPor")} label="Preço da oferta (R$)" inputMode="decimal" value={form.precoPor} onChange={(e) => set("precoPor", e.target.value)} error={erros["oferta.precoPor"]} placeholder="55,90" />

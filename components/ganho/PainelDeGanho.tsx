@@ -110,9 +110,10 @@ export function PainelDeGanho({ sintetico }: { sintetico: { campanhas: number; c
         </div>
       ) : (
         <>
-          <Revela as="section" className="ganho-bloco" aria-labelledby="g-medido">
+          <Revela as="section" className="painel ganho-bloco" aria-labelledby="g-medido">
             <header className="ganho-bloco-topo">
-              <h2 id="g-medido" className="t-h2">
+              <h2 id="g-medido" className="t-h2 painel-h2">
+                <span className="painel-ponto" aria-hidden="true" />
                 O que o app mediu
               </h2>
               <span className="selo-dado is-medido">
@@ -151,9 +152,10 @@ export function PainelDeGanho({ sintetico }: { sintetico: { campanhas: number; c
             </ul>
           </Revela>
 
-          <Revela as="section" className="ganho-bloco" aria-labelledby="g-comp">
+          <Revela as="section" className="painel ganho-bloco" aria-labelledby="g-comp">
             <header className="ganho-bloco-topo">
-              <h2 id="g-comp" className="t-h2">
+              <h2 id="g-comp" className="t-h2 painel-h2">
+                <span className="painel-ponto" aria-hidden="true" />
                 Comparação com o processo de hoje
               </h2>
               <span className="selo-dado is-premissa">
@@ -193,9 +195,10 @@ export function PainelDeGanho({ sintetico }: { sintetico: { campanhas: number; c
             ) : null}
           </Revela>
 
-          <Revela as="section" className="ganho-bloco" aria-labelledby="g-sint">
+          <Revela as="section" className="painel ganho-bloco" aria-labelledby="g-sint">
             <header className="ganho-bloco-topo">
-              <h2 id="g-sint" className="t-h2">
+              <h2 id="g-sint" className="t-h2 painel-h2">
+                <span className="painel-ponto" aria-hidden="true" />
                 Desempenho do histórico
               </h2>
               <span className="selo-dado is-sintetico">
@@ -212,9 +215,10 @@ export function PainelDeGanho({ sintetico }: { sintetico: { campanhas: number; c
             </ul>
           </Revela>
 
-          <Revela as="section" className="ganho-bloco" aria-labelledby="g-ult">
+          <Revela as="section" className="painel ganho-bloco" aria-labelledby="g-ult">
             <header className="ganho-bloco-topo">
-              <h2 id="g-ult" className="t-h2">
+              <h2 id="g-ult" className="t-h2 painel-h2">
+                <span className="painel-ponto" aria-hidden="true" />
                 Últimas gerações
               </h2>
             </header>

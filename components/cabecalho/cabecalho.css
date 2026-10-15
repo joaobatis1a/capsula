@@ -1,32 +1,27 @@
-/* Cabeçalho. Só tokens do design system. */
+/* Cabeçalho: ilha em forma de cápsula. Só tokens do design system. Sem bordas: a forma vem do tom e da sombra. */
 
 .cab {
-  --p: 0;
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--surface-raised) 80%, transparent);
-  backdrop-filter: blur(14px) saturate(1.25);
-  border-bottom: 1.5px dashed var(--line);
-  transition:
-    background-color var(--dur-3) var(--ease-out),
-    box-shadow var(--dur-3) var(--ease-out);
+  padding: var(--space-3) var(--space-4) 0;
+  pointer-events: none;
 }
-.cab.is-compacto {
-  background: color-mix(in srgb, var(--surface-raised) 92%, transparent);
-  box-shadow: 0 10px 24px -18px #14142a59;
-}
-.cab-linha {
-  max-width: 1200px;
+.cab-ilha {
+  pointer-events: auto;
+  max-width: 1168px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: var(--space-4) var(--space-6);
-  padding: var(--space-3) var(--space-4);
-  transition: padding var(--dur-3) var(--ease-out);
-}
-.cab.is-compacto .cab-linha {
-  padding-block: 6px;
+  gap: var(--space-4);
+  padding: 6px 8px 6px var(--space-5);
+  border-radius: var(--radius-pill);
+  /* A cápsula de duas metades, bem de leve: anil à esquerda, brasa à direita */
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--memoria-fill) 16%, transparent) 0%, transparent 42%, transparent 62%, color-mix(in srgb, var(--tendencia-fill) 12%, transparent) 100%),
+    color-mix(in srgb, var(--surface-raised) 78%, transparent);
+  backdrop-filter: blur(20px) saturate(1.45);
+  box-shadow: 0 16px 36px -18px #000000b3;
 }
 
 /* Logo: a cápsula do lockup balança no hover */
@@ -41,12 +36,8 @@
 }
 .cab-logo img {
   display: block;
-  height: 32px;
+  height: 30px;
   width: auto;
-  transition: height var(--dur-3) var(--ease-out);
-}
-.cab.is-compacto .cab-logo img {
-  height: 26px;
 }
 .cab-logo .logo-dark {
   display: none;
@@ -71,7 +62,8 @@
   position: relative;
   flex: 1;
   display: flex;
-  gap: var(--space-1);
+  justify-content: center;
+  gap: 2px;
   min-width: 0;
 }
 .cab-pilula {
@@ -79,8 +71,8 @@
   top: 0;
   left: 0;
   border-radius: var(--radius-pill);
-  background: var(--action);
-  box-shadow: var(--shadow-seam);
+  background: var(--memoria-fill);
+  box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--memoria-fill) 85%, transparent);
   transition:
     transform var(--dur-3) var(--ease-mola),
     width var(--dur-3) var(--ease-mola),
@@ -91,27 +83,22 @@
   flex: none;
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 0 var(--space-3);
+  min-height: 42px;
+  padding: 0 var(--space-4);
   font-size: 15px;
   line-height: 20px;
   font-weight: 600;
-  text-decoration: none;
   white-space: nowrap;
   border-radius: var(--radius-pill);
   transition:
     color var(--dur-2) var(--ease-out),
-    background-color var(--dur-2) var(--ease-out),
-    min-height var(--dur-3) var(--ease-out);
-}
-.cab.is-compacto .cab-nav a {
-  min-height: 38px;
+    background-color var(--dur-2) var(--ease-out);
 }
 .cab-nav a:not([aria-current="page"]):hover {
-  background: var(--surface-sunken);
+  background: var(--hover);
 }
 .cab-nav a[aria-current="page"] {
-  color: var(--on-action);
+  color: var(--on-memoria);
 }
 .cab-nav a:focus-visible {
   outline: 2px solid transparent;
@@ -119,13 +106,12 @@
 }
 /* Antes de a pílula ser medida, a página atual já aparece marcada */
 .cab-nav:not(:has(.cab-pilula)) a[aria-current="page"] {
-  background: var(--action);
+  background: var(--memoria-fill);
 }
 
 /* Estado do sistema */
 .cab-lado {
   flex: none;
-  margin-left: auto;
 }
 .status {
   position: relative;
@@ -134,22 +120,19 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 36px;
-  padding: 0 var(--space-3) 0 var(--space-2);
+  min-height: 42px;
+  padding: 0 var(--space-4) 0 var(--space-3);
   font: inherit;
   color: var(--ink);
-  background: var(--surface-sunken);
-  border: 1.5px solid var(--line);
+  background: var(--fill-suave);
+  border: 0;
   border-radius: var(--radius-pill);
   cursor: help;
-  transition:
-    border-color var(--dur-2) var(--ease-out),
-    background-color var(--dur-2) var(--ease-out);
+  transition: background-color var(--dur-2) var(--ease-out);
 }
 .status-botao:hover,
 .status-botao:focus-visible {
-  border-color: var(--line-strong);
-  background: var(--surface-raised);
+  background: var(--hover-forte);
 }
 .status-botao:focus-visible {
   outline: 2px solid transparent;
@@ -166,9 +149,10 @@
   white-space: nowrap;
 }
 .status-sep {
-  width: 1px;
-  height: 12px;
-  background: var(--line-strong);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ink-muted);
 }
 .status-modelo {
   color: var(--ink-muted);
@@ -179,7 +163,7 @@
 }
 .status-detalhe {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 12px);
   right: 0;
   z-index: 5;
   width: min(340px, calc(100vw - 2 * var(--space-4)));
@@ -187,9 +171,8 @@
   gap: var(--space-3);
   padding: var(--space-4);
   background: var(--surface-raised);
-  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-float);
+  box-shadow: 0 24px 50px -20px #000000d9;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px) scale(0.98);
@@ -225,24 +208,16 @@
   line-height: 20px;
 }
 
-/* Progresso da página: anil (memória) até brasa (tendência) */
-.cab-progresso {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1.5px;
-  height: 2px;
-  transform: scaleX(var(--p));
-  transform-origin: left;
-  background: linear-gradient(90deg, var(--memoria-fill) 0 50%, var(--tendencia-fill) 50% 100%);
-  transition: transform 120ms linear;
-}
-
-/* Celular: o menu ganha uma linha própria, com rolagem lateral e a página atual centralizada */
+/* Celular: a ilha vira um bloco arredondado, com o menu numa linha própria que rola para o lado */
 @media (max-width: 860px) {
-  .cab-linha {
+  .cab-ilha {
     flex-wrap: wrap;
     gap: var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: 28px;
+  }
+  .cab-logo {
+    margin-right: auto;
   }
   .cab-lado {
     order: 2;
@@ -250,24 +225,18 @@
   .cab-nav {
     order: 3;
     flex: 1 0 100%;
+    justify-content: flex-start;
     overflow-x: auto;
     scrollbar-width: none;
     scroll-snap-type: x proximity;
-    margin-inline: calc(var(--space-4) * -1);
-    padding-inline: var(--space-4);
-    mask-image: linear-gradient(90deg, transparent, #000 var(--space-4), #000 calc(100% - var(--space-4)), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
   }
   .cab-nav::-webkit-scrollbar {
     display: none;
   }
   .cab-nav a {
     scroll-snap-align: center;
-  }
-  .cab-logo {
-    margin-right: auto;
-  }
-  .cab.is-compacto .cab-nav a {
-    min-height: 34px;
+    min-height: 38px;
   }
 }
 @media (max-width: 420px) {

@@ -9,22 +9,20 @@ export const metadata: Metadata = { title: "Painel de ganho · Cápsula" };
 
 export default function GanhoPage() {
   return (
-    <>
-      <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 760 }}>
-        <p className="receita-olho">Capacidade da área</p>
+    <div className="pg">
+      <header className="pg-cabeca">
         <div className="titulo-forma tem-forma">
           <Forma tipo="capsula" size={56} className="forma-entra" />
-          <h1 className="t-h1">Painel de ganho</h1>
+          <div>
+            <h1 className="t-h1">Painel de ganho</h1>
+            <p className="pg-sub">Tempo por peça, variações por briefing e peças barradas antes da revisão. O que é medido é medido de verdade; o que é estimativa fica marcado.</p>
+          </div>
         </div>
-        <p>
-          Quanto tempo uma peça leva, quantas variações saem de um briefing e quantas o checklist barra antes da revisão. O que é medido aqui é medido de verdade, no
-          seu uso. O que é estimativa fica marcado e pode ser ajustado.
-        </p>
       </header>
       <Suspense fallback={<div className="esqueleto" style={{ height: 360 }} />}>
         <Conteudo />
       </Suspense>
-    </>
+    </div>
   );
 }
 

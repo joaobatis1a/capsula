@@ -52,7 +52,19 @@
 
   --shadow-seam: 0 2px 0 #14142A26;
   --shadow-float: 0 16px 32px -16px #19156559;
-  --focus-ring: 0 0 0 2px #F6F6FA, 0 0 0 4px #4C4FE8;
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 42%, transparent);
+
+  /* Interação sem linhas: hover e preenchimentos tingidos pelo anil, nunca preto nem branco */
+  --hover: color-mix(in srgb, var(--memoria-fill) 10%, transparent);
+  --hover-forte: color-mix(in srgb, var(--memoria-fill) 17%, transparent);
+  --fill-suave: color-mix(in srgb, var(--ink) 5%, transparent);
+  --fill-suave-2: color-mix(in srgb, var(--ink) 9%, transparent);
+  /* Borda de campo de texto: a única linha que fica, porque precisa de 3:1 */
+  --campo-borda: var(--nevoa-400);
+  /* Luz de fundo: dois campos de cor muito suaves, anil no alto e brasa embaixo */
+  --amb-1: color-mix(in srgb, var(--anil-500) 13%, transparent);
+  --amb-2: color-mix(in srgb, var(--brasa-500) 9%, transparent);
+  --acento: var(--memoria-fill);
 
   /* Espaço (base 4px) */
   --space-1: 4px;
@@ -105,8 +117,15 @@
     --surface: #0F0F1E;
     --surface-raised: #1A1A31;
     --surface-sunken: #0A0A16;
-    --line: #2B2B45;
-    --line-strong: #6A6A8C;
+    --line: #FFFFFF14;
+    --line-strong: #FFFFFF2E;
+  --campo-borda: #6A6A8C;
+  --amb-1: color-mix(in srgb, var(--anil-500) 26%, transparent);
+  --amb-2: color-mix(in srgb, var(--brasa-500) 15%, transparent);
+  --hover: color-mix(in srgb, var(--memoria-fill) 14%, transparent);
+  --hover-forte: color-mix(in srgb, var(--memoria-fill) 22%, transparent);
+  --fill-suave: color-mix(in srgb, var(--ink) 6%, transparent);
+  --fill-suave-2: color-mix(in srgb, var(--ink) 10%, transparent);
     --ink: #F1F1F8;
     --ink-muted: #A3A3BC;
     --action: #F1F1F8;
@@ -128,7 +147,7 @@
     --focus: var(--anil-300);
     --shadow-seam: 0 2px 0 #00000099;
     --shadow-float: 0 16px 40px -12px #000000cc;
-    --focus-ring: 0 0 0 2px #0F0F1E, 0 0 0 4px #A9AEFF;
+    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 50%, transparent);
     --folha: linear-gradient(135deg, #22223D 0%, #1A1A31 45%, #26264A 60%, #191930 100%);
     --folha-risco: #FFFFFF08;
     --bolha-luz: #FFFFFF2E;
@@ -147,8 +166,15 @@
   --surface: #0F0F1E;
   --surface-raised: #1A1A31;
   --surface-sunken: #0A0A16;
-  --line: #2B2B45;
-  --line-strong: #6A6A8C;
+  --line: #FFFFFF14;
+  --line-strong: #FFFFFF2E;
+  --campo-borda: #6A6A8C;
+  --amb-1: color-mix(in srgb, var(--anil-500) 26%, transparent);
+  --amb-2: color-mix(in srgb, var(--brasa-500) 15%, transparent);
+  --hover: color-mix(in srgb, var(--memoria-fill) 14%, transparent);
+  --hover-forte: color-mix(in srgb, var(--memoria-fill) 22%, transparent);
+  --fill-suave: color-mix(in srgb, var(--ink) 6%, transparent);
+  --fill-suave-2: color-mix(in srgb, var(--ink) 10%, transparent);
   --ink: #F1F1F8;
   --ink-muted: #A3A3BC;
   --action: #F1F1F8;
@@ -170,7 +196,7 @@
   --focus: var(--anil-300);
   --shadow-seam: 0 2px 0 #00000099;
   --shadow-float: 0 16px 40px -12px #000000cc;
-  --focus-ring: 0 0 0 2px #0F0F1E, 0 0 0 4px #A9AEFF;
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 50%, transparent);
   --folha: linear-gradient(135deg, #22223D 0%, #1A1A31 45%, #26264A 60%, #191930 100%);
   --folha-risco: #FFFFFF08;
   --bolha-luz: #FFFFFF2E;

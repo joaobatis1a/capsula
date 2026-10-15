@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import "./cabecalho.css";
 
 const LINKS = [
@@ -13,24 +13,22 @@ const LINKS = [
   { href: "/ganho", label: "Ganho" },
 ];
 
-/* Cabeçalho: logo, menu com a pílula que desliza até a página atual e o estado do sistema.
-   Compacta ao rolar e mostra o progresso da página numa linha que vai do anil (memória) ao brasa (tendência). */
+/* Cabeçalho: uma ilha em forma de cápsula, que flutua sobre a página. Anil de um lado, brasa do outro, bem suave.
+   Altura fixa, sem encolher ao rolar: mudar a altura empurrava o conteúdo e dava um pulo no começo da rolagem. */
 
 export function Cabecalho({ status }: { status: ReactNode }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
-  const cabRef = useRef<HTMLElement>(null);
   const [pilula, setPilula] = useState<{ x: number; y: number; w: number; h: number } | null>(null);
-  const [compacto, setCompacto] = useState(false);
 
-  // A pílula acompanha o link da página atual, inclusive quando o menu quebra de linha ou rola no celular.
+  // A pílula acompanha o link da página atual, inclusive quando o menu rola no celular.
   useLayoutEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
     const medir = () => {
       const ativo = nav.querySelector<HTMLElement>("a[aria-current='page']");
       setPilula(ativo ? { x: ativo.offsetLeft, y: ativo.offsetTop, w: ativo.offsetWidth, h: ativo.offsetHeight } : null);
-      ativo?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+      if (ativo && nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: ativo.offsetLeft - (nav.clientWidth - ativo.offsetWidth) / 2, behavior: "smooth" });
     };
     medir();
     const obs = new ResizeObserver(medir);
@@ -38,32 +36,9 @@ export function Cabecalho({ status }: { status: ReactNode }) {
     return () => obs.disconnect();
   }, [pathname]);
 
-  // Compacta depois de 12px de rolagem e atualiza o progresso (--p, de 0 a 1) sem re-renderizar.
-  useEffect(() => {
-    let quadro = 0;
-    const atualizar = () => {
-      quadro = 0;
-      const y = window.scrollY;
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      cabRef.current?.style.setProperty("--p", String(total > 0 ? Math.min(1, y / total) : 0));
-      setCompacto(y > 12);
-    };
-    const aoRolar = () => {
-      if (!quadro) quadro = requestAnimationFrame(atualizar);
-    };
-    atualizar();
-    window.addEventListener("scroll", aoRolar, { passive: true });
-    window.addEventListener("resize", aoRolar, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", aoRolar);
-      window.removeEventListener("resize", aoRolar);
-      cancelAnimationFrame(quadro);
-    };
-  }, [pathname]);
-
   return (
-    <header ref={cabRef} className={compacto ? "cab is-compacto" : "cab"}>
-      <div className="cab-linha">
+    <header className="cab">
+      <div className="cab-ilha">
         <Link href="/" className="cab-logo" aria-label="Cápsula, início">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="logo-light" src="/brand/capsula-lockup.svg" alt="" width={138} height={32} />
@@ -82,7 +57,6 @@ export function Cabecalho({ status }: { status: ReactNode }) {
 
         <div className="cab-lado">{status}</div>
       </div>
-      <span className="cab-progresso" aria-hidden="true" />
     </header>
   );
 }
