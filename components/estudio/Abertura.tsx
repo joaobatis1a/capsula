@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button, Icon } from "@/components/ds";
+import { Button, Forma, Icon } from "@/components/ds";
 import { FaixaAno } from "@/components/saude/FaixaAno";
 import type { Sazonalidade } from "@/lib/data/types";
 import { MESES_NOME, NIVEL } from "@/lib/saude/rotulos";
@@ -47,11 +47,14 @@ export function Abertura({ agora, mes, onUsar, onEscrever }: { agora: Sazonalida
       </div>
 
       <aside className="agora" aria-labelledby="titulo-agora">
-        <header className="agora-topo">
-          <p className="receita-olho">Agora na saúde · {MESES_NOME[mes - 1]}</p>
-          <h2 id="titulo-agora" className="t-h3">
-            Escolha um tema e o briefing se preenche
-          </h2>
+        <header className="agora-topo tem-forma">
+          <Forma tipo="efervescente" size={44} className="is-viva" />
+          <div>
+            <p className="receita-olho">Agora na saúde · {MESES_NOME[mes - 1]}</p>
+            <h2 id="titulo-agora" className="t-h3">
+              Escolha um tema e o briefing se preenche
+            </h2>
+          </div>
         </header>
         <ul className="agora-lista">
           {agora.map((s, i) => (

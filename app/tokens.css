@@ -90,6 +90,12 @@
   --fundo-cavidade: #E4E4EE;
   --fundo-luz: #4C4FE81F;
 
+  /* Formas farmacêuticas: corpo branco do comprimido, borda e sombra */
+  --forma-corpo: #FFFFFF;
+  --forma-corpo-sombra: #DCDCE9;
+  --forma-borda: #B9B9CF;
+  --forma-sombra: #14142A33;
+
   color-scheme: light;
 }
 
@@ -129,6 +135,10 @@
     --bolha-sombra: #00000080;
     --fundo-cavidade: #17172C;
     --fundo-luz: #8B90FF26;
+    --forma-corpo: #F1F1F8;
+    --forma-corpo-sombra: #B7B7CC;
+    --forma-borda: #6A6A8C;
+    --forma-sombra: #00000080;
     color-scheme: dark;
   }
 }
@@ -167,5 +177,9 @@
   --bolha-sombra: #00000080;
   --fundo-cavidade: #17172C;
   --fundo-luz: #8B90FF26;
+  --forma-corpo: #F1F1F8;
+  --forma-corpo-sombra: #B7B7CC;
+  --forma-borda: #6A6A8C;
+  --forma-sombra: #00000080;
   color-scheme: dark;
 }

@@ -1,13 +1,14 @@
 import type { ReactNode } from "react";
+import { Forma, type TipoForma } from "./Forma";
 import { Icon, type IconName } from "./Icon";
 
 export type Origem = "memoria" | "tendencia" | "gerado";
 export type Status = "rascunho" | "revisao" | "bloqueado" | "aprovado" | "publicado";
 
-const ORIGEM: Record<Origem, { label: string; icon: IconName }> = {
-  memoria: { label: "Memória", icon: "archive" },
-  tendencia: { label: "Tendência", icon: "trend" },
-  gerado: { label: "Gerado", icon: "spark" },
+const ORIGEM: Record<Origem, { label: string; forma: TipoForma }> = {
+  memoria: { label: "Memória", forma: "comprimido" },
+  tendencia: { label: "Tendência", forma: "softgel" },
+  gerado: { label: "Gerado", forma: "capsula" },
 };
 
 /** Etiqueta que diz de onde veio uma informação. */
@@ -15,7 +16,7 @@ export function OriginTag({ origin, children }: { origin: Origem; children?: Rea
   const def = ORIGEM[origin];
   return (
     <span className={`cp-tag cp-tag-${origin}`}>
-      <Icon name={def.icon} size={14} />
+      <Forma tipo={def.forma} size={20} />
       <span>{children ?? def.label}</span>
     </span>
   );

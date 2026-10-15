@@ -241,3 +241,14 @@
     transform: none;
   }
 }
+
+/* Topo do painel com a forma efervescente */
+.agora-topo {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+}
+.agora-topo > div {
+  display: grid;
+  gap: var(--space-1);
+}

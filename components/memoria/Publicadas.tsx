@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { DoseBar, StatusPill } from "@/components/ds";
+import { DoseBar, Forma, StatusPill } from "@/components/ds";
 import { CHAVE_PUBLICADAS, type PecaPublicada } from "@/components/estudio/Aprovacao";
 import { ROTULOS, type Canal, type Formato } from "@/types/briefing";
 
@@ -54,7 +54,11 @@ export function Publicadas() {
           ))}
         </ul>
       ) : (
-        <p className="t-body-sm">Nenhuma peça publicada ainda. Aprove e publique uma peça no Estúdio para vê-la aqui.</p>
+        <div className="vazio-forma">
+          <Forma tipo="comprimido" size={72} />
+          <p className="t-h3">Nenhuma dose registrada ainda</p>
+          <p className="t-body-sm t-muted">Aprove e publique uma peça no Estúdio e ela entra aqui, como histórico.</p>
+        </div>
       )}
     </section>
   );

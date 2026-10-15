@@ -302,3 +302,39 @@
 .dosagem .capsula-viva-tag {
   display: none;
 }
+
+/* Etapas da dosagem com a forma de cada coisa */
+.dosagem-forma {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  transition: opacity var(--dur-2) var(--ease-out), filter var(--dur-2) var(--ease-out);
+}
+.dosagem-etapas li:not(.is-atual):not(.is-feita) .dosagem-forma {
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+.dosagem-etapas li.is-atual .dosagem-forma .forma {
+  animation: fm-dosa 900ms ease-in-out infinite alternate;
+}
+@keyframes fm-dosa {
+  from {
+    transform: translateY(1px) rotate(-8deg);
+  }
+  to {
+    transform: translateY(-3px) rotate(8deg);
+  }
+}
+.dosagem-etapas li.is-feita .dosagem-forma::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  bottom: -2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--aprovado) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg>") center / 10px no-repeat;
+  animation: cp-pop var(--dur-3) var(--ease-mola);
+}

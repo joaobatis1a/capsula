@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button, Field, Icon } from "@/components/ds";
+import { Button, Field, Forma, Icon } from "@/components/ds";
 import type { PublicoSugerido, Sazonalidade } from "@/lib/data/types";
 import { CANAIS, FORMATOS, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Formato, type Objetivo, type TipoProduto } from "@/types/briefing";
 import type { ErroApi, RespostaGeracao } from "@/types/variacao";
@@ -204,11 +204,14 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
 
       <form id="briefing" ref={formRef} className="estudio-form" onSubmit={gerar} noValidate aria-labelledby="titulo-briefing">
         <div className="estudio-form-head">
-          <div>
-            <p className="receita-olho">Receita de campanha · {new Date().toLocaleDateString("pt-BR")}</p>
-            <h2 id="titulo-briefing" className="t-h2">
-              Briefing
-            </h2>
+          <div className="titulo-forma tem-forma">
+            <Forma tipo="caplet" size={44} />
+            <div>
+              <p className="receita-olho">Receita de campanha · {new Date().toLocaleDateString("pt-BR")}</p>
+              <h2 id="titulo-briefing" className="t-h2">
+                Briefing
+              </h2>
+            </div>
           </div>
           <Button variant="ghost" onClick={preencherExemplo}>
             Preencher exemplo

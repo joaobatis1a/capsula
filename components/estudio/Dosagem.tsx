@@ -1,12 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Icon } from "@/components/ds";
+import { Forma, type TipoForma } from "@/components/ds";
 import { CapsulaViva } from "./CapsulaViva";
 
-/* O que a tela mostra enquanto o motor trabalha: as etapas reais da geração e a galeria em esqueleto. */
+/* O que a tela mostra enquanto o motor trabalha: as etapas reais da geração e a galeria em esqueleto.
+   Cada etapa tem a forma de aquilo que ela usa: comprimido (memória), softgel (radar), cápsula (peça) e drágea (aprovada na Bula). */
 
-const ETAPAS = ["Lendo a memória de campanhas", "Consultando o radar e a época do ano", "Escrevendo as variações", "Checando a Bula de cada peça"];
+const ETAPAS: { nome: string; forma: TipoForma }[] = [
+  { nome: "Lendo a memória de campanhas", forma: "comprimido" },
+  { nome: "Consultando o radar e a época do ano", forma: "softgel" },
+  { nome: "Escrevendo as variações", forma: "capsula" },
+  { nome: "Checando a Bula de cada peça", forma: "dragea" },
+];
 
 export function Dosagem({ pecas }: { pecas: number }) {
   const [etapa, setEtapa] = useState(0);
@@ -22,14 +28,16 @@ export function Dosagem({ pecas }: { pecas: number }) {
         <CapsulaViva estado="dosando" />
         <div>
           <p className="receita-olho">Dosando {pecas} peças</p>
-      <ol className="dosagem-etapas">
-        {ETAPAS.map((nome, i) => (
-          <li key={nome} className={i < etapa ? "is-feita" : i === etapa ? "is-atual" : ""}>
-            <span className="dosagem-marca">{i < etapa ? <Icon name="check" size={14} /> : null}</span>
-            {nome}
-          </li>
-        ))}
-      </ol>
+          <ol className="dosagem-etapas">
+            {ETAPAS.map((e, i) => (
+              <li key={e.nome} className={i < etapa ? "is-feita" : i === etapa ? "is-atual" : ""}>
+                <span className="dosagem-forma">
+                  <Forma tipo={e.forma} size={26} className={i === etapa ? "forma-balanca" : undefined} />
+                </span>
+                {e.nome}
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
       <ul className="dosagem-esqueletos" aria-hidden="true">
