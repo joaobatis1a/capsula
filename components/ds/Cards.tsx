@@ -62,9 +62,11 @@ export interface TrendItemProps {
   fonte?: string;
   data?: string;
   validade?: string;
+  /** Linha extra no pé do card (ex.: música liberada para uso comercial). */
+  rodape?: ReactNode;
 }
 
-export function TrendItem({ plataforma, tipo, termo, ideia, fonte = "Observação manual", data = "—", validade = "—" }: TrendItemProps) {
+export function TrendItem({ plataforma, tipo, termo, ideia, fonte = "Observação manual", data = "—", validade = "—", rodape }: TrendItemProps) {
   return (
     <article className="cp-trend">
       <div className="cp-trend-top">
@@ -87,6 +89,7 @@ export function TrendItem({ plataforma, tipo, termo, ideia, fonte = "Observaçã
           <dd>{validade}</dd>
         </div>
       </dl>
+      {rodape}
     </article>
   );
 }

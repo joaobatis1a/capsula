@@ -11,22 +11,20 @@ export const metadata: Metadata = { title: "Ano da saúde · Cápsula" };
 
 export default function SaudePage() {
   return (
-    <>
-      <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 760 }}>
-        <p className="receita-olho">Radar de sazonalidade</p>
+    <div className="pg pg-saude">
+      <header className="pg-cabeca">
         <div className="titulo-forma tem-forma">
           <Forma tipo="efervescente" size={56} className="forma-entra is-viva" />
-          <h1 className="t-h1">Ano da saúde</h1>
+          <div>
+            <h1 className="t-h1">Ano da saúde</h1>
+            <p className="pg-sub">Quando cada condição sobe, onde, quem mais sente e o que a farmácia pode oferecer. Escolha um mês e abra a ficha para criar um briefing.</p>
+          </div>
         </div>
-        <p>
-          Quando cada condição sobe, onde, quem mais sente e o que a farmácia pode oferecer. Escolha um mês, filtre por tema, causa ou região e abra
-          a ficha para criar um briefing já com o assunto certo.
-        </p>
       </header>
       <Suspense fallback={<div className="esqueleto" style={{ height: 420 }} />}>
         <Conteudo />
       </Suspense>
-    </>
+    </div>
   );
 }
 

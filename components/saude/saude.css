@@ -42,9 +42,9 @@
   display: grid;
   gap: 2px;
   padding: var(--space-4);
-  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--surface-raised);
+  box-shadow: 0 14px 30px -24px #000000b3;
   animation: cp-sobe var(--dur-3) var(--ease-out) both;
 }
 .saude-numero b {
@@ -67,12 +67,7 @@
 
 /* Controles */
 .saude-controles {
-  display: grid;
   gap: var(--space-4);
-  padding: var(--space-5);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface-raised);
 }
 .saude-busca {
   position: relative;
@@ -113,8 +108,7 @@
   display: grid;
   gap: var(--space-2);
   padding: var(--space-4) var(--space-5);
-  border-left: 4px solid var(--tendencia-fill);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--tendencia-soft);
 }
 .saude-mes-texto {
@@ -136,19 +130,18 @@
 .saude-link {
   font: inherit;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--tendencia);
   background: none;
   border: 0;
-  padding: 0;
+  padding: 0 4px;
+  margin: 0 -4px;
   cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: var(--line-strong);
-  text-underline-offset: 3px;
-  border-radius: 4px;
-  transition: text-decoration-color var(--dur-2) var(--ease-out);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color var(--dur-2) var(--ease-out);
 }
 .saude-link:hover {
-  text-decoration-color: var(--tendencia-fill);
+  background: var(--tendencia-soft);
 }
 .saude-link:focus-visible {
   outline: 2px solid transparent;
@@ -157,15 +150,14 @@
 
 /* Tabela */
 .saude-tabela-caixa {
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--surface-raised);
+  gap: var(--space-3);
   overflow: hidden;
 }
 .saude-rolagem {
   overflow: auto;
   max-height: 72vh;
-  padding: 0 var(--space-4);
+  margin: 0 calc(var(--space-2) * -1);
+  padding: 0 var(--space-2);
 }
 .saude-tabela {
   width: 100%;
@@ -211,15 +203,15 @@
 }
 .saude-th-mes button:hover {
   color: var(--ink);
-  background: var(--surface-sunken);
+  background: var(--hover);
 }
 .saude-th-mes.is-hoje button {
   color: var(--tendencia);
   font-weight: 500;
 }
 .saude-th-mes.is-sel button {
-  background: var(--action);
-  color: var(--on-action);
+  background: var(--tendencia-fill);
+  color: var(--on-tendencia);
 }
 .saude-th-mes button:focus-visible {
   outline: 2px solid transparent;
@@ -312,8 +304,9 @@
   animation-delay: calc(var(--c, 0) * 24ms + var(--l, 0) * 20ms);
   transform-origin: bottom;
 }
-.saude-celula.is-mes .saude-bloco {
-  box-shadow: 0 0 0 2px var(--ink);
+.saude-celula.is-mes {
+  background: var(--hover);
+  border-radius: 10px;
 }
 .saude-linha:hover .saude-celula:not(.n0) .saude-bloco {
   transform: scaleY(1.12);
@@ -382,8 +375,22 @@
   background: var(--n3);
   color: var(--nevoa-900);
 }
-.faixa-celula.is-hoje {
-  box-shadow: 0 0 0 2px var(--ink);
+.faixa-celula {
+  position: relative;
+}
+.faixa-celula.is-hoje::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink);
+  translate: -50% 0;
+}
+.faixa-ano {
+  padding-bottom: 8px;
 }
 .faixa-celula:not(.n0) {
   animation: cp-cresce 450ms var(--ease-mola) both;
@@ -413,15 +420,14 @@
   border-radius: var(--radius-lg);
   background: var(--surface-raised);
   transition:
-    border-color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out),
     transform var(--dur-2) var(--ease-out);
 }
 .saude-datas-mes:hover {
   transform: translateY(-3px);
 }
 .saude-datas-mes.is-sel {
-  border-color: var(--tendencia-fill);
-  box-shadow: inset 0 0 0 1px var(--tendencia-fill);
+  background: var(--tendencia-soft);
 }
 .saude-datas-topo {
   justify-self: start;

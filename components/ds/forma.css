@@ -228,7 +228,7 @@
     background-color var(--dur-2) var(--ease-out);
 }
 .rodape-forma:hover {
-  background: var(--surface-sunken);
+  background: var(--hover);
   transform: translateY(-4px) rotate(-6deg);
 }
 .rodape-forma::after {
@@ -279,7 +279,7 @@
   justify-items: center;
   gap: var(--space-3);
   padding: var(--space-8) var(--space-4);
-  border: 1.5px dashed var(--line-strong);
+  background: var(--fill-suave);
   border-radius: var(--radius-lg);
   text-align: center;
 }
@@ -326,7 +326,6 @@
 .forma-cartao:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-float);
-  border-color: var(--line-strong);
 }
 .forma-palco {
   display: grid;

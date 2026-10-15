@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { DoseBar, Forma, StatusPill } from "@/components/ds";
+import { Revela } from "@/components/motion/Revela";
 import { CHAVE_PUBLICADAS, type PecaPublicada } from "@/components/estudio/Aprovacao";
 import { ROTULOS, type Canal, type Formato } from "@/types/briefing";
 
@@ -29,13 +30,16 @@ export function Publicadas() {
   } catch {}
 
   return (
-    <section className="memoria-lista" aria-labelledby="titulo-publicadas">
-      <h2 id="titulo-publicadas" className="t-h2">
-        Publicadas pelo Estúdio
-      </h2>
-      <p className="t-body-sm t-muted">
-        Peças aprovadas e publicadas entram aqui e passam a contar como histórico. Por enquanto ficam neste navegador.
-      </p>
+    <Revela as="section" i={4} className="painel" aria-labelledby="titulo-publicadas">
+      <header className="painel-topo">
+        <div className="painel-titulo">
+          <span className="painel-ponto" aria-hidden="true" />
+          <h2 id="titulo-publicadas" className="t-h2">
+            Publicadas pelo Estúdio
+          </h2>
+        </div>
+        <span className="painel-nota">{pecas.length ? `${pecas.length} peça${pecas.length === 1 ? "" : "s"}` : "entram aqui como histórico"}</span>
+      </header>
       {pecas.length ? (
         <ul className="memoria-publicadas">
           {pecas.map((p) => (
@@ -60,6 +64,6 @@ export function Publicadas() {
           <p className="t-body-sm t-muted">Aprove e publique uma peça no Estúdio e ela entra aqui, como histórico.</p>
         </div>
       )}
-    </section>
+    </Revela>
   );
 }

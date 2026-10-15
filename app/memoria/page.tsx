@@ -13,25 +13,29 @@ import "@/components/memoria/memoria.css";
 
 export const metadata: Metadata = { title: "Memória · Cápsula" };
 
-export default function MemoriaPage({ searchParams }: { searchParams: Promise<{ canal?: string; publico?: string }> }) {
+type Busca = Promise<{ canal?: string; publico?: string }>;
+
+export default function MemoriaPage({ searchParams }: { searchParams: Busca }) {
   return (
-    <>
-      <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 720 }}>
+    <div className="pg pg-memoria">
+      <header className="pg-cabeca">
         <div className="titulo-forma tem-forma">
           <Forma tipo="comprimido" size={56} className="forma-entra" />
-          <h1 className="t-h1">Memória</h1>
+          <div>
+            <h1 className="t-h1">Memória</h1>
+            <p className="pg-sub">O que funcionou e o que falhou nas campanhas anteriores. É daqui que o motor tira as evidências da Bula.</p>
+          </div>
         </div>
-        <p>O que funcionou e o que falhou nas campanhas anteriores. É daqui que o motor tira as evidências de memória da Bula.</p>
       </header>
-      <Suspense fallback={<p className="t-muted">Carregando a memória…</p>}>
+      <Suspense fallback={<div className="esqueleto" style={{ height: 320 }} />}>
         <Ranking searchParams={searchParams} />
       </Suspense>
       <Publicadas />
-    </>
+    </div>
   );
 }
 
-async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: string; publico?: string }> }) {
+async function Ranking({ searchParams }: { searchParams: Busca }) {
   await connection();
   const params = await searchParams;
   const canal = CANAIS.includes(params.canal as Canal) ? (params.canal as Canal) : undefined;
@@ -55,61 +59,90 @@ async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: strin
 
   return (
     <>
-      <Revela as="section" className="memoria-resumo" aria-label="Resumo do histórico">
-        <Numero valor={<Conta valor={todas.length} />} rotulo="campanhas no histórico" />
-        <Numero valor={<Conta key={filtradas.length} valor={filtradas.length} />} rotulo="no filtro atual" />
-        <Numero valor={`${dataCurta(datas[0])} a ${dataCurta(datas.at(-1)!)}`} rotulo="período" />
-        <p className="memoria-origem">
+      <Revela as="section" className="painel" aria-labelledby="m-geral">
+        <header className="painel-topo">
+          <div className="painel-titulo">
+            <span className="painel-ponto" aria-hidden="true" />
+            <h2 id="m-geral" className="t-h2">
+              Visão geral
+            </h2>
+          </div>
           <OriginTag origin="memoria">{fonte.origem === "sintetico" ? "Dados de teste" : "Dados reais"}</OriginTag>
-          <span className="t-body-sm t-muted">
-            {fonte.origem === "sintetico" ? "Histórico sintético: os números não são da empresa." : `Fonte: ${fonte.nome}.`}
-          </span>
-        </p>
+        </header>
+        <ul className="memoria-numeros">
+          <Numero valor={<Conta valor={todas.length} />} rotulo="campanhas no histórico" />
+          <Numero valor={<Conta key={filtradas.length} valor={filtradas.length} />} rotulo="no filtro atual" />
+          <Numero valor={`${dataCurta(datas[0])} a ${dataCurta(datas.at(-1)!)}`} rotulo="período coberto" />
+        </ul>
+        {fonte.origem === "sintetico" ? <p className="painel-nota">Histórico sintético: os números não são da empresa.</p> : null}
       </Revela>
 
-      <Revela as="nav" i={1} className="galeria-filtros" aria-label="Filtros da memória">
-        <div className="galeria-filtro">
-          <span className="cp-label">Canal</span>
-          <ul className="estudio-chips">
-            <Chip href={link({ canal: undefined })} ativo={!canal}>
-              Todos
-            </Chip>
-            {CANAIS.map((c) => (
-              <Chip key={c} href={link({ canal: c })} ativo={canal === c}>
-                {ROTULOS.canal[c]}
+      <Revela as="section" i={1} className="painel" aria-labelledby="m-filtros">
+        <header className="painel-topo">
+          <div className="painel-titulo">
+            <span className="painel-ponto" aria-hidden="true" />
+            <h2 id="m-filtros" className="t-h2">
+              Filtrar
+            </h2>
+          </div>
+          {canal || publico ? (
+            <Link href="/memoria" className="memoria-limpar" scroll={false}>
+              Limpar filtros
+            </Link>
+          ) : null}
+        </header>
+        <div className="memoria-filtros">
+          <div className="galeria-filtro">
+            <span className="cp-label">Canal</span>
+            <ul className="estudio-chips">
+              <Chip href={link({ canal: undefined })} ativo={!canal}>
+                Todos
               </Chip>
-            ))}
-          </ul>
-        </div>
-        <div className="galeria-filtro">
-          <span className="cp-label">Público</span>
-          <ul className="estudio-chips">
-            <Chip href={link({ publico: undefined })} ativo={!publico}>
-              Todos
-            </Chip>
-            {publicos.map((p) => (
-              <Chip key={p.id} href={link({ publico: p.nome })} ativo={publico === p.nome}>
-                {p.nome}
+              {CANAIS.map((c) => (
+                <Chip key={c} href={link({ canal: c })} ativo={canal === c}>
+                  {ROTULOS.canal[c]}
+                </Chip>
+              ))}
+            </ul>
+          </div>
+          <div className="galeria-filtro">
+            <span className="cp-label">Público</span>
+            <ul className="estudio-chips">
+              <Chip href={link({ publico: undefined })} ativo={!publico}>
+                Todos
               </Chip>
-            ))}
-          </ul>
+              {publicos.map((p) => (
+                <Chip key={p.id} href={link({ publico: p.nome })} ativo={publico === p.nome}>
+                  {p.nome}
+                </Chip>
+              ))}
+            </ul>
+          </div>
         </div>
       </Revela>
 
       <div className="memoria-colunas" key={`${canal}-${publico}`}>
-        <Lista titulo="O que funcionou" vazio="Poucas campanhas neste filtro para recomendar algo." itens={ranking.melhores} />
-        <Lista titulo="O que evitar" vazio="Nenhuma combinação abaixo da média neste filtro." itens={ranking.piores} />
+        <Lista id="m-funcionou" i={2} titulo="O que funcionou" nota="acima da média" vazio="Poucas campanhas neste filtro para recomendar algo." itens={ranking.melhores} />
+        <Lista id="m-evitar" i={3} titulo="O que evitar" nota="abaixo da média" vazio="Nenhuma combinação abaixo da média neste filtro." itens={ranking.piores} evitar />
       </div>
     </>
   );
 }
 
-function Lista({ titulo, itens, vazio }: { titulo: string; itens: ItemRanking[]; vazio: string }) {
+function Lista({ id, i, titulo, nota, itens, vazio, evitar }: { id: string; i: number; titulo: string; nota: string; itens: ItemRanking[]; vazio: string; evitar?: boolean }) {
   return (
-    <section className="memoria-lista" aria-label={titulo}>
-      <h2 className="t-h2">{titulo}</h2>
+    <Revela as="section" i={i} className={evitar ? "painel painel-evitar" : "painel"} aria-labelledby={id}>
+      <header className="painel-topo">
+        <div className="painel-titulo">
+          <span className="painel-ponto" aria-hidden="true" />
+          <h2 id={id} className="t-h2">
+            {titulo}
+          </h2>
+        </div>
+        <span className="painel-nota">{itens.length ? `${itens.length} combinações, ${nota}` : nota}</span>
+      </header>
       {itens.length ? (
-        <ol>
+        <ol className="memoria-lista">
           {itens.map((item, n) => (
             <Revela as="li" key={item.id} i={n} className="memoria-item">
               <span className={item.lift >= 1 ? "memoria-lift is-alto" : "memoria-lift is-baixo"}>{item.lift.toLocaleString("pt-BR", { maximumFractionDigits: 1, minimumFractionDigits: 1 })}×</span>
@@ -125,16 +158,16 @@ function Lista({ titulo, itens, vazio }: { titulo: string; itens: ItemRanking[];
       ) : (
         <p className="t-body-sm t-muted">{vazio}</p>
       )}
-    </section>
+    </Revela>
   );
 }
 
 function Numero({ valor, rotulo }: { valor: React.ReactNode; rotulo: string }) {
   return (
-    <div className="memoria-numero">
-      <span className="t-h2">{valor}</span>
+    <li className="memoria-numero">
+      <span className="memoria-numero-valor">{valor}</span>
       <span className="t-caption t-muted">{rotulo}</span>
-    </div>
+    </li>
   );
 }
 

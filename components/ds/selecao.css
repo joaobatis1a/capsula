@@ -1,0 +1,141 @@
+/* Seletor da Cápsula. Só tokens do design system. */
+
+.sel-caixa {
+  position: relative;
+}
+.sel-botao {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+  color: var(--ink);
+  background: var(--surface-raised);
+  border: 1.5px solid var(--campo-borda);
+  border-radius: var(--radius-md);
+  padding: 10px var(--space-3);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.sel-botao:hover {
+  border-color: var(--ink-muted);
+}
+.sel-botao:focus-visible,
+.sel-caixa.is-aberto .sel-botao {
+  outline: 2px solid transparent;
+  border-color: var(--memoria-fill);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--memoria-fill) 20%, transparent);
+}
+.sel-valor {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A seta é desenhada com bordas e gira ao abrir, com mola */
+.sel-seta {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin: -3px 4px 0 0;
+  border-right: 2px solid var(--ink-muted);
+  border-bottom: 2px solid var(--ink-muted);
+  transform: rotate(45deg);
+  transition:
+    transform var(--dur-3) var(--ease-mola),
+    border-color var(--dur-2) var(--ease-out);
+}
+.sel-caixa.is-aberto .sel-seta {
+  margin-top: 3px;
+  transform: rotate(-135deg);
+  border-color: var(--memoria);
+}
+
+/* A lista: abre de cima para baixo (ou de baixo para cima), com opacidade, escala e mola */
+.sel-lista {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  max-height: 340px;
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  box-shadow: 0 26px 54px -22px #000000e6;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.97);
+  transform-origin: top center;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-3) var(--ease-mola),
+    visibility 0s linear var(--dur-3);
+}
+.sel-caixa.is-acima .sel-lista {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform: translateY(8px) scale(0.97);
+  transform-origin: bottom center;
+}
+.sel-caixa.is-aberto .sel-lista {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* Cada opção entra um pouquinho depois da anterior */
+.sel-op {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  line-height: 22px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-3) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+.sel-caixa.is-aberto .sel-op {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 28ms), calc(var(--i, 0) * 28ms), 0s;
+}
+.sel-op.is-ativo {
+  background: var(--hover-forte);
+}
+.sel-op.is-escolhida {
+  font-weight: 600;
+}
+.sel-op.is-escolhida .cp-icon {
+  color: var(--memoria);
+}
+.sel-op-texto {
+  display: grid;
+  gap: 1px;
+}
+.sel-op-texto small {
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--ink-muted);
+}
+.sel.is-error .sel-botao {
+  border-color: var(--bloqueado);
+}

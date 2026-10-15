@@ -54,7 +54,7 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
         <Numero valor={noPico.length} rotulo="no pico do mês" destaque />
       </Revela>
 
-      <Revela as="section" i={1} className="saude-controles" aria-label="Filtros">
+      <Revela as="section" i={1} className="painel saude-controles" aria-label="Filtros">
         <div className="saude-busca">
           <Icon name="archive" size={18} />
           <input
@@ -146,7 +146,7 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
         ) : null}
       </Revela>
 
-      <Revela as="section" i={3} className="saude-tabela-caixa" aria-label="Sazonalidade por mês">
+      <Revela as="section" i={3} className="painel saude-tabela-caixa" aria-label="Sazonalidade por mês">
         <div className="saude-rolagem">
         <table className="saude-tabela" key={assinatura}>
           <caption className="sr-only">Intensidade de cada condição por mês, de janeiro a dezembro. Clique no mês para ver o que está em alta.</caption>
@@ -222,7 +222,7 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
         </ul>
       </Revela>
 
-      <Revela as="section" i={4} className="saude-datas" aria-labelledby="titulo-datas">
+      <Revela as="section" i={4} className="painel saude-datas" aria-labelledby="titulo-datas">
         <h2 id="titulo-datas" className="t-h2">
           Calendário de campanhas de saúde
         </h2>

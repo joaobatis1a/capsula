@@ -30,5 +30,5 @@ export function FundoVivo() {
     return () => window.removeEventListener("pointerdown", ondular);
   }, []);
 
-  return <div className="fundo-grao" aria-hidden="true" />;
+  return <div className="fundo-ambiente" aria-hidden="true" />;
 }
