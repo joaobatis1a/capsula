@@ -1,0 +1,175 @@
+/* Base da aplicação. Cores e medidas só por tokens (app/tokens.css). */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  background: var(--surface);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+/* Estilos de texto do design system */
+.t-display {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.t-h1 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.t-h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+}
+.t-h3 {
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.t-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+}
+.t-caption {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.t-muted {
+  color: var(--ink-muted);
+}
+.t-data {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .t-display {
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Estrutura das telas */
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-raised);
+}
+.app-logo {
+  display: inline-flex;
+  border-radius: var(--radius-sm);
+}
+.app-logo img {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+.app-logo .logo-dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .app-logo .logo-light {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .app-logo .logo-dark {
+    display: block;
+  }
+}
+:root[data-theme="dark"] .app-logo .logo-light {
+  display: none;
+}
+:root[data-theme="dark"] .app-logo .logo-dark {
+  display: block;
+}
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.app-nav a {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px var(--space-3);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+}
+.app-nav a:hover {
+  background: var(--surface-sunken);
+}
+.app-nav a[aria-current="page"] {
+  background: var(--action);
+  color: var(--on-action);
+}
+.app-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) var(--space-12);
+  display: grid;
+  gap: var(--space-8);
+}
+.app-footer {
+  padding: var(--space-6) var(--space-4);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
