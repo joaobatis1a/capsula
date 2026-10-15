@@ -118,18 +118,17 @@ select.cp-input {
   padding: 0 var(--space-4);
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--line-strong);
-  background: var(--surface-raised);
+  background-color: var(--surface-raised);
   color: var(--ink);
   cursor: pointer;
 }
 .estudio-chip:is(a) {
   text-decoration: none;
 }
-.estudio-chip:hover {
-  background: var(--surface-sunken);
+.estudio-chip:not(.is-on):hover {
+  background-color: var(--surface-sunken);
 }
 .estudio-chip.is-on {
-  background: var(--action);
   border-color: var(--action);
   color: var(--on-action);
 }
@@ -364,3 +363,25 @@ select.cp-input {
   padding-top: var(--space-2);
   border-top: 1px dashed var(--line-strong);
 }
+
+/* Chips: o preenchimento entra da esquerda, o check se desenha */
+.estudio-chip {
+  background-image: linear-gradient(var(--action), var(--action));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition:
+    background-size var(--dur-3) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+.estudio-chip.is-on {
+  background-color: var(--surface-raised);
+  background-size: 100% 100%;
+}
+.estudio-chip.is-on .cp-icon path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: cp-desenha 360ms var(--ease-out) 120ms forwards;
+}
+

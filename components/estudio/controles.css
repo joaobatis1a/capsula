@@ -1,0 +1,137 @@
+/* Seletor de segmentos e interruptor. Só tokens do design system. */
+
+.segmentos {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 22px;
+  background: var(--surface-sunken);
+  border: 1.5px solid var(--line);
+  justify-self: start;
+}
+.segmentos-marcador {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  box-shadow: var(--shadow-seam);
+  transition:
+    transform var(--dur-3) var(--ease-mola),
+    width var(--dur-3) var(--ease-mola),
+    height var(--dur-3) var(--ease-mola);
+}
+.seg-op {
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  min-height: 38px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    color var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+.seg-op[aria-checked="true"] {
+  color: var(--on-action);
+}
+.seg-op:not([aria-checked="true"]):hover {
+  color: var(--ink-muted);
+}
+.seg-op:active {
+  transform: scale(0.95);
+}
+.seg-op:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+/* Antes de o marcador ser medido, a opção ainda aparece marcada */
+.segmentos:not(:has(.segmentos-marcador)) .seg-op[aria-checked="true"] {
+  background: var(--action);
+}
+
+.interruptor-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 15px;
+  line-height: 22px;
+  cursor: pointer;
+}
+.interruptor {
+  flex: none;
+  width: 52px;
+  height: 30px;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface-sunken);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.interruptor[aria-checked="true"] {
+  background: var(--memoria-fill);
+  border-color: var(--memoria-fill);
+}
+.interruptor-bolinha {
+  display: block;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-seam);
+  transition: transform var(--dur-3) var(--ease-mola);
+}
+.interruptor[aria-checked="true"] .interruptor-bolinha {
+  transform: translateX(22px);
+}
+.interruptor:active .interruptor-bolinha {
+  width: 26px;
+}
+.interruptor:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+/* Linha de posologia ao vivo */
+.posologia-viva {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+.posologia-viva b {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  animation: cp-pop var(--dur-3) var(--ease-mola);
+}
+.posologia-viva span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* Cabeçalho do briefing como receituário */
+.receita-olho {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}

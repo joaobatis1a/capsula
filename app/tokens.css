@@ -82,6 +82,14 @@
   --font-sans: var(--font-instrument), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
+  /* Cartela: folha metálica, bolhas e o relevo do fundo */
+  --folha: linear-gradient(135deg, #FFFFFF 0%, #EEEEF5 45%, #FFFFFF 60%, #E6E6EF 100%);
+  --folha-risco: #14142A0A;
+  --bolha-luz: #FFFFFFE6;
+  --bolha-sombra: #14142A2E;
+  --fundo-cavidade: #E4E4EE;
+  --fundo-luz: #4C4FE81F;
+
   color-scheme: light;
 }
 
@@ -115,6 +123,12 @@
     --shadow-seam: 0 2px 0 #00000099;
     --shadow-float: 0 16px 40px -12px #000000cc;
     --focus-ring: 0 0 0 2px #0F0F1E, 0 0 0 4px #A9AEFF;
+    --folha: linear-gradient(135deg, #22223D 0%, #1A1A31 45%, #26264A 60%, #191930 100%);
+    --folha-risco: #FFFFFF08;
+    --bolha-luz: #FFFFFF2E;
+    --bolha-sombra: #00000080;
+    --fundo-cavidade: #17172C;
+    --fundo-luz: #8B90FF26;
     color-scheme: dark;
   }
 }
@@ -147,5 +161,11 @@
   --shadow-seam: 0 2px 0 #00000099;
   --shadow-float: 0 16px 40px -12px #000000cc;
   --focus-ring: 0 0 0 2px #0F0F1E, 0 0 0 4px #A9AEFF;
+  --folha: linear-gradient(135deg, #22223D 0%, #1A1A31 45%, #26264A 60%, #191930 100%);
+  --folha-risco: #FFFFFF08;
+  --bolha-luz: #FFFFFF2E;
+  --bolha-sombra: #00000080;
+  --fundo-cavidade: #17172C;
+  --fundo-luz: #8B90FF26;
   color-scheme: dark;
 }
