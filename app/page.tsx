@@ -14,6 +14,12 @@ export default function EstudioPage() {
 async function EstudioComDados() {
   await connection();
   const fonte = getDataSource();
-  const [publicos, sazonalidade] = await Promise.all([fonte.getPublicos(), fonte.getSazonalidade(new Date().getMonth() + 1)]);
-  return <Estudio publicos={publicos} sazonalidade={sazonalidade} />;
+  const mes = new Date().getMonth() + 1;
+  const [publicos, sazonalidade, ...porMes] = await Promise.all([
+    fonte.getPublicos(),
+    fonte.getSazonalidade(mes),
+    ...Array.from({ length: 12 }, (_, i) => fonte.getSazonalidade(i + 1)),
+  ]);
+  const doAno = [...new Map(porMes.flat().map((s) => [s.id, s])).values()];
+  return <Estudio publicos={publicos} sazonalidade={sazonalidade} sazonalidadeAno={doAno} />;
 }

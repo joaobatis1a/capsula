@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button, Field, Icon, OriginTag } from "@/components/ds";
+import { Button, Field, Icon } from "@/components/ds";
 import type { PublicoSugerido, Sazonalidade } from "@/lib/data/types";
 import { CANAIS, FORMATOS, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Formato, type Objetivo, type TipoProduto } from "@/types/briefing";
 import type { ErroApi, RespostaGeracao } from "@/types/variacao";
 import { useAvisar } from "@/components/motion/Avisos";
-import { CapsulaViva } from "./CapsulaViva";
+import type { Dose } from "@/lib/estudio/doses";
+import { Abertura } from "./Abertura";
+import { Interruptor, Segmentos } from "./Controles";
 import { Dosagem } from "./Dosagem";
 import { Galeria } from "./Galeria";
 import "./estudio.css";
@@ -52,9 +54,7 @@ const VAZIO: Form = {
   observacoes: "",
 };
 
-const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-
-export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[]; sazonalidade: Sazonalidade[] }) {
+export function Estudio({ publicos, sazonalidade, sazonalidadeAno }: { publicos: PublicoSugerido[]; sazonalidade: Sazonalidade[]; sazonalidadeAno: Sazonalidade[] }) {
   const [form, setForm] = useState<Form>(VAZIO);
   const [erros, setErros] = useState<ErrosBriefing>({});
   const [publicoLivre, setPublicoLivre] = useState("");
@@ -64,6 +64,7 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
   const [pronto, setPronto] = useState(false);
   const [preenchidos, setPreenchidos] = useState<string[]>([]);
   const resultadoRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const avisar = useAvisar();
 
   // O brilho de "pronto" e o destaque dos campos preenchidos duram pouco.
@@ -89,16 +90,30 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
     setPublicoLivre("");
   }
 
-  function usarSazonalidade(s: Sazonalidade) {
+  function usarDose(d: Dose) {
+    const daqui30 = new Date(Date.now() + 30 * 864e5).toISOString().slice(0, 10);
+    const saz = sazonalidadeAno.find((s) => s.id === d.sazonalidadeId);
     setForm((f) => ({
       ...f,
-      categoria: s.categorias[0],
-      tipoProduto: s.tiposProduto[0],
-      radarIds: f.radarIds.includes(s.id) ? f.radarIds : [...f.radarIds, s.id],
-      observacoes: f.observacoes || `Ângulo da época: ${s.angulo}`,
+      produto: d.produto,
+      categoria: d.categoria,
+      tipoProduto: d.tipoProduto,
+      descricao: d.descricao,
+      precoDe: d.precoDe ?? "",
+      precoPor: d.precoPor ?? "",
+      condicao: d.condicao,
+      validade: daqui30,
+      publicos: d.publicos.filter((p) => publicos.some((x) => x.nome === p)),
+      canais: d.canais,
+      formatos: d.formatos,
+      objetivo: d.objetivo,
+      radarIds: d.sazonalidadeId ? [d.sazonalidadeId] : [],
+      observacoes: saz ? `Ângulo da época: ${saz.angulo}` : "",
     }));
-    setPreenchidos(["categoria", "tipo", "observacoes"]);
-    document.getElementById("cp-f-produto")?.focus();
+    setErros({});
+    setPreenchidos(["produto", "categoria", "tipo", "oferta", "precoDe", "precoPor", "validade", "condicao", "observacoes"]);
+    // Dá tempo da cápsula saltar da cartela antes de descer até o briefing.
+    setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 450);
   }
 
   function preencherExemplo() {
@@ -174,59 +189,28 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
   }
 
   const sugeridos = publicos.filter((p) => !form.publicos.includes(p.nome));
+  const totalPecas = Math.min(24, form.publicos.length * form.canais.length * form.variacoesPorCanal);
 
   return (
     <div className="estudio">
-      <header className="estudio-hero">
-        <div className="estudio-hero-texto">
-          <h1 className="t-display estudio-hero-titulo">
-            <span>Criatividade</span> <span>na</span> <span className="is-dose">dose</span> <span>certa</span>
-          </h1>
-          <p>
-            Escreva um briefing e a Cápsula gera variações para cada público e canal, juntando o que funcionou nas campanhas
-            anteriores com o que está em alta e a época do ano. Cada peça sai com a sua Bula.
-          </p>
-        </div>
-        <CapsulaViva estado={estado === "gerando" ? "dosando" : pronto ? "pronto" : "parado"} />
-      </header>
+      <Abertura
+        sazonalidade={sazonalidade}
+        sazonalidadeAno={sazonalidadeAno}
+        onDose={usarDose}
+        onEscrever={() => {
+          formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          setTimeout(() => document.getElementById("cp-f-produto")?.focus({ preventScroll: true }), 500);
+        }}
+      />
 
-      {sazonalidade.length ? (
-        <section className="estudio-epoca" aria-labelledby="titulo-epoca">
-          <div className="estudio-epoca-head">
-            <h2 id="titulo-epoca" className="t-h2">
-              Em alta nesta época
-            </h2>
-            <p className="t-body-sm t-muted">Condições de saúde que costumam aumentar agora e nos próximos dois meses. Fontes públicas.</p>
-          </div>
-          <ul className="estudio-epoca-lista">
-            {sazonalidade.map((s) => (
-              <li key={s.id} className={form.radarIds.includes(s.id) ? "estudio-epoca-item is-escolhido" : "estudio-epoca-item"}>
-                <div className="estudio-epoca-top">
-                  <OriginTag origin="tendencia">Sazonalidade</OriginTag>
-                  <span className="t-data t-muted">pico {s.mesesPico.map((m) => MESES[m - 1]).join(", ")}</span>
-                </div>
-                <h3 className="t-h3">{s.condicao}</h3>
-                <p className="t-body-sm">{s.categorias.join(" · ")}</p>
-                <p className="t-data t-muted">
-                  {s.regiao} ·{" "}
-                  <a href={s.fonteUrl} target="_blank" rel="noreferrer">
-                    {s.fonte}
-                  </a>
-                </p>
-                <Button variant="secondary" onClick={() => usarSazonalidade(s)} aria-pressed={form.radarIds.includes(s.id)}>
-                  {form.radarIds.includes(s.id) ? "No briefing" : "Usar no briefing"}
-                </Button>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      <form className="estudio-form" onSubmit={gerar} noValidate aria-labelledby="titulo-briefing">
+      <form ref={formRef} className="estudio-form" onSubmit={gerar} noValidate aria-labelledby="titulo-briefing">
         <div className="estudio-form-head">
-          <h2 id="titulo-briefing" className="t-h2">
-            Briefing
-          </h2>
+          <div>
+            <p className="receita-olho">Receita de campanha · {new Date().toLocaleDateString("pt-BR")}</p>
+            <h2 id="titulo-briefing" className="t-h2">
+              Briefing
+            </h2>
+          </div>
           <Button variant="ghost" onClick={preencherExemplo}>
             Preencher exemplo
           </Button>
@@ -310,25 +294,12 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
           <div className="estudio-grade">
             <Opcoes rotulo="Canais" erro={erros.canais} itens={CANAIS} nomes={ROTULOS.canal} escolhidos={form.canais} alternar={(c) => set("canais", alternar(form.canais, c))} />
             <Opcoes rotulo="Formatos" erro={erros.formatos} itens={FORMATOS} nomes={ROTULOS.formato} escolhidos={form.formatos} alternar={(f) => set("formatos", alternar(form.formatos, f))} />
-            <Field as="select" label="Objetivo" value={form.objetivo} onChange={(e) => set("objetivo", e.target.value as Objetivo)}>
-              {OBJETIVOS.map((o) => (
-                <option key={o} value={o}>
-                  {ROTULOS.objetivo[o]}
-                </option>
-              ))}
-            </Field>
-            <Field as="select" label="Variações por canal e público" value={String(form.variacoesPorCanal)} onChange={(e) => set("variacoesPorCanal", Number(e.target.value))}>
-              {[3, 4, 5].map((n) => (
-                <option key={n} value={n}>
-                  {n}
-                </option>
-              ))}
-            </Field>
+            <Segmentos rotulo="Objetivo" opcoes={OBJETIVOS.map((o) => ({ valor: o, nome: ROTULOS.objetivo[o] }))} valor={form.objetivo} mudar={(v) => set("objetivo", v)} />
+            <Segmentos rotulo="Variações por canal e público" opcoes={[3, 4, 5].map((n) => ({ valor: n, nome: String(n) }))} valor={form.variacoesPorCanal} mudar={(v) => set("variacoesPorCanal", v)} />
           </div>
-          <label className="estudio-check">
-            <input type="checkbox" checked={form.incluirRoteiros} onChange={(e) => set("incluirRoteiros", e.target.checked)} />
+          <Interruptor ligado={form.incluirRoteiros} mudar={(v) => set("incluirRoteiros", v)}>
             Incluir roteiro de vídeo curto (Reels ou TikTok) com sugestão de música
-          </label>
+          </Interruptor>
           <Field as="textarea" className={marca("observacoes")} label="Observações" value={form.observacoes} onChange={(e) => set("observacoes", e.target.value)} placeholder="Algo que a peça precisa ou não pode dizer" />
         </fieldset>
 
@@ -336,8 +307,17 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
           <Button variant="capsula" type="submit" className={estado === "gerando" ? "is-dosando" : undefined} disabled={estado === "gerando"} icon={estado === "gerando" ? "clock" : "arrow"}>
             {estado === "gerando" ? "Gerando variações…" : "Gerar variações"}
           </Button>
-          <p className="t-body-sm t-muted" aria-live="polite">
-            {estado === "gerando" ? "Consultando a memória, o radar e o modelo. Leva alguns segundos." : null}
+          <p className="posologia-viva" aria-live="polite">
+            {estado === "gerando" ? (
+              "Consultando a memória, o radar e o modelo."
+            ) : (
+              <>
+                Vai gerar <b key={totalPecas}>{totalPecas}</b> peças
+                <span>
+                  {form.publicos.length || 0} público{form.publicos.length === 1 ? "" : "s"} × {form.canais.length} cana{form.canais.length === 1 ? "l" : "is"} × {form.variacoesPorCanal}
+                </span>
+              </>
+            )}
           </p>
         </div>
 

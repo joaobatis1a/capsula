@@ -1,50 +1,9 @@
 /* Movimento do Estúdio: a cápsula viva, a dosagem, a galeria e a aprovação. Só tokens do design system. */
 
-/* ---------- Abertura e a cápsula viva ---------- */
-.estudio-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--space-6);
-}
-.estudio-hero-texto {
-  display: grid;
-  gap: var(--space-4);
-  max-width: 640px;
-}
-.estudio-hero-titulo span {
-  display: inline-block;
-  animation: cp-sobe 700ms var(--ease-out) both;
-}
-.estudio-hero-titulo span:nth-child(2) {
-  animation-delay: 90ms;
-}
-.estudio-hero-titulo span:nth-child(3) {
-  animation-delay: 180ms;
-}
-.estudio-hero-titulo span:nth-child(4) {
-  animation-delay: 270ms;
-}
-.estudio-hero-titulo .is-dose {
-  color: var(--tendencia);
-}
-.estudio-hero-texto > p {
-  animation: cp-sobe 700ms var(--ease-out) 360ms both;
-}
-@media (max-width: 720px) {
-  .estudio-hero {
-    grid-template-columns: 1fr;
-  }
-  .estudio-hero .capsula-viva {
-    order: -1;
-    justify-self: center;
-    width: 210px;
-  }
-}
-
+/* ---------- A cápsula viva (na dosagem) ---------- */
 .capsula-viva {
   position: relative;
-  width: clamp(220px, 30vw, 340px);
+  width: clamp(140px, 18vw, 200px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -202,6 +161,12 @@
 .dosagem {
   display: grid;
   gap: var(--space-6);
+}
+.dosagem-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-8);
   animation: cp-aparece var(--dur-2) var(--ease-out) both;
 }
 .dosagem-etapas {
@@ -309,18 +274,8 @@
 }
 
 /* ---------- Chips, época e avisos ---------- */
-.estudio-chip {
-  transition:
-    background-color var(--dur-2) var(--ease-out),
-    border-color var(--dur-2) var(--ease-out),
-    color var(--dur-2) var(--ease-out),
-    transform var(--dur-1) var(--ease-out);
-}
 .estudio-chip:not(:disabled):active {
   transform: scale(0.95);
-}
-.estudio-chip.is-on {
-  animation: cp-pop var(--dur-3) var(--ease-mola);
 }
 .estudio-epoca-item {
   transition:
@@ -342,4 +297,8 @@
 }
 .estudio-alerta.is-erro {
   animation: cp-treme 420ms var(--ease-out);
+}
+
+.dosagem .capsula-viva-tag {
+  display: none;
 }

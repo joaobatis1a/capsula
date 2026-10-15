@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AppNav } from "@/components/AppNav";
 import "@/components/ds/ds.css";
 import { AvisosProvider } from "@/components/motion/Avisos";
+import { FundoVivo } from "@/components/motion/FundoVivo";
 import { instrumentSans, plexMono, unbounded } from "./fonts";
 import "./globals.css";
 import "./motion.css";
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR" className={`${unbounded.variable} ${instrumentSans.variable} ${plexMono.variable}`}>
       <body>
+        <FundoVivo />
         <header className="app-header">
           <Link href="/" className="app-logo" aria-label="Cápsula, início">
             {/* eslint-disable-next-line @next/next/no-img-element */}
