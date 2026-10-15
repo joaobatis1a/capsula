@@ -17,9 +17,13 @@ Como um briefing vira variações com Bula. Código em `lib/motor`, `lib/memoria
 
 ## Provedores do modelo
 
-O motor usa a primeira chave preenchida no `.env.local`, nesta ordem: `GROQ_API_KEY`, `OPENROUTER_API_KEY`, `GEMINI_API_KEY`. Os três usam o formato da API da OpenAI. Se um provedor recusa (cota, erro ou tempo esgotado), o motor passa para o próximo e avisa na tela.
+O projeto usa o **Gemini** (`GEMINI_API_KEY`, modelo padrão `gemini-3.5-flash`, trocável por `GEMINI_MODEL`). O motor também aceita Groq e OpenRouter, na ordem `GROQ_API_KEY`, `OPENROUTER_API_KEY`, `GEMINI_API_KEY`, mas o time decidiu usar só o Gemini. Todos usam o formato da API da OpenAI.
 
-Sem nenhuma chave, ou se todos falham, as peças saem do **modo sem IA**: moldes fixos guiados pelo ranking. A tela avisa, e essas respostas não entram no cache.
+Quando o provedor responde 429 (cota) ou 502, 503 e 504 (sobrecarga passageira), o motor tenta até 3 vezes, esperando um pouco mais a cada vez. Se ainda assim falhar, passa para o próximo provedor com chave e avisa na tela.
+
+Sem nenhuma chave, ou se todas as tentativas falham, as peças saem do **modo sem IA**: moldes fixos guiados pelo ranking. A tela avisa, e essas respostas não entram no cache.
+
+O plano gratuito do Google tem cota curta: depois de umas 5 gerações seguidas pode vir o erro 429. Prefira o `gemini-3.5-flash` (cerca de 2 s); o `gemini-3.8-flash` levou 150 s em teste e não serve para a demonstração.
 
 ## Dose
 
@@ -40,6 +44,7 @@ O resto é tendência e sazonalidade. **É uma heurística**, e deve ser apresen
 | Termos proibidos | cura, milagre, garantido, 100% eficaz, sem efeitos colaterais, infalível |
 | Promessa | prazo de efeito ("em 7 dias"), resultado imediato ou definitivo |
 | Diagnóstico | "você está com gripe?", diagnóstico, remédio para dengue |
+| Alegação terapêutica | "previne", "trata", "combate", "fortalece a imunidade", "emagrece", "rejuvenesce" ou "elimina rugas" em dermocosmético, suplemento, higiene e infantil (não vale para medicamento nem serviço) |
 | Superlativo | "o melhor", "nº 1", "único do mercado" sem prova |
 | Oferta | preço ou desconto sem a validade da oferta |
 
