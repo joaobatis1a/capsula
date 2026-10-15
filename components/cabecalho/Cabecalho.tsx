@@ -18,7 +18,7 @@ const LINKS = [
    volta ao rolar para cima, ao passar o mouse ou ao tocar nela. A faixa do cabeçalho guarda sempre a altura da ilha
    aberta, então o conteúdo nunca se mexe. */
 
-export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo: string; comIA: boolean }) {
+export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: string }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const intRef = useRef<HTMLDivElement>(null);
@@ -109,10 +109,8 @@ export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo
           <div className="cab-lado">{status}</div>
         </div>
 
-        {/* Recolhida, a própria ilha é o comprimido: tocar nela abre o menu. O ponto na divisão mostra o estado do sistema. */}
-        <button type="button" className="cab-abrir" aria-label={`Abrir o menu. Estado: ${resumo}`} title={resumo} aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)}>
-          <span className={comIA ? "cab-ponto is-ia" : "cab-ponto"} aria-hidden="true" />
-        </button>
+        {/* Recolhida, a própria ilha é o comprimido: tocar nela abre o menu. */}
+        <button type="button" className="cab-abrir" aria-label={`Abrir o menu. Estado: ${resumo}`} title={resumo} aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)} />
       </div>
     </header>
   );
