@@ -31,16 +31,32 @@
     height 1000ms var(--ease-suave),
     box-shadow 700ms var(--ease-out);
 }
-/* As duas metades fortes do comprimido: surgem por cima enquanto a ilha encolhe */
-.cab-ilha::before {
+/* As duas metades fortes do comprimido, com o mesmo sombreado da palavra "dose": linha escura embaixo e brilho em cima.
+   Surgem por cima enquanto a ilha encolhe; as pontas de dentro são quase retas, como no comprimido da marca. */
+.cab-ilha::before,
+.cab-ilha::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--memoria-fill) 0 calc(50% - 2px), transparent calc(50% - 2px) calc(50% + 2px), var(--tendencia-fill) calc(50% + 2px) 100%);
+  top: 0;
+  bottom: 0;
   opacity: 0;
   transition: opacity 800ms var(--ease-out);
   pointer-events: none;
+  box-shadow:
+    inset 0 -5px 0 #14142a33,
+    inset 0 3px 0 #ffffff40;
+}
+.cab-ilha::before {
+  left: 0;
+  right: calc(50% + 2px);
+  border-radius: 999px 7px 7px 999px;
+  background: var(--memoria-fill);
+}
+.cab-ilha::after {
+  left: calc(50% + 2px);
+  right: 0;
+  border-radius: 7px 999px 999px 7px;
+  background: var(--tendencia-fill);
 }
 .cab-int {
   position: relative;
@@ -58,7 +74,8 @@
   overflow: hidden;
   box-shadow: 0 18px 34px -14px color-mix(in srgb, var(--memoria-fill) 70%, #000000);
 }
-.cab.is-compacto .cab-ilha::before {
+.cab.is-compacto .cab-ilha::before,
+.cab.is-compacto .cab-ilha::after {
   opacity: 1;
 }
 .cab.is-compacto .cab-int {
@@ -91,6 +108,7 @@
 @media (prefers-reduced-motion: reduce) {
   .cab-ilha,
   .cab-ilha::before,
+  .cab-ilha::after,
   .cab-int {
     transition: none;
   }
