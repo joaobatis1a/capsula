@@ -39,7 +39,6 @@ Como saber que o objetivo foi atingido:
 | **Hipótese** | A camada gratuita da Groq (cerca de 1.000 requisições por dia) cobre o desenvolvimento e a demonstração. |
 | **Dúvida** | Qual é o tempo atual de produção por peça? É preciso confirmar com a empresa na mentoria. |
 | **Dúvida** | Que regras de publicidade a empresa já aplica? O checklist do MVP é um conjunto mínimo. |
-| **Dúvida** | O time pode mostrar o pitch a pessoas de fora, como os professores, para receber feedback? É preciso confirmar com a organização. |
 | **Risco** | Cotas gratuitas mudarem ou acabarem. Mitigação: OpenRouter como reserva e cache das saídas. |
 | **Risco** | O Supabase gratuito pausar após 7 dias sem uso. Mitigação: acessar o projeto antes de cada apresentação. |
 | **Risco** | O escopo crescer além de 12 dias com 3 pessoas. Mitigação: congelar o escopo em 24/10 e enviar em 25/10. |
