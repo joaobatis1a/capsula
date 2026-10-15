@@ -122,6 +122,9 @@ select.cp-input {
   color: var(--ink);
   cursor: pointer;
 }
+.estudio-chip:is(a) {
+  text-decoration: none;
+}
 .estudio-chip:hover {
   background: var(--surface-sunken);
 }
