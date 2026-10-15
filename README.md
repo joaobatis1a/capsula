@@ -136,6 +136,19 @@ Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (
 | 5. Ambiente colaborativo | Configurou o quadro do GitHub Projects com colunas do Scrum, criou os modelos de PR e issue e documentou acessos | A proteção da `main` sugerida no manual não está disponível no GitHub Free para repositório privado. Virou acordo do time |
 | 6. Sprint Planning 1 e tasks | Propôs as datas das sprints e o Sprint Goal 1, quebrou os itens #1 a #5 em 16 tasks com dono e criou o campo Sprint no quadro | Datas aprovadas pelo PO. As tasks precisam do aceite dos Developers, que são donos do plano de execução |
 
+### Sprint 1: app, motor e interface
+
+Ferramenta: **Claude Code** (Anthropic), escrevendo e testando o código junto com o PO. Toda mudança entrou por Pull Request, e o PO decidiu o que ficava.
+
+| Entrega | Em que a IA ajudou | O que foi corrigido ou rejeitado |
+|---|---|---|
+| Contratos, adaptador e motor (#20 a #26, #30 a #32) | Escreveu os contratos de dados, o adaptador com mock, o histórico sintético de 300 campanhas, o ranking da memória e o motor com cadeia Groq, OpenRouter e Gemini, com modo sem IA | O motor com modelo real **ainda não foi testado**: não há chave configurada. Só o modo sem IA e o contrato foram verificados |
+| Governança e aprovação (#7, #8) | Escreveu o checklist (RDC 96/2008 e termos proibidos) e o fluxo de quatro estados validado no servidor | O conjunto de regras é mínimo e **não é parecer jurídico**. A IA pesquisou a norma, mas o texto oficial da RDC 96/2008 precisa ser lido pelo time |
+| Peças e marca (#27, #28, #29) | Criou a marca fictícia "Farmácia Exemplo" e os templates nos três formatos | O PO pediu marca fictícia por confidencialidade. Nenhuma imagem é gerada por IA |
+| Ano da saúde (#36) | Montou a base de 33 condições com intensidade por mês, a partir de fontes públicas | As faixas de intensidade são **aproximadas** e a IA não conseguiu abrir o InfoGripe. O time deve conferir nos boletins vigentes antes de apresentar |
+| Interface e movimento | Propôs e implementou animações, cabeçalho, rodapé e formas farmacêuticas | O PO **rejeitou** o fundo de bolinhas, a cartela do hero, a faixa de bula em carrossel e o seletor de segmentos, e pediu a base de saúde muito mais ampla. Bugs achados e corrigidos na revisão: uma animação que sumiu e sobra horizontal no celular |
+| Painel de ganho (#12) | Escreveu a medição e a comparação | A comparação com o processo de hoje usa **premissas declaradas e editáveis**, e não são dado da empresa |
+
 ## Dados e confidencialidade
 
 - Nenhum dado real da empresa cliente é usado: tudo é público ou sintético, com a origem marcada.

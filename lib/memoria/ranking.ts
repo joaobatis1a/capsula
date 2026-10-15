@@ -92,8 +92,9 @@ export function rankear(campanhas: Campanha[], opcoes: { minimo?: number; limite
       const combinacao = { [a]: va, [b]: vb };
       const liftCtr = media(grupo, (c) => c.cliques / c.impressoes / base.get(c.formato)!);
       const liftConv = soma(grupo, (c) => c.conversoes) / Math.max(1, soma(grupo, (c) => c.cliques)) / convMedia;
-      itens.push(item(combinacao, "ctr", liftCtr, grupo.length, fonte));
-      itens.push(item(combinacao, "conversao", liftConv, grupo.length, fonte));
+      const periodo = periodoDe(grupo);
+      itens.push(item(combinacao, "ctr", liftCtr, grupo.length, fonte, periodo));
+      itens.push(item(combinacao, "conversao", liftConv, grupo.length, fonte, periodo));
     }
   }
 
@@ -114,7 +115,7 @@ export function relevantesPara(itens: ItemRanking[], filtro: { publicos: string[
   );
 }
 
-function item(combinacao: ItemRanking["combinacao"], metrica: Metrica, lift: number, n: number, fonte: string): ItemRanking {
+function item(combinacao: ItemRanking["combinacao"], metrica: Metrica, lift: number, n: number, fonte: string, periodo: string): ItemRanking {
   const id = `rk-${metrica}-${Object.values(combinacao).join("-")}`.toLowerCase().replace(/[^a-z0-9-]+/g, "-");
   const nome = metrica === "ctr" ? "CTR" : "Conversão";
   return {
@@ -124,8 +125,15 @@ function item(combinacao: ItemRanking["combinacao"], metrica: Metrica, lift: num
     lift,
     campanhas: n,
     texto: `${nome} ${formatarLift(lift)} a média · ${n} campanhas`,
-    fonte: `${n} campanhas · ${fonte}`,
+    fonte: `${n} campanhas · ${periodo} · ${fonte}`,
   };
+}
+
+/** "10/2025 a 09/2026": o período das campanhas que sustentam a evidência. */
+function periodoDe(grupo: Campanha[]) {
+  const datas = grupo.map((c) => c.data).sort();
+  const curta = (iso: string) => `${iso.slice(5, 7)}/${iso.slice(0, 4)}`;
+  return curta(datas[0]) === curta(datas.at(-1)!) ? curta(datas[0]) : `${curta(datas[0])} a ${curta(datas.at(-1)!)}`;
 }
 
 /** Evita mostrar a mesma combinação duas vezes (CTR e conversão). */

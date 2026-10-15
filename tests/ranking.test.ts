@@ -23,6 +23,7 @@ describe("ranking da memória", () => {
     const i = ranking.melhores[0];
     expect(i.texto).toMatch(/^(CTR|Conversão) \d+,\d× a média · \d+ campanhas$/);
     expect(i.fonte).toContain("nos dados de teste");
+    expect(i.fonte).toMatch(/\d+ campanhas · \d{2}\/\d{4}( a \d{2}\/\d{4})? · nos dados de teste/);
   });
 
   it("ignora combinações com poucas campanhas", () => {
