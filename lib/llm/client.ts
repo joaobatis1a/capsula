@@ -54,6 +54,12 @@ export function temProvedor() {
   return provedores().length > 0;
 }
 
+/** Nome curto do primeiro provedor com chave, ou null quando o motor usa os moldes fixos. */
+export function provedorAtivo(): "Groq" | "OpenRouter" | "Gemini" | null {
+  const p = provedores()[0];
+  return p ? ({ groq: "Groq", openrouter: "OpenRouter", gemini: "Gemini" } as const)[p.id] : null;
+}
+
 /** Pede uma resposta em JSON. Tenta cada provedor uma vez, com uma nova tentativa em caso de 429. */
 export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura?: number; timeoutMs?: number } = {}): Promise<RespostaLLM> {
   const lista = provedores();

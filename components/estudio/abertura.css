@@ -42,6 +42,11 @@
   line-height: 1.02;
   letter-spacing: -0.035em;
 }
+@media (max-width: 960px) {
+  .abertura-titulo {
+    font-size: clamp(30px, 9.4vw, 64px);
+  }
+}
 .abertura-linha {
   display: block;
   animation: cp-sobe 800ms var(--ease-out) both;
@@ -251,4 +256,21 @@
 .agora-topo > div {
   display: grid;
   gap: var(--space-1);
+}
+
+/* Celular: o rótulo "Usar no briefing" desce para baixo do nome, sem espaço fixo reservado */
+@media (max-width: 520px) {
+  .agora {
+    padding: var(--space-4);
+  }
+  .agora-nome {
+    padding-right: 0;
+  }
+  .agora-usar {
+    position: static;
+    opacity: 1;
+    transform: none;
+    justify-self: start;
+    margin-top: 2px;
+  }
 }

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Forma, Icon } from "@/components/ds";
 import { Interruptor } from "@/components/estudio/Controles";
+import { Revela } from "@/components/motion/Revela";
 import { AGENTES, CATEGORIAS_SAUDE, REGIOES, type Agente, type CategoriaSaude, type DataSaude, type Regiao, type Sazonalidade } from "@/lib/data/types";
 import { atencao, intensidadeDe, MESES_CURTOS, MESES_NOME, NIVEL, ROTULO_AGENTE, ROTULO_CATEGORIA, ROTULO_REGIAO } from "@/lib/saude/rotulos";
 import { Ficha } from "./Ficha";
@@ -46,14 +47,14 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
 
   return (
     <div className="saude">
-      <section className="saude-numeros" aria-label="Resumo">
+      <Revela as="section" className="saude-numeros" aria-label="Resumo">
         <Numero valor={itens.length} rotulo="condições na base" />
         <Numero valor={CATEGORIAS_SAUDE.length} rotulo="grupos de saúde" />
         <Numero valor={emAlta.length} rotulo={`em alta em ${MESES_NOME[mes - 1]}`} destaque />
         <Numero valor={noPico.length} rotulo="no pico do mês" destaque />
-      </section>
+      </Revela>
 
-      <section className="saude-controles" aria-label="Filtros">
+      <Revela as="section" i={1} className="saude-controles" aria-label="Filtros">
         <div className="saude-busca">
           <Icon name="archive" size={18} />
           <input
@@ -109,9 +110,9 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
             </Chip>
           </Grupo>
         </div>
-      </section>
+      </Revela>
 
-      <section className="saude-mes" aria-live="polite">
+      <Revela as="section" i={2} className="saude-mes" aria-live="polite">
         <p className="receita-olho">Mês escolhido · {MESES_NOME[mes - 1]}</p>
         <p className="saude-mes-texto">
           {noPico.length ? (
@@ -143,9 +144,9 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
             {datasDoMes.map((d) => `${d.nome} (${d.tema.toLowerCase()})`).join(" · ")}
           </p>
         ) : null}
-      </section>
+      </Revela>
 
-      <section className="saude-tabela-caixa" aria-label="Sazonalidade por mês">
+      <Revela as="section" i={3} className="saude-tabela-caixa" aria-label="Sazonalidade por mês">
         <div className="saude-rolagem">
         <table className="saude-tabela" key={assinatura}>
           <caption className="sr-only">Intensidade de cada condição por mês, de janeiro a dezembro. Clique no mês para ver o que está em alta.</caption>
@@ -219,9 +220,9 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
           </li>
           <li className="t-muted">Faixas aproximadas, a partir de fontes públicas. Confira o boletim vigente antes de publicar.</li>
         </ul>
-      </section>
+      </Revela>
 
-      <section className="saude-datas" aria-labelledby="titulo-datas">
+      <Revela as="section" i={4} className="saude-datas" aria-labelledby="titulo-datas">
         <h2 id="titulo-datas" className="t-h2">
           Calendário de campanhas de saúde
         </h2>
@@ -249,7 +250,7 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
             );
           })}
         </ol>
-      </section>
+      </Revela>
 
       <Ficha item={aberta} mes={mes} onFechar={() => setAbertaId(null)} />
     </div>

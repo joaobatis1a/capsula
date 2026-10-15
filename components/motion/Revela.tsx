@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState, type CSSProperties, type ElementType, type ReactNode } from "react";
 
 /* Mostra o conteúdo subindo quando entra na tela. `i` atrasa em passos de 60ms, para sequências. */
-export function Revela({ children, i = 0, as: Tag = "div", className = "", style }: { children: ReactNode; i?: number; as?: ElementType; className?: string; style?: CSSProperties }) {
+export function Revela({
+  children,
+  i = 0,
+  as: Tag = "div",
+  className = "",
+  style,
+  ...resto
+}: { children: ReactNode; i?: number; as?: ElementType; className?: string; style?: CSSProperties } & Omit<React.HTMLAttributes<HTMLElement>, "className" | "style" | "children">) {
   const ref = useRef<HTMLElement>(null);
   const [visivel, setVisivel] = useState(false);
 
@@ -24,7 +31,7 @@ export function Revela({ children, i = 0, as: Tag = "div", className = "", style
   }, []);
 
   return (
-    <Tag ref={ref} className={`revela ${visivel ? "is-visivel" : ""} ${className}`} style={{ ...style, "--i": i } as CSSProperties}>
+    <Tag ref={ref} {...resto} className={`revela ${visivel ? "is-visivel" : ""} ${className}`} style={{ ...style, "--i": i } as CSSProperties}>
       {children}
     </Tag>
   );

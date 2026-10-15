@@ -55,7 +55,7 @@ async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: strin
 
   return (
     <>
-      <section className="memoria-resumo" aria-label="Resumo do histórico">
+      <Revela as="section" className="memoria-resumo" aria-label="Resumo do histórico">
         <Numero valor={<Conta valor={todas.length} />} rotulo="campanhas no histórico" />
         <Numero valor={<Conta key={filtradas.length} valor={filtradas.length} />} rotulo="no filtro atual" />
         <Numero valor={`${dataCurta(datas[0])} a ${dataCurta(datas.at(-1)!)}`} rotulo="período" />
@@ -65,9 +65,9 @@ async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: strin
             {fonte.origem === "sintetico" ? "Histórico sintético: os números não são da empresa." : `Fonte: ${fonte.nome}.`}
           </span>
         </p>
-      </section>
+      </Revela>
 
-      <nav className="galeria-filtros" aria-label="Filtros da memória">
+      <Revela as="nav" i={1} className="galeria-filtros" aria-label="Filtros da memória">
         <div className="galeria-filtro">
           <span className="cp-label">Canal</span>
           <ul className="estudio-chips">
@@ -94,7 +94,7 @@ async function Ranking({ searchParams }: { searchParams: Promise<{ canal?: strin
             ))}
           </ul>
         </div>
-      </nav>
+      </Revela>
 
       <div className="memoria-colunas" key={`${canal}-${publico}`}>
         <Lista titulo="O que funcionou" vazio="Poucas campanhas neste filtro para recomendar algo." itens={ranking.melhores} />

@@ -65,14 +65,6 @@
 .capsula-viva-linha-2 {
   animation-delay: 950ms;
 }
-@keyframes cp-escreve {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
 
 /* Gerando: as metades se afastam e dosam */
 .capsula-viva.is-dosando .capsula-viva-memoria {
@@ -202,11 +194,6 @@
   border-color: var(--memoria-fill);
   border-top-color: transparent;
   animation: cp-gira 800ms linear infinite;
-}
-@keyframes cp-gira {
-  to {
-    transform: rotate(360deg);
-  }
 }
 .is-feita .dosagem-marca {
   background: var(--aprovado);

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import Link from "next/link";
+import { Revela } from "@/components/motion/Revela";
 import { FaixaAno } from "@/components/saude/FaixaAno";
 import { Forma, Icon, OriginTag, TrendItem } from "@/components/ds";
 import "@/components/saude/saude.css";
@@ -123,11 +124,11 @@ function Item({ item: i }: { item: ItemRadar }) {
 
 function Secao({ titulo, descricao, children }: { titulo: string; descricao: string; children: React.ReactNode }) {
   return (
-    <section className="radar-secao" aria-label={titulo}>
+    <Revela as="section" className="radar-secao" aria-label={titulo}>
       <h2 className="t-h2">{titulo}</h2>
       <p className="t-body-sm t-muted">{descricao}</p>
       <ul className="radar-grade">{children}</ul>
-    </section>
+    </Revela>
   );
 }
 

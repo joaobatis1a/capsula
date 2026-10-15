@@ -1,0 +1,241 @@
+/* Rodapé em forma de bula. Só tokens do design system. */
+
+.rodape {
+  margin-top: var(--space-8);
+  border-top: 1.5px dashed var(--line-strong);
+  background: color-mix(in srgb, var(--surface-sunken) 55%, transparent);
+}
+.rodape-grade {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) var(--space-6);
+  display: grid;
+  grid-template-columns: 1.25fr 0.8fr 0.9fr 1.6fr;
+}
+.rodape-grade > * {
+  min-width: 0;
+  padding: 0 var(--space-6);
+  border-left: 1.5px dashed var(--line);
+}
+.rodape-grade > *:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.rodape-grade > *:last-child {
+  padding-right: 0;
+}
+@media (max-width: 960px) {
+  .rodape-grade {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6) 0;
+  }
+  .rodape-grade > *:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .rodape-grade > *:nth-child(even) {
+    padding-right: 0;
+  }
+  .rodape-bula {
+    grid-column: 1 / -1;
+    padding: var(--space-5) 0 0 !important;
+    border-left: 0 !important;
+    border-top: 1.5px dashed var(--line);
+  }
+}
+@media (max-width: 560px) {
+  .rodape-grade {
+    grid-template-columns: 1fr;
+  }
+  .rodape-grade > * {
+    padding: var(--space-5) 0 0;
+    border-left: 0;
+    border-top: 1.5px dashed var(--line);
+  }
+  .rodape-grade > *:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* Marca */
+.rodape-marca {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+.rodape-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+.rodape-logo img {
+  display: block;
+  transition: transform var(--dur-3) var(--ease-mola);
+}
+.rodape-logo:hover img {
+  transform: rotate(-12deg) scale(1.1);
+}
+.rodape-marca > p {
+  max-width: 26em;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--ink-muted);
+}
+
+.rodape-marca .rodape-formas {
+  justify-content: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+/* Rótulos e links: tipografia de bula */
+.rodape-rotulo {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.rodape-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.rodape a:not(.rodape-forma):not(.rodape-logo) {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(var(--tendencia-fill), var(--tendencia-fill)) left bottom / 0% 1.5px no-repeat;
+  transition:
+    background-size var(--dur-3) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.rodape a:not(.rodape-forma):not(.rodape-logo):hover {
+  background-size: 100% 1.5px;
+  color: var(--tendencia);
+  transform: translateX(3px);
+}
+.rodape a:focus-visible,
+.rodape-topo:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
+}
+.rodape-json {
+  margin-left: 4px;
+  padding: 1px 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--memoria);
+  background: var(--memoria-soft);
+  border-radius: var(--radius-pill);
+  vertical-align: 1px;
+}
+
+/* Bula */
+.rodape-bula dl {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.rodape-bula dt {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tendencia);
+}
+.rodape-bula dd {
+  margin: 2px 0 0;
+  max-width: 44em;
+  font-size: 13.5px;
+  line-height: 20px;
+  color: var(--ink-muted);
+}
+
+/* Faixa de baixo */
+.rodape-base {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+.rodape-base b {
+  font-weight: 500;
+  color: var(--ink);
+}
+.rodape-topo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: 0 var(--space-3) 0 var(--space-4);
+  font: inherit;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface-raised);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.rodape-topo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 #14142a26;
+  border-color: var(--ink);
+}
+.rodape-topo:active {
+  transform: translateY(1px) scale(0.97);
+}
+.rodape-topo-seta {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--action);
+  color: var(--on-action);
+  transition: transform var(--dur-3) var(--ease-mola);
+}
+.rodape-topo-seta .cp-icon {
+  transform: rotate(-90deg);
+}
+.rodape-topo:hover .rodape-topo-seta {
+  transform: translateY(-3px);
+}

@@ -8,11 +8,19 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 84px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 24px;
@@ -100,103 +108,13 @@ a {
   }
 }
 
-/* Estrutura das telas */
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--line);
-  background: var(--surface-raised);
-}
-.app-logo {
-  display: inline-flex;
-  border-radius: var(--radius-sm);
-  transition: transform var(--dur-2) var(--ease-mola);
-}
-.app-logo:hover {
-  transform: rotate(-4deg) scale(1.04);
-}
-.app-logo img {
-  display: block;
-  height: 32px;
-  width: auto;
-}
-.app-logo .logo-dark {
-  display: none;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .app-logo .logo-light {
-    display: none;
-  }
-  :root:not([data-theme="light"]) .app-logo .logo-dark {
-    display: block;
-  }
-}
-:root[data-theme="dark"] .app-logo .logo-light {
-  display: none;
-}
-:root[data-theme="dark"] .app-logo .logo-dark {
-  display: block;
-}
-.app-nav {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-}
-.app-nav-pilula {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: var(--radius-pill);
-  background: var(--action);
-  box-shadow: var(--shadow-seam);
-  transition:
-    transform var(--dur-3) var(--ease-mola),
-    width var(--dur-3) var(--ease-mola);
-}
-.app-nav a {
-  position: relative;
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 10px var(--space-3);
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--radius-pill);
-  transition:
-    color var(--dur-2) var(--ease-out),
-    background-color var(--dur-2) var(--ease-out);
-}
-.app-nav a:not([aria-current="page"]):hover {
-  background: var(--surface-sunken);
-}
-.app-nav a[aria-current="page"] {
-  color: var(--on-action);
-}
+/* Estrutura das telas. Cabeçalho e rodapé têm CSS próprio em components/cabecalho e components/rodape. */
 .app-main {
+  flex: 1 0 auto;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-8) var(--space-4) var(--space-12);
   display: grid;
   gap: var(--space-8);
-}
-.app-footer {
-  padding: var(--space-6) var(--space-4);
-  border-top: 1px solid var(--line);
-  text-align: center;
-}
-
-/* Antes de a pílula do menu ser medida, a página atual ainda aparece marcada */
-.app-nav:not(:has(.app-nav-pilula)) a[aria-current="page"] {
-  background: var(--action);
 }

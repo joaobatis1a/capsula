@@ -170,3 +170,26 @@
 .aviso-rapido .cp-icon {
   color: var(--aprovado-soft);
 }
+
+/* Compartilhadas entre telas */
+@keyframes cp-cresce {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes cp-escreve {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes cp-gira {
+  to {
+    transform: rotate(360deg);
+  }
+}
