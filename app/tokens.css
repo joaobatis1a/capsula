@@ -51,9 +51,9 @@
   --focus: var(--anil-500);
 
   --shadow-seam: 0 2px 0 #14142A26;
-  /* Sombreado dos comprimidos (o da forma cápsula da marca): metade de baixo escurece e há uma listra de brilho no alto */
-  --comp-sombra: linear-gradient(180deg, transparent 55%, #00000038 100%);
-  --comp-brilho: linear-gradient(#ffffff6b, #ffffff6b);
+  /* Sombreado dos comprimidos, o mesmo da palavra "dose": faixa escura de borda dura embaixo e fio de luz no alto */
+  --comp-inset: inset 0 -3px 0 #14142a33, inset 0 2px 0 #ffffff40;
+  --comp-inset-g: inset 0 -5px 0 #14142a33, inset 0 3px 0 #ffffff40;
   --shadow-float: 0 16px 32px -16px #19156559;
   --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus) 42%, transparent);
 

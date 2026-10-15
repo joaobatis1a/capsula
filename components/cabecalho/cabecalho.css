@@ -31,8 +31,8 @@
     height 1000ms var(--ease-suave),
     box-shadow 700ms var(--ease-out);
 }
-/* As duas metades fortes, com o sombreado do comprimido da marca (a forma "cápsula"): a metade de baixo escurece e há uma
-   listra de brilho no alto. Surgem por cima enquanto a ilha encolhe; as pontas de dentro são quase retas. */
+/* As duas metades fortes do comprimido, com o sombreado da palavra "dose": faixa escura embaixo e fio de luz no alto.
+   Surgem por cima enquanto a ilha encolhe; as pontas de dentro são quase retas. */
 .cab-ilha::before,
 .cab-ilha::after {
   content: "";
@@ -42,24 +42,19 @@
   opacity: 0;
   transition: opacity 800ms var(--ease-out);
   pointer-events: none;
+  box-shadow: var(--comp-inset-g);
 }
 .cab-ilha::before {
   left: 0;
   right: calc(50% + 2px);
   border-radius: 999px 7px 7px 999px;
-  background:
-    linear-gradient(#ffffff6b, #ffffff6b) 62% 22% / 50% 3px no-repeat,
-    linear-gradient(180deg, transparent 55%, #00000038 100%),
-    var(--memoria-fill);
+  background: var(--memoria-fill);
 }
 .cab-ilha::after {
   left: calc(50% + 2px);
   right: 0;
   border-radius: 7px 999px 999px 7px;
-  background:
-    linear-gradient(#ffffff6b, #ffffff6b) 14% 22% / 50% 3px no-repeat,
-    linear-gradient(180deg, transparent 55%, #00000038 100%),
-    var(--tendencia-fill);
+  background: var(--tendencia-fill);
 }
 .cab-int {
   position: relative;
