@@ -76,6 +76,21 @@
   transform: translateX(-50%) scale(1);
   transition-delay: 0.08s, 0.08s, 0s;
 }
+/* Ponto de estado: brasa sem IA (moldes fixos), verde com IA */
+.cab-ponto {
+  position: absolute;
+  top: 7px;
+  right: 11px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tendencia-fill);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tendencia-fill) 26%, transparent);
+}
+.cab-ponto.is-ia {
+  background: var(--aprovado);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aprovado) 26%, transparent);
+}
 .cab-mini img {
   display: block;
   transform: rotate(-35deg);

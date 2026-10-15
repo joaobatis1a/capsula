@@ -17,7 +17,7 @@ const LINKS = [
    Ao rolar para baixo ela se recolhe num comprimido com a marca, no centro; volta ao rolar para cima, ao passar o mouse
    ou ao tocar nele. A faixa do cabeçalho guarda sempre a altura da ilha aberta, então o conteúdo nunca se mexe. */
 
-export function Cabecalho({ status }: { status: ReactNode }) {
+export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo: string; comIA: boolean }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const ilhaRef = useRef<HTMLDivElement>(null);
@@ -74,9 +74,10 @@ export function Cabecalho({ status }: { status: ReactNode }) {
 
   return (
     <header className={compacto ? "cab is-compacto" : "cab"} style={altura ? ({ "--cab-h": `${altura + 12}px` } as React.CSSProperties) : undefined}>
-      <button type="button" className="cab-mini" aria-label="Abrir o menu" aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)}>
+      <button type="button" className="cab-mini" aria-label={`Abrir o menu. Estado: ${resumo}`} title={resumo} aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brand/capsula-mark.svg" alt="" width={26} height={26} />
+        <span className={comIA ? "cab-ponto is-ia" : "cab-ponto"} aria-hidden="true" />
       </button>
       <div
         ref={ilhaRef}

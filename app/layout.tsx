@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Cabecalho } from "@/components/cabecalho/Cabecalho";
 import { StatusDoSistema } from "@/components/cabecalho/StatusDoSistema";
 import { FormasDefs } from "@/components/ds";
+import { getDataSource } from "@/lib/data";
+import { provedorAtivo } from "@/lib/llm/client";
 import "@/components/ds/ds.css";
 import "@/components/ds/forma.css";
 import { AvisosProvider } from "@/components/motion/Avisos";
@@ -18,12 +20,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const modelo = provedorAtivo();
+  const resumo = `${getDataSource().origem === "sintetico" ? "Dados de teste" : "Dados reais"} · ${modelo ? `IA: ${modelo}` : "Sem IA"}`;
+
   return (
     <html lang="pt-BR" className={`${unbounded.variable} ${instrumentSans.variable} ${plexMono.variable}`}>
       <body>
         <FormasDefs />
         <FundoVivo />
-        <Cabecalho status={<StatusDoSistema />} />
+        <Cabecalho status={<StatusDoSistema />} resumo={resumo} comIA={Boolean(modelo)} />
         <AvisosProvider>
           <main className="app-main">{children}</main>
         </AvisosProvider>
