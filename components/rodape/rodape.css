@@ -3,7 +3,9 @@
 .rodape {
   margin-top: var(--space-8, 64px);
   padding: var(--space-7, 48px) var(--space-4) var(--space-5);
-  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--memoria-fill) 8%, var(--surface-raised)) 40%);
+  background:
+    linear-gradient(90deg, transparent, var(--line-strong) 15%, var(--line-strong) 85%, transparent) top / 100% 1px no-repeat,
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--memoria-fill) 8%, var(--surface-raised)) 40%);
 }
 .rodape-miolo {
   max-width: 1168px;
