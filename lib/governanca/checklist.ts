@@ -44,6 +44,18 @@ const PROMESSAS = [
   /\bo dia (todo|inteiro)\b/,
 ];
 
+/* Alegações de efeito terapêutico ou de saúde. Dermocosmético, suplemento, higiene e infantil não podem prometer
+   prevenir, tratar ou combater doenças, nem emagrecer ou eliminar rugas e manchas (quem pode é medicamento, dentro da bula). */
+const ALEGACOES_SAUDE: [RegExp, string][] = [
+  [/\bprevin(e|em)\b|\bprevenir\b|\bprevencao de\b/, "previne"],
+  [/\btrata(m)?\b|\btratar\b/, "trata"],
+  [/\bcombate(m)?\b|\bcombater\b/, "combate"],
+  [/\b(fortalece|aumenta|turbina|reforca) (a |as |o |os )?(imunidade|defesas|sistema imunologico|imunologico)\b/, "fortalece a imunidade"],
+  [/\bemagrece(r|m)?\b|\bemagrecimento\b|\bqueima (a )?gordura\b|\bdetox\b/, "emagrece"],
+  [/\brejuvenesc(e|em|er|imento)\b/, "rejuvenesce"],
+  [/\belimina (as |a |os |o )?(rugas|manchas|celulite|estrias|acne|espinhas)\b/, "elimina"],
+];
+
 const SUPERLATIVOS = [/\bo melhor\b/, /\ba melhor\b/, /\bnumero 1\b/, /\bn[oº°] ?1\b/, /\bunico do mercado\b/];
 
 const REGRAS: Regra[] = [
@@ -87,6 +99,15 @@ const REGRAS: Regra[] = [
       /voce (tem|esta com) (gripe|dengue|alergia|rinite|infeccao|virose)/.test(t) || /\bdiagnostic/.test(t) || /remedio (para|contra) (a )?dengue/.test(t)
         ? "Faz diagnóstico ou indica tratamento, o que cabe a um profissional de saúde"
         : null,
+  },
+  {
+    id: "alegacao-saude",
+    ok: "Sem alegação terapêutica ou de saúde indevida",
+    aplica: (b) => !b.tipoProduto.startsWith("medicamento") && b.tipoProduto !== "servico",
+    checar: (t) => {
+      const achado = ALEGACOES_SAUDE.find(([r]) => r.test(t));
+      return achado ? `Faz alegação terapêutica ou de saúde ("${achado[1]}"), que não cabe a este tipo de produto sem comprovação` : null;
+    },
   },
   {
     id: "superlativo",
