@@ -30,6 +30,10 @@ describe("governança", () => {
     expect(motivos).toContain("Promete resultado ou prazo de efeito");
   });
 
+  it("bloqueia o exemplo do critério de aceitação com o motivo promessa de resultado", () => {
+    expect(falhas("Proteção garantida o dia todo. Válido até 15/11.")).toContain("promessa");
+  });
+
   it("não confunde palavras parecidas", () => {
     expect(falhas("Cuidado diário com curadoria do farmacêutico. Válido até 15/11.")).toEqual([]);
   });

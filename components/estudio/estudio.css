@@ -247,6 +247,40 @@ select.cp-input {
   width: 62%;
   justify-self: center;
 }
+.aprovacao {
+  display: grid;
+  gap: var(--space-3);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+.aprovacao-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.aprovacao-bloqueio {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--bloqueado-soft);
+  color: var(--bloqueado);
+}
+.aprovacao-bloqueio .cp-icon {
+  margin-top: 2px;
+}
+.aprovacao-historico {
+  margin: 0;
+  padding: var(--space-3) 0 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-1);
+  border-top: 1px dashed var(--line-strong);
+  color: var(--ink-muted);
+}
 .galeria-formatos {
   display: grid;
   gap: var(--space-3);

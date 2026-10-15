@@ -40,6 +40,8 @@ const PROMESSAS = [
   /\bacaba com\b/,
   /\belimina de vez\b/,
   /\bpara sempre\b/,
+  /\bgarantid[oa]s?\b/,
+  /\bo dia (todo|inteiro)\b/,
 ];
 
 const SUPERLATIVOS = [/\bo melhor\b/, /\ba melhor\b/, /\bnumero 1\b/, /\bn[oº°] ?1\b/, /\bunico do mercado\b/];
