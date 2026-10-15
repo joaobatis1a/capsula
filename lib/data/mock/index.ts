@@ -29,8 +29,8 @@ export class MockDataSource implements CampaignDataSource {
   }
 
   async getSazonalidade(mes: number) {
-    const proximo = (mes % 12) + 1;
-    return SAZONALIDADE.filter((s) => s.mesesPico.includes(mes) || s.mesesPico.includes(proximo));
+    const janela = [mes, (mes % 12) + 1, ((mes + 1) % 12) + 1];
+    return SAZONALIDADE.filter((s) => s.mesesPico.some((m) => janela.includes(m)));
   }
 
   async getPublicos() {

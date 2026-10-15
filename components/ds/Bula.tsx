@@ -7,6 +7,8 @@ export interface BulaEvidencia {
   origin: Origem;
   text: string;
   fonte?: string;
+  /** Rótulo da etiqueta, quando difere do padrão da origem (ex.: "Sazonalidade"). */
+  rotulo?: string;
 }
 
 export interface BulaChecagem {
@@ -69,7 +71,7 @@ export function Bula({ titulo, memoria, indicacao, composicao, evidencias = [], 
           <ul className="cp-bula-ev">
             {evidencias.map((e, i) => (
               <li key={i}>
-                <OriginTag origin={e.origin} />
+                <OriginTag origin={e.origin}>{e.rotulo}</OriginTag>
                 <span className="cp-bula-evt">{e.text}</span>
                 {e.fonte ? <span className="cp-bula-src">{e.fonte}</span> : null}
               </li>
