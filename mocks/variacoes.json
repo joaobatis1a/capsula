@@ -1,0 +1,152 @@
+{
+  "briefing": {
+    "produto": "Protetor solar FPS 50",
+    "categoria": "Protetor solar",
+    "tipoProduto": "dermocosmetico",
+    "oferta": {
+      "descricao": "30% off no protetor solar FPS 50",
+      "precoDe": 79.9,
+      "precoPor": 55.9,
+      "condicao": "Válido para compras no app e nas lojas, enquanto durar o estoque.",
+      "validade": "2026-11-15"
+    },
+    "publicos": ["Jovens de 18 a 24", "Mães e pais de crianças pequenas"],
+    "canais": ["instagram", "site"],
+    "formatos": ["feed", "story", "banner"],
+    "objetivo": "conversao",
+    "variacoesPorCanal": 3,
+    "incluirRoteiros": true,
+    "radarIds": ["saz-verao-sol", "rad-formato-antes-depois"]
+  },
+  "variacoes": [
+    {
+      "id": "var-001",
+      "publico": "Jovens de 18 a 24",
+      "canal": "instagram",
+      "formato": "feed",
+      "titulo": "Você reaplica o protetor depois do almoço?",
+      "texto": "FPS 50 com 30% off para o seu verão não virar arrependimento. Leve no bolso, reaplique a cada duas horas.",
+      "cta": "Comprar no app",
+      "selo": "30% off",
+      "hashtags": ["#skincarebarato", "#verao"],
+      "dose": 65,
+      "bula": {
+        "indicacao": "Jovens de 18 a 24 no Instagram, objetivo de venda, verão.",
+        "composicao": [
+          { "k": "Gancho", "v": "Pergunta direta" },
+          { "k": "Tom", "v": "Próximo" },
+          { "k": "Benefício", "v": "Preço e praticidade" }
+        ],
+        "evidencias": [
+          { "origem": "memoria", "texto": "Gancho com pergunta teve CTR 1,8× a média em vídeo", "fonte": "41 campanhas · nos dados de teste", "peso": 0.6 },
+          { "origem": "tendencia", "texto": "#skincarebarato em alta no TikTok", "fonte": "TikTok · Creative Center · 08/10", "refId": "rad-hashtag-skincare", "peso": 0.2 },
+          { "origem": "sazonalidade", "texto": "Exposição ao sol aumenta de dezembro a março", "fonte": "Ministério da Saúde", "refId": "saz-verao-sol", "peso": 0.2 }
+        ],
+        "contraindicacoes": [],
+        "posologia": "Publicar de terça a quinta, às 19h. Oferta válida até 15/11."
+      },
+      "status": "rascunho"
+    },
+    {
+      "id": "var-002",
+      "publico": "Jovens de 18 a 24",
+      "canal": "instagram",
+      "formato": "story",
+      "titulo": "Antes e depois do sol sem proteção",
+      "texto": "Arraste para cima e garanta o FPS 50 com 30% off. Só até 15/11.",
+      "cta": "Arrastar para cima",
+      "selo": "Só até 15/11",
+      "hashtags": [],
+      "dose": 40,
+      "bula": {
+        "indicacao": "Jovens de 18 a 24 nos Stories, objetivo de venda.",
+        "composicao": [
+          { "k": "Gancho", "v": "Antes e depois" },
+          { "k": "Tom", "v": "Divertido" }
+        ],
+        "evidencias": [
+          { "origem": "tendencia", "texto": "Formato antes e depois em alta", "fonte": "TikTok · Creative Center · 12/10", "refId": "rad-formato-antes-depois", "peso": 0.6 },
+          { "origem": "memoria", "texto": "Tom divertido teve CTR 1,6× a média com jovens", "fonte": "18 campanhas · nos dados de teste", "peso": 0.4 }
+        ],
+        "contraindicacoes": [],
+        "posologia": "Sequência de 3 stories, sábado às 11h."
+      },
+      "status": "rascunho"
+    },
+    {
+      "id": "var-003",
+      "publico": "Mães e pais de crianças pequenas",
+      "canal": "instagram",
+      "formato": "feed",
+      "titulo": "Proteção para a família inteira no verão",
+      "texto": "Mais de 2 mil famílias já escolheram o FPS 50 para o dia a dia. Agora com 30% off, até 15/11.",
+      "cta": "Ver oferta",
+      "selo": "30% off",
+      "hashtags": ["#verao"],
+      "dose": 70,
+      "bula": {
+        "indicacao": "Mães e pais de crianças pequenas no Instagram, objetivo de venda.",
+        "composicao": [
+          { "k": "Gancho", "v": "Prova social" },
+          { "k": "Tom", "v": "Próximo" },
+          { "k": "Benefício", "v": "Cuidado com a família" }
+        ],
+        "evidencias": [
+          { "origem": "memoria", "texto": "Prova social teve CTR 1,4× a média com mães e pais", "fonte": "22 campanhas · nos dados de teste", "peso": 0.7 },
+          { "origem": "sazonalidade", "texto": "Exposição ao sol aumenta de dezembro a março", "fonte": "Ministério da Saúde", "refId": "saz-verao-sol", "peso": 0.3 }
+        ],
+        "contraindicacoes": [],
+        "posologia": "Publicar domingo às 10h. Oferta válida até 15/11."
+      },
+      "status": "rascunho"
+    },
+    {
+      "id": "var-004",
+      "publico": "Mães e pais de crianças pequenas",
+      "canal": "site",
+      "formato": "banner",
+      "titulo": "FPS 50 com 30% off",
+      "texto": "De R$ 79,90 por R$ 55,90. Válido até 15/11 no app e nas lojas, enquanto durar o estoque.",
+      "cta": "Aproveitar",
+      "selo": "Oferta",
+      "hashtags": [],
+      "dose": 80,
+      "bula": {
+        "indicacao": "Visitantes do site, objetivo de venda.",
+        "composicao": [
+          { "k": "Gancho", "v": "Oferta direta" },
+          { "k": "Tom", "v": "Informativo" }
+        ],
+        "evidencias": [
+          { "origem": "memoria", "texto": "Oferta direta em banner converteu 1,5× a média", "fonte": "26 campanhas · nos dados de teste", "peso": 0.8 },
+          { "origem": "sazonalidade", "texto": "Exposição ao sol aumenta de dezembro a março", "fonte": "Ministério da Saúde", "refId": "saz-verao-sol", "peso": 0.2 }
+        ],
+        "contraindicacoes": [],
+        "posologia": "Banner da home durante toda a validade da oferta."
+      },
+      "status": "rascunho"
+    }
+  ],
+  "roteiros": [
+    {
+      "id": "rot-001",
+      "publico": "Jovens de 18 a 24",
+      "plataforma": "reels",
+      "duracaoSeg": 15,
+      "titulo": "Reels: você reaplica?",
+      "cenas": [
+        { "inicio": 0, "fim": 3, "visual": "Close no rosto ao sol, careta", "fala": "Você reaplica o protetor?" },
+        { "inicio": 3, "fim": 10, "visual": "Protetor saindo do bolso, aplicação rápida", "tela": "FPS 50 com 30% off" },
+        { "inicio": 10, "fim": 15, "visual": "Produto e logo", "tela": "Só até 15/11 · no app e nas lojas" }
+      ],
+      "musica": { "titulo": "Faixa instrumental animada (exemplo)", "artista": "Artista de exemplo", "radarId": "rad-musica-1", "usoComercial": true },
+      "evidencias": [
+        { "origem": "memoria", "texto": "Gancho com pergunta teve CTR 1,8× a média em vídeo", "fonte": "41 campanhas · nos dados de teste", "peso": 1 }
+      ]
+    }
+  ],
+  "geradoEm": "2026-10-15T12:00:00.000Z",
+  "modelo": "exemplo",
+  "doCache": false,
+  "avisos": ["Exemplo fixo para o front, até o motor ficar pronto."]
+}
