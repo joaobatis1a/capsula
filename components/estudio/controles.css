@@ -78,3 +78,8 @@
   text-transform: uppercase;
   color: var(--ink-muted);
 }
+
+/* Alvo de toque de 44px: a linha inteira do interruptor é clicável */
+.interruptor-linha {
+  min-height: 44px;
+}

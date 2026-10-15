@@ -114,7 +114,7 @@ select.cp-input {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 var(--space-4);
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--line-strong);

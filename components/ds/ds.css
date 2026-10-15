@@ -274,3 +274,17 @@ textarea.cp-input { resize: vertical; }
 .cp-input:hover:not(:focus-visible) {
   border-color: var(--ink-muted);
 }
+
+/* Alvo de toque de 44px nos links de texto e nos meses da tabela, em telas de toque */
+.cp-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+@media (pointer: coarse) {
+  .saude-th-mes button,
+  .agora-item,
+  .rodape a:not(.rodape-forma):not(.rodape-logo) {
+    min-height: 44px;
+  }
+}
