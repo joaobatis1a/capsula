@@ -1,30 +1,55 @@
 /* Rodapé: ilha que espelha o cabeçalho. Só tokens do design system, sem bordas. */
 
 .rodape {
-  margin-top: var(--space-6);
-  padding: 0 var(--space-4) var(--space-6);
+  margin-top: var(--space-8, 64px);
+  padding: var(--space-7, 48px) var(--space-4) var(--space-5);
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--memoria-fill) 8%, var(--surface-raised)) 40%);
 }
-.rodape-ilha {
+.rodape-miolo {
   max-width: 1168px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr;
+  gap: var(--space-6);
+}
+@media (max-width: 720px) {
+  .rodape-miolo {
+    grid-template-columns: 1fr;
+  }
+}
+.rodape-col {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+}
+.rodape-titulo {
+  font-size: 12.5px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.rodape-slogan {
+  color: var(--ink-muted);
+}
+.rodape-lista {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 0 calc(var(--space-3) * -1);
+  padding: 0;
+  list-style: none;
+}
+.rodape-base {
+  max-width: 1168px;
+  margin: var(--space-6) auto 0;
+  padding-top: var(--space-4);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-3) var(--space-6);
-  padding: 8px 8px 8px var(--space-5);
-  border-radius: var(--radius-pill);
-  background:
-    linear-gradient(100deg, color-mix(in srgb, var(--memoria-fill) 14%, transparent) 0%, transparent 42%, transparent 62%, color-mix(in srgb, var(--tendencia-fill) 11%, transparent) 100%),
-    color-mix(in srgb, var(--surface-raised) 78%, transparent);
-  box-shadow: 0 16px 36px -22px #000000b3;
-}
-@media (max-width: 720px) {
-  .rodape-ilha {
-    padding: var(--space-3) var(--space-4);
-    border-radius: 28px;
-    justify-content: center;
-  }
+  gap: var(--space-3);
+  background: linear-gradient(90deg, transparent, var(--line), transparent) top / 100% 1px no-repeat;
 }
 
 .rodape-marca {
@@ -47,15 +72,9 @@
   transform: rotate(-14deg) scale(1.12);
 }
 
-.rodape-ilha .rodape-formas {
-  margin: 0;
-  justify-content: center;
+.rodape .rodape-formas {
+  margin: 0 0 0 calc(var(--space-2) * -1);
   gap: var(--space-1);
-}
-.rodape-acoes {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
 }
 .rodape-link {
   display: inline-flex;
@@ -118,9 +137,7 @@
 }
 
 .rodape-nota {
-  max-width: 1168px;
-  margin: var(--space-3) auto 0;
-  text-align: center;
+  margin: 0;
   font-family: var(--font-mono);
   font-size: 11.5px;
   line-height: 16px;
