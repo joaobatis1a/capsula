@@ -1,3 +1,4 @@
+import { MARCA } from "@/lib/marca";
 import type { Briefing } from "@/types/briefing";
 import type { Checagem, Variacao } from "@/types/variacao";
 
@@ -89,6 +90,14 @@ const REGRAS: Regra[] = [
     id: "superlativo",
     ok: "Sem superlativo absoluto sem prova",
     checar: (t) => (SUPERLATIVOS.some((r) => r.test(t)) ? "Usa superlativo absoluto (\"o melhor\", \"nº 1\") sem comprovação" : null),
+  },
+  {
+    id: "tom-marca",
+    ok: "Dentro do tom de voz do manual de marca",
+    checar: (t) => {
+      const achado = MARCA.tomDeVoz.evite.find((termo) => new RegExp(`(^|[^a-z])${normalizar(termo)}([^a-z]|$)`).test(t));
+      return achado ? `Foge do tom da marca: o manual pede para evitar "${achado}"` : null;
+    },
   },
   {
     id: "oferta-validade",
