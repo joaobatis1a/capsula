@@ -344,19 +344,26 @@
   color: var(--tendencia);
 }
 
-/* Todo comprimido sólido do sistema leva o sombreado da marca: botões, pílula do menu, selos e avisos */
-.cp-btn-primary.cp-btn-primary,
+/* Todo comprimido sólido do sistema leva o sombreado da palavra "dose": botões, pílula do menu, selos e avisos */
+.cp-btn-primary.cp-btn-primary {
+  box-shadow: var(--shadow-seam), var(--comp-inset);
+}
+.cp-btn-primary.cp-btn-primary:not(:disabled):hover {
+  box-shadow: 0 4px 0 #14142a26, var(--comp-inset);
+}
+.cp-btn-primary.cp-btn-primary:not(:disabled):active {
+  box-shadow: var(--comp-inset);
+}
 .cp-btn-cap-l.cp-btn-cap-l,
 .cp-btn-cap-r.cp-btn-cap-r,
-.cp-status-publicado.cp-status-publicado,
-.aviso-rapido.aviso-rapido,
+.cp-status-publicado.cp-status-publicado {
+  box-shadow: var(--comp-inset);
+}
+.aviso-rapido.aviso-rapido {
+  box-shadow: var(--shadow-float), var(--comp-inset);
+}
 .cab-nav .cab-pilula {
-  background-image: var(--comp-brilho), var(--comp-sombra);
-  background-position:
-    50% 16%,
-    0 0;
-  background-size:
-    38% 2px,
-    100% 100%;
-  background-repeat: no-repeat;
+  box-shadow:
+    0 10px 22px -10px color-mix(in srgb, var(--memoria-fill) 85%, transparent),
+    var(--comp-inset);
 }
