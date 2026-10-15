@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Icon } from "@/components/ds";
+import { Forma, Icon } from "@/components/ds";
 import { Interruptor } from "@/components/estudio/Controles";
 import { AGENTES, CATEGORIAS_SAUDE, REGIOES, type Agente, type CategoriaSaude, type DataSaude, type Regiao, type Sazonalidade } from "@/lib/data/types";
 import { atencao, intensidadeDe, MESES_CURTOS, MESES_NOME, NIVEL, ROTULO_AGENTE, ROTULO_CATEGORIA, ROTULO_REGIAO } from "@/lib/saude/rotulos";
@@ -188,6 +188,7 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
             {filtrados.length === 0 ? (
               <tr>
                 <td colSpan={13} className="saude-vazio">
+                  <Forma tipo="comprimido" size={56} />
                   Nenhuma condição com esses filtros. Tire um filtro ou procure por outro termo.
                   <button
                     type="button"
@@ -257,7 +258,8 @@ export function AnoDaSaude({ itens, datas, mesAtual }: { itens: Sazonalidade[]; 
 
 function Numero({ valor, rotulo, destaque }: { valor: number; rotulo: string; destaque?: boolean }) {
   return (
-    <div className={destaque ? "saude-numero is-destaque" : "saude-numero"}>
+    <div className={destaque ? "saude-numero is-destaque tem-forma" : "saude-numero"}>
+      {destaque ? <Forma tipo="efervescente" size={34} className="saude-numero-forma" /> : null}
       <b key={valor}>{valor}</b>
       <span>{rotulo}</span>
     </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
+import { Forma } from "@/components/ds";
 import { AnoDaSaude } from "@/components/saude/AnoDaSaude";
 import { getDataSource } from "@/lib/data";
 import "@/components/estudio/estudio.css";
@@ -13,7 +14,10 @@ export default function SaudePage() {
     <>
       <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 760 }}>
         <p className="receita-olho">Radar de sazonalidade</p>
-        <h1 className="t-h1">Ano da saúde</h1>
+        <div className="titulo-forma tem-forma">
+          <Forma tipo="efervescente" size={56} className="forma-entra is-viva" />
+          <h1 className="t-h1">Ano da saúde</h1>
+        </div>
         <p>
           Quando cada condição sobe, onde, quem mais sente e o que a farmácia pode oferecer. Escolha um mês, filtre por tema, causa ou região e abra
           a ficha para criar um briefing já com o assunto certo.

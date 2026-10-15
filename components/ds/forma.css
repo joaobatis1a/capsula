@@ -1,0 +1,334 @@
+/* Formas farmacêuticas: o gesto de cada uma. Dispara no hover da própria forma ou do pai com .tem-forma. */
+
+.forma {
+  flex: none;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 1.5px 0 var(--forma-sombra));
+}
+
+/* Cápsula: as metades se afastam e voltam com mola */
+.forma-capsula .fm-a,
+.forma-capsula .fm-b,
+.forma-comprimido .fm-a,
+.forma-comprimido .fm-b {
+  transition: transform var(--dur-3) var(--ease-mola);
+}
+:is(.forma-capsula, .tem-forma):hover .forma-capsula .fm-a,
+.forma-capsula:hover .fm-a {
+  transform: translateX(-3px);
+}
+:is(.forma-capsula, .tem-forma):hover .forma-capsula .fm-b,
+.forma-capsula:hover .fm-b {
+  transform: translateX(3px);
+}
+
+/* Comprimido: o sulco se abre, cada metade gira um pouco */
+.forma-comprimido .fm-a,
+.forma-comprimido .fm-b {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tem-forma:hover .forma-comprimido .fm-a,
+.forma-comprimido:hover .fm-a {
+  transform: translateX(-2.6px) rotate(-5deg);
+}
+.tem-forma:hover .forma-comprimido .fm-b,
+.forma-comprimido:hover .fm-b {
+  transform: translateX(2.6px) rotate(5deg);
+}
+
+/* Softgel: balança como um líquido */
+.forma-softgel .fm-corpo,
+.forma-dragea .fm-corpo,
+.forma-caplet .fm-corpo,
+.forma-efervescente .fm-corpo {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tem-forma:hover .forma-softgel .fm-corpo,
+.forma-softgel:hover .fm-corpo {
+  animation: fm-balanca 700ms var(--ease-out);
+}
+@keyframes fm-balanca {
+  20% {
+    transform: scale(1.1, 0.88) rotate(-3deg);
+  }
+  45% {
+    transform: scale(0.94, 1.1) rotate(3deg);
+  }
+  70% {
+    transform: scale(1.04, 0.97);
+  }
+}
+
+/* Efervescente: as bolhas sobem e somem */
+.forma-efervescente .fm-bolha {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tem-forma:hover .forma-efervescente .fm-bolha,
+.forma-efervescente:hover .fm-bolha,
+.forma-efervescente.is-viva .fm-bolha {
+  animation: fm-sobe 1.6s var(--ease-out) infinite;
+}
+.forma-efervescente .fm-bolha.b2 {
+  animation-delay: 0.35s !important;
+}
+.forma-efervescente .fm-bolha.b3 {
+  animation-delay: 0.7s !important;
+}
+@keyframes fm-sobe {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.5);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.15);
+  }
+}
+.tem-forma:hover .forma-efervescente .fm-corpo,
+.forma-efervescente:hover .fm-corpo {
+  animation: fm-treme 500ms linear infinite;
+}
+@keyframes fm-treme {
+  25% {
+    transform: translate(0.6px, -0.4px);
+  }
+  75% {
+    transform: translate(-0.6px, 0.4px);
+  }
+}
+
+/* Drágea: o brilho passa e ela dá um pulo */
+.tem-forma:hover .forma-dragea .fm-corpo,
+.forma-dragea:hover .fm-corpo {
+  animation: fm-pula 600ms var(--ease-mola);
+}
+@keyframes fm-pula {
+  40% {
+    transform: translateY(-3px) scale(1.06);
+  }
+}
+.tem-forma:hover .forma-dragea .fm-brilho,
+.forma-dragea:hover .fm-brilho {
+  animation: fm-brilho 900ms var(--ease-out);
+}
+@keyframes fm-brilho {
+  50% {
+    stroke-opacity: 1;
+    stroke-width: 4.5;
+  }
+}
+
+/* Caplet: gira como quem está sendo lido */
+.tem-forma:hover .forma-caplet .fm-corpo,
+.forma-caplet:hover .fm-corpo {
+  animation: fm-gira 700ms var(--ease-mola);
+}
+@keyframes fm-gira {
+  40% {
+    transform: rotate(-9deg) scale(1.06);
+  }
+}
+
+/* Entrada: a forma cai e se assenta, para emblemas de página */
+.forma-entra {
+  animation: fm-entra 800ms var(--ease-mola) both;
+}
+@keyframes fm-entra {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) rotate(-40deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Etiquetas: a forma ao lado do texto */
+.cp-tag .forma,
+.cp-status .forma {
+  margin-left: -2px;
+}
+
+/* Emblema ao lado do título de uma página */
+.titulo-forma {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.titulo-forma .forma {
+  width: 56px;
+  height: 56px;
+}
+@media (max-width: 520px) {
+  .titulo-forma .forma {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* A dose que cai quando algo é aprovado ou publicado */
+.chuva {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  container-type: size;
+  pointer-events: none;
+}
+.chuva .forma {
+  position: absolute;
+  top: -34px;
+  left: var(--x);
+  animation: fm-cai var(--t, 1.4s) cubic-bezier(0.3, 0.1, 0.7, 0.9) var(--d, 0s) both;
+}
+@keyframes fm-cai {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--h, 360px)) rotate(var(--r, 240deg));
+    opacity: 0;
+  }
+}
+
+/* Rodapé: a fileira de formas com o nome de cada uma */
+.rodape-formas {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.rodape-formas li {
+  position: relative;
+}
+.rodape-forma {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  transition:
+    transform var(--dur-2) var(--ease-mola),
+    background-color var(--dur-2) var(--ease-out);
+}
+.rodape-forma:hover {
+  background: var(--surface-sunken);
+  transform: translateY(-4px) rotate(-6deg);
+}
+.rodape-forma::after {
+  content: attr(data-nome);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    translate var(--dur-2) var(--ease-mola);
+}
+.rodape-forma:hover::after,
+.rodape-forma:focus-visible::after {
+  opacity: 1;
+  translate: -50% 0;
+}
+.rodape-forma:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+/* Estado vazio com um comprimido partido */
+.vazio-forma {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-4);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+.vazio-forma .forma {
+  width: 72px;
+  height: 72px;
+}
+.vazio-forma .forma-comprimido .fm-a {
+  transform: translateX(-4px) rotate(-6deg);
+}
+.vazio-forma .forma-comprimido .fm-b {
+  transform: translateX(4px) rotate(6deg);
+}
+
+/* Vitrine das formas no design system */
+.formas-secao {
+  display: grid;
+  gap: var(--space-5);
+  scroll-margin-top: 80px;
+}
+.formas-grade {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+}
+.forma-cartao {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.forma-cartao:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-float);
+  border-color: var(--line-strong);
+}
+.forma-palco {
+  display: grid;
+  place-items: center;
+  height: 172px;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+.forma-significa {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tendencia);
+}

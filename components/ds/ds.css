@@ -28,7 +28,7 @@ textarea.cp-input { resize: vertical; }
 .cp-hint-error { color: var(--bloqueado); }
 
 /* Etiqueta de origem: a cor diz de onde veio */
-.cp-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; line-height: 18px; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: var(--radius-pill); white-space: nowrap; }
+.cp-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; line-height: 18px; font-weight: 600; padding: 2px 10px 2px 6px; border-radius: var(--radius-pill); white-space: nowrap; }
 .cp-tag-memoria { background: var(--memoria-soft); color: var(--memoria); }
 .cp-tag-tendencia { background: var(--tendencia-soft); color: var(--tendencia); }
 .cp-tag-gerado { color: var(--ink); background: linear-gradient(90deg, var(--memoria-soft) 0 50%, var(--tendencia-soft) 50% 100%); }

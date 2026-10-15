@@ -3,7 +3,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import Link from "next/link";
 import { FaixaAno } from "@/components/saude/FaixaAno";
-import { Icon, OriginTag, TrendItem } from "@/components/ds";
+import { Forma, Icon, OriginTag, TrendItem } from "@/components/ds";
 import "@/components/saude/saude.css";
 import { getDataSource } from "@/lib/data";
 import type { ItemRadar } from "@/lib/data/types";
@@ -19,7 +19,10 @@ export default function RadarPage() {
   return (
     <>
       <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 720 }}>
-        <h1 className="t-h1">Radar</h1>
+        <div className="titulo-forma tem-forma">
+          <Forma tipo="softgel" size={56} className="forma-entra" />
+          <h1 className="t-h1">Radar</h1>
+        </div>
         <p>
           O que está em alta agora e o que vem pela frente na saúde. Todo item tem fonte, data e validade, e sai das sugestões quando vence. A
           coleta é manual, em fontes públicas, sem raspar os aplicativos.

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bula, Button, DoseBar, Field, OriginTag, PieceCard, Roteiro, StatusPill, TrendItem } from "@/components/ds";
+import { Bula, Button, DoseBar, Field, Forma, FORMAS, OriginTag, PieceCard, Roteiro, StatusPill, TrendItem, type TipoForma } from "@/components/ds";
 
 export const metadata: Metadata = { title: "Design system · Cápsula" };
 
@@ -15,6 +15,34 @@ export default function DesignSystemPage() {
         <h1 className="t-h1">Design system</h1>
         <p className="t-muted">Os 9 componentes da Cápsula v1. Exemplos com dados de teste.</p>
       </header>
+
+      <section id="formas" className="formas-secao" aria-labelledby="titulo-formas">
+        <div style={{ display: "grid", gap: "var(--space-2)", maxWidth: 680 }}>
+          <h2 id="titulo-formas" className="t-h2">
+            Formas farmacêuticas
+          </h2>
+          <p className="t-body-sm t-muted">
+            Existem muitas formas de uma dose. Na Cápsula, cada uma significa uma coisa do produto e só aparece onde esse significado vale: etiquetas, etapas da geração, emblemas das
+            páginas e momentos de aprovação. Passe o mouse para ver o gesto de cada uma.
+          </p>
+        </div>
+        <ul className="formas-grade">
+          {(Object.keys(FORMAS) as TipoForma[]).map((t, i) => (
+            <li key={t} className="forma-cartao tem-forma" style={{ "--i": i } as React.CSSProperties}>
+              <span className="forma-palco">
+                <Forma tipo={t} size={124} className={t === "efervescente" ? "is-viva" : undefined} />
+              </span>
+              <p className="t-h3">{FORMAS[t].nome}</p>
+              <p className="forma-significa">{FORMAS[t].significa}</p>
+              <p className="t-body-sm t-muted">{FORMAS[t].uso}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="t-body-sm">
+          <b>Regras.</b> A forma sempre vem com a palavra que ela representa (nunca sozinha para dizer status). Nunca como fundo, textura ou enfeite solto. Uma forma de cada vez
+          por área, e no máximo uma coisa se mexendo ao mesmo tempo.
+        </p>
+      </section>
 
       <section style={{ display: "grid", gap: "var(--space-4)" }}>
         <h2 className="t-h2">Ações e etiquetas</h2>

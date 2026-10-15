@@ -619,3 +619,26 @@
     grid-template-columns: 78px 1fr;
   }
 }
+
+/* Formas na página */
+.saude-numero {
+  position: relative;
+}
+.saude-numero-forma {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+}
+.saude-vazio .forma-comprimido .fm-a {
+  transform: translateX(-3px) rotate(-5deg);
+}
+.saude-vazio .forma-comprimido .fm-b {
+  transform: translateX(3px) rotate(5deg);
+}
+/* As doses da tabela são cápsulas: cada mês é uma dose */
+.saude-bloco {
+  border-radius: 999px;
+}
+.faixa-celula {
+  border-radius: 999px;
+}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
-import { OriginTag } from "@/components/ds";
+import { Forma, OriginTag } from "@/components/ds";
 import { Publicadas } from "@/components/memoria/Publicadas";
 import { Conta, Revela } from "@/components/motion/Revela";
 import { getDataSource } from "@/lib/data";
@@ -17,7 +17,10 @@ export default function MemoriaPage({ searchParams }: { searchParams: Promise<{ 
   return (
     <>
       <header style={{ display: "grid", gap: "var(--space-2)", maxWidth: 720 }}>
-        <h1 className="t-h1">Memória</h1>
+        <div className="titulo-forma tem-forma">
+          <Forma tipo="comprimido" size={56} className="forma-entra" />
+          <h1 className="t-h1">Memória</h1>
+        </div>
         <p>O que funcionou e o que falhou nas campanhas anteriores. É daqui que o motor tira as evidências de memória da Bula.</p>
       </header>
       <Suspense fallback={<p className="t-muted">Carregando a memória…</p>}>

@@ -8,6 +8,7 @@ import { tempoDaCena, type RespostaGeracao, type Variacao } from "@/types/variac
 import type { Registro } from "@/lib/governanca/fluxo";
 import { Aprovacao, guardarPublicada } from "./Aprovacao";
 import { useAvisar } from "@/components/motion/Avisos";
+import { Chuva } from "@/components/motion/Chuva";
 import { Conta } from "@/components/motion/Revela";
 
 function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
@@ -221,9 +222,12 @@ function VerFormatos({ variacao, briefing, carimbo }: { variacao: Variacao; brie
       </ul>
       <div className={`galeria-formato galeria-formato-${formato}`}>
         {carimbo ? (
-          <span key={carimbo.n} className={carimbo.status === "publicado" ? "carimbo is-publicado" : "carimbo"} aria-hidden="true">
-            {carimbo.status === "publicado" ? "Publicado" : "Aprovado"}
-          </span>
+          <>
+            <span key={carimbo.n} className={carimbo.status === "publicado" ? "carimbo is-publicado" : "carimbo"} aria-hidden="true">
+              {carimbo.status === "publicado" ? "Publicado" : "Aprovado"}
+            </span>
+            <Chuva key={`chuva-${carimbo.n}`} quantidade={carimbo.status === "publicado" ? 12 : 7} />
+          </>
         ) : null}
         <PecaEscalada conteudo={conteudoDe(variacao, briefing)} formato={formato} pecaRef={pecaRef} />
       </div>
