@@ -1,0 +1,273 @@
+/* Painel de ganho. Só tokens do design system. */
+
+.ganho {
+  display: grid;
+  gap: var(--space-6);
+}
+.ganho-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+.ganho-bloco {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+}
+@media (min-width: 720px) {
+  .ganho-bloco {
+    padding: var(--space-6);
+  }
+}
+.ganho-bloco-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+/* Selos: dizem de que tipo é o número */
+.selo-dado {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 12px 3px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.selo-dado.is-medido {
+  color: var(--aprovado);
+  background: var(--aprovado-soft);
+}
+.selo-dado.is-premissa {
+  color: var(--revisao);
+  background: var(--revisao-soft);
+}
+.selo-dado.is-sintetico {
+  color: var(--ink-muted);
+  border: 1.5px dashed var(--line-strong);
+  padding: 1.5px 10.5px 1.5px 6.5px;
+}
+.ganho-declara {
+  max-width: 64em;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* Números */
+.ganho-numeros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.ganho-numero {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.ganho-numero:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-float);
+}
+.ganho-numero-rotulo {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.ganho-numero-valor {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 42px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.ganho-numero-valor small {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: var(--ink-muted);
+}
+.ganho-numero-nota {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ink-muted);
+}
+.ganho-numero.is-destaque {
+  border-color: var(--tendencia-fill);
+}
+.ganho-numero.is-destaque .ganho-numero-valor {
+  color: var(--tendencia);
+}
+.ganho-numeros.is-sintetico .ganho-numero {
+  border-style: dashed;
+  border-color: var(--line-strong);
+}
+.ganho-numeros.is-sintetico .ganho-numero-valor {
+  color: var(--ink-muted);
+}
+
+/* Premissas editáveis */
+.ganho-ajustes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-4);
+}
+.ganho-ajustes .cp-field {
+  flex: 1 1 200px;
+  max-width: 280px;
+}
+
+/* Comparação */
+.ganho-comp {
+  display: grid;
+  gap: var(--space-5);
+  padding-top: var(--space-2);
+}
+.ganho-barras {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.ganho-barras figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.ganho-conclusao {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--memoria);
+}
+.ganho-barra-linha {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.5fr) 1fr 72px;
+  align-items: center;
+  gap: var(--space-3);
+}
+@media (max-width: 640px) {
+  .ganho-barra-linha {
+    grid-template-columns: 1fr 72px;
+  }
+  .ganho-barra-nome {
+    grid-column: 1 / -1;
+  }
+}
+.ganho-barra-nome {
+  font-size: 14px;
+  line-height: 20px;
+}
+.ganho-barra-trilho {
+  display: block;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  overflow: hidden;
+}
+.ganho-barra {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: left;
+  animation: cp-escreve 900ms var(--ease-out) 200ms both;
+}
+.ganho-barra.is-hoje {
+  background: var(--line-strong);
+}
+.ganho-barra.is-capsula {
+  background: linear-gradient(90deg, var(--memoria-fill) 0 70%, var(--tendencia-fill) 70% 100%);
+}
+.ganho-barra-valor {
+  text-align: right;
+}
+.ganho-frase {
+  font-size: 16px;
+  line-height: 26px;
+}
+.ganho-frase b {
+  font-weight: 600;
+}
+
+/* Últimas gerações */
+.ganho-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.ganho-lista li {
+  display: grid;
+  grid-template-columns: 90px 1fr 70px 150px auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px dashed var(--line);
+  font-size: 14px;
+  line-height: 20px;
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+}
+.ganho-lista li:first-child {
+  border-top: 0;
+}
+@media (max-width: 720px) {
+  .ganho-lista li {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.ganho-aviso {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--revisao-soft);
+  color: var(--revisao);
+  font-size: 14px;
+  line-height: 20px;
+}
+.ganho-aviso .cp-icon {
+  margin-top: 2px;
+  flex: none;
+}
+.ganho-aviso span {
+  color: var(--ink);
+}

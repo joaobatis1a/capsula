@@ -6,6 +6,8 @@ import type { PublicoSugerido, Sazonalidade } from "@/lib/data/types";
 import { CANAIS, FORMATOS, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Formato, type Objetivo, type TipoProduto } from "@/types/briefing";
 import type { ErroApi, RespostaGeracao } from "@/types/variacao";
 import { useAvisar } from "@/components/motion/Avisos";
+import { Revela } from "@/components/motion/Revela";
+import { registrar } from "@/lib/ganho/metricas";
 import { Abertura } from "./Abertura";
 import { Escolha, Interruptor } from "./Controles";
 import { Dosagem } from "./Dosagem";
@@ -79,6 +81,11 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
   const [preenchidos, setPreenchidos] = useState<string[]>(() => (temaInicial ? CAMPOS_DO_TEMA : []));
   const resultadoRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  // Quando a pessoa começou a preencher o briefing: alimenta o painel de ganho.
+  const inicioRef = useRef<number | null>(null);
+  const tocou = () => {
+    inicioRef.current ??= Date.now();
+  };
 
   // Vindo do Ano da saúde com um tema escolhido: desce até o briefing já preenchido.
   useEffect(() => {
@@ -101,7 +108,10 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
   }, [preenchidos]);
   const marca = (campo: string) => (preenchidos.includes(campo) ? "is-preenchido" : undefined);
 
-  const set = <K extends keyof Form>(k: K, v: Form[K]) => setForm((f) => ({ ...f, [k]: v }));
+  const set = <K extends keyof Form>(k: K, v: Form[K]) => {
+    tocou();
+    setForm((f) => ({ ...f, [k]: v }));
+  };
   const alternar = <T,>(lista: T[], item: T) => (lista.includes(item) ? lista.filter((x) => x !== item) : [...lista, item]);
 
   function adicionarPublicoLivre() {
@@ -112,6 +122,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
   }
 
   function usarTema(t: Sazonalidade) {
+    tocou();
     setForm((f) => ({ ...formDe(t, publicos), descricao: f.descricao, precoDe: f.precoDe, precoPor: f.precoPor, condicao: f.condicao, validade: f.validade, canais: f.canais, formatos: f.formatos, objetivo: f.objetivo }));
     setErros({});
     setPreenchidos(CAMPOS_DO_TEMA);
@@ -124,6 +135,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
   }
 
   function preencherExemplo() {
+    tocou();
     const daqui30 = new Date(Date.now() + 30 * 864e5).toISOString().slice(0, 10);
     setForm({
       ...VAZIO,
@@ -171,11 +183,18 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
     }
     setErros({});
     setEstado("gerando");
+    const clicouEm = Date.now();
+    const briefingMs = inicioRef.current ? clicouEm - inicioRef.current : null;
     requestAnimationFrame(() => resultadoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
     try {
       // A dosagem fica na tela pelo menos 1,8s, para não piscar quando a resposta vem do cache ou dos moldes.
+      const t0 = performance.now();
+      let geracaoMs = 0;
       const [res] = await Promise.all([
-        fetch("/api/gerar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(v.briefing) }),
+        fetch("/api/gerar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(v.briefing) }).then((r) => {
+          geracaoMs = performance.now() - t0;
+          return r;
+        }),
         new Promise((r) => setTimeout(r, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800)),
       ]);
       const json = await res.json();
@@ -184,7 +203,22 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
         if (err.campos) setErros(err.campos);
         throw new Error(err.erro);
       }
-      setResposta(json as RespostaGeracao);
+      const r = json as RespostaGeracao;
+      registrar({
+        tipo: "geracao",
+        em: new Date().toISOString(),
+        briefingMs,
+        geracaoMs: Math.round(geracaoMs),
+        variacoes: r.variacoes.length,
+        bloqueadas: r.variacoes.filter((x) => x.status === "bloqueado").length,
+        roteiros: r.roteiros.length,
+        publicos: v.briefing.publicos.length,
+        canais: v.briefing.canais.length,
+        modelo: r.modelo,
+        doCache: r.doCache,
+      });
+      inicioRef.current = null;
+      setResposta(r);
       setEstado("parado");
       setPronto(true);
       avisar(`${(json as RespostaGeracao).variacoes.length} variações prontas`);
@@ -218,7 +252,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
           </Button>
         </div>
 
-        <fieldset className="estudio-grupo">
+        <Revela as="fieldset" className="estudio-grupo">
           <legend className="estudio-legenda">Produto e oferta</legend>
           <div className="estudio-grade">
             <Field id="cp-f-produto" className={marca("produto")} label="Produto" value={form.produto} onChange={(e) => set("produto", e.target.value)} error={erros.produto} placeholder="Protetor solar FPS 50" />
@@ -243,9 +277,9 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
             <Field className={marca("validade")} label="Validade da oferta" type="date" value={form.validade} onChange={(e) => set("validade", e.target.value)} error={erros["oferta.validade"] && "Informe até quando a oferta vale."} />
             <Field className={marca("condicao")} label="Condição" value={form.condicao} onChange={(e) => set("condicao", e.target.value)} placeholder="No app e nas lojas, enquanto durar o estoque" />
           </div>
-        </fieldset>
+        </Revela>
 
-        <fieldset className="estudio-grupo" aria-describedby="hint-publicos">
+        <Revela as="fieldset" className="estudio-grupo" aria-describedby="hint-publicos">
           <legend className="estudio-legenda">Públicos</legend>
           <p id="hint-publicos" className={erros.publicos ? "cp-hint cp-hint-error" : "cp-hint"}>
             {erros.publicos ? <Icon name="x" size={14} /> : null}
@@ -289,9 +323,9 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
               Adicionar
             </Button>
           </div>
-        </fieldset>
+        </Revela>
 
-        <fieldset className="estudio-grupo">
+        <Revela as="fieldset" className="estudio-grupo">
           <legend className="estudio-legenda">Canais e formatos</legend>
           <div className="estudio-grade">
             <Opcoes rotulo="Canais" erro={erros.canais} itens={CANAIS} nomes={ROTULOS.canal} escolhidos={form.canais} alternar={(c) => set("canais", alternar(form.canais, c))} />
@@ -303,7 +337,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
             Incluir roteiro de vídeo curto (Reels ou TikTok) com sugestão de música
           </Interruptor>
           <Field as="textarea" className={marca("observacoes")} label="Observações" value={form.observacoes} onChange={(e) => set("observacoes", e.target.value)} placeholder="Algo que a peça precisa ou não pode dizer" />
-        </fieldset>
+        </Revela>
 
         <div className="estudio-acoes">
           <Button variant="capsula" type="submit" className={estado === "gerando" ? "is-dosando" : undefined} disabled={estado === "gerando"} icon={estado === "gerando" ? "clock" : "arrow"}>

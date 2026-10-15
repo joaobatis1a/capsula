@@ -9,6 +9,7 @@ import type { Registro } from "@/lib/governanca/fluxo";
 import { Aprovacao, guardarPublicada } from "./Aprovacao";
 import { useAvisar } from "@/components/motion/Avisos";
 import { Chuva } from "@/components/motion/Chuva";
+import { registrar } from "@/lib/ganho/metricas";
 import { Conta } from "@/components/motion/Revela";
 
 function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
@@ -40,7 +41,13 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
     if (abertaId) dialogRef.current?.showModal();
   }, [abertaId]);
 
+  // Marca a chegada das variações: o tempo até a aprovação conta daqui.
+  useEffect(() => {
+    chegouEm.current = Date.now();
+  }, []);
+
   const avisar = useAvisar();
+  const chegouEm = useRef(0);
   const [carimbo, setCarimbo] = useState<{ id: string; status: "aprovado" | "publicado"; n: number } | null>(null);
 
   function fechar() {
@@ -61,6 +68,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
   function mudou(peca: Variacao, registro: Registro) {
     const mensagens = { revisao: "Peça enviada para revisão", aprovado: "Peça aprovada", publicado: "Peça publicada e guardada na Memória", rascunho: "Peça devolvida para rascunho", bloqueado: "" };
     avisar(mensagens[peca.status]);
+    if (peca.status === "aprovado") registrar({ tipo: "aprovacao", em: new Date().toISOString(), aposMs: Date.now() - chegouEm.current });
     if (peca.status === "aprovado" || peca.status === "publicado") setCarimbo({ id: peca.id, status: peca.status, n: Date.now() });
     setPecas((lista) => lista.map((p) => (p.id === peca.id ? peca : p)));
     setHistorico((h) => ({ ...h, [peca.id]: [...(h[peca.id] ?? []), registro] }));
