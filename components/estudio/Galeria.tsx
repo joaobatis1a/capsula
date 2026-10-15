@@ -5,6 +5,8 @@ import { Bula, Button, Icon, PieceCard, Roteiro, StatusPill, type BulaEvidencia 
 import { baixarPng, PecaEscalada, type ConteudoPeca } from "@/components/pecas/Peca";
 import { FORMATOS, ROTULOS, type Briefing, type Canal, type Formato } from "@/types/briefing";
 import { tempoDaCena, type RespostaGeracao, type Variacao } from "@/types/variacao";
+import type { Registro } from "@/lib/governanca/fluxo";
+import { Aprovacao, guardarPublicada } from "./Aprovacao";
 
 function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
   return {
@@ -25,18 +27,28 @@ function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
 export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
   const [publico, setPublico] = useState<string | "todos">("todos");
   const [canal, setCanal] = useState<Canal | "todos">("todos");
-  const [aberta, setAberta] = useState<Variacao | null>(null);
+  const [pecas, setPecas] = useState<Variacao[]>(resposta.variacoes);
+  const [historico, setHistorico] = useState<Record<string, Registro[]>>({});
+  const [abertaId, setAbertaId] = useState<string | null>(null);
+  const aberta = pecas.find((p) => p.id === abertaId) ?? null;
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (aberta) dialogRef.current?.showModal();
-  }, [aberta]);
+    if (abertaId) dialogRef.current?.showModal();
+  }, [abertaId]);
+
+  function mudou(peca: Variacao, registro: Registro) {
+    setPecas((lista) => lista.map((p) => (p.id === peca.id ? peca : p)));
+    setHistorico((h) => ({ ...h, [peca.id]: [...(h[peca.id] ?? []), registro] }));
+    if (peca.status === "publicado") guardarPublicada(peca, resposta.briefing, registro);
+  }
 
   const visiveis = useMemo(
-    () => resposta.variacoes.filter((v) => (publico === "todos" || v.publico === publico) && (canal === "todos" || v.canal === canal)),
-    [resposta, publico, canal],
+    () => pecas.filter((v) => (publico === "todos" || v.publico === publico) && (canal === "todos" || v.canal === canal)),
+    [pecas, publico, canal],
   );
-  const bloqueadas = resposta.variacoes.filter((v) => v.status === "bloqueado").length;
+  const bloqueadas = pecas.filter((v) => v.status === "bloqueado").length;
+  const aprovadas = pecas.filter((v) => v.status === "aprovado" || v.status === "publicado").length;
   const publicos = resposta.briefing.publicos;
   const canais = [...new Set(resposta.variacoes.map((v) => v.canal))];
   const porPublico = publicos.map((p) => ({ publico: p, pecas: visiveis.filter((v) => v.publico === p) })).filter((g) => g.pecas.length);
@@ -49,7 +61,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
         </h2>
         <p className="t-data t-muted">
           {resposta.modelo === "sem-ia" ? "Moldes fixos, sem IA" : `Modelo ${resposta.modelo}`}
-          {resposta.doCache ? " · do cache" : ""} · {bloqueadas} bloqueada{bloqueadas === 1 ? "" : "s"} pela governança
+          {resposta.doCache ? " · do cache" : ""} · {bloqueadas} bloqueada{bloqueadas === 1 ? "" : "s"} pela governança · {aprovadas} aprovada{aprovadas === 1 ? "" : "s"}
         </p>
       </header>
 
@@ -75,7 +87,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
           <ul className="galeria-grade">
             {g.pecas.map((v) => (
               <li key={v.id}>
-                <PieceCard titulo={v.titulo} texto={v.texto} canal={ROTULOS.canal[v.canal]} formato={v.formato} memoria={v.dose} status={v.status} selo={v.selo} onBula={() => setAberta(v)}>
+                <PieceCard titulo={v.titulo} texto={v.texto} canal={ROTULOS.canal[v.canal]} formato={v.formato} memoria={v.dose} status={v.status} selo={v.selo} onBula={() => setAbertaId(v.id)}>
                   <PecaEscalada conteudo={conteudoDe(v, resposta.briefing)} formato={v.formato} />
                 </PieceCard>
               </li>
@@ -109,7 +121,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
         </section>
       ) : null}
 
-      <dialog ref={dialogRef} className="galeria-dialogo" aria-label="Bula da peça" onClose={() => setAberta(null)} onClick={(e) => e.target === dialogRef.current && dialogRef.current?.close()}>
+      <dialog ref={dialogRef} className="galeria-dialogo" aria-label="Bula da peça" onClose={() => setAbertaId(null)} onClick={(e) => e.target === dialogRef.current && dialogRef.current?.close()}>
         {aberta ? (
           <div className="galeria-dialogo-corpo">
             <div className="galeria-dialogo-topo">
@@ -118,6 +130,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
                 Fechar
               </Button>
             </div>
+            <Aprovacao key={`ap-${aberta.id}`} peca={aberta} briefing={resposta.briefing} historico={historico[aberta.id] ?? []} onMudou={mudou} />
             <VerFormatos key={aberta.id} variacao={aberta} briefing={resposta.briefing} />
             <div className="galeria-peca">
               <p className="t-data t-muted">

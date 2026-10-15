@@ -310,7 +310,7 @@ export function Estudio({ publicos, sazonalidade }: { publicos: PublicoSugerido[
       </form>
 
       <div ref={resultadoRef} className="estudio-resultado">
-        {resposta ? <Galeria resposta={resposta} /> : null}
+        {resposta ? <Galeria key={resposta.geradoEm} resposta={resposta} /> : null}
       </div>
     </div>
   );
