@@ -1,0 +1,307 @@
+/* Estúdio e galeria. Só tokens do design system. */
+
+.estudio {
+  display: grid;
+  gap: var(--space-8);
+}
+
+/* Em alta nesta época */
+.estudio-epoca {
+  display: grid;
+  gap: var(--space-4);
+}
+.estudio-epoca-head {
+  display: grid;
+  gap: var(--space-1);
+}
+.estudio-epoca-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.estudio-epoca-item {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+.estudio-epoca-item .cp-btn {
+  justify-self: start;
+}
+.estudio-epoca-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Formulário */
+.estudio-form {
+  display: grid;
+  gap: var(--space-6);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-4);
+}
+@media (min-width: 720px) {
+  .estudio-form {
+    padding: var(--space-8);
+  }
+}
+.estudio-form-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+.estudio-grupo {
+  border: 0;
+  margin: 0;
+  padding: var(--space-4) 0 0;
+  border-top: 1px dashed var(--line-strong);
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.estudio-legenda {
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+}
+.estudio-grade {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+}
+select.cp-input {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-muted) 50%), linear-gradient(135deg, var(--ink-muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: var(--space-8);
+}
+
+/* Chips de escolha: tudo que age é cápsula */
+.estudio-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.estudio-chip {
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface-raised);
+  color: var(--ink);
+  cursor: pointer;
+}
+.estudio-chip:hover {
+  background: var(--surface-sunken);
+}
+.estudio-chip.is-on {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--on-action);
+}
+.estudio-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.estudio-chip:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+.estudio-livre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.estudio-livre .cp-field {
+  flex: 1 1 220px;
+}
+.estudio-check {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  font-size: 15px;
+  line-height: 22px;
+  cursor: pointer;
+}
+.estudio-check input {
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--action);
+  flex: none;
+}
+
+.estudio-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Avisos e erros */
+.estudio-alerta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--revisao-soft);
+  color: var(--revisao);
+  font-size: 14px;
+  line-height: 20px;
+}
+.estudio-alerta ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-1);
+  flex: 1 1 240px;
+}
+.estudio-alerta p {
+  flex: 1 1 200px;
+}
+.estudio-alerta .cp-icon {
+  margin-top: 1px;
+}
+.estudio-alerta.is-erro {
+  background: var(--bloqueado-soft);
+  color: var(--bloqueado);
+}
+
+/* Galeria */
+.estudio-resultado {
+  scroll-margin-top: var(--space-4);
+}
+.galeria {
+  display: grid;
+  gap: var(--space-6);
+}
+.galeria-head {
+  display: grid;
+  gap: var(--space-1);
+}
+.galeria-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-8);
+}
+.galeria-filtro {
+  display: grid;
+  gap: var(--space-2);
+}
+.galeria-grupo {
+  display: grid;
+  gap: var(--space-4);
+}
+.galeria-grade {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  align-items: start;
+}
+.galeria-grade .cp-piece {
+  max-width: none;
+}
+.galeria-roteiros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  align-items: start;
+}
+.galeria-roteiro {
+  display: grid;
+  gap: var(--space-2);
+}
+.galeria-musica {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  color: var(--tendencia);
+}
+.galeria-musica .cp-icon {
+  margin-top: 2px;
+}
+
+/* Bula aberta ao lado */
+.galeria-dialogo {
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: min(100vw, 520px);
+  max-width: 100vw;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+}
+.galeria-dialogo::backdrop {
+  background: #14142A66;
+}
+.galeria-dialogo-corpo {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+.galeria-dialogo-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+.galeria-dialogo .cp-bula {
+  max-width: none;
+}
+.galeria-peca {
+  display: grid;
+  gap: var(--space-2);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+.galeria-advertencia {
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--line-strong);
+}

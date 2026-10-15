@@ -94,7 +94,7 @@ export interface CampaignDataSource {
   getCampanhas(filtro?: FiltroCampanhas): Promise<Campanha[]>;
   /** Itens válidos na data informada (padrão: hoje). */
   getRadar(data?: string): Promise<ItemRadar[]>;
-  /** Condições em pico no mês informado e no seguinte (1 a 12). */
+  /** Condições em pico no mês informado e nos dois seguintes (1 a 12), para planejar antes do pico. */
   getSazonalidade(mes: number): Promise<Sazonalidade[]>;
   getPublicos(): Promise<PublicoSugerido[]>;
 }
