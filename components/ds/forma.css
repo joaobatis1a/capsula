@@ -343,3 +343,20 @@
   text-transform: uppercase;
   color: var(--tendencia);
 }
+
+/* Todo comprimido sólido do sistema leva o sombreado da marca: botões, pílula do menu, selos e avisos */
+.cp-btn-primary.cp-btn-primary,
+.cp-btn-cap-l.cp-btn-cap-l,
+.cp-btn-cap-r.cp-btn-cap-r,
+.cp-status-publicado.cp-status-publicado,
+.aviso-rapido.aviso-rapido,
+.cab-nav .cab-pilula {
+  background-image: var(--comp-brilho), var(--comp-sombra);
+  background-position:
+    50% 16%,
+    0 0;
+  background-size:
+    38% 2px,
+    100% 100%;
+  background-repeat: no-repeat;
+}
