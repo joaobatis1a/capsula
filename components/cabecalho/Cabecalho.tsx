@@ -14,13 +14,15 @@ const LINKS = [
 ];
 
 /* Cabeçalho: uma ilha em forma de cápsula, que flutua sobre a página. Anil de um lado, brasa do outro, bem suave.
-   Ao rolar para baixo ela se recolhe num comprimido com a marca, no centro; volta ao rolar para cima, ao passar o mouse
-   ou ao tocar nele. A faixa do cabeçalho guarda sempre a altura da ilha aberta, então o conteúdo nunca se mexe. */
+   Ao rolar para baixo a própria ilha encolhe e vira o comprimido da marca (anil e brasa, divididos no meio), no centro;
+   volta ao rolar para cima, ao passar o mouse ou ao tocar nela. A faixa do cabeçalho guarda sempre a altura da ilha
+   aberta, então o conteúdo nunca se mexe. */
 
 export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo: string; comIA: boolean }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
-  const ilhaRef = useRef<HTMLDivElement>(null);
+  const intRef = useRef<HTMLDivElement>(null);
+  const compactoRef = useRef(false);
   const [compacto, setCompacto] = useState(false);
   const [altura, setAltura] = useState<number | null>(null);
   const preso = useRef(false); // mouse ou foco dentro da ilha: não recolhe
@@ -41,14 +43,20 @@ export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo
     return () => obs.disconnect();
   }, [pathname]);
 
-  // Guarda a altura da ilha aberta para a faixa não mudar quando ela se recolhe.
+  // Guarda a altura da ilha aberta: a faixa do cabeçalho não muda quando ela se recolhe, e a ilha anima a altura até o comprimido.
   useLayoutEffect(() => {
-    const ilha = ilhaRef.current;
-    if (!ilha) return;
-    const obs = new ResizeObserver(() => setAltura(ilha.offsetHeight));
-    obs.observe(ilha);
+    const el = intRef.current;
+    if (!el) return;
+    const obs = new ResizeObserver(() => {
+      if (!compactoRef.current) setAltura(el.offsetHeight);
+    });
+    obs.observe(el);
     return () => obs.disconnect();
   }, []);
+
+  useEffect(() => {
+    compactoRef.current = compacto;
+  }, [compacto]);
 
   // Recolhe ao rolar para baixo; abre ao rolar para cima e no topo da página.
   useEffect(() => {
@@ -73,38 +81,38 @@ export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo
   }
 
   return (
-    <header className={compacto ? "cab is-compacto" : "cab"} style={altura ? ({ "--cab-h": `${altura + 12}px` } as React.CSSProperties) : undefined}>
-      <button type="button" className="cab-mini" aria-label={`Abrir o menu. Estado: ${resumo}`} title={resumo} aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brand/capsula-mark.svg" alt="" width={26} height={26} />
-        <span className={comIA ? "cab-ponto is-ia" : "cab-ponto"} aria-hidden="true" />
-      </button>
+    <header className={compacto ? "cab is-compacto" : "cab"} style={altura ? ({ "--cab-h": `${altura + 12}px`, "--ilha-h": `${altura}px` } as React.CSSProperties) : undefined}>
       <div
-        ref={ilhaRef}
         className="cab-ilha"
-        inert={compacto}
         onPointerEnter={() => (preso.current = true)}
         onPointerLeave={() => (preso.current = false)}
         onFocus={() => (preso.current = true)}
         onBlur={() => (preso.current = false)}
       >
-        <Link href="/" className="cab-logo" aria-label="Cápsula, início">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="logo-light" src="/brand/capsula-lockup.svg" alt="" width={138} height={32} />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="logo-dark" src="/brand/capsula-lockup-dark.svg" alt="" width={138} height={32} />
-        </Link>
+        <div ref={intRef} className="cab-int" inert={compacto}>
+          <Link href="/" className="cab-logo" aria-label="Cápsula, início">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="logo-light" src="/brand/capsula-lockup.svg" alt="" width={138} height={32} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="logo-dark" src="/brand/capsula-lockup-dark.svg" alt="" width={138} height={32} />
+          </Link>
 
-        <nav ref={navRef} className="cab-nav" aria-label="Principal">
-          {pilula ? <span className="cab-pilula" aria-hidden="true" style={{ transform: `translate(${pilula.x}px, ${pilula.y}px)`, width: pilula.w, height: pilula.h }} /> : null}
-          {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
+          <nav ref={navRef} className="cab-nav" aria-label="Principal">
+            {pilula ? <span className="cab-pilula" aria-hidden="true" style={{ transform: `translate(${pilula.x}px, ${pilula.y}px)`, width: pilula.w, height: pilula.h }} /> : null}
+            {LINKS.map((l) => (
+              <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="cab-lado">{status}</div>
+          <div className="cab-lado">{status}</div>
+        </div>
+
+        {/* Recolhida, a própria ilha é o comprimido: tocar nela abre o menu. O ponto na divisão mostra o estado do sistema. */}
+        <button type="button" className="cab-abrir" aria-label={`Abrir o menu. Estado: ${resumo}`} title={resumo} aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)}>
+          <span className={comIA ? "cab-ponto is-ia" : "cab-ponto"} aria-hidden="true" />
+        </button>
       </div>
     </header>
   );

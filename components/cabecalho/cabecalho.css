@@ -11,103 +11,113 @@
 }
 .cab-ilha {
   pointer-events: auto;
+  position: relative;
+  width: 100%;
   max-width: 1168px;
+  height: var(--ilha-h, auto);
   margin: 0 auto;
+  border-radius: var(--radius-pill);
+  /* Aberta, a cápsula é de duas metades, bem de leve: anil à esquerda, brasa à direita, com a divisão no meio */
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--memoria-fill) 18%, transparent) 0%, transparent 44%, transparent 56%, color-mix(in srgb, var(--tendencia-fill) 14%, transparent) 100%),
+    color-mix(in srgb, var(--surface-raised) 78%, transparent);
+  backdrop-filter: blur(20px) saturate(1.45);
+  box-shadow: 0 16px 36px -18px #000000b3;
+  transition:
+    width 520ms var(--ease-mola),
+    height 520ms var(--ease-mola),
+    box-shadow var(--dur-3) var(--ease-out);
+}
+/* As duas metades fortes do comprimido: surgem por cima enquanto a ilha encolhe */
+.cab-ilha::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--memoria-fill) 0 calc(50% - 2px), transparent calc(50% - 2px) calc(50% + 2px), var(--tendencia-fill) calc(50% + 2px) 100%);
+  opacity: 0;
+  transition: opacity var(--dur-3) var(--ease-out);
+  pointer-events: none;
+}
+.cab-int {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-4);
   padding: 6px 8px 6px var(--space-5);
-  border-radius: var(--radius-pill);
-  /* A cápsula de duas metades, bem de leve: anil à esquerda, brasa à direita */
-  background:
-    linear-gradient(100deg, color-mix(in srgb, var(--memoria-fill) 16%, transparent) 0%, transparent 42%, transparent 62%, color-mix(in srgb, var(--tendencia-fill) 12%, transparent) 100%),
-    color-mix(in srgb, var(--surface-raised) 78%, transparent);
-  backdrop-filter: blur(20px) saturate(1.45);
-  box-shadow: 0 16px 36px -18px #000000b3;
-  transform-origin: top center;
-  transition:
-    opacity var(--dur-2) var(--ease-out),
-    transform var(--dur-3) var(--ease-mola),
-    visibility 0s linear 0s;
+  transition: opacity var(--dur-2) var(--ease-out);
 }
 
-/* Recolhido: a ilha some em direção ao centro e o comprimido aparece no lugar */
+/* Recolhida: o comprimido */
 .cab.is-compacto .cab-ilha {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-6px) scale(0.5, 0.8);
-  pointer-events: none;
-  transition:
-    opacity var(--dur-2) var(--ease-out),
-    transform var(--dur-3) var(--ease-mola),
-    visibility 0s linear var(--dur-3);
+  width: 188px;
+  height: 56px;
+  overflow: hidden;
+  box-shadow: 0 18px 34px -14px color-mix(in srgb, var(--memoria-fill) 70%, #000000);
 }
-.cab-mini {
+.cab.is-compacto .cab-ilha::before {
+  opacity: 1;
+}
+.cab.is-compacto .cab-int {
+  opacity: 0;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.cab-abrir {
   position: absolute;
-  top: var(--space-3);
-  left: 50%;
-  z-index: 1;
-  display: inline-grid;
-  place-items: center;
-  width: 76px;
-  height: 42px;
+  inset: 0;
+  display: block;
   padding: 0;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: inherit;
+  background: transparent;
   cursor: pointer;
-  background:
-    linear-gradient(100deg, color-mix(in srgb, var(--memoria-fill) 30%, transparent) 0%, transparent 46%, transparent 54%, color-mix(in srgb, var(--tendencia-fill) 24%, transparent) 100%),
-    color-mix(in srgb, var(--surface-raised) 82%, transparent);
-  backdrop-filter: blur(20px) saturate(1.45);
-  box-shadow: 0 16px 36px -18px #000000b3;
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
-  transform: translateX(-50%) scale(0.6);
-  transition:
-    opacity var(--dur-2) var(--ease-out),
-    transform var(--dur-3) var(--ease-mola),
-    visibility 0s linear var(--dur-3);
 }
-.cab.is-compacto .cab-mini {
+.cab.is-compacto .cab-abrir {
   opacity: 1;
-  visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) scale(1);
-  transition-delay: 0.08s, 0.08s, 0s;
 }
-/* Ponto de estado: brasa sem IA (moldes fixos), verde com IA */
-.cab-ponto {
-  position: absolute;
-  top: 7px;
-  right: 11px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--tendencia-fill);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tendencia-fill) 26%, transparent);
-}
-.cab-ponto.is-ia {
-  background: var(--aprovado);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--aprovado) 26%, transparent);
-}
-.cab-mini img {
-  display: block;
-  transform: rotate(-35deg);
-  transition: transform var(--dur-3) var(--ease-mola);
-}
-.cab-mini:hover img {
-  transform: rotate(0deg) scale(1.12);
-}
-.cab-mini:focus-visible {
+.cab-abrir:focus-visible {
   outline: 2px solid transparent;
   box-shadow: var(--focus-ring);
 }
+/* Ponto de estado na divisão do comprimido: brasa sem IA (moldes fixos), verde com IA */
+.cab-ponto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  transform: translate(-50%, -50%) scale(0.4);
+  transition: transform var(--dur-3) var(--ease-mola) 0.15s;
+}
+.cab.is-compacto .cab-ponto {
+  transform: translate(-50%, -50%) scale(1);
+}
+.cab-ponto::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--tendencia-fill);
+}
+.cab-ponto.is-ia::after {
+  background: var(--aprovado);
+}
+.cab-abrir:hover .cab-ponto {
+  transform: translate(-50%, -50%) scale(1.18);
+}
 @media (prefers-reduced-motion: reduce) {
   .cab-ilha,
-  .cab-mini,
-  .cab.is-compacto .cab-ilha,
-  .cab.is-compacto .cab-mini {
+  .cab-ilha::before,
+  .cab-int,
+  .cab-ponto {
     transition: none;
   }
 }
@@ -299,10 +309,18 @@
 /* Celular: a ilha vira um bloco arredondado, com o menu numa linha própria que rola para o lado */
 @media (max-width: 860px) {
   .cab-ilha {
+    border-radius: 28px;
+  }
+  .cab-int {
     flex-wrap: wrap;
     gap: var(--space-2) var(--space-3);
     padding: var(--space-2) var(--space-3);
-    border-radius: 28px;
+  }
+  .cab.is-compacto .cab-ilha {
+    border-radius: var(--radius-pill);
+  }
+  .cab.is-compacto .cab-int {
+    flex-wrap: nowrap;
   }
   .cab-logo {
     margin-right: auto;
