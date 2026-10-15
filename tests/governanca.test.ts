@@ -54,6 +54,22 @@ describe("governança", () => {
     expect(falhas("Alívio para a congestão nasal.", { advertencia: ADVERTENCIA_MIP }, b)).toEqual([]);
   });
 
+  it("bloqueia alegação terapêutica em produto que não é medicamento", () => {
+    const b = { ...briefing, tipoProduto: "dermocosmetico" as const };
+    expect(falhas("A proteção diária previne o envelhecimento precoce. Válido até 15/11.", {}, b)).toContain("alegacao-saude");
+    expect(falhas("O creme trata a pele e elimina rugas. Válido até 15/11.", {}, b)).toContain("alegacao-saude");
+    const sup = { ...briefing, tipoProduto: "suplemento" as const };
+    expect(falhas("Fortalece a imunidade a cada dose. Válido até 15/11.", {}, sup)).toContain("alegacao-saude");
+    expect(falhas("Ajuda a manter o bem-estar no dia a dia. Válido até 15/11.", {}, sup)).toEqual([]);
+  });
+
+  it("não aplica a regra de alegação a medicamento nem a serviço", () => {
+    const med = { ...briefing, tipoProduto: "medicamento_isento" as const };
+    expect(falhas("Trata a dor de cabeça.", { advertencia: ADVERTENCIA_MIP }, med)).not.toContain("alegacao-saude");
+    const serv = { ...briefing, tipoProduto: "servico" as const };
+    expect(falhas("Combate a fila com agendamento. Válido até 15/11.", {}, serv)).not.toContain("alegacao-saude");
+  });
+
   it("bloqueia termos que o manual de marca pede para evitar", () => {
     expect(falhas("Protetor imperdível até 15/11.")).toContain("tom-marca");
   });
