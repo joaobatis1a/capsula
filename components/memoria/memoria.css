@@ -123,3 +123,120 @@
 .radar-uso.is-nao {
   color: var(--bloqueado);
 }
+
+/* Movimento: barras de desempenho que enchem ao aparecer, itens que respondem ao hover */
+.memoria-item {
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    opacity var(--dur-3) var(--ease-out);
+}
+.memoria-item.is-visivel:hover {
+  transform: translateX(4px);
+  border-color: var(--line-strong);
+}
+.memoria-barra {
+  display: block;
+  height: 6px;
+  margin: var(--space-1) 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  position: relative;
+  overflow: hidden;
+}
+.memoria-barra::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: inherit;
+  background: var(--memoria-fill);
+  transition: width 900ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms + 150ms);
+}
+.memoria-barra.is-baixo::after {
+  background: var(--line-strong);
+}
+.is-visivel .memoria-barra::after {
+  width: var(--w);
+}
+.memoria-publicada {
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.memoria-publicada:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-float);
+}
+.radar-grade > li {
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+/* Calendário de sazonalidade: 12 meses, pico em brasa, hoje marcado */
+.calendario {
+  display: grid;
+  gap: var(--space-2);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+.calendario-linha {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.4fr) repeat(12, minmax(22px, 1fr));
+  gap: 4px;
+  align-items: center;
+  min-width: 520px;
+}
+.calendario-mes {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink-muted);
+}
+.calendario-mes.is-hoje {
+  color: var(--tendencia);
+  font-weight: 500;
+}
+.calendario-nome {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  padding-right: var(--space-2);
+}
+.calendario-celula {
+  height: 22px;
+  border-radius: 6px;
+  background: var(--surface-sunken);
+  transform-origin: bottom;
+  transition: transform var(--dur-1) var(--ease-out);
+}
+.calendario-celula.is-pico {
+  background: var(--tendencia-fill);
+  animation: cp-cresce 500ms var(--ease-mola) both;
+  animation-delay: calc(var(--c, 0) * 30ms + var(--l, 0) * 70ms);
+}
+.calendario-celula.is-hoje {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.calendario-linha:hover .calendario-celula.is-pico {
+  transform: scaleY(1.15);
+}
+.calendario-linha:hover .calendario-nome {
+  color: var(--tendencia);
+}
+@keyframes cp-cresce {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

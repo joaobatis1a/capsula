@@ -118,3 +118,159 @@ textarea.cp-input { resize: vertical; }
 .cp-cena-b p { margin: 0; }
 .cp-cena-b b { font-weight: 600; }
 .cp-cena-kick { justify-self: start; font-family: var(--font-mono); font-size: 11px; line-height: 16px; letter-spacing: .08em; text-transform: uppercase; color: var(--tendencia); background: var(--tendencia-soft); padding: 1px 8px; border-radius: var(--radius-pill); margin-bottom: 2px; }
+
+/* ---------- Movimento e resposta ao toque (v1.1) ---------- */
+.cp-btn {
+  transition:
+    transform var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.cp-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+.cp-btn-primary:not(:disabled):hover,
+.cp-btn-secondary:not(:disabled):hover {
+  box-shadow: 0 4px 0 #14142A26;
+}
+.cp-btn-secondary:not(:disabled):hover {
+  border-color: var(--ink);
+}
+.cp-btn:not(:disabled):active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: none;
+}
+.cp-btn .cp-icon {
+  transition: transform var(--dur-2) var(--ease-mola);
+}
+.cp-btn:not(:disabled):hover .cp-icon {
+  transform: scale(1.12);
+}
+
+/* Botão cápsula: no hover, a costura abre e as metades se afastam; no clique, encaixam */
+.cp-btn-cap-l,
+.cp-btn-cap-r {
+  transition:
+    padding var(--dur-2) var(--ease-mola),
+    border-width var(--dur-2) var(--ease-mola),
+    background-color var(--dur-2) var(--ease-out);
+}
+.cp-btn-capsula:not(:disabled):hover .cp-btn-cap-r {
+  border-left-width: 6px;
+  padding-left: var(--space-4);
+}
+.cp-btn-capsula:not(:disabled):hover .cp-btn-cap-r .cp-icon {
+  transform: translateX(3px);
+}
+.cp-btn-capsula:not(:disabled):active .cp-btn-cap-r {
+  border-left-width: 1px;
+}
+.cp-btn-capsula.is-dosando .cp-btn-cap-r {
+  animation: cp-costura 900ms var(--ease-out) infinite alternate;
+}
+@keyframes cp-costura {
+  from {
+    border-left-width: 3px;
+  }
+  to {
+    border-left-width: 10px;
+  }
+}
+
+/* Etiquetas e pílulas entram com um pop */
+.cp-status {
+  animation: cp-pop var(--dur-3) var(--ease-mola) both;
+}
+
+/* Card de peça: levanta no hover */
+.cp-piece {
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.cp-piece:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-float);
+  border-color: var(--line-strong);
+}
+.cp-piece-thumb > * {
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.cp-piece:hover .cp-piece-thumb > * {
+  transform: scale(1.025);
+}
+.cp-link {
+  transition:
+    text-decoration-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out);
+}
+.cp-link:hover {
+  text-decoration-color: var(--ink);
+}
+
+/* Item do radar */
+.cp-trend {
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+.cp-trend:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-float);
+  border-color: var(--tendencia-fill);
+}
+
+/* Bula: seções em sequência, checks que se desenham, falha que treme */
+.cp-bula-sec {
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+}
+.cp-bula-sec:nth-of-type(1) { animation-delay: 80ms; }
+.cp-bula-sec:nth-of-type(2) { animation-delay: 140ms; }
+.cp-bula-sec:nth-of-type(3) { animation-delay: 200ms; }
+.cp-bula-sec:nth-of-type(4) { animation-delay: 260ms; }
+.cp-bula-sec:nth-of-type(5) { animation-delay: 320ms; }
+.cp-bula-ci .cp-icon path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: cp-desenha 420ms var(--ease-out) forwards;
+}
+.cp-bula-ci li:nth-child(1) .cp-icon path { animation-delay: 360ms; }
+.cp-bula-ci li:nth-child(2) .cp-icon path { animation-delay: 440ms; }
+.cp-bula-ci li:nth-child(3) .cp-icon path { animation-delay: 520ms; }
+.cp-bula-ci li:nth-child(4) .cp-icon path { animation-delay: 600ms; }
+.cp-bula-ci li:nth-child(5) .cp-icon path { animation-delay: 680ms; }
+.cp-bula-ci li:nth-child(6) .cp-icon path { animation-delay: 760ms; }
+.cp-bula-ci li:nth-child(7) .cp-icon path { animation-delay: 840ms; }
+.cp-bula-ci li:nth-child(8) .cp-icon path { animation-delay: 920ms; }
+.cp-bula-ci li.is-fail {
+  animation: cp-treme 420ms var(--ease-out) 900ms both;
+}
+.cp-bula-ev li {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.cp-bula-ev li:hover {
+  transform: translateX(4px);
+}
+
+/* Roteiro: cena destacada no hover */
+.cp-cena {
+  transition: background-color var(--dur-2) var(--ease-out);
+  border-radius: var(--radius-sm);
+}
+.cp-cena:hover {
+  background: var(--surface-sunken);
+}
+
+/* Campos: transição suave de borda e foco */
+.cp-input {
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+.cp-input:hover:not(:focus-visible) {
+  border-color: var(--ink-muted);
+}
