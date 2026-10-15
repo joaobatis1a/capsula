@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/", label: "Estúdio" },
   { href: "/memoria", label: "Memória" },
   { href: "/radar", label: "Radar" },
+  { href: "/saude", label: "Ano da saúde" },
   { href: "/design-system", label: "Design system" },
 ];
 

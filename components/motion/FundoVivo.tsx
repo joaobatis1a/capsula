@@ -1,33 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "./fundo.css";
 
-/* Fundo do app: o relevo de uma cartela, que acende em volta do cursor.
-   E a onda que sai do ponto do clique em botões, chips e opções. */
+/* Onda que sai do ponto do clique em botões, chips e opções.
+   O fundo do app é liso, com um grão fino de papel (fundo.css). */
 
-const ALVOS_DA_ONDA = ".cp-btn, .estudio-chip, .seg-op, .cartela-celula, .interruptor";
+const ALVOS_DA_ONDA = ".cp-btn, .estudio-chip, .interruptor, .agora-item, .saude-th-mes button";
 
 export function FundoVivo() {
-  const ref = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const fundo = ref.current;
-    const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let quadro = 0;
-
-    function mover(e: PointerEvent) {
-      if (!fundo || e.pointerType !== "mouse") return;
-      cancelAnimationFrame(quadro);
-      quadro = requestAnimationFrame(() => {
-        fundo.style.setProperty("--mx", `${e.clientX}px`);
-        fundo.style.setProperty("--my", `${e.clientY}px`);
-        fundo.classList.add("is-ativo");
-      });
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     function ondular(e: PointerEvent) {
-      if (semMovimento) return;
       const alvo = (e.target as HTMLElement).closest<HTMLElement>(ALVOS_DA_ONDA);
       if (!alvo || (alvo as HTMLButtonElement).disabled) return;
       const r = alvo.getBoundingClientRect();
@@ -41,19 +26,9 @@ export function FundoVivo() {
       onda.addEventListener("animationend", () => onda.remove(), { once: true });
     }
 
-    window.addEventListener("pointermove", mover, { passive: true });
     window.addEventListener("pointerdown", ondular, { passive: true });
-    return () => {
-      window.removeEventListener("pointermove", mover);
-      window.removeEventListener("pointerdown", ondular);
-      cancelAnimationFrame(quadro);
-    };
+    return () => window.removeEventListener("pointerdown", ondular);
   }, []);
 
-  return (
-    <div ref={ref} className="fundo-vivo" aria-hidden="true">
-      <span className="fundo-relevo" />
-      <span className="fundo-luz" />
-    </div>
-  );
+  return <div className="fundo-grao" aria-hidden="true" />;
 }

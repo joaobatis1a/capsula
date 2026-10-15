@@ -1,0 +1,621 @@
+/* Ano da saúde. Só tokens do design system. A escala de intensidade usa a brasa: a cor diz que vem do radar. */
+
+.saude {
+  --n1: var(--brasa-100);
+  --n2: var(--brasa-300);
+  --n3: var(--brasa-500);
+  display: grid;
+  gap: var(--space-6);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .saude {
+    --n1: #4a2410;
+    --n2: #b8541f;
+    --n3: #ff6a33;
+  }
+}
+:root[data-theme="dark"] .saude {
+  --n1: #4a2410;
+  --n2: #b8541f;
+  --n3: #ff6a33;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Números */
+.saude-numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-3);
+}
+.saude-numero {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+}
+.saude-numero b {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  animation: cp-pop var(--dur-3) var(--ease-mola);
+}
+.saude-numero span {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ink-muted);
+}
+.saude-numero.is-destaque b {
+  color: var(--tendencia);
+}
+
+/* Controles */
+.saude-controles {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+}
+.saude-busca {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.saude-busca .cp-icon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--ink-muted);
+  pointer-events: none;
+}
+.saude-busca .cp-input {
+  padding-left: 46px;
+}
+.saude-grupo {
+  display: grid;
+  gap: var(--space-2);
+}
+.saude-grupo .estudio-chips {
+  gap: var(--space-2);
+}
+.estudio-chip small {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  opacity: 0.7;
+}
+.saude-linha-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-8);
+}
+
+/* O mês escolhido */
+.saude-mes {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-left: 4px solid var(--tendencia-fill);
+  border-radius: var(--radius-md);
+  background: var(--tendencia-soft);
+}
+.saude-mes-texto {
+  font-size: 16px;
+  line-height: 26px;
+}
+.saude-prox {
+  color: var(--ink-muted);
+}
+.saude-mes-datas {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  color: var(--tendencia);
+}
+.saude-mes-datas .cp-icon {
+  margin-top: 2px;
+}
+.saude-link {
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+  border-radius: 4px;
+  transition: text-decoration-color var(--dur-2) var(--ease-out);
+}
+.saude-link:hover {
+  text-decoration-color: var(--tendencia-fill);
+}
+.saude-link:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+/* Tabela */
+.saude-tabela-caixa {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+.saude-rolagem {
+  overflow: auto;
+  max-height: 72vh;
+  padding: 0 var(--space-4);
+}
+.saude-tabela {
+  width: 100%;
+  min-width: 760px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 3px;
+}
+.saude-tabela thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--surface-raised);
+  padding: var(--space-3) 0 var(--space-2);
+}
+.saude-th-nome {
+  width: 250px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.saude-th-mes button {
+  width: 100%;
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+.saude-th-mes button:hover {
+  color: var(--ink);
+  background: var(--surface-sunken);
+}
+.saude-th-mes.is-hoje button {
+  color: var(--tendencia);
+  font-weight: 500;
+}
+.saude-th-mes.is-sel button {
+  background: var(--action);
+  color: var(--on-action);
+}
+.saude-th-mes button:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+.saude-linha {
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+  animation-delay: calc(var(--l, 0) * 28ms);
+}
+.saude-td-nome {
+  width: 250px;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--surface-raised);
+  text-align: left;
+  font-weight: 400;
+  padding: 0;
+}
+.saude-td-nome button {
+  width: 100%;
+  display: grid;
+  gap: 1px;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 6px var(--space-3) 6px 0;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+.saude-nome {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  transition: color var(--dur-2) var(--ease-out);
+}
+.saude-sub {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.saude-linha:hover .saude-nome,
+.saude-td-nome button:focus-visible .saude-nome {
+  color: var(--tendencia);
+}
+.saude-td-nome button:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+
+.saude-celula {
+  padding: 0 2px;
+}
+.saude-bloco {
+  display: block;
+  height: 28px;
+  min-width: 14px;
+  border-radius: 6px;
+  background: var(--surface-sunken);
+  transition:
+    transform var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.saude-legenda .saude-bloco {
+  display: inline-block;
+  width: 22px;
+  height: 14px;
+  vertical-align: -2px;
+}
+.saude-celula.n1 .saude-bloco,
+.saude-bloco.n1 {
+  background: var(--n1);
+}
+.saude-celula.n2 .saude-bloco,
+.saude-bloco.n2 {
+  background: var(--n2);
+}
+.saude-celula.n3 .saude-bloco,
+.saude-bloco.n3 {
+  background: var(--n3);
+}
+.saude-celula:not(.n0) .saude-bloco {
+  animation: cp-cresce 450ms var(--ease-mola) both;
+  animation-delay: calc(var(--c, 0) * 24ms + var(--l, 0) * 20ms);
+  transform-origin: bottom;
+}
+.saude-celula.is-mes .saude-bloco {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+.saude-linha:hover .saude-celula:not(.n0) .saude-bloco {
+  transform: scaleY(1.12);
+}
+.saude-vazio {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+  padding: var(--space-8) 0;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.saude-legenda {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  border-top: 1px dashed var(--line-strong);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* Faixa de 12 meses (ficha e abertura) */
+.faixa-ano {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 3px;
+  --n1: var(--brasa-100);
+  --n2: var(--brasa-300);
+  --n3: var(--brasa-500);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .faixa-ano {
+    --n1: #4a2410;
+    --n2: #b8541f;
+    --n3: #ff6a33;
+  }
+}
+:root[data-theme="dark"] .faixa-ano {
+  --n1: #4a2410;
+  --n2: #b8541f;
+  --n3: #ff6a33;
+}
+.faixa-celula {
+  display: grid;
+  place-items: center;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--surface-sunken);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--ink-muted);
+}
+.faixa-celula.n1 {
+  background: var(--n1);
+}
+.faixa-celula.n2 {
+  background: var(--n2);
+  color: var(--nevoa-900);
+}
+.faixa-celula.n3 {
+  background: var(--n3);
+  color: var(--nevoa-900);
+}
+.faixa-celula.is-hoje {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+.faixa-celula:not(.n0) {
+  animation: cp-cresce 450ms var(--ease-mola) both;
+  animation-delay: calc(var(--c, 0) * 24ms);
+  transform-origin: bottom;
+}
+
+/* Campanhas */
+.saude-datas {
+  display: grid;
+  gap: var(--space-3);
+}
+.saude-datas-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+}
+.saude-datas-mes {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  transition:
+    border-color var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.saude-datas-mes:hover {
+  transform: translateY(-3px);
+}
+.saude-datas-mes.is-sel {
+  border-color: var(--tendencia-fill);
+  box-shadow: inset 0 0 0 1px var(--tendencia-fill);
+}
+.saude-datas-topo {
+  justify-self: start;
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  cursor: pointer;
+}
+.saude-datas-mes.is-sel .saude-datas-topo {
+  color: var(--tendencia);
+}
+.saude-data-nome {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+/* Ficha */
+.ficha {
+  width: min(100vw, 620px);
+}
+.ficha-corpo {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-4) var(--space-8);
+}
+.ficha-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin: calc(var(--space-4) * -1) calc(var(--space-4) * -1) 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+}
+.ficha-etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.ficha-agente {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.ficha-titulo {
+  display: grid;
+  gap: var(--space-2);
+}
+.ficha-bloco {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  min-width: 0;
+}
+.ficha-bloco > * {
+  animation: cp-sobe var(--dur-3) var(--ease-out) both;
+}
+.ficha-regioes {
+  display: grid;
+  gap: var(--space-2);
+}
+.ficha-regiao {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  gap: var(--space-3);
+}
+.ficha-regiao-nome {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ink-muted);
+}
+.ficha-legenda {
+  display: grid;
+  gap: 2px;
+  color: var(--ink-muted);
+}
+.ficha-legenda span {
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+.ficha-duas {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.ficha-pontos {
+  margin: 0;
+  padding-left: var(--space-5);
+  display: grid;
+  gap: 4px;
+  font-size: 15px;
+  line-height: 22px;
+}
+.ficha-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 22px;
+}
+.ficha-checks li {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+.ficha-checks .cp-icon {
+  margin-top: 3px;
+  color: var(--aprovado);
+}
+.ficha-vacina {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--aprovado-soft);
+  color: var(--aprovado);
+}
+.ficha-vacina .cp-icon {
+  margin-top: 2px;
+}
+.ficha-vacina span {
+  color: var(--ink);
+}
+.ficha-farmacia {
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+}
+.ficha-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.ficha-chip {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--tendencia-soft);
+  color: var(--tendencia);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+}
+.ficha-cuidado {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--bloqueado-soft);
+  color: var(--bloqueado);
+}
+.ficha-cuidado .cp-icon {
+  margin-top: 2px;
+}
+.ficha-fontes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.ficha-acoes {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+.ficha-acoes a.cp-btn {
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .saude-controles {
+    padding: var(--space-4);
+  }
+  .ficha-regiao {
+    grid-template-columns: 78px 1fr;
+  }
+}

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
+import Link from "next/link";
+import { FaixaAno } from "@/components/saude/FaixaAno";
 import { Icon, OriginTag, TrendItem } from "@/components/ds";
+import "@/components/saude/saude.css";
 import { getDataSource } from "@/lib/data";
-import type { ItemRadar, Sazonalidade } from "@/lib/data/types";
+import type { ItemRadar } from "@/lib/data/types";
 import "@/components/estudio/estudio.css";
 import "@/components/memoria/memoria.css";
 
@@ -34,28 +37,16 @@ async function Itens() {
   const fonte = getDataSource();
   const hoje = new Date();
   const mes = hoje.getMonth() + 1;
-  const [radar, sazonalidade, ...porMes] = await Promise.all([
-    fonte.getRadar(hoje.toISOString().slice(0, 10)),
-    fonte.getSazonalidade(mes),
-    ...Array.from({ length: 12 }, (_, i) => fonte.getSazonalidade(i + 1)),
-  ]);
-  const ano = [...new Map(porMes.flat().map((s) => [s.id, s])).values()];
+  const [radar, sazonalidade] = await Promise.all([fonte.getRadar(hoje.toISOString().slice(0, 10)), fonte.getSazonalidade(mes)]);
+  const emAlta = sazonalidade.sort((a, b) => b.intensidade[mes - 1] - a.intensidade[mes - 1]).slice(0, 6);
   const tendencias = radar.filter((i) => i.tipo === "formato" || i.tipo === "hashtag");
   const musicas = radar.filter((i) => i.tipo === "musica");
   const datas = radar.filter((i) => i.tipo === "data_sazonal");
 
   return (
     <>
-      <section className="radar-secao" aria-labelledby="titulo-calendario">
-        <h2 id="titulo-calendario" className="t-h2">
-          O ano da saúde
-        </h2>
-        <p className="t-body-sm t-muted">Meses de pico de cada condição. O contorno marca o mês atual.</p>
-        <Calendario itens={ano} mes={mes} />
-      </section>
-
-      <Secao titulo="Sazonalidade de saúde" descricao="Condições que costumam aumentar neste mês e nos dois seguintes, com a categoria de produto ligada.">
-        {sazonalidade.map((s, n) => (
+      <Secao titulo="Sazonalidade de saúde" descricao="O que mais pede atenção neste mês e nos dois seguintes, com a categoria de produto ligada.">
+        {emAlta.map((s, n) => (
           <li key={s.id} className="estudio-epoca-item" style={{ "--i": n } as React.CSSProperties}>
             <div className="estudio-epoca-top">
               <OriginTag origin="tendencia">Sazonalidade</OriginTag>
@@ -63,6 +54,7 @@ async function Itens() {
             </div>
             <h3 className="t-h3">{s.condicao}</h3>
             <p className="t-body-sm">{s.angulo}</p>
+            <FaixaAno intensidade={s.intensidade} mes={mes} nome={s.condicao} />
             <p className="t-body-sm">{s.categorias.join(" · ")}</p>
             <p className="t-data t-muted">
               {s.regiao} ·{" "}
@@ -73,6 +65,13 @@ async function Itens() {
           </li>
         ))}
       </Secao>
+
+      <p className="radar-ver-mais">
+        <Link href="/saude" className="abertura-link">
+          Ver as 33 condições e o calendário de campanhas no Ano da saúde
+          <Icon name="arrow" size={16} />
+        </Link>
+      </p>
 
       <Secao titulo="Tendências" descricao="Formatos e hashtags em alta nas plataformas.">
         {tendencias.map((i, n) => (
@@ -102,40 +101,6 @@ async function Itens() {
         ))}
       </Secao>
     </>
-  );
-}
-
-function Calendario({ itens, mes }: { itens: Sazonalidade[]; mes: number }) {
-  return (
-    <div className="calendario" role="table" aria-label="Meses de pico por condição">
-      <div className="calendario-linha" role="row">
-        <span role="columnheader" />
-        {MESES.map((m, i) => (
-          <span key={m} role="columnheader" className={i + 1 === mes ? "calendario-mes is-hoje" : "calendario-mes"}>
-            {m}
-          </span>
-        ))}
-      </div>
-      {itens.map((s, l) => (
-        <div key={s.id} className="calendario-linha" role="row" style={{ "--l": l } as React.CSSProperties}>
-          <span role="rowheader" className="calendario-nome" title={`${s.regiao} · ${s.fonte}`}>
-            {s.condicao}
-          </span>
-          {MESES.map((m, i) => {
-            const pico = s.mesesPico.includes(i + 1);
-            return (
-              <span
-                key={m}
-                role="cell"
-                aria-label={`${m}: ${pico ? "pico" : "fora do pico"}`}
-                className={`calendario-celula${pico ? " is-pico" : ""}${i + 1 === mes ? " is-hoje" : ""}`}
-                style={{ "--c": i } as React.CSSProperties}
-              />
-            );
-          })}
-        </div>
-      ))}
-    </div>
   );
 }
 
