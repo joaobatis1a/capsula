@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { Forma, type TipoForma } from "@/components/ds";
 import "./cabecalho.css";
 
-const LINKS = [
-  { href: "/", label: "Estúdio", curto: "Estúdio" },
-  { href: "/memoria", label: "Memória", curto: "Memória" },
-  { href: "/radar", label: "Radar", curto: "Radar" },
-  { href: "/saude", label: "Ano da saúde", curto: "Saúde" },
-  { href: "/ganho", label: "Ganho", curto: "Ganho" },
+const LINKS: { href: string; label: string; curto: string; forma: TipoForma }[] = [
+  { href: "/", label: "Estúdio", curto: "Estúdio", forma: "capsula" },
+  { href: "/memoria", label: "Memória", curto: "Memória", forma: "comprimido" },
+  { href: "/radar", label: "Radar", curto: "Radar", forma: "softgel" },
+  { href: "/saude", label: "Ano da saúde", curto: "Saúde", forma: "efervescente" },
+  { href: "/ganho", label: "Ganho", curto: "Ganho", forma: "dragea" },
 ];
 
-/* No celular (até 860px) o menu sai do topo e vira uma barra flutuante embaixo, ao alcance do polegar. */
+/* No celular (até 860px) não há barra no topo: tudo vive numa barra flutuante embaixo, como nos aplicativos, com a forma
+   farmacêutica de cada página no lugar do ícone. O ponto na cápsula do Estúdio mostra o estado do sistema. */
 const CELULAR = "(max-width: 860px)";
 function useCelular() {
   return useSyncExternalStore(
@@ -32,7 +34,7 @@ function useCelular() {
    volta ao rolar para cima, ao passar o mouse ou ao tocar nela. A faixa do cabeçalho guarda sempre a altura da ilha
    aberta, então o conteúdo nunca se mexe. No celular o topo tem só o logo e o estado, e é a barra de baixo que faz isso. */
 
-export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: string }) {
+export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo: string; comIA: boolean }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const celular = useCelular();
@@ -104,7 +106,7 @@ export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: strin
         onFocus={() => (preso.current = true)}
         onBlur={() => (preso.current = false)}
       >
-        <div ref={intRef} className="cab-int" inert={compacto && !celular}>
+        <div ref={intRef} className="cab-int" inert={compacto}>
           <Link href="/" className="cab-logo" aria-label="Cápsula, início">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="logo-light" src="/brand/capsula-lockup.svg" alt="" width={138} height={32} />
@@ -133,8 +135,12 @@ export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: strin
         <div className="cab-baixo-ilha" onPointerEnter={() => (preso.current = true)} onPointerLeave={() => (preso.current = false)} onFocus={() => (preso.current = true)} onBlur={() => (preso.current = false)}>
           <div className="cab-baixo-int" inert={compacto && celular}>
             {LINKS.map((l) => (
-              <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
-                {l.curto}
+              <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined} aria-label={l.href === "/" ? `${l.label}. Estado: ${resumo}` : undefined}>
+                <span className="cab-baixo-icone">
+                  <Forma tipo={l.forma} size={26} />
+                  {l.href === "/" ? <span className={comIA ? "cab-ponto is-ia" : "cab-ponto"} aria-hidden="true" title={resumo} /> : null}
+                </span>
+                <span>{l.curto}</span>
               </Link>
             ))}
           </div>

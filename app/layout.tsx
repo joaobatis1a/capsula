@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <FormasDefs />
         <FundoVivo />
-        <Cabecalho status={<StatusDoSistema />} resumo={resumo} />
+        <Cabecalho status={<StatusDoSistema />} resumo={resumo} comIA={Boolean(modelo)} />
         <AvisosProvider>
           <main className="app-main">{children}</main>
         </AvisosProvider>

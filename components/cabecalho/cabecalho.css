@@ -307,35 +307,16 @@
     position: static;
     height: auto;
   }
-  .cab-ilha,
-  .cab.is-compacto .cab-ilha {
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    box-shadow: 0 16px 36px -18px #000000b3;
-  }
-  .cab.is-compacto .cab-ilha::before,
-  .cab.is-compacto .cab-ilha::after,
-  .cab-ilha .cab-abrir {
+  /* Sem barra no topo: o logo e o estado foram para a barra de baixo */
+  .cab-ilha {
     display: none;
   }
-  .cab-int,
-  .cab.is-compacto .cab-int {
-    flex-wrap: nowrap;
-    opacity: 1;
-    pointer-events: auto;
-    gap: var(--space-3);
-    padding: 6px 8px 6px var(--space-4);
-  }
-  .cab-nav {
-    display: none;
-  }
-  .cab-logo {
-    margin-right: auto;
+  .cab {
+    padding: 0;
   }
 
   body {
-    padding-bottom: 92px;
+    padding-bottom: 96px;
   }
   .cab-baixo {
     display: block;
@@ -351,7 +332,7 @@
     pointer-events: auto;
     position: relative;
     width: min(100%, 420px);
-    height: 62px;
+    height: 66px;
     margin: 0 auto;
     border-radius: var(--radius-pill);
     background:
@@ -398,17 +379,47 @@
     flex: 1 1 0;
     min-width: 0;
     display: grid;
-    place-items: center;
-    min-height: 50px;
+    grid-template-rows: 28px 14px;
+    justify-items: center;
+    align-content: center;
+    gap: 1px;
+    min-height: 52px;
     padding: 0 2px;
-    font-size: 13px;
-    line-height: 18px;
+    font-size: 11px;
+    line-height: 14px;
     font-weight: 600;
     white-space: nowrap;
     border-radius: var(--radius-pill);
     transition:
       background-color var(--dur-2) var(--ease-out),
       color var(--dur-2) var(--ease-out);
+  }
+  .cab-baixo-icone {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+  }
+  .cab-baixo-icone .forma {
+    transition: transform var(--dur-3) var(--ease-mola);
+  }
+  .cab-baixo-int a[aria-current="page"] .forma {
+    transform: scale(1.1);
+  }
+  /* Estado do sistema: brasa sem IA (moldes fixos), verde com IA */
+  .cab-ponto {
+    position: absolute;
+    top: -1px;
+    right: -4px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--tendencia-fill);
+    box-shadow: 0 0 0 2.5px var(--surface-raised);
+  }
+  .cab-ponto.is-ia {
+    background: var(--aprovado);
   }
   .cab-baixo-int a:not([aria-current="page"]):active {
     background: var(--hover-forte);
@@ -455,12 +466,6 @@
   .cab-baixo-ilha::after,
   .cab-baixo-int {
     transition: none;
-  }
-}
-@media (max-width: 380px) {
-  .cab-baixo-int a {
-    font-size: 12px;
-    letter-spacing: -0.01em;
   }
 }
 @media (max-width: 420px) {

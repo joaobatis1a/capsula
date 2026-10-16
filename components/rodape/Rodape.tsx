@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FORMAS, Forma, type TipoForma } from "@/components/ds";
+import { provedorAtivo } from "@/lib/llm/client";
 import { VoltarAoTopo } from "./VoltarAoTopo";
 import "./rodape.css";
 
@@ -15,6 +16,7 @@ const PAGINAS = [
 
 export function Rodape() {
   const versao = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "local";
+  const modelo = provedorAtivo();
 
   return (
     <footer className="rodape">
@@ -65,7 +67,7 @@ export function Rodape() {
 
       <div className="rodape-base">
         <p className="rodape-nota">
-          Protótipo do hackathon · dados de teste · versão <b>{versao}</b>
+          Protótipo do hackathon · dados de teste · {modelo ? `IA: ${modelo}` : "sem IA"} · versão <b>{versao}</b>
         </p>
         <VoltarAoTopo />
       </div>
