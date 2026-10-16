@@ -182,6 +182,18 @@
     color var(--dur-2) var(--ease-out),
     background-color var(--dur-2) var(--ease-out);
 }
+.cab-nav a {
+  gap: 8px;
+}
+.cab-nav a .cp-icon {
+  flex: none;
+  opacity: 0.85;
+}
+@media (max-width: 1040px) {
+  .cab-nav a .cp-icon {
+    display: none;
+  }
+}
 .cab-nav a:not([aria-current="page"]):hover {
   background: var(--hover);
 }
@@ -401,11 +413,16 @@
     width: 28px;
     height: 28px;
   }
-  .cab-baixo-icone .forma {
+  .cab-baixo-icone .cp-icon {
+    stroke-width: 1.9;
     transition: transform var(--dur-3) var(--ease-mola);
   }
-  .cab-baixo-int a[aria-current="page"] .forma {
-    transform: scale(1.1);
+  .cab-baixo-int a:not([aria-current="page"]) {
+    color: var(--ink-muted);
+  }
+  .cab-baixo-int a[aria-current="page"] .cp-icon {
+    stroke-width: 2.2;
+    transform: scale(1.08);
   }
   /* Estado do sistema: brasa sem IA (moldes fixos), verde com IA */
   .cab-ponto {

@@ -9,6 +9,9 @@ export type IconName =
   | "spark"
   | "arrow"
   | "shield"
+  | "edit"
+  | "heart"
+  | "chart"
   | "dot"
   | "draft";
 
@@ -25,6 +28,9 @@ const PATHS: Record<Exclude<IconName, "dot" | "draft">, string[]> = {
   spark: ["M12 4l1.9 5.1L19 11l-5.1 1.9L12 18l-1.9-5.1L5 11l5.1-1.9z"],
   arrow: ["M5 12h14", "M13 6l6 6-6 6"],
   shield: ["M12 3.5l7 2.5v5.5c0 4.2-3 7.4-7 9-4-1.6-7-4.8-7-9V6z"],
+  edit: ["M5 19l.8-3.8L16.6 4.4a1.6 1.6 0 0 1 2.3 0l.7.7a1.6 1.6 0 0 1 0 2.3L8.8 18.2z", "M14.5 6.5l3 3"],
+  heart: ["M12 19.5s-7-4.4-7-9.6A4 4 0 0 1 12 7.6a4 4 0 0 1 7 2.3c0 5.2-7 9.6-7 9.6z"],
+  chart: ["M6 19v-6", "M12 19V5", "M18 19v-9"],
 };
 
 export function Icon({ name, size = 16, className }: { name: IconName; size?: number; className?: string }) {
