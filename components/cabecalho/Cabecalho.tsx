@@ -3,19 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
-import { Forma, type TipoForma } from "@/components/ds";
+import { Icon, type IconName } from "@/components/ds";
 import "./cabecalho.css";
 
-const LINKS: { href: string; label: string; curto: string; forma: TipoForma }[] = [
-  { href: "/", label: "Estúdio", curto: "Estúdio", forma: "capsula" },
-  { href: "/memoria", label: "Memória", curto: "Memória", forma: "comprimido" },
-  { href: "/radar", label: "Radar", curto: "Radar", forma: "softgel" },
-  { href: "/saude", label: "Ano da saúde", curto: "Saúde", forma: "efervescente" },
-  { href: "/ganho", label: "Ganho", curto: "Ganho", forma: "dragea" },
+const LINKS: { href: string; label: string; curto: string; icone: IconName }[] = [
+  { href: "/", label: "Estúdio", curto: "Estúdio", icone: "edit" },
+  { href: "/memoria", label: "Memória", curto: "Memória", icone: "archive" },
+  { href: "/radar", label: "Radar", curto: "Radar", icone: "trend" },
+  { href: "/saude", label: "Ano da saúde", curto: "Saúde", icone: "heart" },
+  { href: "/ganho", label: "Ganho", curto: "Ganho", icone: "chart" },
 ];
 
-/* No celular (até 860px) não há barra no topo: tudo vive numa barra flutuante embaixo, como nos aplicativos, com a forma
-   farmacêutica de cada página no lugar do ícone. O ponto na cápsula do Estúdio mostra o estado do sistema. */
+/* No celular (até 860px) não há barra no topo: tudo vive numa barra flutuante embaixo, como nos aplicativos, com um ícone de
+   traço e o nome de cada página, como no LinkedIn. O ponto na cápsula do Estúdio mostra o estado do sistema. */
 const CELULAR = "(max-width: 860px)";
 function useCelular() {
   return useSyncExternalStore(
@@ -118,6 +118,7 @@ export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo
             {pilula ? <span className="cab-pilula" aria-hidden="true" style={{ transform: `translate(${pilula.x}px, ${pilula.y}px)`, width: pilula.w, height: pilula.h }} /> : null}
             {LINKS.map((l) => (
               <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
+                <Icon name={l.icone} size={18} />
                 {l.label}
               </Link>
             ))}
@@ -137,7 +138,7 @@ export function Cabecalho({ status, resumo, comIA }: { status: ReactNode; resumo
             {LINKS.map((l) => (
               <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined} aria-label={l.href === "/" ? `${l.label}. Estado: ${resumo}` : undefined}>
                 <span className="cab-baixo-icone">
-                  <Forma tipo={l.forma} size={26} />
+                  <Icon name={l.icone} size={24} />
                   {l.href === "/" ? <span className={comIA ? "cab-ponto is-ia" : "cab-ponto"} aria-hidden="true" title={resumo} /> : null}
                 </span>
                 <span>{l.curto}</span>
