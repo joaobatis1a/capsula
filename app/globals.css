@@ -229,3 +229,46 @@ a {
   align-items: center;
   gap: var(--space-3);
 }
+
+/* Celular: alvos de toque de pelo menos 44px. O desenho continua do mesmo tamanho, só a área de toque cresce. */
+@media (max-width: 860px) {
+  .cab-logo.cab-logo {
+    padding: 7px 0;
+  }
+  .status-botao.status-botao,
+  .rodape-link.rodape-link,
+  .rodape-topo.rodape-topo {
+    min-height: 44px;
+  }
+  .rodape-marca.rodape-marca {
+    min-height: 44px;
+  }
+  .memoria-limpar.memoria-limpar {
+    min-height: 44px;
+  }
+  .estudio-chip.estudio-chip {
+    min-width: 44px;
+  }
+  .saude-link.saude-link {
+    min-height: 44px;
+  }
+  .saude-th-mes.saude-th-mes button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .saude-datas-topo.saude-datas-topo {
+    min-height: 44px;
+  }
+  .rodape-forma.rodape-forma {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .interruptor {
+    position: relative;
+  }
+  .interruptor::after {
+    content: "";
+    position: absolute;
+    inset: -8px 0;
+  }
+}
