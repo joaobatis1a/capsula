@@ -2,25 +2,40 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import "./cabecalho.css";
 
 const LINKS = [
-  { href: "/", label: "Estúdio" },
-  { href: "/memoria", label: "Memória" },
-  { href: "/radar", label: "Radar" },
-  { href: "/saude", label: "Ano da saúde" },
-  { href: "/ganho", label: "Ganho" },
+  { href: "/", label: "Estúdio", curto: "Estúdio" },
+  { href: "/memoria", label: "Memória", curto: "Memória" },
+  { href: "/radar", label: "Radar", curto: "Radar" },
+  { href: "/saude", label: "Ano da saúde", curto: "Saúde" },
+  { href: "/ganho", label: "Ganho", curto: "Ganho" },
 ];
+
+/* No celular (até 860px) o menu sai do topo e vira uma barra flutuante embaixo, ao alcance do polegar. */
+const CELULAR = "(max-width: 860px)";
+function useCelular() {
+  return useSyncExternalStore(
+    (aviso) => {
+      const m = window.matchMedia(CELULAR);
+      m.addEventListener("change", aviso);
+      return () => m.removeEventListener("change", aviso);
+    },
+    () => window.matchMedia(CELULAR).matches,
+    () => false,
+  );
+}
 
 /* Cabeçalho: uma ilha em forma de cápsula, que flutua sobre a página. Anil de um lado, brasa do outro, bem suave.
    Ao rolar para baixo a própria ilha encolhe e vira o comprimido da marca (anil e brasa, divididos no meio), no centro;
    volta ao rolar para cima, ao passar o mouse ou ao tocar nela. A faixa do cabeçalho guarda sempre a altura da ilha
-   aberta, então o conteúdo nunca se mexe. */
+   aberta, então o conteúdo nunca se mexe. No celular o topo tem só o logo e o estado, e é a barra de baixo que faz isso. */
 
 export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: string }) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
+  const celular = useCelular();
   const intRef = useRef<HTMLDivElement>(null);
   const compactoRef = useRef(false);
   const [compacto, setCompacto] = useState(false);
@@ -89,7 +104,7 @@ export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: strin
         onFocus={() => (preso.current = true)}
         onBlur={() => (preso.current = false)}
       >
-        <div ref={intRef} className="cab-int" inert={compacto}>
+        <div ref={intRef} className="cab-int" inert={compacto && !celular}>
           <Link href="/" className="cab-logo" aria-label="Cápsula, início">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="logo-light" src="/brand/capsula-lockup.svg" alt="" width={138} height={32} />
@@ -112,6 +127,20 @@ export function Cabecalho({ status, resumo }: { status: ReactNode; resumo: strin
         {/* Recolhida, a própria ilha é o comprimido: tocar nela abre o menu. */}
         <button type="button" className="cab-abrir" aria-label={`Abrir o menu. Estado: ${resumo}`} title={resumo} aria-expanded={!compacto} tabIndex={compacto ? 0 : -1} onClick={() => setCompacto(false)} onPointerEnter={(e) => e.pointerType === "mouse" && setCompacto(false)} />
       </div>
+
+      {/* Celular: barra de baixo em forma de comprimido. Recolhe ao rolar para baixo e volta ao rolar para cima. */}
+      <nav className="cab-baixo" aria-label="Principal">
+        <div className="cab-baixo-ilha" onPointerEnter={() => (preso.current = true)} onPointerLeave={() => (preso.current = false)} onFocus={() => (preso.current = true)} onBlur={() => (preso.current = false)}>
+          <div className="cab-baixo-int" inert={compacto && celular}>
+            {LINKS.map((l) => (
+              <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
+                {l.curto}
+              </Link>
+            ))}
+          </div>
+          <button type="button" className="cab-abrir cab-abrir-baixo" aria-label="Abrir o menu" aria-expanded={!compacto} tabIndex={compacto && celular ? 0 : -1} onClick={() => setCompacto(false)} />
+        </div>
+      </nav>
     </header>
   );
 }
