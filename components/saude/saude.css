@@ -663,3 +663,43 @@
     inset 0 -1.5px 0 #14142a33,
     inset 0 1px 0 #ffffff40;
 }
+
+/* Celular: o nome ocupava 250px de uma tela de ~360px e sobravam poucos pixels para os meses.
+   Nome mais estreito (sem a categoria), canto do cabeçalho preso à esquerda e rolagem só na horizontal. */
+@media (max-width: 860px) {
+  .saude-rolagem {
+    max-height: none;
+    overscroll-behavior-x: contain;
+  }
+  .saude-tabela {
+    min-width: 660px;
+  }
+  .saude-th-nome,
+  .saude-td-nome {
+    width: 112px;
+  }
+  .saude-th-nome {
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    background: var(--surface-raised);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 14px;
+    padding-right: var(--space-2);
+  }
+  .saude-td-nome {
+    box-shadow: 8px 0 8px -8px #00000066;
+  }
+  .saude-td-nome button {
+    padding-right: var(--space-2);
+  }
+  .saude-nome {
+    font-size: 13px;
+    line-height: 16px;
+    overflow-wrap: anywhere;
+  }
+  .saude-sub {
+    display: none;
+  }
+}
