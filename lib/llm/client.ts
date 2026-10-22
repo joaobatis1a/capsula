@@ -26,6 +26,10 @@ export interface RespostaLLM {
 /* Duas tentativas por modelo: o 503 do Gemini costuma ser do modelo e não da chave, então trocar de modelo
    resolve mais rápido do que insistir no mesmo. Os modelos de reserva sempre têm cota e carga próprias. */
 const TENTATIVAS = 2;
+/* A função da Vercel morre em 60s. Cada tentativa espera no máximo 20s e, passados 45s no total, não começa outra:
+   melhor devolver os moldes fixos, com aviso, do que perder a resposta inteira. */
+const TIMEOUT_TENTATIVA_MS = 20_000;
+const ORCAMENTO_TOTAL_MS = 45_000;
 const GEMINI_RESERVAS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"];
 
 export class SemProvedorError extends Error {}
@@ -71,8 +75,13 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
   if (lista.length === 0) throw new SemProvedorError("Nenhuma chave de modelo configurada.");
 
   const avisos: string[] = [];
+  const inicio = Date.now();
   for (const p of lista) {
     for (let tentativa = 0; tentativa < TENTATIVAS; tentativa++) {
+      if (Date.now() - inicio > ORCAMENTO_TOTAL_MS) {
+        avisos.push("O tempo para gerar com o modelo acabou.");
+        throw new ProvedoresFalharamError(avisos.join(" "));
+      }
       try {
         const res = await fetch(p.url, {
           method: "POST",
@@ -87,7 +96,7 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
             temperature: opcoes.temperatura ?? 0.8,
             response_format: { type: "json_object" },
           }),
-          signal: AbortSignal.timeout(opcoes.timeoutMs ?? 45_000),
+          signal: AbortSignal.timeout(opcoes.timeoutMs ?? TIMEOUT_TENTATIVA_MS),
         });
 
         // Cota (429) ou sobrecarga passageira (503, 502, 504): espera um pouco e tenta de novo no mesmo provedor.

@@ -56,7 +56,9 @@ const ALEGACOES_SAUDE: [RegExp, string][] = [
   [/\belimina (as |a |os |o )?(rugas|manchas|celulite|estrias|acne|espinhas)\b/, "elimina"],
 ];
 
-const SUPERLATIVOS = [/\bo melhor\b/, /\ba melhor\b/, /\bnumero 1\b/, /\bn[oº°] ?1\b/, /\bunico do mercado\b/];
+/* "o melhor horário" ou "a melhor hora" falam de tempo, não de qual é o melhor produto: não contam. */
+const TEMPO = "(horario|hora|momento|dia|periodo|jeito|caminho)";
+const SUPERLATIVOS = [new RegExp(`\\bo melhor\\b(?! ${TEMPO}\\b)`), new RegExp(`\\ba melhor\\b(?! ${TEMPO}\\b)`), /\bnumero 1\b/, /\bn[oº°] ?1\b/, /\bunico do mercado\b/];
 
 const REGRAS: Regra[] = [
   {

@@ -68,4 +68,15 @@ describe("cliente do modelo", () => {
     await expect(pedir()).rejects.toThrow();
     expect([...new Set(usados)]).toEqual(["gemini-3.5-flash", "modelo-x"]);
   });
+
+  it("para de tentar quando o tempo total passa de 45s, para a função da Vercel não morrer", async () => {
+    let chamadas = 0;
+    vi.stubGlobal("fetch", async () => {
+      chamadas++;
+      vi.setSystemTime(Date.now() + 50_000);
+      return resposta(503);
+    });
+    await expect(pedir()).rejects.toThrow(/O tempo para gerar com o modelo acabou/);
+    expect(chamadas).toBe(1);
+  });
 });
