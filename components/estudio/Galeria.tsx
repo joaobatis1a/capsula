@@ -194,7 +194,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
                 const musica = resposta.roteiros
                   .filter((r) => r.publico === aberta.publico)
                   .flatMap((r) => r.evidencias
-                    .filter((e) => e.texto?.includes("Música liberada"))
+                    .filter((e) => r.musica && e.refId === r.musica.radarId)
                     .map((e): BulaEvidencia => ({ origin: e.origem === "memoria" ? "memoria" : "tendencia", rotulo: e.origem === "sazonalidade" ? "Sazonalidade" : undefined, text: e.texto, fonte: e.fonte })),
                   );
                 // Deduplica pela fonte (todas são iguais)

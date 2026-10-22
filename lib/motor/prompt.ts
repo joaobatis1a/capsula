@@ -67,7 +67,7 @@ export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido):
   if (pedido.roteiro) {
     linhas.push(
       "",
-      `## Roteiro pedido: ${pedido.roteiro.plataforma === "reels" ? "Reels" : "TikTok"} de ${pedido.roteiro.duracaoSeg}s`,
+      `## Roteiro pedido: ${{ reels: "Reels", tiktok: "TikTok", comercial: "Comercial" }[pedido.roteiro.plataforma]} de ${pedido.roteiro.duracaoSeg}s`,
       "A primeira cena é o gancho e vai de 0 a 3s. As cenas cobrem o vídeo inteiro sem buracos e a última termina exatamente na duração.",
     );
   }
