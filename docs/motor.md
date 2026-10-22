@@ -17,13 +17,13 @@ Como um briefing vira variações com Bula. Código em `lib/motor`, `lib/memoria
 
 ## Provedores do modelo
 
-O projeto usa o **Gemini** (`GEMINI_API_KEY`, modelo padrão `gemini-3.5-flash`, trocável por `GEMINI_MODEL`). O motor também aceita Groq e OpenRouter, na ordem `GROQ_API_KEY`, `OPENROUTER_API_KEY`, `GEMINI_API_KEY`, mas o time decidiu usar só o Gemini. Todos usam o formato da API da OpenAI.
+O projeto usa o **Gemini** (`GEMINI_API_KEY`, modelo padrão `gemini-3.5-flash-lite`, trocável por `GEMINI_MODEL`). O motor também aceita Groq e OpenRouter, na ordem `GROQ_API_KEY`, `OPENROUTER_API_KEY`, `GEMINI_API_KEY`, mas o time decidiu usar só o Gemini. Todos usam o formato da API da OpenAI.
 
-Quando o provedor responde 429 (cota) ou 502, 503 e 504 (sobrecarga passageira), o motor tenta até 3 vezes, esperando um pouco mais a cada vez. Se ainda assim falhar, passa para o próximo provedor com chave e avisa na tela.
+Quando o provedor responde 429 (cota) ou 502, 503 e 504 (sobrecarga passageira), o motor tenta 2 vezes em cada modelo e, se o modelo continua falhando, passa para o de reserva (`gemini-3.5-flash`, depois `gemini-3.1-flash-lite`, trocáveis por `GEMINI_FALLBACK_MODELS`) e, por fim, para o próximo provedor com chave. Cada tentativa espera até 20 s e, passados 45 s no total, o motor não começa outra, para a função da Vercel (60 s) não morrer. A tela avisa qual modelo respondeu.
 
 Sem nenhuma chave, ou se todas as tentativas falham, as peças saem do **modo sem IA**: moldes fixos guiados pelo ranking. A tela avisa, e essas respostas não entram no cache.
 
-O plano gratuito do Google tem cota curta: depois de umas 5 gerações seguidas pode vir o erro 429. Prefira o `gemini-3.5-flash` (cerca de 2 s); o `gemini-3.8-flash` levou 150 s em teste e não serve para a demonstração.
+O plano gratuito do Google tem cota curta: depois de umas 5 gerações seguidas pode vir o erro 429. O padrão é o `gemini-3.5-flash-lite`: em 22/10 o `gemini-3.5-flash` respondeu 429 ou 503 em 10 de 10 gerações em produção e o lite respondeu todas, em 6 a 15 s (ver [qa-motor.md](qa-motor.md)). O `gemini-3.8-flash` levou 150 s em teste e não serve para a demonstração.
 
 ## Dose
 
