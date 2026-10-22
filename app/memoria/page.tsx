@@ -122,14 +122,31 @@ async function Ranking({ searchParams }: { searchParams: Busca }) {
       </Revela>
 
       <div className="memoria-colunas" key={`${canal}-${publico}`}>
-        <Lista id="m-funcionou" i={2} titulo="O que funcionou" nota="acima da média" vazio="Poucas campanhas neste filtro para recomendar algo." itens={ranking.melhores} />
-        <Lista id="m-evitar" i={3} titulo="O que evitar" nota="abaixo da média" vazio="Nenhuma combinação abaixo da média neste filtro." itens={ranking.piores} evitar />
+        <Lista
+          id="m-funcionou"
+          i={2}
+          titulo="Combinações que renderam mais"
+          nota="acima da média"
+          explica="Misturas de gancho, formato, canal e público cujo resultado ficou acima da média das campanhas. O motor usa estas como evidência na Bula."
+          vazio="Poucas campanhas neste filtro para recomendar algo."
+          itens={ranking.melhores}
+        />
+        <Lista
+          id="m-evitar"
+          i={3}
+          titulo="Combinações que renderam menos"
+          nota="abaixo da média"
+          explica="Misturas que ficaram abaixo da média. O motor as trata como alerta e não as sugere, mas você pode usá-las de propósito."
+          vazio="Nenhuma combinação abaixo da média neste filtro."
+          itens={ranking.piores}
+          evitar
+        />
       </div>
     </>
   );
 }
 
-function Lista({ id, i, titulo, nota, itens, vazio, evitar }: { id: string; i: number; titulo: string; nota: string; itens: ItemRanking[]; vazio: string; evitar?: boolean }) {
+function Lista({ id, i, titulo, nota, explica, itens, vazio, evitar }: { id: string; i: number; titulo: string; nota: string; explica: string; itens: ItemRanking[]; vazio: string; evitar?: boolean }) {
   return (
     <Revela as="section" i={i} className={evitar ? "painel painel-evitar" : "painel"} aria-labelledby={id}>
       <header className="painel-topo">
@@ -141,6 +158,7 @@ function Lista({ id, i, titulo, nota, itens, vazio, evitar }: { id: string; i: n
         </div>
         <span className="painel-nota">{itens.length ? `${itens.length} combinações, ${nota}` : nota}</span>
       </header>
+      <p className="painel-nota">{explica}</p>
       {itens.length ? (
         <ol className="memoria-lista">
           {itens.map((item, n) => (
@@ -151,6 +169,10 @@ function Lista({ id, i, titulo, nota, itens, vazio, evitar }: { id: string; i: n
                 <span className={item.lift >= 1 ? "memoria-barra is-alto" : "memoria-barra is-baixo"} style={{ "--w": `${Math.min(100, (item.lift / 2) * 100)}%` } as React.CSSProperties} aria-hidden="true" />
                 <p className="t-body-sm">{item.texto}</p>
                 <p className="t-data t-muted">{item.fonte}</p>
+                <details className="memoria-detalhes">
+                  <summary>Ver mais detalhes</summary>
+                  <Detalhes item={item} />
+                </details>
               </div>
             </Revela>
           ))}
@@ -159,6 +181,33 @@ function Lista({ id, i, titulo, nota, itens, vazio, evitar }: { id: string; i: n
         <p className="t-body-sm t-muted">{vazio}</p>
       )}
     </Revela>
+  );
+}
+
+/** O que o número quer dizer, em palavras, para quem vê a lista pela primeira vez. */
+function Detalhes({ item }: { item: ItemRanking }) {
+  const medida = item.metrica === "ctr" ? "taxa de clique (CTR)" : "taxa de conversão (quantos cliques viraram compra)";
+  const dif = Math.round(Math.abs(item.lift - 1) * 100);
+  const lift = item.lift.toLocaleString("pt-BR", { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+  return (
+    <dl className="memoria-detalhes-lista">
+      <div>
+        <dt>O que é {lift}×</dt>
+        <dd>
+          A {medida} desta combinação foi {lift} vez{item.lift >= 1.5 ? "es" : ""} a média, ou seja, {dif}% {item.lift >= 1 ? "acima" : "abaixo"}.
+        </dd>
+      </div>
+      <div>
+        <dt>Em quantas campanhas</dt>
+        <dd>
+          {item.campanhas} campanhas com esta mistura. Misturas com poucas campanhas não entram na lista, para um acaso não virar recomendação.
+        </dd>
+      </div>
+      <div>
+        <dt>Como o motor usa</dt>
+        <dd>{item.lift >= 1 ? "Entra como evidência na Bula das peças geradas para o mesmo canal e público." : "Entra como alerta no pedido ao modelo: a combinação é evitada, não sugerida."}</dd>
+      </div>
+    </dl>
   );
 }
 
