@@ -1,0 +1,45 @@
+# mapping.yaml: liga as colunas REAIS do CSV da empresa aos campos do contrato (lib/data/types.ts).
+# Este arquivo mapeia mocks/campanhas-exemplo.csv. Para dados reais, só ESTE arquivo muda: veja docs/dados-reais.md.
+# Formato: campo_do_contrato: nome_da_coluna_real
+
+campanhas:
+  separador: ";"          # "," ou ";"
+  formato_data: br        # iso = AAAA-MM-DD | br = DD/MM/AAAA
+  decimal: ","            # "." ou ","
+  colunas:
+    id: cod_campanha              # opcional (se faltar, a Cápsula numera)
+    data: dt_veiculacao
+    canal: plataforma
+    formato: tipo_peca
+    publico: faixa_etaria
+    gancho: titulo_gancho
+    tom: tom_comunicacao          # opcional (padrão: informativo)
+    categoria: linha_produto      # opcional (padrão: "Sem categoria")
+    tipo_produto: tipo_produto    # opcional (padrão: higiene_beleza)
+    impressoes: impressoes_total
+    cliques: cliques_total
+    conversoes: conversoes_total  # opcional (padrão: 0)
+  # Traduz o valor real para o valor do contrato (sem acento e sem maiúsculas).
+  # Canal: instagram, tiktok, facebook, site. Formato: feed, story, banner, video.
+  # Gancho: pergunta, beneficio, oferta_direta, prova_social, urgencia, humor.
+  # Tom: proximo, informativo, divertido, institucional.
+  # Tipo de produto: medicamento_isento, medicamento_prescricao, dermocosmetico, higiene_beleza, suplemento, infantil, servico.
+  valores:
+    formato:
+      "Reels": "video"
+    gancho:
+      "Dica": "beneficio"
+    tom:
+      "Descontraído": "divertido"
+      "Urgente": "proximo"
+    publico:
+      "18 a 24 anos": "Jovens de 18 a 24"
+      "25 a 34 anos": "Adultos de 25 a 34"
+      "35 a 44 anos": "Adultos de 35 a 59 com uso contínuo"
+    tipo_produto:
+      "Dermocosmético": "dermocosmetico"
+      "Medicamento sem prescrição": "medicamento_isento"
+      "Suplemento": "suplemento"
+      "Higiene": "higiene_beleza"
+      "Infantil": "infantil"
+      "Serviço": "servico"

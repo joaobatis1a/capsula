@@ -1,0 +1,301 @@
+cod_campanha;titulo_gancho;tipo_peca;plataforma;faixa_etaria;tom_comunicacao;dt_veiculacao;impressoes_total;cliques_total;conversoes_total;linha_produto;tipo_produto;verba_rs;responsavel
+EX-0001;Prova social;Reels;Instagram;25 a 34 anos;Descontraído;01/11/2025;16208;358;22;Protetor solar;Dermocosmético;194,50;Equipe de exemplo
+EX-0002;Dica;Banner;Site;18 a 24 anos;Informativo;04/11/2025;42288;354;21;Antigripais;Medicamento sem prescrição;507,46;Equipe de exemplo
+EX-0003;Prova social;Reels;Instagram;18 a 24 anos;Descontraído;04/11/2025;83143;1209;89;Vitaminas;Suplemento;997,72;Equipe de exemplo
+EX-0004;Dica;Story;Instagram;35 a 44 anos;Informativo;04/11/2025;17911;303;22;Higiene bucal;Higiene;214,93;Equipe de exemplo
+EX-0005;Prova social;Reels;TikTok;35 a 44 anos;Informativo;05/11/2025;16671;177;11;Fraldas e bebê;Infantil;200,05;Equipe de exemplo
+EX-0006;Pergunta;Feed;Instagram;25 a 34 anos;Urgente;07/11/2025;46817;1061;69;Vacinação na farmácia;Serviço;561,80;Equipe de exemplo
+EX-0007;Oferta direta;Reels;Instagram;25 a 34 anos;Informativo;10/11/2025;76254;1659;52;Protetor solar;Dermocosmético;915,05;Equipe de exemplo
+EX-0008;Dica;Banner;Site;18 a 24 anos;Informativo;11/11/2025;77672;882;28;Antigripais;Medicamento sem prescrição;932,06;Equipe de exemplo
+EX-0009;Oferta direta;Story;Instagram;25 a 34 anos;Urgente;11/11/2025;56464;1236;66;Vitaminas;Suplemento;677,57;Equipe de exemplo
+EX-0010;Oferta direta;Reels;TikTok;25 a 34 anos;Informativo;11/11/2025;71421;1900;100;Higiene bucal;Higiene;857,05;Equipe de exemplo
+EX-0011;Pergunta;Feed;Site;25 a 34 anos;Descontraído;12/11/2025;50773;816;46;Fraldas e bebê;Infantil;609,28;Equipe de exemplo
+EX-0012;Prova social;Reels;Instagram;18 a 24 anos;Informativo;13/11/2025;88004;1883;177;Vacinação na farmácia;Serviço;1056,05;Equipe de exemplo
+EX-0013;Dica;Feed;Site;35 a 44 anos;Descontraído;16/11/2025;40977;612;30;Protetor solar;Dermocosmético;491,72;Equipe de exemplo
+EX-0014;Pergunta;Story;Instagram;25 a 34 anos;Urgente;16/11/2025;62443;1240;64;Antigripais;Medicamento sem prescrição;749,32;Equipe de exemplo
+EX-0015;Prova social;Feed;Site;18 a 24 anos;Informativo;16/11/2025;77525;1811;140;Vitaminas;Suplemento;930,30;Equipe de exemplo
+EX-0016;Pergunta;Banner;Site;25 a 34 anos;Urgente;19/11/2025;89777;1500;57;Higiene bucal;Higiene;1077,32;Equipe de exemplo
+EX-0017;Dica;Reels;TikTok;35 a 44 anos;Descontraído;22/11/2025;111994;2040;168;Fraldas e bebê;Infantil;1343,93;Equipe de exemplo
+EX-0018;Prova social;Feed;Site;18 a 24 anos;Descontraído;22/11/2025;26514;654;32;Vacinação na farmácia;Serviço;318,17;Equipe de exemplo
+EX-0019;Oferta direta;Banner;Site;25 a 34 anos;Urgente;26/11/2025;37954;836;77;Protetor solar;Dermocosmético;455,45;Equipe de exemplo
+EX-0020;Prova social;Story;Instagram;18 a 24 anos;Descontraído;27/11/2025;95179;1713;94;Antigripais;Medicamento sem prescrição;1142,15;Equipe de exemplo
+EX-0021;Prova social;Reels;TikTok;35 a 44 anos;Informativo;28/11/2025;37242;464;29;Vitaminas;Suplemento;446,90;Equipe de exemplo
+EX-0022;Oferta direta;Banner;Site;25 a 34 anos;Urgente;29/11/2025;43216;1208;101;Higiene bucal;Higiene;518,59;Equipe de exemplo
+EX-0023;Dica;Feed;Instagram;18 a 24 anos;Urgente;29/11/2025;31832;498;35;Fraldas e bebê;Infantil;381,98;Equipe de exemplo
+EX-0024;Prova social;Reels;Instagram;18 a 24 anos;Urgente;01/12/2025;29738;633;48;Vacinação na farmácia;Serviço;356,86;Equipe de exemplo
+EX-0025;Oferta direta;Story;Instagram;35 a 44 anos;Descontraído;02/12/2025;22845;198;8;Protetor solar;Dermocosmético;274,14;Equipe de exemplo
+EX-0026;Oferta direta;Story;Instagram;25 a 34 anos;Urgente;03/12/2025;29947;763;57;Antigripais;Medicamento sem prescrição;359,36;Equipe de exemplo
+EX-0027;Prova social;Reels;Instagram;18 a 24 anos;Descontraído;03/12/2025;78250;1494;97;Vitaminas;Suplemento;939,00;Equipe de exemplo
+EX-0028;Dica;Reels;TikTok;18 a 24 anos;Urgente;03/12/2025;67009;1069;69;Higiene bucal;Higiene;804,11;Equipe de exemplo
+EX-0029;Pergunta;Story;Instagram;25 a 34 anos;Descontraído;04/12/2025;106648;2192;109;Fraldas e bebê;Infantil;1279,78;Equipe de exemplo
+EX-0030;Prova social;Reels;Instagram;25 a 34 anos;Informativo;05/12/2025;66317;1159;51;Vacinação na farmácia;Serviço;795,80;Equipe de exemplo
+EX-0031;Dica;Banner;Site;18 a 24 anos;Urgente;06/12/2025;39698;451;15;Protetor solar;Dermocosmético;476,38;Equipe de exemplo
+EX-0032;Dica;Banner;Site;18 a 24 anos;Informativo;06/12/2025;73407;1203;46;Antigripais;Medicamento sem prescrição;880,88;Equipe de exemplo
+EX-0033;Oferta direta;Reels;Instagram;25 a 34 anos;Urgente;06/12/2025;68267;1442;112;Vitaminas;Suplemento;819,20;Equipe de exemplo
+EX-0034;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;06/12/2025;47302;1087;82;Higiene bucal;Higiene;567,62;Equipe de exemplo
+EX-0035;Dica;Story;Instagram;25 a 34 anos;Urgente;06/12/2025;51877;976;50;Fraldas e bebê;Infantil;622,52;Equipe de exemplo
+EX-0036;Dica;Feed;Site;25 a 34 anos;Informativo;06/12/2025;45608;934;56;Vacinação na farmácia;Serviço;547,30;Equipe de exemplo
+EX-0037;Dica;Banner;Site;18 a 24 anos;Informativo;07/12/2025;24594;264;11;Protetor solar;Dermocosmético;295,13;Equipe de exemplo
+EX-0038;Pergunta;Banner;Site;18 a 24 anos;Urgente;08/12/2025;98217;2495;244;Antigripais;Medicamento sem prescrição;1178,60;Equipe de exemplo
+EX-0039;Pergunta;Reels;TikTok;25 a 34 anos;Informativo;13/12/2025;22156;458;21;Vitaminas;Suplemento;265,87;Equipe de exemplo
+EX-0040;Dica;Feed;Site;18 a 24 anos;Descontraído;14/12/2025;104780;1992;126;Higiene bucal;Higiene;1257,36;Equipe de exemplo
+EX-0041;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;15/12/2025;76667;1114;50;Fraldas e bebê;Infantil;920,00;Equipe de exemplo
+EX-0042;Dica;Feed;Site;25 a 34 anos;Descontraído;17/12/2025;28857;505;36;Vacinação na farmácia;Serviço;346,28;Equipe de exemplo
+EX-0043;Pergunta;Reels;TikTok;18 a 24 anos;Descontraído;18/12/2025;75402;1987;138;Protetor solar;Dermocosmético;904,82;Equipe de exemplo
+EX-0044;Pergunta;Reels;TikTok;18 a 24 anos;Descontraído;18/12/2025;21023;563;39;Antigripais;Medicamento sem prescrição;252,28;Equipe de exemplo
+EX-0045;Dica;Reels;TikTok;18 a 24 anos;Informativo;18/12/2025;15215;312;12;Vitaminas;Suplemento;182,58;Equipe de exemplo
+EX-0046;Pergunta;Reels;Instagram;35 a 44 anos;Informativo;18/12/2025;15020;324;15;Higiene bucal;Higiene;180,24;Equipe de exemplo
+EX-0047;Prova social;Reels;TikTok;35 a 44 anos;Urgente;20/12/2025;27653;328;14;Fraldas e bebê;Infantil;331,84;Equipe de exemplo
+EX-0048;Pergunta;Feed;Site;18 a 24 anos;Urgente;20/12/2025;26244;659;44;Vacinação na farmácia;Serviço;314,93;Equipe de exemplo
+EX-0049;Dica;Reels;TikTok;25 a 34 anos;Urgente;20/12/2025;67030;1178;75;Protetor solar;Dermocosmético;804,36;Equipe de exemplo
+EX-0050;Dica;Reels;Instagram;35 a 44 anos;Urgente;23/12/2025;22957;517;26;Antigripais;Medicamento sem prescrição;275,48;Equipe de exemplo
+EX-0051;Dica;Reels;TikTok;25 a 34 anos;Urgente;24/12/2025;25400;620;49;Vitaminas;Suplemento;304,80;Equipe de exemplo
+EX-0052;Prova social;Reels;Instagram;25 a 34 anos;Urgente;25/12/2025;17071;409;25;Higiene bucal;Higiene;204,85;Equipe de exemplo
+EX-0053;Pergunta;Story;Instagram;25 a 34 anos;Informativo;25/12/2025;25150;497;20;Fraldas e bebê;Infantil;301,80;Equipe de exemplo
+EX-0054;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;26/12/2025;25715;247;10;Vacinação na farmácia;Serviço;308,58;Equipe de exemplo
+EX-0055;Prova social;Feed;Site;25 a 34 anos;Urgente;27/12/2025;110171;2883;192;Protetor solar;Dermocosmético;1322,05;Equipe de exemplo
+EX-0056;Dica;Banner;Site;18 a 24 anos;Descontraído;28/12/2025;27448;337;15;Antigripais;Medicamento sem prescrição;329,38;Equipe de exemplo
+EX-0057;Dica;Feed;Instagram;35 a 44 anos;Informativo;28/12/2025;33511;645;35;Vitaminas;Suplemento;402,13;Equipe de exemplo
+EX-0058;Prova social;Feed;Site;25 a 34 anos;Informativo;28/12/2025;42486;850;65;Higiene bucal;Higiene;509,83;Equipe de exemplo
+EX-0059;Pergunta;Reels;Instagram;18 a 24 anos;Descontraído;28/12/2025;42192;782;33;Fraldas e bebê;Infantil;506,30;Equipe de exemplo
+EX-0060;Oferta direta;Reels;Instagram;25 a 34 anos;Informativo;29/12/2025;32079;812;33;Vacinação na farmácia;Serviço;384,95;Equipe de exemplo
+EX-0061;Dica;Story;Instagram;35 a 44 anos;Urgente;29/12/2025;40691;843;59;Protetor solar;Dermocosmético;488,29;Equipe de exemplo
+EX-0062;Pergunta;Reels;Instagram;25 a 34 anos;Descontraído;30/12/2025;22536;875;89;Antigripais;Medicamento sem prescrição;270,43;Equipe de exemplo
+EX-0063;Prova social;Reels;Instagram;25 a 34 anos;Informativo;31/12/2025;26692;619;53;Vitaminas;Suplemento;320,30;Equipe de exemplo
+EX-0064;Dica;Banner;Site;18 a 24 anos;Urgente;02/01/2026;34558;361;15;Higiene bucal;Higiene;414,70;Equipe de exemplo
+EX-0065;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;02/01/2026;16514;193;7;Fraldas e bebê;Infantil;198,17;Equipe de exemplo
+EX-0066;Dica;Reels;TikTok;25 a 34 anos;Descontraído;04/01/2026;34061;726;47;Vacinação na farmácia;Serviço;408,73;Equipe de exemplo
+EX-0067;Dica;Banner;Site;18 a 24 anos;Descontraído;05/01/2026;16488;145;5;Protetor solar;Dermocosmético;197,86;Equipe de exemplo
+EX-0068;Dica;Feed;Site;25 a 34 anos;Informativo;05/01/2026;87471;2011;121;Antigripais;Medicamento sem prescrição;1049,65;Equipe de exemplo
+EX-0069;Dica;Feed;Site;25 a 34 anos;Informativo;07/01/2026;48136;1266;78;Vitaminas;Suplemento;577,63;Equipe de exemplo
+EX-0070;Oferta direta;Story;Instagram;25 a 34 anos;Informativo;08/01/2026;15812;215;12;Higiene bucal;Higiene;189,74;Equipe de exemplo
+EX-0071;Prova social;Banner;Site;18 a 24 anos;Urgente;09/01/2026;27806;871;50;Fraldas e bebê;Infantil;333,67;Equipe de exemplo
+EX-0072;Prova social;Reels;TikTok;25 a 34 anos;Urgente;09/01/2026;36169;650;37;Vacinação na farmácia;Serviço;434,03;Equipe de exemplo
+EX-0073;Dica;Feed;Site;25 a 34 anos;Descontraído;10/01/2026;24210;475;35;Protetor solar;Dermocosmético;290,52;Equipe de exemplo
+EX-0074;Prova social;Feed;Instagram;18 a 24 anos;Urgente;10/01/2026;117309;2469;148;Antigripais;Medicamento sem prescrição;1407,71;Equipe de exemplo
+EX-0075;Dica;Banner;Site;18 a 24 anos;Urgente;18/01/2026;24259;232;16;Vitaminas;Suplemento;291,11;Equipe de exemplo
+EX-0076;Oferta direta;Reels;TikTok;18 a 24 anos;Informativo;18/01/2026;36276;625;63;Higiene bucal;Higiene;435,31;Equipe de exemplo
+EX-0077;Pergunta;Feed;Site;18 a 24 anos;Urgente;19/01/2026;50963;1209;70;Fraldas e bebê;Infantil;611,56;Equipe de exemplo
+EX-0078;Pergunta;Feed;Instagram;25 a 34 anos;Descontraído;20/01/2026;23946;619;29;Vacinação na farmácia;Serviço;287,35;Equipe de exemplo
+EX-0079;Prova social;Feed;Site;18 a 24 anos;Informativo;21/01/2026;21631;515;23;Protetor solar;Dermocosmético;259,57;Equipe de exemplo
+EX-0080;Oferta direta;Feed;Site;18 a 24 anos;Descontraído;21/01/2026;84129;2334;138;Antigripais;Medicamento sem prescrição;1009,55;Equipe de exemplo
+EX-0081;Oferta direta;Story;Instagram;25 a 34 anos;Urgente;22/01/2026;15383;261;20;Vitaminas;Suplemento;184,60;Equipe de exemplo
+EX-0082;Oferta direta;Feed;Instagram;18 a 24 anos;Urgente;22/01/2026;100756;2076;88;Higiene bucal;Higiene;1209,07;Equipe de exemplo
+EX-0083;Prova social;Feed;Instagram;35 a 44 anos;Urgente;24/01/2026;67923;2141;145;Fraldas e bebê;Infantil;815,08;Equipe de exemplo
+EX-0084;Oferta direta;Story;Instagram;35 a 44 anos;Informativo;24/01/2026;37975;484;19;Vacinação na farmácia;Serviço;455,70;Equipe de exemplo
+EX-0085;Prova social;Reels;Instagram;25 a 34 anos;Informativo;24/01/2026;16115;254;13;Protetor solar;Dermocosmético;193,38;Equipe de exemplo
+EX-0086;Prova social;Reels;Instagram;35 a 44 anos;Urgente;24/01/2026;38205;869;51;Antigripais;Medicamento sem prescrição;458,46;Equipe de exemplo
+EX-0087;Prova social;Story;Instagram;18 a 24 anos;Urgente;27/01/2026;47465;661;33;Vitaminas;Suplemento;569,58;Equipe de exemplo
+EX-0088;Oferta direta;Reels;TikTok;18 a 24 anos;Informativo;27/01/2026;76548;1761;93;Higiene bucal;Higiene;918,58;Equipe de exemplo
+EX-0089;Oferta direta;Reels;TikTok;18 a 24 anos;Informativo;31/01/2026;16026;338;20;Fraldas e bebê;Infantil;192,31;Equipe de exemplo
+EX-0090;Prova social;Feed;Instagram;35 a 44 anos;Urgente;03/02/2026;68735;1562;118;Vacinação na farmácia;Serviço;824,82;Equipe de exemplo
+EX-0091;Dica;Reels;Instagram;18 a 24 anos;Urgente;04/02/2026;26591;549;31;Protetor solar;Dermocosmético;319,09;Equipe de exemplo
+EX-0092;Prova social;Reels;Instagram;18 a 24 anos;Informativo;05/02/2026;113959;2561;163;Antigripais;Medicamento sem prescrição;1367,51;Equipe de exemplo
+EX-0093;Pergunta;Reels;Instagram;35 a 44 anos;Informativo;07/02/2026;62101;1059;75;Vitaminas;Suplemento;745,21;Equipe de exemplo
+EX-0094;Prova social;Reels;TikTok;25 a 34 anos;Urgente;07/02/2026;15457;292;20;Higiene bucal;Higiene;185,48;Equipe de exemplo
+EX-0095;Oferta direta;Story;Instagram;18 a 24 anos;Informativo;09/02/2026;55113;1229;76;Fraldas e bebê;Infantil;661,36;Equipe de exemplo
+EX-0096;Prova social;Feed;Instagram;18 a 24 anos;Urgente;10/02/2026;22061;544;31;Vacinação na farmácia;Serviço;264,73;Equipe de exemplo
+EX-0097;Prova social;Feed;Site;25 a 34 anos;Urgente;12/02/2026;110169;2203;186;Protetor solar;Dermocosmético;1322,03;Equipe de exemplo
+EX-0098;Prova social;Reels;Instagram;18 a 24 anos;Urgente;17/02/2026;70651;1565;142;Antigripais;Medicamento sem prescrição;847,81;Equipe de exemplo
+EX-0099;Dica;Reels;Instagram;35 a 44 anos;Informativo;17/02/2026;49176;1115;69;Vitaminas;Suplemento;590,11;Equipe de exemplo
+EX-0100;Prova social;Reels;TikTok;25 a 34 anos;Urgente;19/02/2026;119488;1981;95;Higiene bucal;Higiene;1433,86;Equipe de exemplo
+EX-0101;Prova social;Feed;Site;35 a 44 anos;Informativo;20/02/2026;62402;1412;116;Fraldas e bebê;Infantil;748,82;Equipe de exemplo
+EX-0102;Dica;Feed;Site;35 a 44 anos;Urgente;21/02/2026;84047;897;59;Vacinação na farmácia;Serviço;1008,56;Equipe de exemplo
+EX-0103;Prova social;Banner;Site;18 a 24 anos;Descontraído;24/02/2026;88157;1606;85;Protetor solar;Dermocosmético;1057,88;Equipe de exemplo
+EX-0104;Dica;Banner;Site;35 a 44 anos;Descontraído;25/02/2026;30119;761;51;Antigripais;Medicamento sem prescrição;361,43;Equipe de exemplo
+EX-0105;Prova social;Reels;TikTok;18 a 24 anos;Urgente;26/02/2026;101290;2412;233;Vitaminas;Suplemento;1215,48;Equipe de exemplo
+EX-0106;Prova social;Story;Instagram;18 a 24 anos;Informativo;27/02/2026;118685;1674;55;Higiene bucal;Higiene;1424,22;Equipe de exemplo
+EX-0107;Prova social;Feed;Instagram;35 a 44 anos;Descontraído;02/03/2026;51111;1395;95;Fraldas e bebê;Infantil;613,33;Equipe de exemplo
+EX-0108;Oferta direta;Banner;Site;25 a 34 anos;Urgente;02/03/2026;36789;871;45;Vacinação na farmácia;Serviço;441,47;Equipe de exemplo
+EX-0109;Oferta direta;Story;Instagram;18 a 24 anos;Urgente;02/03/2026;19660;438;24;Protetor solar;Dermocosmético;235,92;Equipe de exemplo
+EX-0110;Prova social;Story;Instagram;25 a 34 anos;Descontraído;02/03/2026;38333;1081;59;Antigripais;Medicamento sem prescrição;460,00;Equipe de exemplo
+EX-0111;Prova social;Banner;Site;18 a 24 anos;Urgente;03/03/2026;39435;657;47;Vitaminas;Suplemento;473,22;Equipe de exemplo
+EX-0112;Pergunta;Story;Instagram;35 a 44 anos;Descontraído;03/03/2026;33019;822;65;Higiene bucal;Higiene;396,23;Equipe de exemplo
+EX-0113;Prova social;Banner;Site;25 a 34 anos;Descontraído;04/03/2026;44932;754;45;Fraldas e bebê;Infantil;539,18;Equipe de exemplo
+EX-0114;Pergunta;Feed;Instagram;25 a 34 anos;Informativo;05/03/2026;65310;993;48;Vacinação na farmácia;Serviço;783,72;Equipe de exemplo
+EX-0115;Pergunta;Reels;Instagram;25 a 34 anos;Urgente;06/03/2026;66600;1729;164;Protetor solar;Dermocosmético;799,20;Equipe de exemplo
+EX-0116;Pergunta;Reels;TikTok;18 a 24 anos;Urgente;06/03/2026;64512;1798;140;Antigripais;Medicamento sem prescrição;774,14;Equipe de exemplo
+EX-0117;Prova social;Feed;Site;25 a 34 anos;Descontraído;06/03/2026;100045;2182;126;Vitaminas;Suplemento;1200,54;Equipe de exemplo
+EX-0118;Prova social;Reels;TikTok;18 a 24 anos;Urgente;06/03/2026;67380;1204;63;Higiene bucal;Higiene;808,56;Equipe de exemplo
+EX-0119;Dica;Reels;Instagram;18 a 24 anos;Urgente;06/03/2026;18564;440;21;Fraldas e bebê;Infantil;222,77;Equipe de exemplo
+EX-0120;Prova social;Banner;Site;25 a 34 anos;Descontraído;06/03/2026;34285;613;33;Vacinação na farmácia;Serviço;411,42;Equipe de exemplo
+EX-0121;Pergunta;Feed;Instagram;25 a 34 anos;Urgente;07/03/2026;17604;308;16;Protetor solar;Dermocosmético;211,25;Equipe de exemplo
+EX-0122;Pergunta;Reels;Instagram;25 a 34 anos;Informativo;08/03/2026;86829;3181;280;Antigripais;Medicamento sem prescrição;1041,95;Equipe de exemplo
+EX-0123;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;08/03/2026;118196;1374;74;Vitaminas;Suplemento;1418,35;Equipe de exemplo
+EX-0124;Oferta direta;Feed;Site;25 a 34 anos;Urgente;08/03/2026;63266;1478;88;Higiene bucal;Higiene;759,19;Equipe de exemplo
+EX-0125;Dica;Feed;Site;35 a 44 anos;Urgente;09/03/2026;63124;849;37;Fraldas e bebê;Infantil;757,49;Equipe de exemplo
+EX-0126;Prova social;Reels;TikTok;25 a 34 anos;Urgente;09/03/2026;25490;474;39;Vacinação na farmácia;Serviço;305,88;Equipe de exemplo
+EX-0127;Dica;Feed;Instagram;18 a 24 anos;Urgente;14/03/2026;43200;1060;55;Protetor solar;Dermocosmético;518,40;Equipe de exemplo
+EX-0128;Prova social;Feed;Instagram;35 a 44 anos;Urgente;15/03/2026;33591;1004;85;Antigripais;Medicamento sem prescrição;403,09;Equipe de exemplo
+EX-0129;Prova social;Feed;Instagram;25 a 34 anos;Urgente;15/03/2026;67670;1184;68;Vitaminas;Suplemento;812,04;Equipe de exemplo
+EX-0130;Dica;Feed;Instagram;35 a 44 anos;Urgente;15/03/2026;28361;556;28;Higiene bucal;Higiene;340,33;Equipe de exemplo
+EX-0131;Pergunta;Reels;Instagram;25 a 34 anos;Descontraído;17/03/2026;77674;2929;188;Fraldas e bebê;Infantil;932,09;Equipe de exemplo
+EX-0132;Prova social;Banner;Site;35 a 44 anos;Urgente;17/03/2026;92981;1918;93;Vacinação na farmácia;Serviço;1115,77;Equipe de exemplo
+EX-0133;Oferta direta;Banner;Site;25 a 34 anos;Urgente;18/03/2026;18177;482;27;Protetor solar;Dermocosmético;218,12;Equipe de exemplo
+EX-0134;Oferta direta;Feed;Site;25 a 34 anos;Urgente;18/03/2026;56291;1047;46;Antigripais;Medicamento sem prescrição;675,49;Equipe de exemplo
+EX-0135;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;18/03/2026;34658;564;32;Vitaminas;Suplemento;415,90;Equipe de exemplo
+EX-0136;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;19/03/2026;118808;2481;166;Higiene bucal;Higiene;1425,70;Equipe de exemplo
+EX-0137;Pergunta;Reels;TikTok;35 a 44 anos;Urgente;21/03/2026;43789;782;47;Fraldas e bebê;Infantil;525,47;Equipe de exemplo
+EX-0138;Oferta direta;Reels;Instagram;18 a 24 anos;Urgente;21/03/2026;50734;978;66;Vacinação na farmácia;Serviço;608,81;Equipe de exemplo
+EX-0139;Pergunta;Banner;Site;25 a 34 anos;Urgente;23/03/2026;92132;1861;105;Protetor solar;Dermocosmético;1105,58;Equipe de exemplo
+EX-0140;Prova social;Feed;Site;35 a 44 anos;Informativo;25/03/2026;68656;1249;83;Antigripais;Medicamento sem prescrição;823,87;Equipe de exemplo
+EX-0141;Pergunta;Story;Instagram;18 a 24 anos;Descontraído;25/03/2026;29218;497;35;Vitaminas;Suplemento;350,62;Equipe de exemplo
+EX-0142;Pergunta;Reels;Instagram;25 a 34 anos;Descontraído;26/03/2026;16657;591;54;Higiene bucal;Higiene;199,88;Equipe de exemplo
+EX-0143;Pergunta;Reels;Instagram;35 a 44 anos;Descontraído;26/03/2026;49486;824;43;Fraldas e bebê;Infantil;593,83;Equipe de exemplo
+EX-0144;Prova social;Banner;Site;35 a 44 anos;Informativo;26/03/2026;33207;658;39;Vacinação na farmácia;Serviço;398,48;Equipe de exemplo
+EX-0145;Prova social;Reels;TikTok;35 a 44 anos;Informativo;29/03/2026;15829;287;17;Protetor solar;Dermocosmético;189,95;Equipe de exemplo
+EX-0146;Oferta direta;Banner;Site;35 a 44 anos;Urgente;30/03/2026;59731;1391;132;Antigripais;Medicamento sem prescrição;716,77;Equipe de exemplo
+EX-0147;Pergunta;Feed;Instagram;35 a 44 anos;Descontraído;30/03/2026;15683;322;24;Vitaminas;Suplemento;188,20;Equipe de exemplo
+EX-0148;Pergunta;Reels;Instagram;35 a 44 anos;Informativo;31/03/2026;89367;2089;110;Higiene bucal;Higiene;1072,40;Equipe de exemplo
+EX-0149;Oferta direta;Reels;TikTok;25 a 34 anos;Urgente;31/03/2026;31001;665;36;Fraldas e bebê;Infantil;372,01;Equipe de exemplo
+EX-0150;Pergunta;Story;Instagram;18 a 24 anos;Descontraído;01/04/2026;71264;1565;120;Vacinação na farmácia;Serviço;855,17;Equipe de exemplo
+EX-0151;Pergunta;Reels;TikTok;18 a 24 anos;Informativo;02/04/2026;71992;2364;153;Protetor solar;Dermocosmético;863,90;Equipe de exemplo
+EX-0152;Prova social;Feed;Instagram;18 a 24 anos;Descontraído;03/04/2026;39900;676;57;Antigripais;Medicamento sem prescrição;478,80;Equipe de exemplo
+EX-0153;Oferta direta;Feed;Site;25 a 34 anos;Urgente;05/04/2026;22574;461;24;Vitaminas;Suplemento;270,89;Equipe de exemplo
+EX-0154;Prova social;Story;Instagram;25 a 34 anos;Urgente;07/04/2026;63595;938;47;Higiene bucal;Higiene;763,14;Equipe de exemplo
+EX-0155;Dica;Story;Instagram;25 a 34 anos;Urgente;08/04/2026;27006;406;29;Fraldas e bebê;Infantil;324,07;Equipe de exemplo
+EX-0156;Prova social;Banner;Site;18 a 24 anos;Descontraído;11/04/2026;109427;2298;155;Vacinação na farmácia;Serviço;1313,12;Equipe de exemplo
+EX-0157;Oferta direta;Reels;TikTok;25 a 34 anos;Descontraído;12/04/2026;36161;969;50;Protetor solar;Dermocosmético;433,93;Equipe de exemplo
+EX-0158;Oferta direta;Story;Instagram;25 a 34 anos;Descontraído;12/04/2026;16795;414;17;Antigripais;Medicamento sem prescrição;201,54;Equipe de exemplo
+EX-0159;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;14/04/2026;18959;203;11;Vitaminas;Suplemento;227,51;Equipe de exemplo
+EX-0160;Oferta direta;Banner;Site;18 a 24 anos;Urgente;15/04/2026;16835;294;20;Higiene bucal;Higiene;202,02;Equipe de exemplo
+EX-0161;Pergunta;Reels;Instagram;18 a 24 anos;Urgente;20/04/2026;80971;1415;79;Fraldas e bebê;Infantil;971,65;Equipe de exemplo
+EX-0162;Dica;Feed;Instagram;18 a 24 anos;Urgente;20/04/2026;16143;347;17;Vacinação na farmácia;Serviço;193,72;Equipe de exemplo
+EX-0163;Oferta direta;Banner;Site;25 a 34 anos;Urgente;23/04/2026;20046;811;63;Protetor solar;Dermocosmético;240,55;Equipe de exemplo
+EX-0164;Prova social;Reels;Instagram;35 a 44 anos;Informativo;23/04/2026;24400;527;36;Antigripais;Medicamento sem prescrição;292,80;Equipe de exemplo
+EX-0165;Prova social;Feed;Instagram;35 a 44 anos;Descontraído;24/04/2026;24784;638;47;Vitaminas;Suplemento;297,41;Equipe de exemplo
+EX-0166;Oferta direta;Feed;Instagram;18 a 24 anos;Informativo;24/04/2026;61516;1468;92;Higiene bucal;Higiene;738,19;Equipe de exemplo
+EX-0167;Dica;Feed;Site;35 a 44 anos;Informativo;25/04/2026;42727;439;21;Fraldas e bebê;Infantil;512,72;Equipe de exemplo
+EX-0168;Dica;Feed;Instagram;25 a 34 anos;Urgente;27/04/2026;74083;1382;104;Vacinação na farmácia;Serviço;889,00;Equipe de exemplo
+EX-0169;Oferta direta;Banner;Site;25 a 34 anos;Urgente;29/04/2026;117574;2258;129;Protetor solar;Dermocosmético;1410,89;Equipe de exemplo
+EX-0170;Dica;Reels;TikTok;35 a 44 anos;Urgente;30/04/2026;33116;1294;68;Antigripais;Medicamento sem prescrição;397,39;Equipe de exemplo
+EX-0171;Prova social;Reels;TikTok;25 a 34 anos;Descontraído;01/05/2026;25811;547;36;Vitaminas;Suplemento;309,73;Equipe de exemplo
+EX-0172;Dica;Feed;Instagram;25 a 34 anos;Urgente;01/05/2026;71136;1848;152;Higiene bucal;Higiene;853,63;Equipe de exemplo
+EX-0173;Pergunta;Reels;Instagram;25 a 34 anos;Informativo;02/05/2026;27309;780;52;Fraldas e bebê;Infantil;327,71;Equipe de exemplo
+EX-0174;Dica;Feed;Instagram;25 a 34 anos;Descontraído;03/05/2026;27038;624;39;Vacinação na farmácia;Serviço;324,46;Equipe de exemplo
+EX-0175;Dica;Feed;Instagram;35 a 44 anos;Descontraído;04/05/2026;56580;1206;61;Protetor solar;Dermocosmético;678,96;Equipe de exemplo
+EX-0176;Dica;Reels;TikTok;35 a 44 anos;Informativo;05/05/2026;93066;1758;84;Antigripais;Medicamento sem prescrição;1116,79;Equipe de exemplo
+EX-0177;Pergunta;Reels;TikTok;18 a 24 anos;Informativo;06/05/2026;41106;1420;109;Vitaminas;Suplemento;493,27;Equipe de exemplo
+EX-0178;Prova social;Banner;Site;35 a 44 anos;Urgente;08/05/2026;102758;2671;180;Higiene bucal;Higiene;1233,10;Equipe de exemplo
+EX-0179;Oferta direta;Banner;Site;25 a 34 anos;Urgente;09/05/2026;88455;1865;165;Fraldas e bebê;Infantil;1061,46;Equipe de exemplo
+EX-0180;Prova social;Reels;TikTok;18 a 24 anos;Informativo;11/05/2026;39601;1313;80;Vacinação na farmácia;Serviço;475,21;Equipe de exemplo
+EX-0181;Pergunta;Story;Instagram;18 a 24 anos;Informativo;11/05/2026;49525;941;71;Protetor solar;Dermocosmético;594,30;Equipe de exemplo
+EX-0182;Dica;Banner;Site;35 a 44 anos;Descontraído;11/05/2026;57930;888;53;Antigripais;Medicamento sem prescrição;695,16;Equipe de exemplo
+EX-0183;Pergunta;Reels;Instagram;25 a 34 anos;Urgente;13/05/2026;42019;1718;115;Vitaminas;Suplemento;504,23;Equipe de exemplo
+EX-0184;Pergunta;Reels;Instagram;35 a 44 anos;Descontraído;13/05/2026;58906;1595;90;Higiene bucal;Higiene;706,87;Equipe de exemplo
+EX-0185;Pergunta;Reels;TikTok;18 a 24 anos;Descontraído;14/05/2026;70496;2604;175;Fraldas e bebê;Infantil;845,95;Equipe de exemplo
+EX-0186;Pergunta;Reels;TikTok;35 a 44 anos;Descontraído;14/05/2026;103162;1849;104;Vacinação na farmácia;Serviço;1237,94;Equipe de exemplo
+EX-0187;Dica;Feed;Instagram;18 a 24 anos;Descontraído;14/05/2026;17437;443;23;Protetor solar;Dermocosmético;209,24;Equipe de exemplo
+EX-0188;Dica;Reels;Instagram;35 a 44 anos;Informativo;14/05/2026;42153;847;47;Antigripais;Medicamento sem prescrição;505,84;Equipe de exemplo
+EX-0189;Dica;Banner;Site;25 a 34 anos;Urgente;17/05/2026;84387;1149;59;Vitaminas;Suplemento;1012,64;Equipe de exemplo
+EX-0190;Prova social;Feed;Instagram;35 a 44 anos;Informativo;18/05/2026;38383;1221;107;Higiene bucal;Higiene;460,60;Equipe de exemplo
+EX-0191;Prova social;Reels;Instagram;25 a 34 anos;Descontraído;18/05/2026;70647;1710;116;Fraldas e bebê;Infantil;847,76;Equipe de exemplo
+EX-0192;Pergunta;Reels;Instagram;25 a 34 anos;Descontraído;19/05/2026;22113;738;64;Vacinação na farmácia;Serviço;265,36;Equipe de exemplo
+EX-0193;Dica;Reels;TikTok;25 a 34 anos;Descontraído;19/05/2026;37836;731;46;Protetor solar;Dermocosmético;454,03;Equipe de exemplo
+EX-0194;Pergunta;Banner;Site;18 a 24 anos;Descontraído;20/05/2026;40575;795;54;Antigripais;Medicamento sem prescrição;486,90;Equipe de exemplo
+EX-0195;Prova social;Feed;Site;18 a 24 anos;Informativo;20/05/2026;16409;378;22;Vitaminas;Suplemento;196,91;Equipe de exemplo
+EX-0196;Oferta direta;Reels;TikTok;35 a 44 anos;Informativo;22/05/2026;28657;640;48;Higiene bucal;Higiene;343,88;Equipe de exemplo
+EX-0197;Dica;Feed;Site;35 a 44 anos;Informativo;23/05/2026;72325;898;38;Fraldas e bebê;Infantil;867,90;Equipe de exemplo
+EX-0198;Oferta direta;Reels;TikTok;35 a 44 anos;Urgente;23/05/2026;25879;593;27;Vacinação na farmácia;Serviço;310,55;Equipe de exemplo
+EX-0199;Pergunta;Reels;Instagram;25 a 34 anos;Descontraído;24/05/2026;49895;2350;177;Protetor solar;Dermocosmético;598,74;Equipe de exemplo
+EX-0200;Pergunta;Reels;TikTok;18 a 24 anos;Informativo;24/05/2026;115511;3267;229;Antigripais;Medicamento sem prescrição;1386,13;Equipe de exemplo
+EX-0201;Oferta direta;Reels;TikTok;25 a 34 anos;Urgente;24/05/2026;69643;1247;104;Vitaminas;Suplemento;835,72;Equipe de exemplo
+EX-0202;Dica;Story;Instagram;25 a 34 anos;Descontraído;24/05/2026;20389;433;27;Higiene bucal;Higiene;244,67;Equipe de exemplo
+EX-0203;Prova social;Banner;Site;25 a 34 anos;Informativo;24/05/2026;34092;672;33;Fraldas e bebê;Infantil;409,10;Equipe de exemplo
+EX-0204;Pergunta;Reels;TikTok;18 a 24 anos;Urgente;25/05/2026;119244;3686;286;Vacinação na farmácia;Serviço;1430,93;Equipe de exemplo
+EX-0205;Prova social;Feed;Site;25 a 34 anos;Urgente;25/05/2026;68704;1406;94;Protetor solar;Dermocosmético;824,45;Equipe de exemplo
+EX-0206;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;29/05/2026;17792;166;8;Antigripais;Medicamento sem prescrição;213,50;Equipe de exemplo
+EX-0207;Dica;Reels;TikTok;35 a 44 anos;Descontraído;31/05/2026;64495;858;61;Vitaminas;Suplemento;773,94;Equipe de exemplo
+EX-0208;Prova social;Banner;Site;35 a 44 anos;Informativo;02/06/2026;18979;273;15;Higiene bucal;Higiene;227,75;Equipe de exemplo
+EX-0209;Pergunta;Story;Instagram;25 a 34 anos;Informativo;02/06/2026;109602;1907;139;Fraldas e bebê;Infantil;1315,22;Equipe de exemplo
+EX-0210;Prova social;Feed;Instagram;35 a 44 anos;Informativo;03/06/2026;37597;805;54;Vacinação na farmácia;Serviço;451,16;Equipe de exemplo
+EX-0211;Dica;Reels;Instagram;25 a 34 anos;Descontraído;03/06/2026;96492;2028;84;Protetor solar;Dermocosmético;1157,90;Equipe de exemplo
+EX-0212;Dica;Reels;Instagram;35 a 44 anos;Urgente;03/06/2026;17163;434;28;Antigripais;Medicamento sem prescrição;205,96;Equipe de exemplo
+EX-0213;Prova social;Reels;TikTok;18 a 24 anos;Urgente;06/06/2026;34485;613;33;Vitaminas;Suplemento;413,82;Equipe de exemplo
+EX-0214;Oferta direta;Feed;Site;35 a 44 anos;Informativo;08/06/2026;18346;269;18;Higiene bucal;Higiene;220,15;Equipe de exemplo
+EX-0215;Oferta direta;Feed;Site;25 a 34 anos;Urgente;09/06/2026;77804;1868;88;Fraldas e bebê;Infantil;933,65;Equipe de exemplo
+EX-0216;Prova social;Reels;Instagram;35 a 44 anos;Descontraído;10/06/2026;23289;653;31;Vacinação na farmácia;Serviço;279,47;Equipe de exemplo
+EX-0217;Pergunta;Feed;Site;18 a 24 anos;Descontraído;12/06/2026;96018;1969;83;Protetor solar;Dermocosmético;1152,22;Equipe de exemplo
+EX-0218;Dica;Reels;TikTok;35 a 44 anos;Informativo;12/06/2026;53150;1240;70;Antigripais;Medicamento sem prescrição;637,80;Equipe de exemplo
+EX-0219;Prova social;Feed;Instagram;35 a 44 anos;Descontraído;13/06/2026;38285;1066;61;Vitaminas;Suplemento;459,42;Equipe de exemplo
+EX-0220;Prova social;Banner;Site;18 a 24 anos;Urgente;14/06/2026;95606;1776;96;Higiene bucal;Higiene;1147,27;Equipe de exemplo
+EX-0221;Prova social;Banner;Site;25 a 34 anos;Descontraído;15/06/2026;21317;372;23;Fraldas e bebê;Infantil;255,80;Equipe de exemplo
+EX-0222;Oferta direta;Reels;Instagram;35 a 44 anos;Urgente;15/06/2026;28654;609;43;Vacinação na farmácia;Serviço;343,85;Equipe de exemplo
+EX-0223;Oferta direta;Reels;TikTok;35 a 44 anos;Urgente;16/06/2026;15735;437;23;Protetor solar;Dermocosmético;188,82;Equipe de exemplo
+EX-0224;Dica;Feed;Site;18 a 24 anos;Urgente;20/06/2026;93706;1948;129;Antigripais;Medicamento sem prescrição;1124,47;Equipe de exemplo
+EX-0225;Pergunta;Feed;Site;25 a 34 anos;Urgente;20/06/2026;66716;1412;114;Vitaminas;Suplemento;800,59;Equipe de exemplo
+EX-0226;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;21/06/2026;15669;328;19;Higiene bucal;Higiene;188,03;Equipe de exemplo
+EX-0227;Prova social;Reels;TikTok;35 a 44 anos;Informativo;22/06/2026;23914;358;18;Fraldas e bebê;Infantil;286,97;Equipe de exemplo
+EX-0228;Pergunta;Reels;Instagram;18 a 24 anos;Descontraído;22/06/2026;21670;463;31;Vacinação na farmácia;Serviço;260,04;Equipe de exemplo
+EX-0229;Oferta direta;Reels;Instagram;18 a 24 anos;Urgente;23/06/2026;39661;867;48;Protetor solar;Dermocosmético;475,93;Equipe de exemplo
+EX-0230;Dica;Banner;Site;18 a 24 anos;Informativo;24/06/2026;73236;671;25;Antigripais;Medicamento sem prescrição;878,83;Equipe de exemplo
+EX-0231;Prova social;Reels;Instagram;18 a 24 anos;Urgente;26/06/2026;32814;652;38;Vitaminas;Suplemento;393,77;Equipe de exemplo
+EX-0232;Pergunta;Reels;Instagram;25 a 34 anos;Informativo;29/06/2026;105294;3758;345;Higiene bucal;Higiene;1263,53;Equipe de exemplo
+EX-0233;Prova social;Reels;Instagram;25 a 34 anos;Descontraído;30/06/2026;18428;448;25;Fraldas e bebê;Infantil;221,14;Equipe de exemplo
+EX-0234;Dica;Reels;Instagram;35 a 44 anos;Urgente;30/06/2026;85218;1709;86;Vacinação na farmácia;Serviço;1022,62;Equipe de exemplo
+EX-0235;Oferta direta;Banner;Site;25 a 34 anos;Urgente;03/07/2026;93350;1940;133;Protetor solar;Dermocosmético;1120,20;Equipe de exemplo
+EX-0236;Prova social;Reels;TikTok;35 a 44 anos;Informativo;04/07/2026;17195;239;11;Antigripais;Medicamento sem prescrição;206,34;Equipe de exemplo
+EX-0237;Oferta direta;Reels;Instagram;25 a 34 anos;Urgente;04/07/2026;43613;771;34;Vitaminas;Suplemento;523,36;Equipe de exemplo
+EX-0238;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;04/07/2026;40903;932;52;Higiene bucal;Higiene;490,84;Equipe de exemplo
+EX-0239;Oferta direta;Feed;Instagram;35 a 44 anos;Urgente;05/07/2026;30837;767;53;Fraldas e bebê;Infantil;370,04;Equipe de exemplo
+EX-0240;Oferta direta;Feed;Instagram;35 a 44 anos;Urgente;06/07/2026;16523;372;18;Vacinação na farmácia;Serviço;198,28;Equipe de exemplo
+EX-0241;Prova social;Banner;Site;18 a 24 anos;Urgente;06/07/2026;44953;755;44;Protetor solar;Dermocosmético;539,44;Equipe de exemplo
+EX-0242;Oferta direta;Reels;Instagram;35 a 44 anos;Descontraído;07/07/2026;52651;1106;47;Antigripais;Medicamento sem prescrição;631,81;Equipe de exemplo
+EX-0243;Prova social;Story;Instagram;35 a 44 anos;Descontraído;10/07/2026;21528;398;22;Vitaminas;Suplemento;258,34;Equipe de exemplo
+EX-0244;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;11/07/2026;54246;914;53;Higiene bucal;Higiene;650,95;Equipe de exemplo
+EX-0245;Dica;Banner;Site;35 a 44 anos;Urgente;12/07/2026;23293;392;23;Fraldas e bebê;Infantil;279,52;Equipe de exemplo
+EX-0246;Pergunta;Reels;Instagram;25 a 34 anos;Informativo;13/07/2026;116916;5385;385;Vacinação na farmácia;Serviço;1402,99;Equipe de exemplo
+EX-0247;Oferta direta;Feed;Site;25 a 34 anos;Urgente;13/07/2026;18809;422;36;Protetor solar;Dermocosmético;225,71;Equipe de exemplo
+EX-0248;Oferta direta;Story;Instagram;35 a 44 anos;Urgente;14/07/2026;89940;848;46;Antigripais;Medicamento sem prescrição;1079,28;Equipe de exemplo
+EX-0249;Oferta direta;Reels;TikTok;25 a 34 anos;Urgente;17/07/2026;32366;578;30;Vitaminas;Suplemento;388,39;Equipe de exemplo
+EX-0250;Oferta direta;Reels;TikTok;25 a 34 anos;Urgente;18/07/2026;91138;1659;102;Higiene bucal;Higiene;1093,66;Equipe de exemplo
+EX-0251;Pergunta;Reels;Instagram;18 a 24 anos;Urgente;19/07/2026;108043;1924;96;Fraldas e bebê;Infantil;1296,52;Equipe de exemplo
+EX-0252;Dica;Story;Instagram;35 a 44 anos;Urgente;22/07/2026;15535;273;15;Vacinação na farmácia;Serviço;186,42;Equipe de exemplo
+EX-0253;Oferta direta;Feed;Site;18 a 24 anos;Urgente;22/07/2026;18121;343;19;Protetor solar;Dermocosmético;217,45;Equipe de exemplo
+EX-0254;Prova social;Banner;Site;18 a 24 anos;Descontraído;24/07/2026;81678;2514;163;Antigripais;Medicamento sem prescrição;980,14;Equipe de exemplo
+EX-0255;Prova social;Feed;Site;25 a 34 anos;Informativo;26/07/2026;59997;1319;69;Vitaminas;Suplemento;719,96;Equipe de exemplo
+EX-0256;Prova social;Reels;Instagram;25 a 34 anos;Descontraído;27/07/2026;77498;1219;72;Higiene bucal;Higiene;929,98;Equipe de exemplo
+EX-0257;Oferta direta;Feed;Site;35 a 44 anos;Urgente;29/07/2026;84011;1765;111;Fraldas e bebê;Infantil;1008,13;Equipe de exemplo
+EX-0258;Pergunta;Story;Instagram;25 a 34 anos;Descontraído;29/07/2026;55789;948;53;Vacinação na farmácia;Serviço;669,47;Equipe de exemplo
+EX-0259;Pergunta;Reels;TikTok;18 a 24 anos;Informativo;01/08/2026;37579;1463;113;Protetor solar;Dermocosmético;450,95;Equipe de exemplo
+EX-0260;Dica;Feed;Site;35 a 44 anos;Descontraído;03/08/2026;38218;442;16;Antigripais;Medicamento sem prescrição;458,62;Equipe de exemplo
+EX-0261;Prova social;Reels;Instagram;18 a 24 anos;Urgente;03/08/2026;23174;508;26;Vitaminas;Suplemento;278,09;Equipe de exemplo
+EX-0262;Dica;Story;Instagram;18 a 24 anos;Informativo;07/08/2026;74922;1514;95;Higiene bucal;Higiene;899,06;Equipe de exemplo
+EX-0263;Pergunta;Reels;Instagram;35 a 44 anos;Urgente;10/08/2026;16984;314;18;Fraldas e bebê;Infantil;203,81;Equipe de exemplo
+EX-0264;Pergunta;Banner;Site;35 a 44 anos;Urgente;11/08/2026;23152;439;20;Vacinação na farmácia;Serviço;277,82;Equipe de exemplo
+EX-0265;Oferta direta;Reels;TikTok;35 a 44 anos;Descontraído;12/08/2026;35696;776;41;Protetor solar;Dermocosmético;428,35;Equipe de exemplo
+EX-0266;Oferta direta;Banner;Site;18 a 24 anos;Urgente;13/08/2026;20496;524;30;Antigripais;Medicamento sem prescrição;245,95;Equipe de exemplo
+EX-0267;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;13/08/2026;42141;691;43;Vitaminas;Suplemento;505,69;Equipe de exemplo
+EX-0268;Prova social;Feed;Instagram;35 a 44 anos;Informativo;15/08/2026;18216;662;58;Higiene bucal;Higiene;218,59;Equipe de exemplo
+EX-0269;Pergunta;Banner;Site;35 a 44 anos;Urgente;15/08/2026;38638;754;41;Fraldas e bebê;Infantil;463,66;Equipe de exemplo
+EX-0270;Pergunta;Banner;Site;25 a 34 anos;Informativo;15/08/2026;80986;1361;85;Vacinação na farmácia;Serviço;971,83;Equipe de exemplo
+EX-0271;Dica;Story;Instagram;35 a 44 anos;Informativo;16/08/2026;51080;1004;66;Protetor solar;Dermocosmético;612,96;Equipe de exemplo
+EX-0272;Dica;Story;Instagram;35 a 44 anos;Descontraído;16/08/2026;54031;1407;92;Antigripais;Medicamento sem prescrição;648,37;Equipe de exemplo
+EX-0273;Dica;Feed;Site;35 a 44 anos;Informativo;17/08/2026;15251;162;11;Vitaminas;Suplemento;183,01;Equipe de exemplo
+EX-0274;Prova social;Reels;TikTok;35 a 44 anos;Urgente;17/08/2026;24031;361;20;Higiene bucal;Higiene;288,37;Equipe de exemplo
+EX-0275;Pergunta;Feed;Site;25 a 34 anos;Urgente;18/08/2026;28611;519;21;Fraldas e bebê;Infantil;343,33;Equipe de exemplo
+EX-0276;Pergunta;Reels;TikTok;35 a 44 anos;Urgente;20/08/2026;15433;402;28;Vacinação na farmácia;Serviço;185,20;Equipe de exemplo
+EX-0277;Dica;Feed;Site;18 a 24 anos;Informativo;20/08/2026;36381;871;63;Protetor solar;Dermocosmético;436,57;Equipe de exemplo
+EX-0278;Prova social;Reels;TikTok;35 a 44 anos;Urgente;22/08/2026;43016;480;28;Antigripais;Medicamento sem prescrição;516,19;Equipe de exemplo
+EX-0279;Pergunta;Reels;TikTok;35 a 44 anos;Descontraído;23/08/2026;22398;381;26;Vitaminas;Suplemento;268,78;Equipe de exemplo
+EX-0280;Pergunta;Banner;Site;35 a 44 anos;Urgente;28/08/2026;17101;355;20;Higiene bucal;Higiene;205,21;Equipe de exemplo
+EX-0281;Pergunta;Feed;Instagram;35 a 44 anos;Urgente;28/08/2026;103474;1802;107;Fraldas e bebê;Infantil;1241,69;Equipe de exemplo
+EX-0282;Pergunta;Feed;Instagram;35 a 44 anos;Informativo;29/08/2026;17632;351;17;Vacinação na farmácia;Serviço;211,58;Equipe de exemplo
+EX-0283;Prova social;Story;Instagram;35 a 44 anos;Informativo;30/08/2026;38996;852;47;Protetor solar;Dermocosmético;467,95;Equipe de exemplo
+EX-0284;Dica;Feed;Instagram;25 a 34 anos;Urgente;02/09/2026;64233;1380;63;Antigripais;Medicamento sem prescrição;770,80;Equipe de exemplo
+EX-0285;Prova social;Banner;Site;35 a 44 anos;Urgente;03/09/2026;32455;646;49;Vitaminas;Suplemento;389,46;Equipe de exemplo
+EX-0286;Dica;Feed;Instagram;18 a 24 anos;Informativo;15/09/2026;53830;1309;92;Higiene bucal;Higiene;645,96;Equipe de exemplo
+EX-0287;Prova social;Feed;Instagram;25 a 34 anos;Urgente;16/09/2026;16283;171;8;Fraldas e bebê;Infantil;195,40;Equipe de exemplo
+EX-0288;Pergunta;Story;Instagram;35 a 44 anos;Informativo;18/09/2026;101583;2322;135;Vacinação na farmácia;Serviço;1219,00;Equipe de exemplo
+EX-0289;Pergunta;Reels;TikTok;25 a 34 anos;Urgente;19/09/2026;107297;1664;100;Protetor solar;Dermocosmético;1287,56;Equipe de exemplo
+EX-0290;Pergunta;Reels;TikTok;18 a 24 anos;Descontraído;20/09/2026;44552;1194;93;Antigripais;Medicamento sem prescrição;534,62;Equipe de exemplo
+EX-0291;Dica;Feed;Site;35 a 44 anos;Informativo;20/09/2026;82642;1120;56;Vitaminas;Suplemento;991,70;Equipe de exemplo
+EX-0292;Oferta direta;Reels;TikTok;25 a 34 anos;Descontraído;20/09/2026;30962;606;37;Higiene bucal;Higiene;371,54;Equipe de exemplo
+EX-0293;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;21/09/2026;50015;1290;72;Fraldas e bebê;Infantil;600,18;Equipe de exemplo
+EX-0294;Prova social;Banner;Site;35 a 44 anos;Descontraído;21/09/2026;89774;1340;79;Vacinação na farmácia;Serviço;1077,29;Equipe de exemplo
+EX-0295;Oferta direta;Feed;Instagram;25 a 34 anos;Urgente;23/09/2026;68867;1567;75;Protetor solar;Dermocosmético;826,40;Equipe de exemplo
+EX-0296;Pergunta;Feed;Instagram;25 a 34 anos;Informativo;24/09/2026;47543;909;64;Antigripais;Medicamento sem prescrição;570,52;Equipe de exemplo
+EX-0297;Prova social;Reels;TikTok;18 a 24 anos;Descontraído;26/09/2026;46095;695;53;Vitaminas;Suplemento;553,14;Equipe de exemplo
+EX-0298;Pergunta;Reels;Instagram;25 a 34 anos;Descontraído;28/09/2026;35410;1214;72;Higiene bucal;Higiene;424,92;Equipe de exemplo
+EX-0299;Pergunta;Banner;Site;25 a 34 anos;Urgente;28/09/2026;113875;1593;88;Fraldas e bebê;Infantil;1366,50;Equipe de exemplo
+EX-0300;Dica;Banner;Site;25 a 34 anos;Informativo;29/09/2026;39532;763;45;Vacinação na farmácia;Serviço;474,38;Equipe de exemplo
