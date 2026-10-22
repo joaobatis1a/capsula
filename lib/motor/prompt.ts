@@ -22,7 +22,7 @@ Responda somente com um objeto JSON válido, sem texto antes ou depois.`;
 export interface Pedido {
   publico: string;
   pecas: { canal: Canal; formato: Formato }[];
-  roteiro?: { plataforma: "reels" | "tiktok"; duracaoSeg: 15 | 30 };
+  roteiro?: { plataforma: "reels" | "tiktok" | "comercial"; duracaoSeg: 15 | 30 };
 }
 
 export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido): string {
@@ -61,10 +61,14 @@ export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido):
   ];
 
   if (pedido.roteiro) {
+    const plataformaLabel = pedido.roteiro.plataforma === "comercial" ? "Comercial" : pedido.roteiro.plataforma === "reels" ? "Reels" : "TikTok";
     linhas.push(
       "",
-      `## Roteiro pedido: ${pedido.roteiro.plataforma === "reels" ? "Reels" : "TikTok"} de ${pedido.roteiro.duracaoSeg}s`,
+      `## Roteiro pedido: ${plataformaLabel} de ${pedido.roteiro.duracaoSeg}s`,
       "A primeira cena é o gancho e vai de 0 a 3s. As cenas cobrem o vídeo inteiro sem buracos e a última termina exatamente na duração.",
+      pedido.roteiro.plataforma === "comercial"
+        ? "Comercial: inclua marcação de cena (abertura, demonstração, benefício, CTA final). Fala e texto na tela obrigatórios."
+        : "",
     );
   }
 
