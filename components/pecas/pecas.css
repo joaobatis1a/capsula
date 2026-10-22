@@ -110,18 +110,20 @@
   line-height: 1.05;
   letter-spacing: -0.02em;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 .peca-texto {
   font-size: 38px;
   line-height: 1.3;
   max-width: 880px;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .peca-acao {
@@ -149,6 +151,7 @@
   font-size: 88px;
   line-height: 1;
   color: var(--m-destaque);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
 }
 .peca-cta {
   background: var(--m-branco);
@@ -190,11 +193,13 @@
 }
 .peca-story .peca-titulo {
   font-size: 104px;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
+  text-overflow: ellipsis;
 }
 .peca-story .peca-texto {
   font-size: 44px;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
+  text-overflow: ellipsis;
 }
 .peca-story .peca-acao {
   flex-direction: column;
@@ -226,7 +231,7 @@
 /* Banner 16:9: texto à esquerda, preço e ação à direita */
 .peca-banner {
   display: grid;
-  grid-template-columns: 1fr 560px;
+  grid-template-columns: 1fr minmax(400px, 560px);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "topo topo"
@@ -258,12 +263,14 @@
 }
 .peca-banner .peca-titulo {
   font-size: 96px;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
 }
 .peca-banner .peca-texto {
   font-size: 40px;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   max-width: none;
+  text-overflow: ellipsis;
 }
 .peca-banner .peca-rodape {
   grid-area: rodape;
