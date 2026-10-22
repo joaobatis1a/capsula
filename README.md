@@ -1,13 +1,12 @@
 # Cápsula
 
-**Estúdio criativo com memória para o marketing** · Next.js · TypeScript · Supabase
+**Estúdio criativo com memória para o marketing** · Next.js · TypeScript · Gemini
 
 [![Status](https://img.shields.io/badge/status-em_desenvolvimento-FF5A1F?style=flat-square)](#status-atual)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com)
 [![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com)
-[![Groq](https://img.shields.io/badge/Groq-F55036?style=flat-square)](https://groq.com)
+[![Gemini](https://img.shields.io/badge/Gemini-4285F4?style=flat-square)](https://ai.google.dev)
 
 *Criatividade na dose certa.* A Cápsula transforma um briefing de campanha em variações de peças prontas para revisão: consulta o histórico do que funcionou e do que falhou, lê o que está em alta no TikTok e no Instagram e entrega cada peça com a sua **Bula**, que explica de onde veio cada escolha.
 
@@ -76,8 +75,8 @@ Num time de três, os três são Developers. PO e Scrum Master acumulam essas re
 Tudo em planos gratuitos:
 
 - **[Next.js](https://nextjs.org)** (App Router) + **TypeScript**: front e rotas de API num único projeto
-- **[Supabase](https://supabase.com)**: Postgres compartilhado pelo time
-- **[Groq](https://groq.com)**: modelo de linguagem aberto na camada gratuita, com o [OpenRouter](https://openrouter.ai) de reserva
+- **Dados de teste** atrás de um adaptador (`CampaignDataSource`): a demonstração roda sem banco, e a fonte CSV ([docs/dados-reais.md](docs/dados-reais.md)) prova que trocar de fonte não muda o sistema. O **Supabase** (Postgres) é a próxima fase, para a aprovação persistir entre sessões
+- **[Gemini](https://ai.google.dev)**: modelo de linguagem na camada gratuita; sem chave, o motor gera por moldes fixos ("modo sem IA")
 - **[Vercel](https://vercel.com)**: deploy conectado ao repositório, com preview a cada PR
 
 ## Estrutura de pastas
@@ -102,7 +101,7 @@ Disponível depois do scaffold. O fluxo previsto é:
 git clone https://github.com/joaobatis1a/capsula.git
 cd capsula
 npm install
-cp .env.example .env.local   # chaves do Supabase e do Groq
+cp .env.example .env.local   # só a chave do Gemini é necessária (opcional)
 npm run dev
 ```
 
