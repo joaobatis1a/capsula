@@ -3,7 +3,7 @@ import { MockDataSource } from "@/lib/data/mock";
 import { gerar } from "@/lib/motor/gerar";
 import { briefingSchema } from "@/types/briefing";
 import { roteiroSchema, variacaoSchema } from "@/types/variacao";
-import { checarPeca } from "@/lib/governanca/checklist";
+import { checarPeca, checarRoteiro } from "@/lib/governanca/checklist";
 
 vi.mock("server-only", () => ({}));
 
@@ -292,5 +292,41 @@ describe("roteiros - duração e estrutura (schema)", () => {
       evidencias: [],
     };
     expect(roteiroSchema.safeParse(roteiroInvalido).success).toBe(false);
+  });
+});
+describe("governança dos roteiros (#10)", () => {
+  it("todo roteiro gerado sai com o checklist rodado", async () => {
+    const r = await gerar(briefingReels, new MockDataSource());
+    expect(r.roteiros.length).toBeGreaterThan(0);
+    for (const rot of r.roteiros) expect(rot.contraindicacoes.length).toBeGreaterThan(0);
+  });
+  it("roteiro de medicamento isento fecha com a advertência e passa", async () => {
+    const mip = briefingSchema.parse({ ...briefingReels, produto: "Antigripal", categoria: "Antigripais", tipoProduto: "medicamento_isento" });
+    const r = await gerar(mip, new MockDataSource());
+    for (const rot of r.roteiros) {
+      expect(rot.cenas.at(-1)!.tela).toContain("SE PERSISTIREM OS SINTOMAS");
+      expect(rot.contraindicacoes.find((c) => c.regra === "advertencia-mip")?.ok).toBe(true);
+    }
+  });
+
+  const briefing = {
+    produto: "Protetor solar FPS 50", categoria: "Protetor solar", tipoProduto: "dermocosmetico", publicos: ["Jovens de 18 a 24"], canais: ["instagram"], formatos: ["feed"],
+    oferta: { descricao: "30% off", precoDe: 79.9, precoPor: 55.9, condicao: "", validade: "2026-11-15" }, objetivo: "conversao", variacoesPorCanal: 3, incluirRoteiros: true, radarIds: [],
+  } as Parameters<typeof checarRoteiro>[1];
+  const cenas = (fala: string) => [{ inicio: 0, fim: 3, visual: "Close no produto", fala }, { inicio: 3, fim: 15, visual: "Logo", tela: "Válido até 15/11" }];
+
+  it("passa um roteiro limpo", () => {
+    expect(checarRoteiro({ titulo: "Reels 15s: protetor", cenas: cenas("Já usou protetor hoje?") }, briefing).every((c) => c.ok)).toBe(true);
+  });
+  it("bloqueia promessa de cura e termo proibido na fala", () => {
+    const r = checarRoteiro({ titulo: "Reels 15s: protetor", cenas: cenas("Cura garantida da sua pele") }, briefing);
+    expect(r.filter((c) => !c.ok).map((c) => c.regra)).toEqual(expect.arrayContaining(["termos-proibidos", "promessa"]));
+  });
+  it("exige a advertência da Anvisa no vídeo de medicamento isento", () => {
+    const mip = { ...briefing, tipoProduto: "medicamento_isento" } as typeof briefing;
+    const sem = checarRoteiro({ titulo: "Comercial", cenas: cenas("Alivia o resfriado") }, mip);
+    expect(sem.find((c) => c.regra === "advertencia-mip")?.ok).toBe(false);
+    const com = checarRoteiro({ titulo: "Comercial", cenas: [...cenas("Alivia o resfriado").slice(0, 1), { inicio: 3, fim: 15, visual: "Logo", tela: "SE PERSISTIREM OS SINTOMAS, O MÉDICO DEVERÁ SER CONSULTADO." }] }, mip);
+    expect(com.find((c) => c.regra === "advertencia-mip")?.ok).toBe(true);
   });
 });

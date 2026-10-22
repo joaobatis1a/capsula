@@ -80,6 +80,8 @@ export const roteiroSchema = z.object({
   cenas: z.array(cenaSchema).min(2),
   musica: musicaSchema.optional(),
   evidencias: z.array(evidenciaSchema).default([]),
+  /** Resultado do mesmo checklist das peças, aplicado ao texto do roteiro. Falha em qualquer regra = bloqueado. */
+  contraindicacoes: z.array(checagemSchema).default([]),
 });
 
 export type Evidencia = z.output<typeof evidenciaSchema>;
