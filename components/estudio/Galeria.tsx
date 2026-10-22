@@ -36,7 +36,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
   const [pecas, setPecas] = useState<Variacao[]>(resposta.variacoes);
   const [historico, setHistorico] = useState<Record<string, Registro[]>>({});
   const [abertaId, setAbertaId] = useState<string | null>(null);
-  const [tema, setTema] = useState<Tema>("sistema");
+  const [tema, setTema] = useState<Tema>("claro");
   const aberta = pecas.find((p) => p.id === abertaId) ?? null;
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -295,9 +295,9 @@ function Filtro({ rotulo, valor, opcoes, mudar }: { rotulo: string; valor: strin
 
 function TemaSeletor({ valor, mudar }: { valor: Tema; mudar: (v: Tema) => void }) {
   const opcoes: [Tema, string][] = [
-    ["sistema", "Sistema"],
     ["claro", "Claro"],
     ["escuro", "Escuro"],
+    ["sistema", "Sistema"],
   ];
   return (
     <div className="galeria-filtro" role="group" aria-label="Tema da peça">

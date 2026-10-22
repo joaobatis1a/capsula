@@ -34,13 +34,13 @@ export interface ConteudoPeca {
 export interface PecaProps {
   conteudo: ConteudoPeca;
   formato: Formato;
-  /** Tema da peça: "claro" | "escuro" | "sistema" (padrão: sistema) */
+  /** Tema da peça: "claro" (padrão, a marca verde), "escuro" ou "sistema" (segue o navegador) */
   tema?: Tema;
 }
 
 /** A peça no tamanho real (1080 ou 1920 px). Use dentro de <PecaEscalada> para caber na tela. */
 export const Peca = forwardRef<HTMLDivElement, PecaProps>(
-  function Peca({ conteudo: c, formato, tema = "sistema" }, ref) {
+  function Peca({ conteudo: c, formato, tema = "claro" }, ref) {
     const { largura, altura } = TAMANHOS[formato];
     const [ano, mes, dia] = c.validade.split("-");
     const temPreco = c.precoDe != null && c.precoPor != null;
