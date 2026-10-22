@@ -49,7 +49,8 @@ export async function gerar(briefing: Briefing, fonte: CampaignDataSource): Prom
   let modelo = usarIA ? "" : "sem-ia";
   const resultados = await Promise.all(
     pedidos.map(async (pedido) => {
-      if (!usarIA) return { pedido, ...gerarSemIA(briefing, ctx, pedido), ia: false };
+      // Pedido só de roteiro comercial: sai do molde, para gastar uma chamada ao modelo por público e não três.
+      if (!usarIA || pedido.pecas.length === 0) return { pedido, ...gerarSemIA(briefing, ctx, pedido), ia: false };
       try {
         const r = await completarJSON([
           { role: "system", content: SISTEMA },
@@ -65,7 +66,7 @@ export async function gerar(briefing: Briefing, fonte: CampaignDataSource): Prom
       }
     }),
   );
-  if (usarIA && resultados.some((r) => !r.ia) && !modelo) modelo = "sem-ia";
+  if (usarIA && resultados.some((r) => !r.ia && r.pedido.pecas.length > 0) && !modelo) modelo = "sem-ia";
 
   const variacoes: Variacao[] = [];
   const roteiros: Roteiro[] = [];
