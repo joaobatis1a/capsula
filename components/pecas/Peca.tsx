@@ -2,7 +2,7 @@
 
 import { Nunito_Sans, Poppins } from "next/font/google";
 import { forwardRef, useEffect, useRef, useState, type CSSProperties } from "react";
-import { MARCA } from "@/lib/marca";
+import { MARCA, getVariaveisCSS, type Tema } from "@/lib/marca";
 import type { Formato } from "@/types/briefing";
 import "./pecas.css";
 
@@ -31,71 +31,78 @@ export interface ConteudoPeca {
   advertencia?: string;
 }
 
-const VARS = {
-  "--m-primaria": MARCA.cores.primaria.valor,
-  "--m-primaria-escura": MARCA.cores.primariaEscura.valor,
-  "--m-clara": MARCA.cores.clara.valor,
-  "--m-destaque": MARCA.cores.destaque.valor,
-  "--m-texto": MARCA.cores.texto.valor,
-  "--m-branco": MARCA.cores.branco.valor,
-} as CSSProperties;
+export interface PecaProps {
+  conteudo: ConteudoPeca;
+  formato: Formato;
+  /** Tema da peça: "claro" | "escuro" | "sistema" (padrão: sistema) */
+  tema?: Tema;
+}
 
 /** A peça no tamanho real (1080 ou 1920 px). Use dentro de <PecaEscalada> para caber na tela. */
-export const Peca = forwardRef<HTMLDivElement, { conteudo: ConteudoPeca; formato: Formato }>(function Peca({ conteudo: c, formato }, ref) {
-  const { largura, altura } = TAMANHOS[formato];
-  const [ano, mes, dia] = c.validade.split("-");
-  const temPreco = c.precoDe != null && c.precoPor != null;
+export const Peca = forwardRef<HTMLDivElement, PecaProps>(
+  function Peca({ conteudo: c, formato, tema = "sistema" }, ref) {
+    const { largura, altura } = TAMANHOS[formato];
+    const [ano, mes, dia] = c.validade.split("-");
+    const temPreco = c.precoDe != null && c.precoPor != null;
 
-  return (
-    <div
-      ref={ref}
-      className={`peca peca-${formato} ${titulo.variable} ${texto.variable}`}
-      style={{ ...VARS, width: largura, height: altura }}
-      role="img"
-      aria-label={`${c.titulo}. ${c.texto}`}
-    >
-      <span className="peca-forma" aria-hidden="true" />
-      <span className="peca-forma peca-forma-2" aria-hidden="true" />
+    // Resolve tema: "sistema" usa prefers-color-scheme
+    const temaResolvido: "claro" | "escuro" = tema === "sistema"
+      ? (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro")
+      : (tema as "claro" | "escuro");
 
-      <header className="peca-topo">
-        <span className="peca-logo">
-          <span className="peca-logo-cruz" aria-hidden="true">
-            +
-          </span>
-          {MARCA.nome}
-        </span>
-        {c.selo ? <span className="peca-selo">{c.selo}</span> : null}
-      </header>
+    const vars = getVariaveisCSS(temaResolvido);
 
-      <div className="peca-corpo">
-        <h2 className="peca-titulo">{c.titulo}</h2>
-        <p className="peca-texto">{c.texto}</p>
-      </div>
+    return (
+      <div
+        ref={ref}
+        className={`peca peca-${formato} ${titulo.variable} ${texto.variable}`}
+        style={{ ...vars, width: largura, height: altura } as CSSProperties}
+        role="img"
+        aria-label={`${c.titulo}. ${c.texto}`}
+      >
+        <span className="peca-forma" aria-hidden="true" />
+        <span className="peca-forma peca-forma-2" aria-hidden="true" />
 
-      <div className="peca-acao">
-        {temPreco ? (
-          <p className="peca-preco">
-            <span className="peca-preco-de">De {real(c.precoDe!)}</span>
-            <span className="peca-preco-por">
-              por <b>{real(c.precoPor!)}</b>
+        <header className="peca-topo">
+          <span className="peca-logo">
+            <span className="peca-logo-cruz" aria-hidden="true">
+              +
             </span>
-          </p>
-        ) : null}
-        <span className="peca-cta">{c.cta}</span>
-      </div>
+            {MARCA.nome}
+          </span>
+          {c.selo ? <span className="peca-selo">{c.selo}</span> : null}
+        </header>
 
-      <footer className="peca-rodape">
-        <p className="peca-legal">
-          Oferta válida até {dia}/{mes}/{ano}.{c.condicao ? ` ${c.condicao}` : ""}
-        </p>
-        {c.advertencia ? <p className="peca-advertencia">{c.advertencia}</p> : null}
-      </footer>
-    </div>
-  );
-});
+        <div className="peca-corpo">
+          <h2 className="peca-titulo">{c.titulo}</h2>
+          <p className="peca-texto">{c.texto}</p>
+        </div>
+
+        <div className="peca-acao">
+          {temPreco ? (
+            <p className="peca-preco">
+              <span className="peca-preco-de">De {real(c.precoDe!)}</span>
+              <span className="peca-preco-por">
+                por <b>{real(c.precoPor!)}</b>
+              </span>
+            </p>
+          ) : null}
+          <span className="peca-cta">{c.cta}</span>
+        </div>
+
+        <footer className="peca-rodape">
+          <p className="peca-legal">
+            Oferta válida até {dia}/{mes}/{ano}.{c.condicao ? ` ${c.condicao}` : ""}
+          </p>
+          {c.advertencia ? <p className="peca-advertencia">{c.advertencia}</p> : null}
+        </footer>
+      </div>
+    );
+  }
+);
 
 /** Mostra a peça em qualquer largura, mantendo a proporção do formato. */
-export function PecaEscalada({ conteudo, formato, pecaRef }: { conteudo: ConteudoPeca; formato: Formato; pecaRef?: React.Ref<HTMLDivElement> }) {
+export function PecaEscalada({ conteudo, formato, pecaRef, tema }: { conteudo: ConteudoPeca; formato: Formato; pecaRef?: React.Ref<HTMLDivElement>; tema?: Tema }) {
   const caixa = useRef<HTMLDivElement>(null);
   const [escala, setEscala] = useState(0);
   const { largura, altura } = TAMANHOS[formato];
@@ -113,7 +120,7 @@ export function PecaEscalada({ conteudo, formato, pecaRef }: { conteudo: Conteud
   return (
     <div ref={caixa} className="peca-caixa" style={{ aspectRatio: `${largura} / ${altura}` }}>
       <div className="peca-escala" style={{ transform: `scale(${escala})`, visibility: escala ? "visible" : "hidden" }}>
-        <Peca ref={pecaRef} conteudo={conteudo} formato={formato} />
+        <Peca ref={pecaRef} conteudo={conteudo} formato={formato} tema={tema} />
       </div>
     </div>
   );
@@ -123,7 +130,9 @@ export function PecaEscalada({ conteudo, formato, pecaRef }: { conteudo: Conteud
 export async function baixarPng(no: HTMLElement, formato: Formato, nome: string) {
   const { toPng } = await import("html-to-image");
   const { largura, altura } = TAMANHOS[formato];
-  const url = await toPng(no, { width: largura, height: altura, pixelRatio: 1, cacheBust: true });
+  // Usa devicePixelRatio do navegador (mín. 2) para nitidez em telas HiDPI/Retina
+  const pixelRatio = Math.max(window.devicePixelRatio || 1, 2);
+  const url = await toPng(no, { width: largura, height: altura, pixelRatio, cacheBust: true });
   const a = document.createElement("a");
   a.href = url;
   a.download = `${nome}-${formato}.png`;
