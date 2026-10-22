@@ -33,13 +33,13 @@ describe("cliente do modelo", () => {
     vi.stubGlobal("fetch", async (_url: string, init: { body: string }) => {
       const modelo = JSON.parse(init.body).model as string;
       usados.push(modelo);
-      return modelo === "gemini-3.5-flash" ? resposta(503) : resposta(200, '{"ok":true}');
+      return modelo === "gemini-3.5-flash-lite" ? resposta(503) : resposta(200, '{"ok":true}');
     });
     const r = await pedir();
-    expect(usados).toEqual(["gemini-3.5-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"]);
-    expect(r.modelo).toBe("gemini-3.5-flash-lite");
-    expect(r.avisos.join(" ")).toMatch(/gemini-3\.5-flash\) respondeu 503/);
-    expect(r.avisos.join(" ")).toMatch(/Usamos O Gemini \(gemini-3\.5-flash-lite\) como reserva/);
+    expect(usados).toEqual(["gemini-3.5-flash-lite", "gemini-3.5-flash-lite", "gemini-3.5-flash"]);
+    expect(r.modelo).toBe("gemini-3.5-flash");
+    expect(r.avisos.join(" ")).toMatch(/gemini-3\.5-flash-lite\) respondeu 503/);
+    expect(r.avisos.join(" ")).toMatch(/Usamos O Gemini \(gemini-3\.5-flash\) como reserva/);
   });
 
   it("não troca de modelo quando o principal responde", async () => {
@@ -49,7 +49,7 @@ describe("cliente do modelo", () => {
       return resposta(200, '{"ok":true}');
     });
     const r = await pedir();
-    expect(usados).toEqual(["gemini-3.5-flash"]);
+    expect(usados).toEqual(["gemini-3.5-flash-lite"]);
     expect(r.avisos).toEqual([]);
   });
 
@@ -66,7 +66,7 @@ describe("cliente do modelo", () => {
       return resposta(503);
     });
     await expect(pedir()).rejects.toThrow();
-    expect([...new Set(usados)]).toEqual(["gemini-3.5-flash", "modelo-x"]);
+    expect([...new Set(usados)]).toEqual(["gemini-3.5-flash-lite", "modelo-x"]);
   });
 
   it("para de tentar quando o tempo total passa de 45s, para a função da Vercel não morrer", async () => {

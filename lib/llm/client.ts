@@ -30,7 +30,8 @@ const TENTATIVAS = 2;
    melhor devolver os moldes fixos, com aviso, do que perder a resposta inteira. */
 const TIMEOUT_TENTATIVA_MS = 20_000;
 const ORCAMENTO_TOTAL_MS = 45_000;
-const GEMINI_RESERVAS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"];
+const GEMINI_PRINCIPAL = "gemini-3.5-flash-lite";
+const GEMINI_RESERVAS = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
 
 export class SemProvedorError extends Error {}
 export class ProvedoresFalharamError extends Error {}
@@ -50,7 +51,7 @@ function provedores(): Provedor[] {
       modelo: process.env.OPENROUTER_MODEL || "meta-llama/llama-3.3-70b-instruct:free",
     },
   ];
-  const principal = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+  const principal = process.env.GEMINI_MODEL || GEMINI_PRINCIPAL;
   const configuradas = process.env.GEMINI_FALLBACK_MODELS?.split(",").map((m) => m.trim()).filter(Boolean);
   const reservas = (configuradas?.length ? configuradas : GEMINI_RESERVAS).filter((m) => m !== principal);
   for (const modelo of [principal, ...reservas]) {
