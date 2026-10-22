@@ -1,7 +1,7 @@
 import "server-only";
 import { z } from "zod";
 import type { CampaignDataSource } from "@/lib/data/types";
-import { ADVERTENCIA_MIP, aplicarGovernanca } from "@/lib/governanca/checklist";
+import { ADVERTENCIA_MIP, aplicarGovernanca, checarRoteiro } from "@/lib/governanca/checklist";
 import { completarJSON, lerJSON, temProvedor } from "@/lib/llm/client";
 import type { Briefing } from "@/types/briefing";
 import { roteiroSchema, variacaoSchema, type Evidencia, type RespostaGeracao, type Roteiro, type Variacao } from "@/types/variacao";
@@ -184,6 +184,11 @@ function montarRoteiro(r: RoteiroBruto, id: string, pedido: Pedido, ctx: Context
     cenas[0] = { ...cenas[0], inicio: 0, fim: Math.min(cenas[0].fim, 3) };
     cenas[cenas.length - 1] = { ...cenas[cenas.length - 1], fim: duracao };
   }
+  // Medicamento isento de prescrição: a advertência da Anvisa fecha o vídeo, como nas peças.
+  if (briefing.tipoProduto === "medicamento_isento" && cenas.length) {
+    const ultima = cenas[cenas.length - 1];
+    if (!(ultima.tela ?? "").includes(ADVERTENCIA_MIP)) cenas[cenas.length - 1] = { ...ultima, tela: [ultima.tela, ADVERTENCIA_MIP].filter(Boolean).join(" · ") };
+  }
   const musica = ctx.musicas.find((m) => m.usoComercial);
   const candidato = {
     id,
@@ -196,7 +201,7 @@ function montarRoteiro(r: RoteiroBruto, id: string, pedido: Pedido, ctx: Context
     evidencias: [...r.evidencias, ...(musica ? [evidenciaPorId(ctx, musica.id, `Música liberada para uso comercial: ${musica.termo}`, 0.3)!] : [])],
   };
   const ok = roteiroSchema.safeParse(candidato);
-  if (ok.success) return ok.data;
+  if (ok.success) return { ...ok.data, contraindicacoes: checarRoteiro(ok.data, briefing) };
   const reserva = gerarSemIA(briefing, ctx, pedido).roteiro;
   return reserva && reserva !== r ? montarRoteiro(reserva, id, pedido, ctx, briefing) : null;
 }
