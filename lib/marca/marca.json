@@ -18,7 +18,7 @@
       "clara": { "valor": "#E6F4EC", "uso": "Fundo da faixa legal e de áreas de respiro.", "fonte": "Definição modo escuro", "data": "2026-10-22" },
       "destaque": { "valor": "#FFC93C", "uso": "Selo de oferta e preço. Nunca como fundo de texto longo.", "fonte": "Definição modo escuro", "data": "2026-10-22" },
       "texto": { "valor": "#10231A", "uso": "Texto sobre fundos claros e sobre o destaque.", "fonte": "Definição modo escuro", "data": "2026-10-22" },
-      "branco": { "valor": "#FFFFFF", "uso": "Texto sobre a primária (contraste 6,4:1).", "fonte": "Defisão modo escuro", "data": "2026-10-22" }
+      "branco": { "valor": "#FFFFFF", "uso": "Texto sobre a primária (contraste 6,4:1).", "fonte": "Definição modo escuro", "data": "2026-10-22" }
     }
   },
   "tipografia": {

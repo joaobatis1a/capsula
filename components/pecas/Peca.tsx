@@ -130,9 +130,7 @@ export function PecaEscalada({ conteudo, formato, pecaRef, tema }: { conteudo: C
 export async function baixarPng(no: HTMLElement, formato: Formato, nome: string) {
   const { toPng } = await import("html-to-image");
   const { largura, altura } = TAMANHOS[formato];
-  // Usa devicePixelRatio do navegador (mín. 2) para nitidez em telas HiDPI/Retina
-  const pixelRatio = Math.max(window.devicePixelRatio || 1, 2);
-  const url = await toPng(no, { width: largura, height: altura, pixelRatio, cacheBust: true });
+  const url = await toPng(no, { width: largura, height: altura, pixelRatio: 1, cacheBust: true });
   const a = document.createElement("a");
   a.href = url;
   a.download = `${nome}-${formato}.png`;
