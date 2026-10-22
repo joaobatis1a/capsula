@@ -23,7 +23,10 @@ export interface RespostaLLM {
   avisos: string[];
 }
 
-const TENTATIVAS = 3;
+/* Duas tentativas por modelo: o 503 do Gemini costuma ser do modelo e não da chave, então trocar de modelo
+   resolve mais rápido do que insistir no mesmo. Os modelos de reserva sempre têm cota e carga próprias. */
+const TENTATIVAS = 2;
+const GEMINI_RESERVAS = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"];
 
 export class SemProvedorError extends Error {}
 export class ProvedoresFalharamError extends Error {}
@@ -42,13 +45,13 @@ function provedores(): Provedor[] {
       chave: process.env.OPENROUTER_API_KEY,
       modelo: process.env.OPENROUTER_MODEL || "meta-llama/llama-3.3-70b-instruct:free",
     },
-    {
-      id: "gemini",
-      url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
-      chave: process.env.GEMINI_API_KEY,
-      modelo: process.env.GEMINI_MODEL || "gemini-3.5-flash",
-    },
   ];
+  const principal = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+  const configuradas = process.env.GEMINI_FALLBACK_MODELS?.split(",").map((m) => m.trim()).filter(Boolean);
+  const reservas = (configuradas?.length ? configuradas : GEMINI_RESERVAS).filter((m) => m !== principal);
+  for (const modelo of [principal, ...reservas]) {
+    lista.push({ id: "gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", chave: process.env.GEMINI_API_KEY, modelo });
+  }
   return lista.filter((p) => p.chave);
 }
 
@@ -62,7 +65,7 @@ export function provedorAtivo(): "Groq" | "OpenRouter" | "Gemini" | null {
   return p ? ({ groq: "Groq", openrouter: "OpenRouter", gemini: "Gemini" } as const)[p.id] : null;
 }
 
-/** Pede uma resposta em JSON. Tenta cada provedor até 3 vezes quando há cota ou sobrecarga passageira. */
+/** Pede uma resposta em JSON. Tenta cada provedor (e, no Gemini, cada modelo) até 2 vezes quando há cota ou sobrecarga passageira. */
 export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura?: number; timeoutMs?: number } = {}): Promise<RespostaLLM> {
   const lista = provedores();
   if (lista.length === 0) throw new SemProvedorError("Nenhuma chave de modelo configurada.");
@@ -93,19 +96,19 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
           continue;
         }
         if (!res.ok) {
-          avisos.push(`${nome(p.id)} respondeu ${res.status}${res.status === 429 ? " (cota)" : ""}.`);
+          avisos.push(`${nome(p)} respondeu ${res.status}${res.status === 429 ? " (cota)" : ""}.`);
           break;
         }
         const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
         const texto = json.choices?.[0]?.message?.content;
         if (!texto) {
-          avisos.push(`${nome(p.id)} devolveu uma resposta vazia.`);
+          avisos.push(`${nome(p)} devolveu uma resposta vazia.`);
           break;
         }
-        if (avisos.length) avisos.push(`Usamos ${nome(p.id)} como reserva.`);
+        if (avisos.length) avisos.push(`Usamos ${nome(p)} como reserva.`);
         return { texto, provedor: p.id, modelo: p.modelo, avisos };
       } catch (e) {
-        avisos.push(`${nome(p.id)} não respondeu (${e instanceof Error && e.name === "TimeoutError" ? "tempo esgotado" : "erro de rede"}).`);
+        avisos.push(`${nome(p)} não respondeu (${e instanceof Error && e.name === "TimeoutError" ? "tempo esgotado" : "erro de rede"}).`);
         break;
       }
     }
@@ -113,8 +116,9 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
   throw new ProvedoresFalharamError(avisos.join(" "));
 }
 
-function nome(id: Provedor["id"]) {
-  return { groq: "O Groq", openrouter: "O OpenRouter", gemini: "O Gemini" }[id];
+function nome(p: Provedor) {
+  const base = { groq: "O Groq", openrouter: "O OpenRouter", gemini: "O Gemini" }[p.id];
+  return p.id === "gemini" ? `${base} (${p.modelo})` : base;
 }
 
 /** Extrai o primeiro objeto JSON de um texto (alguns modelos cercam o JSON com crases). */
