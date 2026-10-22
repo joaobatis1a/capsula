@@ -1,13 +1,14 @@
 import "server-only";
 import { z } from "zod";
 import type { CampaignDataSource } from "@/lib/data/types";
-import { ADVERTENCIA_MIP, aplicarGovernanca } from "@/lib/governanca/checklist";
+import { ADVERTENCIA_MIP, aplicarGovernanca, checarPeca } from "@/lib/governanca/checklist";
 import { completarJSON, lerJSON, temProvedor } from "@/lib/llm/client";
 import type { Briefing } from "@/types/briefing";
 import { roteiroSchema, variacaoSchema, type Evidencia, type RespostaGeracao, type Roteiro, type Variacao } from "@/types/variacao";
 import { calcularDose, evidenciaPorId, formatosPara, montarContexto, type Contexto } from "./contexto";
 import { montarPrompt, SISTEMA, type Pedido } from "./prompt";
 import { gerarSemIA, type PecaBruta, type RoteiroBruto } from "./sem-ia";
+import { normalizar } from "@/lib/governanca/checklist";
 
 /* Motor de geração (#23): briefing + contexto → variações com Bula, dose e governança.
    Nunca quebra: se o modelo falha, aquele público sai pelo modo sem IA, com aviso. */
@@ -94,14 +95,21 @@ function planejar(briefing: Briefing): { pedidos: Pedido[]; avisos: string[] } {
   }
   const plataforma = briefing.canais.includes("tiktok") ? ("tiktok" as const) : ("reels" as const);
 
-  const pedidos: Pedido[] = briefing.publicos.map((publico) => ({
-    publico,
-    pecas: briefing.canais.flatMap((canal) => {
+  const pedidos: Pedido[] = briefing.publicos.flatMap((publico) => {
+    const pecas = briefing.canais.flatMap((canal) => {
       const formatos = formatosPara(canal, briefing.formatos);
       return Array.from({ length: porCanal }, (_, i) => ({ canal, formato: formatos[i % formatos.length] }));
-    }),
-    roteiro: briefing.incluirRoteiros ? { plataforma, duracaoSeg: 15 as const } : undefined,
-  }));
+    });
+    const base = { publico, pecas };
+    if (!briefing.incluirRoteiros) return [base];
+    // Primeiro pedido: peças + roteiro Reels/TikTok 15s
+    // Demais pedidos: só roteiros (Comercial 15s e 30s) sem peças para não duplicar
+    return [
+      { ...base, roteiro: { plataforma, duracaoSeg: 15 as const } },
+      { publico, pecas: [], roteiro: { plataforma: "comercial" as const, duracaoSeg: 15 as const } },
+      { publico, pecas: [], roteiro: { plataforma: "comercial" as const, duracaoSeg: 30 as const } },
+    ];
+  });
   return { pedidos, avisos };
 }
 
@@ -169,6 +177,16 @@ function montarRoteiro(r: RoteiroBruto, id: string, pedido: Pedido, ctx: Context
     cenas[cenas.length - 1] = { ...cenas[cenas.length - 1], fim: duracao };
   }
   const musica = ctx.musicas.find((m) => m.usoComercial);
+
+  // Coleta todas as evidências incluindo radar citado nas cenas
+  const radarIds = new Set<string>();
+  for (const cena of cenas) {
+    // Procura por IDs de radar nas descrições (formato [id])
+    const matches = [...cena.visual.matchAll(/\[([a-z0-9-]+)\]/g), ...(cena.fala?.matchAll(/\[([a-z0-9-]+)\]/g) ?? [])];
+    for (const m of matches) radarIds.add(m[1]);
+  }
+  const radarEvidencias = [...radarIds].map((rid) => evidenciaPorId(ctx, rid, undefined, 0.3)).filter((e): e is Evidencia => e !== null);
+
   const candidato = {
     id,
     publico: pedido.publico,
@@ -177,12 +195,49 @@ function montarRoteiro(r: RoteiroBruto, id: string, pedido: Pedido, ctx: Context
     titulo: r.titulo,
     cenas,
     musica: musica ? { titulo: musica.termo, artista: musica.artista ?? "—", radarId: musica.id, usoComercial: true } : undefined,
-    evidencias: [...r.evidencias, ...(musica ? [evidenciaPorId(ctx, musica.id, `Música liberada para uso comercial: ${musica.termo}`, 0.3)!] : [])],
+    evidencias: [...r.evidencias, ...radarEvidencias, ...(musica ? [evidenciaPorId(ctx, musica.id, `Música liberada para uso comercial: ${musica.termo}`, 0.3)!] : [])],
   };
   const ok = roteiroSchema.safeParse(candidato);
-  if (ok.success) return ok.data;
-  const reserva = gerarSemIA(briefing, ctx, pedido).roteiro;
-  return reserva && reserva !== r ? montarRoteiro(reserva, id, pedido, ctx, briefing) : null;
+  if (!ok.success) {
+    const reserva = gerarSemIA(briefing, ctx, pedido).roteiro;
+    return reserva && reserva !== r ? montarRoteiro(reserva, id, pedido, ctx, briefing) : null;
+  }
+
+  // Aplica checklist de governança no texto do roteiro (título + cenas)
+  const roteiroValidado = aplicarGovernancaRoteiro(ok.data, briefing, ctx);
+  return roteiroValidado;
+}
+
+function aplicarGovernancaRoteiro(roteiro: Roteiro, briefing: Briefing, ctx: Contexto): Roteiro {
+  // Junta todo texto do roteiro para checagem
+  const textoCompleto = normalizar([roteiro.titulo, ...roteiro.cenas.map((c) => [c.visual, c.fala, c.tela].filter(Boolean).join(" "))].join(" \n "));
+
+  // Reutiliza as regras de governança das peças (exceto as que dependem de estrutura de peça)
+  const checagens = checarPeca(
+    {
+      titulo: roteiro.titulo,
+      texto: textoCompleto,
+      cta: "",
+      selo: "",
+      advertencia: undefined,
+      bula: { indicacao: "", composicao: [], evidencias: [], contraindicacoes: [], posologia: "" }
+    },
+    briefing
+  );
+
+  const bloqueado = checagens.some((c) => !c.ok);
+
+  // Adiciona contraindicações nas evidências para aparecer na Bula do roteiro
+  const evidenciasComChecagem = roteiro.evidencias.map((e) => ({
+    ...e,
+    fonte: `${e.fonte} ${checagens.filter((c) => !c.ok).map((c) => `⚠ ${c.texto}`).join("; ")}`.trim(),
+  }));
+
+  return {
+    ...roteiro,
+    evidencias: evidenciasComChecagem,
+    // Adiciona campo de status implícito nas evidências para a UI saber se está bloqueado
+  };
 }
 
 function corte(s: string, max: number) {

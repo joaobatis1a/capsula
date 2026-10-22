@@ -104,8 +104,8 @@ export function gerarSemIA(briefing: Briefing, ctx: Contexto, pedido: Pedido): {
 
   const roteiro = pedido.roteiro
     ? {
-        titulo: `${pedido.roteiro.plataforma === "reels" ? "Reels" : "TikTok"}: ${briefing.produto}`,
-        cenas: cenasPadrao(briefing, pedido.roteiro.duracaoSeg, validade),
+        titulo: `${plataformaLabel(pedido.roteiro.plataforma)}: ${briefing.produto}`,
+        cenas: cenasPadrao(briefing, pedido.roteiro.plataforma, pedido.roteiro.duracaoSeg, validade),
         evidencias: ganchos[0].refId ? [evidenciaPorId(ctx, ganchos[0].refId)!].filter(Boolean) : [],
       }
     : undefined;
@@ -124,12 +124,29 @@ function ganchosParaPublico(ctx: Contexto, publico: string): { gancho: Gancho; r
   return lista.length ? lista : [{ gancho: "beneficio" }];
 }
 
-function cenasPadrao(b: Briefing, duracao: 15 | 30, validade: string): Cena[] {
+function plataformaLabel(p: "reels" | "tiktok" | "comercial") {
+  return p === "comercial" ? "Comercial" : p === "reels" ? "Reels" : "TikTok";
+}
+
+function cenasPadrao(b: Briefing, plataforma: "reels" | "tiktok" | "comercial", duracao: 15 | 30, validade: string): Cena[] {
   const meio = duracao === 15 ? 10 : 22;
+  const fim = duracao;
+
+  if (plataforma === "comercial") {
+    // Comercial: abertura (gancho 0-3s), demonstração, benefícios, CTA final
+    return [
+      { inicio: 0, fim: 3, visual: `Abertura: ${b.produto} em destaque na prateleira`, fala: `Conheça ${b.produto}, o cuidado que faltava na sua rotina.`, tela: "Conheça o produto" },
+      { inicio: 3, fim: meio, visual: "Demonstração do produto em uso", fala: b.oferta.descricao, tela: b.oferta.descricao },
+      { inicio: meio, fim: fim - 3, visual: "Pessoa satisfeita usando o produto no dia a dia", fala: "Praticidade e cuidado para você e sua família.", tela: "Cuidado diário" },
+      { inicio: fim - 3, fim: fim, visual: "Logo + produto + validade", fala: "Disponível no app e nas lojas.", tela: `Válido até ${validade} · Disponível no app e nas lojas` },
+    ];
+  }
+
+  // Reels/TikTok
   return [
     { inicio: 0, fim: 3, visual: `Close no produto em uso: ${b.produto}`, fala: `Já garantiu o seu ${b.produto}?` },
     { inicio: 3, fim: meio, visual: "Produto na mão, aplicação rápida", tela: b.oferta.descricao },
-    { inicio: meio, fim: duracao, visual: "Produto e logo", tela: `Válido até ${validade} · no app e nas lojas` },
+    { inicio: meio, fim: fim, visual: "Produto e logo", tela: `Válido até ${validade} · no app e nas lojas` },
   ];
 }
 
