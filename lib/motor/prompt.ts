@@ -16,13 +16,14 @@ Regras que nunca podem ser quebradas:
 - Toda peça que fala de preço ou desconto informa a validade da oferta no texto (ex.: "até 15/11").
 - Sem emoji. Frases curtas. Botões começam com verbo.
 - Use só os ids de evidência fornecidos. Cada peça cita de 1 a 3 evidências.
+- Se houver músicas liberadas no Radar, use uma delas no roteiro (cite o id da música na cena final).
 
 Responda somente com um objeto JSON válido, sem texto antes ou depois.`;
 
 export interface Pedido {
   publico: string;
   pecas: { canal: Canal; formato: Formato }[];
-  roteiro?: { plataforma: "reels" | "tiktok"; duracaoSeg: 15 | 30 };
+  roteiro?: { plataforma: "reels" | "tiktok" | "comercial"; duracaoSeg: 15 | 30 };
 }
 
 export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido): string {
@@ -53,6 +54,9 @@ export function montarPrompt(briefing: Briefing, ctx: Contexto, pedido: Pedido):
     "",
     "## Época do ano (sazonalidade de saúde)",
     ...ctx.sazonalidade.slice(0, 4).map((s) => `- [${s.id}] ${s.condicao} (pico em ${mesesPorExtenso(s.mesesPico)}). Ângulo: ${s.angulo} Cuidado: ${s.cuidado}`),
+    "",
+    "## Músicas liberadas para uso comercial (Radar)",
+    ...ctx.musicas.filter((m) => m.usoComercial).slice(0, 3).map((m) => `- [${m.id}] ${m.plataforma} · ${m.termo} — ${m.artista ?? "artista não informado"} (fonte: ${m.fonte}, visto em ${dataCurta(m.vistoEm)})`),
     "",
     "## Peças pedidas",
     ...pedido.pecas.map((p, i) => `${i + 1}. ${ROTULOS.canal[p.canal]} · ${ROTULOS.formato[p.formato]}`),

@@ -38,7 +38,7 @@ describe("motor sem chave de modelo", () => {
       if (v.canal === "site") expect(v.formato).toBe("banner");
     }
     expect(new Set(r.variacoes.map((v) => v.publico)).size).toBe(2);
-    expect(r.roteiros).toHaveLength(2);
+    expect(r.roteiros).toHaveLength(6);
     for (const rot of r.roteiros) {
       expect(roteiroSchema.safeParse(rot).success).toBe(true);
       expect(rot.musica?.usoComercial).toBe(true);
