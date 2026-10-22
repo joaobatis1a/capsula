@@ -8,6 +8,7 @@ import type { ErroApi, RespostaGeracao } from "@/types/variacao";
 import { useAvisar } from "@/components/motion/Avisos";
 import { Revela } from "@/components/motion/Revela";
 import { registrar } from "@/lib/ganho/metricas";
+import { calcularDesconto, descricaoDaOferta, lerPreco, reais } from "@/lib/oferta";
 import { Abertura } from "./Abertura";
 import { Escolha, Interruptor } from "./Controles";
 import { Dosagem } from "./Dosagem";
@@ -21,7 +22,6 @@ interface Form {
   produto: string;
   categoria: string;
   tipoProduto: TipoProduto;
-  descricao: string;
   precoDe: string;
   precoPor: string;
   condicao: string;
@@ -40,7 +40,6 @@ const VAZIO: Form = {
   produto: "",
   categoria: "",
   tipoProduto: "dermocosmetico",
-  descricao: "",
   precoDe: "",
   precoPor: "",
   condicao: "",
@@ -123,7 +122,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
 
   function usarTema(t: Sazonalidade) {
     tocou();
-    setForm((f) => ({ ...formDe(t, publicos), descricao: f.descricao, precoDe: f.precoDe, precoPor: f.precoPor, condicao: f.condicao, validade: f.validade, canais: f.canais, formatos: f.formatos, objetivo: f.objetivo }));
+    setForm((f) => ({ ...formDe(t, publicos), precoDe: f.precoDe, precoPor: f.precoPor, condicao: f.condicao, validade: f.validade, canais: f.canais, formatos: f.formatos, objetivo: f.objetivo }));
     setErros({});
     setPreenchidos(CAMPOS_DO_TEMA);
     rolarParaOBriefing(true);
@@ -141,7 +140,6 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
       ...VAZIO,
       produto: "Protetor solar FPS 50",
       categoria: "Protetor solar",
-      descricao: "30% off no protetor solar FPS 50",
       precoDe: "79.90",
       precoPor: "55.90",
       condicao: "No app e nas lojas, enquanto durar o estoque.",
@@ -151,16 +149,17 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
       formatos: ["feed", "story", "banner"],
     });
     setErros({});
-    setPreenchidos(["produto", "categoria", "oferta", "precoDe", "precoPor", "validade", "condicao"]);
+    setPreenchidos(["produto", "categoria", "desconto", "precoDe", "precoPor", "validade", "condicao"]);
   }
 
   function paraBriefing(): BriefingEntrada {
-    const num = (s: string) => (s.trim() ? Number(s.replace(",", ".")) : undefined);
+    const precoDe = lerPreco(form.precoDe);
+    const precoPor = lerPreco(form.precoPor);
     return {
       produto: form.produto,
       categoria: form.categoria,
       tipoProduto: form.tipoProduto,
-      oferta: { descricao: form.descricao, precoDe: num(form.precoDe), precoPor: num(form.precoPor), condicao: form.condicao || undefined, validade: form.validade },
+      oferta: { descricao: descricaoDaOferta(form.produto, precoDe, precoPor), precoDe, precoPor, condicao: form.condicao || undefined, validade: form.validade },
       publicos: form.publicos,
       canais: form.canais,
       formatos: form.formatos,
@@ -230,6 +229,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
   }
 
   const sugeridos = publicos.filter((p) => !form.publicos.includes(p.nome));
+  const desconto = calcularDesconto(lerPreco(form.precoDe), lerPreco(form.precoPor));
   const totalPecas = Math.min(24, form.publicos.length * form.canais.length * form.variacoesPorCanal);
 
   return (
@@ -266,9 +266,23 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
               opcoes={TIPOS_PRODUTO.map((t) => ({ valor: t, nome: ROTULOS.tipoProduto[t] }))}
               dica={form.tipoProduto === "medicamento_prescricao" ? "Não pode ter propaganda para o público. As peças sairão bloqueadas." : form.tipoProduto === "medicamento_isento" ? "As peças levam a advertência obrigatória da Anvisa." : undefined}
             />
-            <Field id="cp-f-oferta" className={marca("oferta")} label="Oferta" value={form.descricao} onChange={(e) => set("descricao", e.target.value)} error={erros["oferta.descricao"]} placeholder="30% off no protetor FPS 50" />
             <Field className={marca("precoDe")} label="Preço normal (R$)" inputMode="decimal" value={form.precoDe} onChange={(e) => set("precoDe", e.target.value)} error={erros["oferta.precoDe"]} placeholder="79,90" />
             <Field className={marca("precoPor")} label="Preço da oferta (R$)" inputMode="decimal" value={form.precoPor} onChange={(e) => set("precoPor", e.target.value)} error={erros["oferta.precoPor"]} placeholder="55,90" />
+            <div className={`cp-field ${marca("desconto") ?? ""}`}>
+              <span className="cp-label" id="rotulo-desconto">
+                Desconto
+              </span>
+              <output className={desconto.tipo === "ok" ? "estudio-desconto is-ok" : "estudio-desconto"} aria-labelledby="rotulo-desconto" aria-live="polite">
+                {desconto.tipo === "ok" ? (
+                  <>
+                    <b>{desconto.percentual}%</b>
+                    <span>economiza {reais(desconto.economia)}</span>
+                  </>
+                ) : (
+                  "Calculado pelos dois preços"
+                )}
+              </output>
+            </div>
             <Field className={marca("validade")} label="Validade da oferta" type="date" value={form.validade} onChange={(e) => set("validade", e.target.value)} error={erros["oferta.validade"] && "Informe até quando a oferta vale."} />
             <Field className={marca("condicao")} label="Condição" value={form.condicao} onChange={(e) => set("condicao", e.target.value)} placeholder="No app e nas lojas, enquanto durar o estoque" />
           </div>
