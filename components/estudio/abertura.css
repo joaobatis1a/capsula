@@ -209,11 +209,16 @@
   line-height: 22px;
   font-weight: 600;
   padding-right: 130px;
+  /* sempre duas linhas de altura: os temas ficam do mesmo tamanho, com o nome curto ou longo */
+  min-height: 44px;
 }
 .agora-sub {
   font-size: 13px;
   line-height: 18px;
   color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .agora-item .faixa-ano {
   margin-top: 2px;

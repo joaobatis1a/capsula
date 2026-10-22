@@ -223,3 +223,62 @@
 .radar-ver-mais {
   margin-top: calc(var(--space-4) * -1);
 }
+
+/* "Ver mais detalhes": explica o número sem poluir a lista */
+.memoria-detalhes {
+  margin-top: var(--space-2);
+}
+.memoria-detalhes > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--acento-texto, var(--memoria));
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  margin-left: calc(var(--space-2) * -1);
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+.memoria-detalhes > summary::-webkit-details-marker {
+  display: none;
+}
+.memoria-detalhes > summary::after {
+  content: "+";
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.memoria-detalhes[open] > summary::after {
+  content: "–";
+}
+.memoria-detalhes > summary:hover {
+  background: var(--hover);
+}
+.memoria-detalhes > summary:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+.memoria-detalhes-lista {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--fill-suave);
+}
+.memoria-detalhes-lista dt {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.memoria-detalhes-lista dd {
+  margin: 2px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ink-muted);
+}

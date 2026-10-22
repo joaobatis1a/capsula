@@ -232,18 +232,42 @@ select.cp-input {
   display: grid;
   gap: var(--space-4);
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-  align-items: start;
+  align-items: stretch;
+}
+.galeria-grade > li {
+  display: grid;
 }
 .galeria-grade .cp-piece {
   max-width: none;
+  grid-template-rows: auto auto 1fr auto;
 }
-/* A miniatura mostra a peça inteira, na proporção real do formato */
+/* Todos os cards têm o mesmo tamanho: a miniatura mora numa moldura quadrada e a peça aparece inteira dentro dela,
+   na proporção real do formato (feed enche a moldura, story fica em pé no meio, banner fica deitado). */
 .galeria-grade .cp-piece-thumb {
-  aspect-ratio: auto;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
 }
-.galeria-grade .cp-piece-story .cp-piece-thumb {
-  width: 62%;
-  justify-self: center;
+.galeria-grade .cp-piece-thumb > .peca-caixa {
+  width: 100%;
+}
+.galeria-grade .cp-piece-story .cp-piece-thumb > .peca-caixa {
+  width: 56.25%;
+}
+/* Título e texto com a mesma altura em todos os cards, com reticências quando passam */
+.galeria-grade .cp-piece-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 48px;
+}
+.galeria-grade .cp-piece-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 60px;
 }
 .aprovacao {
   display: grid;
@@ -400,3 +424,34 @@ select.cp-input {
   animation: cp-desenha 360ms var(--ease-out) 120ms forwards;
 }
 
+
+/* Desconto: calculado pelos dois preços, não se digita */
+.estudio-desconto {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-height: 47px;
+  padding: 10px var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--fill-suave);
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 24px;
+  align-items: center;
+}
+.estudio-desconto b {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--ink);
+}
+.estudio-desconto.is-ok {
+  background: var(--tendencia-soft);
+  color: var(--tendencia);
+}
+.estudio-desconto.is-ok b {
+  color: var(--tendencia);
+}
+.estudio-desconto span {
+  white-space: nowrap;
+}
