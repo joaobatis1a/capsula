@@ -186,9 +186,21 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
               memoria={aberta.dose}
               indicacao={aberta.bula.indicacao}
               composicao={aberta.bula.composicao}
-              evidencias={aberta.bula.evidencias.map(
-                (e): BulaEvidencia => ({ origin: e.origem === "memoria" ? "memoria" : "tendencia", rotulo: e.origem === "sazonalidade" ? "Sazonalidade" : undefined, text: e.texto, fonte: e.fonte }),
-              )}
+              evidencias={(() => {
+                const base = aberta.bula.evidencias.map(
+                  (e): BulaEvidencia => ({ origin: e.origem === "memoria" ? "memoria" : "tendencia", rotulo: e.origem === "sazonalidade" ? "Sazonalidade" : undefined, text: e.texto, fonte: e.fonte }),
+                );
+                // Música: pega apenas uma por público (todos roteiros usam a mesma)
+                const musica = resposta.roteiros
+                  .filter((r) => r.publico === aberta.publico)
+                  .flatMap((r) => r.evidencias
+                    .filter((e) => e.texto?.includes("Música liberada"))
+                    .map((e): BulaEvidencia => ({ origin: e.origem === "memoria" ? "memoria" : "tendencia", rotulo: e.origem === "sazonalidade" ? "Sazonalidade" : undefined, text: e.texto, fonte: e.fonte })),
+                  );
+                // Deduplica pela fonte (todas são iguais)
+                const musicaUnica = musica.length ? [musica[0]] : [];
+                return [...base, ...musicaUnica];
+              })()}
               contraindicacoes={aberta.bula.contraindicacoes.map((c) => ({ ok: c.ok, text: c.texto }))}
               posologia={aberta.bula.posologia}
             />

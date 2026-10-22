@@ -92,16 +92,31 @@ function planejar(briefing: Briefing): { pedidos: Pedido[]; avisos: string[] } {
     porCanal = Math.max(1, Math.floor(MAX_PECAS / combinacoes));
     avisos.push(`Para caber na cota, geramos ${porCanal} variação(ões) por canal e público, em vez de ${briefing.variacoesPorCanal}.`);
   }
-  const plataforma = briefing.canais.includes("tiktok") ? ("tiktok" as const) : ("reels" as const);
+  const plataformaSocial = briefing.canais.includes("tiktok") ? ("tiktok" as const) : ("reels" as const);
 
-  const pedidos: Pedido[] = briefing.publicos.map((publico) => ({
-    publico,
-    pecas: briefing.canais.flatMap((canal) => {
-      const formatos = formatosPara(canal, briefing.formatos);
-      return Array.from({ length: porCanal }, (_, i) => ({ canal, formato: formatos[i % formatos.length] }));
-    }),
-    roteiro: briefing.incluirRoteiros ? { plataforma, duracaoSeg: 15 as const } : undefined,
-  }));
+  const pedidos: Pedido[] = briefing.publicos.flatMap((publico) => [
+    // Pedido 1: peças normais + roteiro social (Reels ou TikTok) 15s
+    {
+      publico,
+      pecas: briefing.canais.flatMap((canal) => {
+        const formatos = formatosPara(canal, briefing.formatos);
+        return Array.from({ length: porCanal }, (_, i) => ({ canal, formato: formatos[i % formatos.length] }));
+      }),
+      roteiro: briefing.incluirRoteiros ? { plataforma: plataformaSocial, duracaoSeg: 15 as const } : undefined,
+    },
+    // Pedido 2: apenas roteiro Comercial 15s (sem peças duplicadas)
+    {
+      publico,
+      pecas: [],
+      roteiro: briefing.incluirRoteiros ? { plataforma: "comercial" as const, duracaoSeg: 15 as const } : undefined,
+    },
+    // Pedido 3: apenas roteiro Comercial 30s (sem peças duplicadas)
+    {
+      publico,
+      pecas: [],
+      roteiro: briefing.incluirRoteiros ? { plataforma: "comercial" as const, duracaoSeg: 30 as const } : undefined,
+    },
+  ]);
   return { pedidos, avisos };
 }
 

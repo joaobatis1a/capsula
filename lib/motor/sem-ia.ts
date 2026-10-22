@@ -103,11 +103,22 @@ export function gerarSemIA(briefing: Briefing, ctx: Contexto, pedido: Pedido): {
   });
 
   const roteiro = pedido.roteiro
-    ? {
-        titulo: `${pedido.roteiro.plataforma === "reels" ? "Reels" : "TikTok"}: ${briefing.produto}`,
-        cenas: cenasPadrao(briefing, pedido.roteiro.duracaoSeg, validade),
-        evidencias: ganchos[0].refId ? [evidenciaPorId(ctx, ganchos[0].refId)!].filter(Boolean) : [],
-      }
+    ? (() => {
+        const duracao = pedido.roteiro.duracaoSeg;
+        const plataforma = pedido.roteiro.plataforma as "reels" | "tiktok" | "comercial";
+        if (plataforma === "comercial") {
+          return {
+            titulo: `Comercial ${duracao}s: ${briefing.produto}`,
+            cenas: cenasComercial(briefing, duracao, validade),
+            evidencias: ganchos[0].refId ? [evidenciaPorId(ctx, ganchos[0].refId)!].filter(Boolean) : [],
+          };
+        }
+        return {
+          titulo: `${plataforma === "reels" ? "Reels" : "TikTok"} ${duracao}s: ${briefing.produto}`,
+          cenas: cenasPadrao(briefing, duracao, validade),
+          evidencias: ganchos[0].refId ? [evidenciaPorId(ctx, ganchos[0].refId)!].filter(Boolean) : [],
+        };
+      })()
     : undefined;
 
   return { pecas, roteiro };
@@ -130,6 +141,15 @@ function cenasPadrao(b: Briefing, duracao: 15 | 30, validade: string): Cena[] {
     { inicio: 0, fim: 3, visual: `Close no produto em uso: ${b.produto}`, fala: `Já garantiu o seu ${b.produto}?` },
     { inicio: 3, fim: meio, visual: "Produto na mão, aplicação rápida", tela: b.oferta.descricao },
     { inicio: meio, fim: duracao, visual: "Produto e logo", tela: `Válido até ${validade} · no app e nas lojas` },
+  ];
+}
+
+function cenasComercial(b: Briefing, duracao: 15 | 30, validade: string): Cena[] {
+  const meio = duracao === 15 ? 10 : 22;
+  return [
+    { inicio: 0, fim: 3, visual: `Abertura: ${b.produto} em destaque`, fala: `Conheça ${b.produto}, o cuidado que você merece.`, tela: b.produto },
+    { inicio: 3, fim: meio, visual: "Demonstração de uso e benefícios", fala: "Proteção e praticidade para sua rotina.", tela: b.oferta.descricao },
+    { inicio: meio, fim: duracao, visual: "Produto, logo e informações legais", fala: "Consulte o farmacêutico.", tela: `Válido até ${validade} · no app e nas lojas` },
   ];
 }
 
