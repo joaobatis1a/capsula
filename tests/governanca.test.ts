@@ -78,3 +78,14 @@ describe("governança", () => {
     expect(falhas("Você está com gripe? Leve o melhor antigripal.")).toEqual(expect.arrayContaining(["diagnostico", "superlativo"]));
   });
 });
+
+describe("superlativo", () => {
+  it("não confunde \"o melhor horário\" com alegação de ser o melhor produto", () => {
+    expect(falhas("Escolha o melhor horário para a sua vacina. Válido até 15/11")).not.toContain("superlativo");
+    expect(falhas("Venha na melhor hora do seu dia. Válido até 15/11")).not.toContain("superlativo");
+  });
+  it("continua bloqueando o melhor produto", () => {
+    expect(falhas("O melhor protetor do mercado. Válido até 15/11")).toContain("superlativo");
+    expect(falhas("A melhor vitamina do Brasil. Válido até 15/11")).toContain("superlativo");
+  });
+});
