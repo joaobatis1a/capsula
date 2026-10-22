@@ -1,6 +1,6 @@
 import { MARCA } from "@/lib/marca";
 import type { Briefing } from "@/types/briefing";
-import type { Checagem, Variacao } from "@/types/variacao";
+import type { Checagem, Roteiro, Variacao } from "@/types/variacao";
 
 /* Checklist de governança (#7): as contraindicações da Bula.
    É um conjunto mínimo inspirado na RDC 96/2008 da Anvisa e no código do CONAR, não um parecer jurídico.
@@ -141,6 +141,14 @@ export function checarPeca(peca: PecaParaChecar, briefing: Briefing): Checagem[]
     const falha = r.checar(texto, peca, briefing);
     return { regra: r.id, ok: !falha, texto: falha ?? r.ok };
   });
+}
+
+/** O roteiro passa pelas mesmas regras das peças, sobre o título e todas as cenas (visual, fala e texto na tela).
+   A advertência obrigatória vale se estiver em alguma cena. */
+export function checarRoteiro(roteiro: Pick<Roteiro, "titulo" | "cenas">, briefing: Briefing): Checagem[] {
+  const naTela = roteiro.cenas.map((c) => c.tela).filter(Boolean).join(" ");
+  const texto = roteiro.cenas.map((c) => [c.visual, c.fala, c.tela].filter(Boolean).join(" ")).join(" \n ");
+  return checarPeca({ titulo: roteiro.titulo, texto, cta: "", selo: undefined, advertencia: naTela, bula: { indicacao: "", composicao: [], evidencias: [], contraindicacoes: [], posologia: "" } }, briefing);
 }
 
 /** Aplica o checklist e define o status: Bloqueado se algo falhou, Rascunho se passou. */

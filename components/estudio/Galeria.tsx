@@ -143,6 +143,20 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
               .map((r, i) => (
                 <li key={r.id} className="galeria-roteiro" style={{ "--i": i } as React.CSSProperties}>
                   <Roteiro titulo={r.titulo} formato={`${r.plataforma === "reels" ? "Reels" : r.plataforma === "tiktok" ? "TikTok" : "Comercial"} · ${r.publico}`} duracao={`${r.duracaoSeg}s`} cenas={r.cenas.map((c) => ({ tempo: tempoDaCena(c), visual: c.visual, fala: c.fala, tela: c.tela }))} />
+                  {r.contraindicacoes.some((c) => !c.ok) ? (
+                    <p className="galeria-roteiro-bloqueio t-body-sm" role="alert">
+                      <Icon name="shield" size={16} />
+                      <span>
+                        <b>Roteiro bloqueado pelo checklist.</b> {r.contraindicacoes.filter((c) => !c.ok).map((c) => c.texto).join(" · ")}
+                      </span>
+                    </p>
+                  ) : null}
+                  {r.evidencias.length ? (
+                    <p className="galeria-roteiro-origem t-body-sm t-muted">
+                      <Icon name="archive" size={16} />
+                      <span>Veio de: {r.evidencias.map((e) => e.fonte).filter((f, i, l) => f && l.indexOf(f) === i).join(" · ")}</span>
+                    </p>
+                  ) : null}
                   {r.musica ? (
                     <p className="galeria-musica t-body-sm">
                       <Icon name="trend" size={16} />

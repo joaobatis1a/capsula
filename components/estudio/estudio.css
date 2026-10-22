@@ -315,6 +315,23 @@ select.cp-input {
 .galeria-musica .cp-icon {
   margin-top: 2px;
 }
+.galeria-roteiro-origem,
+.galeria-roteiro-bloqueio {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+.galeria-roteiro-origem .cp-icon,
+.galeria-roteiro-bloqueio .cp-icon {
+  flex: none;
+  margin-top: 2px;
+}
+.galeria-roteiro-bloqueio {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--bloqueado-soft);
+  color: var(--bloqueado);
+}
 
 /* Bula aberta ao lado */
 .galeria-dialogo {
