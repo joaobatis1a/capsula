@@ -126,7 +126,7 @@ A conta: o painel de ganho usa 40 minutos por peça hoje (premissa do time, a co
 
 > E a margem de lucro? O nosso modelo é uma assinatura por marca. Cada peça custa cerca de um centavo de IA. Se cobrarmos, por exemplo, um real por peça, a margem bruta fica em noventa e nove por cento, antes dos custos fixos. O preço de verdade a gente define no piloto.
 
-*Direção:* Fale devagar, um número por vez: R$ 18,50, depois R$ 1,85, depois R$ 0,01. No fim, diga que são estimativas.
+*Direção:* Fale devagar, um número por vez: um centavo, depois um real, depois noventa e nove por cento. Deixe claro que o um real é só um exemplo.
 
 Como as contas foram feitas (para responder à banca):
 - Custo de IA, só a estimativa que temos: o pedido ao modelo tem cerca de 6.300 caracteres (cerca de 1.800 tokens), e a resposta de 6 peças e 1 roteiro cerca de 800 tokens, mais raciocínio. Com preço de lista de terceiros do Gemini 3.5 Flash-Lite (US$ 0,30 por milhão de tokens de entrada e US$ 2,50 de saída, a confirmar na página oficial do Google), no pior caso são cerca de US$ 0,0075 por chamada, ou cerca de US$ 0,001 por peça: arredondado para R$ 0,01.
