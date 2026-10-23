@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Field, Forma, Icon, Selecao } from "@/components/ds";
 import type { PublicoSugerido, Sazonalidade } from "@/lib/data/types";
-import { CANAIS, FORMATOS, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Formato, type Objetivo, type TipoProduto } from "@/types/briefing";
+import { CANAIS, formatosDosCanais, OBJETIVOS, ROTULOS, TIPOS_PRODUTO, validarBriefing, type BriefingEntrada, type Canal, type ErrosBriefing, type Objetivo, type TipoProduto } from "@/types/briefing";
 import type { ErroApi, RespostaGeracao } from "@/types/variacao";
 import { useAvisar } from "@/components/motion/Avisos";
 import { Revela } from "@/components/motion/Revela";
@@ -28,13 +28,16 @@ interface Form {
   validade: string;
   publicos: string[];
   canais: Canal[];
-  formatos: Formato[];
   objetivo: Objetivo;
-  variacoesPorCanal: number;
   incluirRoteiros: boolean;
   radarIds: string[];
   observacoes: string;
 }
+
+/** Quase todo briefing tem a mesma condição; já vem preenchida e se edita se for outra. */
+const CONDICAO_PADRAO = "No app e nas lojas, enquanto durar o estoque.";
+/** Quantas variações por canal e público: fixo, para caber na cota do modelo. */
+const VARIACOES_POR_CANAL = 3;
 
 const VAZIO: Form = {
   produto: "",
@@ -42,13 +45,11 @@ const VAZIO: Form = {
   tipoProduto: "dermocosmetico",
   precoDe: "",
   precoPor: "",
-  condicao: "",
+  condicao: CONDICAO_PADRAO,
   validade: "",
   publicos: [],
   canais: ["instagram"],
-  formatos: ["feed", "story"],
   objetivo: "conversao",
-  variacoesPorCanal: 3,
   incluirRoteiros: true,
   radarIds: [],
   observacoes: "",
@@ -122,7 +123,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
 
   function usarTema(t: Sazonalidade) {
     tocou();
-    setForm((f) => ({ ...formDe(t, publicos), precoDe: f.precoDe, precoPor: f.precoPor, condicao: f.condicao, validade: f.validade, canais: f.canais, formatos: f.formatos, objetivo: f.objetivo }));
+    setForm((f) => ({ ...formDe(t, publicos), precoDe: f.precoDe, precoPor: f.precoPor, condicao: f.condicao, validade: f.validade, canais: f.canais, objetivo: f.objetivo }));
     setErros({});
     setPreenchidos(CAMPOS_DO_TEMA);
     rolarParaOBriefing(true);
@@ -142,11 +143,9 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
       categoria: "Protetor solar",
       precoDe: "79.90",
       precoPor: "55.90",
-      condicao: "No app e nas lojas, enquanto durar o estoque.",
       validade: daqui30,
       publicos: publicos.slice(0, 2).map((p) => p.nome),
       canais: ["instagram", "site"],
-      formatos: ["feed", "story", "banner"],
     });
     setErros({});
     setPreenchidos(["produto", "categoria", "desconto", "precoDe", "precoPor", "validade", "condicao"]);
@@ -162,9 +161,9 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
       oferta: { descricao: descricaoDaOferta(form.produto, precoDe, precoPor), precoDe, precoPor, condicao: form.condicao || undefined, validade: form.validade },
       publicos: form.publicos,
       canais: form.canais,
-      formatos: form.formatos,
+      formatos: formatosDosCanais(form.canais),
       objetivo: form.objetivo,
-      variacoesPorCanal: form.variacoesPorCanal,
+      variacoesPorCanal: VARIACOES_POR_CANAL,
       incluirRoteiros: form.incluirRoteiros,
       radarIds: form.radarIds,
       observacoes: form.observacoes || undefined,
@@ -230,7 +229,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
 
   const sugeridos = publicos.filter((p) => !form.publicos.includes(p.nome));
   const desconto = calcularDesconto(lerPreco(form.precoDe), lerPreco(form.precoPor));
-  const totalPecas = Math.min(24, form.publicos.length * form.canais.length * form.variacoesPorCanal);
+  const totalPecas = Math.min(24, form.publicos.length * form.canais.length * VARIACOES_POR_CANAL);
 
   return (
     <div className="estudio">
@@ -241,7 +240,6 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
           <div className="titulo-forma tem-forma">
             <Forma tipo="caplet" size={44} />
             <div>
-              <p className="receita-olho">Receita de campanha · {new Date().toLocaleDateString("pt-BR")}</p>
               <h2 id="titulo-briefing" className="t-h2">
                 Briefing
               </h2>
@@ -335,17 +333,21 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
         </Revela>
 
         <Revela as="fieldset" className="estudio-grupo">
-          <legend className="estudio-legenda">Canais e formatos</legend>
+          <legend className="estudio-legenda">Canais e objetivo</legend>
           <div className="estudio-grade">
             <Opcoes rotulo="Canais" erro={erros.canais} itens={CANAIS} nomes={ROTULOS.canal} escolhidos={form.canais} alternar={(c) => set("canais", alternar(form.canais, c))} />
-            <Opcoes rotulo="Formatos" erro={erros.formatos} itens={FORMATOS} nomes={ROTULOS.formato} escolhidos={form.formatos} alternar={(f) => set("formatos", alternar(form.formatos, f))} />
             <Escolha rotulo="Objetivo" opcoes={OBJETIVOS.map((o) => ({ valor: o, nome: ROTULOS.objetivo[o] }))} valor={form.objetivo} mudar={(v) => set("objetivo", v)} />
-            <Escolha rotulo="Variações por canal e público" opcoes={[3, 4, 5].map((n) => ({ valor: n, nome: String(n) }))} valor={form.variacoesPorCanal} mudar={(v) => set("variacoesPorCanal", v)} />
           </div>
+          <p className="cp-hint">
+            Formatos gerados pelos canais escolhidos: {formatosDosCanais(form.canais).map((f) => ROTULOS.formato[f]).join(", ") || "nenhum"}.
+          </p>
           <Interruptor ligado={form.incluirRoteiros} mudar={(v) => set("incluirRoteiros", v)}>
             Incluir roteiro de vídeo curto (Reels ou TikTok) com sugestão de música
           </Interruptor>
-          <Field as="textarea" className={marca("observacoes")} label="Observações" value={form.observacoes} onChange={(e) => set("observacoes", e.target.value)} placeholder="Algo que a peça precisa ou não pode dizer" />
+          <details className="estudio-obs" open={Boolean(temaInicial) || undefined}>
+            <summary>Adicionar observação</summary>
+            <Field as="textarea" className={marca("observacoes")} label="Observações" value={form.observacoes} onChange={(e) => set("observacoes", e.target.value)} placeholder="Algo que a peça precisa ou não pode dizer" />
+          </details>
         </Revela>
 
         <div className="estudio-acoes">
@@ -359,7 +361,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
               <>
                 Vai gerar <b key={totalPecas}>{totalPecas}</b> peças
                 <span>
-                  {form.publicos.length || 0} público{form.publicos.length === 1 ? "" : "s"} × {form.canais.length} cana{form.canais.length === 1 ? "l" : "is"} × {form.variacoesPorCanal}
+                  {form.publicos.length || 0} público{form.publicos.length === 1 ? "" : "s"} × {form.canais.length} cana{form.canais.length === 1 ? "l" : "is"} × {VARIACOES_POR_CANAL}
                 </span>
               </>
             )}
@@ -379,7 +381,7 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
 
       <div ref={resultadoRef} className="estudio-resultado">
         {estado === "gerando" ? (
-          <Dosagem pecas={form.publicos.length * form.canais.length * form.variacoesPorCanal} />
+          <Dosagem pecas={form.publicos.length * form.canais.length * VARIACOES_POR_CANAL} />
         ) : resposta ? (
           <Galeria key={resposta.geradoEm} resposta={resposta} />
         ) : null}

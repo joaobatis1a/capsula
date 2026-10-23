@@ -1,6 +1,6 @@
 import type { CampaignDataSource, ItemRadar, Sazonalidade } from "@/lib/data/types";
 import { rankear, relevantesPara, rotular, type ItemRanking } from "@/lib/memoria/ranking";
-import type { Briefing, Canal, Formato } from "@/types/briefing";
+import { FORMATOS_DO_CANAL, type Briefing, type Canal, type Formato } from "@/types/briefing";
 import type { Evidencia } from "@/types/variacao";
 
 /* Junta o que a Memória, o Radar e a sazonalidade sabem sobre o briefing (#32).
@@ -59,13 +59,6 @@ export function calcularDose(evidencias: Evidencia[]) {
 }
 
 /** Formatos possíveis em cada canal, cruzados com os formatos pedidos no briefing. */
-const FORMATOS_DO_CANAL: Record<Canal, Formato[]> = {
-  instagram: ["feed", "story"],
-  facebook: ["feed", "story"],
-  tiktok: ["story"],
-  site: ["banner"],
-};
-
 export function formatosPara(canal: Canal, pedidos: Formato[]): Formato[] {
   const possiveis = FORMATOS_DO_CANAL[canal];
   const cruzados = possiveis.filter((f) => pedidos.includes(f));

@@ -455,3 +455,41 @@ select.cp-input {
 .estudio-desconto span {
   white-space: nowrap;
 }
+
+/* Observação: recolhida, porque quase nunca se usa */
+.estudio-obs > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--memoria);
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  margin-left: calc(var(--space-2) * -1);
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+.estudio-obs > summary::-webkit-details-marker {
+  display: none;
+}
+.estudio-obs > summary::after {
+  content: "+";
+  font-family: var(--font-mono);
+}
+.estudio-obs[open] > summary::after {
+  content: "–";
+}
+.estudio-obs > summary:hover {
+  background: var(--hover);
+}
+.estudio-obs > summary:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: var(--focus-ring);
+}
+.estudio-obs[open] > .cp-field {
+  margin-top: var(--space-2);
+}

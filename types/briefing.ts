@@ -20,6 +20,19 @@ export const TIPOS_PRODUTO = [
 
 export type Canal = (typeof CANAIS)[number];
 export type Formato = (typeof FORMATOS)[number];
+
+/** Cada canal tem os seus formatos: a pessoa escolhe o canal e os formatos vêm dele, sem uma segunda pergunta. */
+export const FORMATOS_DO_CANAL: Record<Canal, Formato[]> = {
+  instagram: ["feed", "story"],
+  facebook: ["feed", "story"],
+  tiktok: ["story"],
+  site: ["banner"],
+};
+
+/** Os formatos de um conjunto de canais, sem repetir. */
+export function formatosDosCanais(canais: Canal[]): Formato[] {
+  return FORMATOS.filter((f) => canais.some((c) => FORMATOS_DO_CANAL[c].includes(f)));
+}
 export type Objetivo = (typeof OBJETIVOS)[number];
 export type TipoProduto = (typeof TIPOS_PRODUTO)[number];
 
