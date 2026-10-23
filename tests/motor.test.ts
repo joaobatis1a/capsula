@@ -4,7 +4,7 @@ vi.mock("server-only", () => ({}));
 
 const { MockDataSource } = await import("@/lib/data/mock");
 const { gerar } = await import("@/lib/motor/gerar");
-const { chaveDoBriefing } = await import("@/lib/motor/cache");
+const { chaveDoBriefing, gravarCache, lerCache } = await import("@/lib/motor/cache");
 const { briefingSchema } = await import("@/types/briefing");
 const { roteiroSchema, variacaoSchema } = await import("@/types/variacao");
 
@@ -51,5 +51,18 @@ describe("cache", () => {
     const outro = { ...briefing, publicos: [...briefing.publicos].reverse() };
     expect(chaveDoBriefing(outro)).toBe(chaveDoBriefing(briefing));
     expect(chaveDoBriefing({ ...briefing, oferta: { ...briefing.oferta, validade: "2026-12-01" } })).not.toBe(chaveDoBriefing(briefing));
+  });
+});
+
+describe("cache da geração", () => {
+  it("não guarda resposta em que algum público caiu nos moldes fixos", async () => {
+    const b = briefingSchema.parse({ ...briefing, produto: "Produto do teste de cache" });
+    const base = { briefing: b, variacoes: [], roteiros: [], geradoEm: "2026-10-22T00:00:00Z", modelo: "gemini:gemini-3.5-flash-lite", doCache: false };
+    const k1 = chaveDoBriefing(b);
+    gravarCache(k1, { ...base, avisos: ['O modelo falhou para "Jovens". Usamos os moldes fixos.'] });
+    expect(lerCache(k1)).toBeUndefined();
+    const k2 = chaveDoBriefing({ ...b, produto: "Outro produto do teste de cache" });
+    gravarCache(k2, { ...base, avisos: [] });
+    expect(lerCache(k2)).toBeDefined();
   });
 });
