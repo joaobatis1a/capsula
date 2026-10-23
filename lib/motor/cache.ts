@@ -42,6 +42,8 @@ export function lerCache(chave: string) {
 export function gravarCache(chave: string, resposta: RespostaGeracao) {
   // Não guarda respostas do modo sem IA: quando a chave chegar, a próxima geração usa o modelo.
   if (resposta.modelo === "sem-ia") return;
+  // Nem as respostas em que só um público caiu nos moldes fixos: guardadas, seriam servidas depois como se fossem de IA.
+  if (resposta.avisos.some((aviso) => /moldes fixos/i.test(aviso))) return;
   if (memoria.size >= LIMITE) memoria.delete(memoria.keys().next().value!);
   memoria.set(chave, resposta);
 }
