@@ -28,15 +28,12 @@ function conteudoDe(v: Variacao, b: Briefing): ConteudoPeca {
 
 /* Galeria de variações (#29) com filtro por público e canal e a Bula aberta ao lado. */
 
-type Tema = "claro" | "escuro" | "sistema";
-
 export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
   const [publico, setPublico] = useState<string | "todos">("todos");
   const [canal, setCanal] = useState<Canal | "todos">("todos");
   const [pecas, setPecas] = useState<Variacao[]>(resposta.variacoes);
   const [historico, setHistorico] = useState<Record<string, Registro[]>>({});
   const [abertaId, setAbertaId] = useState<string | null>(null);
-  const [tema, setTema] = useState<Tema>("claro");
   const aberta = pecas.find((p) => p.id === abertaId) ?? null;
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -114,7 +111,6 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
       <div className="galeria-filtros">
         <Filtro rotulo="Público" valor={publico} opcoes={publicos.map((p) => [p, p])} mudar={setPublico} />
         <Filtro rotulo="Canal" valor={canal} opcoes={canais.map((c) => [c, ROTULOS.canal[c]])} mudar={(c) => setCanal(c as Canal | "todos")} />
-        <TemaSeletor valor={tema} mudar={setTema} />
       </div>
 
       {porPublico.map((g) => (
@@ -124,7 +120,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
             {g.pecas.map((v, i) => (
               <li key={v.id} style={{ "--i": i } as React.CSSProperties}>
                 <PieceCard titulo={v.titulo} texto={v.texto} canal={ROTULOS.canal[v.canal]} formato={v.formato} memoria={v.dose} status={v.status} selo={v.selo} onBula={() => setAbertaId(v.id)}>
-                  <PecaEscalada conteudo={conteudoDe(v, resposta.briefing)} formato={v.formato} tema={tema} />
+                  <PecaEscalada conteudo={conteudoDe(v, resposta.briefing)} formato={v.formato} />
                 </PieceCard>
               </li>
             ))}
@@ -186,7 +182,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
               </Button>
             </div>
             <Aprovacao key={`ap-${aberta.id}`} peca={aberta} briefing={resposta.briefing} historico={historico[aberta.id] ?? []} onMudou={mudou} />
-            <VerFormatos key={aberta.id} variacao={aberta} briefing={resposta.briefing} carimbo={carimbo?.id === aberta.id ? carimbo : null} tema={tema} />
+            <VerFormatos key={aberta.id} variacao={aberta} briefing={resposta.briefing} carimbo={carimbo?.id === aberta.id ? carimbo : null} />
             <div className="galeria-peca">
               <p className="t-data t-muted">
                 {aberta.publico} · {ROTULOS.canal[aberta.canal]} · {ROTULOS.formato[aberta.formato]}
@@ -230,7 +226,7 @@ export function Galeria({ resposta }: { resposta: RespostaGeracao }) {
 }
 
 /** A variação nos três formatos, em tamanho de leitura, com download do PNG em tamanho real. */
-function VerFormatos({ variacao, briefing, carimbo, tema }: { variacao: Variacao; briefing: Briefing; carimbo: { status: "aprovado" | "publicado"; n: number } | null; tema: Tema }) {
+function VerFormatos({ variacao, briefing, carimbo }: { variacao: Variacao; briefing: Briefing; carimbo: { status: "aprovado" | "publicado"; n: number } | null }) {
   const avisar = useAvisar();
   const [formato, setFormato] = useState<Formato>(variacao.formato);
   const [baixando, setBaixando] = useState(false);
@@ -267,7 +263,7 @@ function VerFormatos({ variacao, briefing, carimbo, tema }: { variacao: Variacao
             <Chuva key={`chuva-${carimbo.n}`} quantidade={carimbo.status === "publicado" ? 12 : 7} />
           </>
         ) : null}
-        <PecaEscalada conteudo={conteudoDe(variacao, briefing)} formato={formato} pecaRef={pecaRef} tema={tema} />
+        <PecaEscalada conteudo={conteudoDe(variacao, briefing)} formato={formato} pecaRef={pecaRef} />
       </div>
       <Button variant="secondary" icon="arrow" onClick={baixar} disabled={baixando || variacao.status === "bloqueado"}>
         {variacao.status === "bloqueado" ? "Peça bloqueada" : baixando ? "Gerando PNG…" : "Baixar PNG"}
@@ -282,28 +278,6 @@ function Filtro({ rotulo, valor, opcoes, mudar }: { rotulo: string; valor: strin
       <span className="cp-label">{rotulo}</span>
       <ul className="estudio-chips">
         {[["todos", "Todos"] as [string, string], ...opcoes].map(([v, nome]) => (
-          <li key={v}>
-            <button type="button" className={valor === v ? "estudio-chip is-on" : "estudio-chip"} aria-pressed={valor === v} onClick={() => mudar(v)}>
-              {nome}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function TemaSeletor({ valor, mudar }: { valor: Tema; mudar: (v: Tema) => void }) {
-  const opcoes: [Tema, string][] = [
-    ["claro", "Claro"],
-    ["escuro", "Escuro"],
-    ["sistema", "Sistema"],
-  ];
-  return (
-    <div className="galeria-filtro" role="group" aria-label="Tema da peça">
-      <span className="cp-label">Tema</span>
-      <ul className="estudio-chips">
-        {opcoes.map(([v, nome]) => (
           <li key={v}>
             <button type="button" className={valor === v ? "estudio-chip is-on" : "estudio-chip"} aria-pressed={valor === v} onClick={() => mudar(v)}>
               {nome}
