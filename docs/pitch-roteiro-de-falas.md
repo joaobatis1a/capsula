@@ -4,7 +4,7 @@
 
 ## Em resumo
 
-- **Duração:** 559 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,7 min**; em ritmo calmo (130) são **4,3 min**. O limite é 5 min, então sobram pelo menos 40 segundos de margem.
+- **Duração:** 568 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,8 min**; em ritmo calmo (130) são **4,4 min**. O limite é 5 min, então sobram pelo menos 40 segundos de margem.
 - **10 slides.** Dois deles (5 e 6) são **gravações de tela do sistema** com a fala por cima; os outros oito são slides.
 - **Fechamento:** QR code para https://capsula-mvp.vercel.app, para a banca testar na hora.
 - **Honestidade:** os dados são de teste, a marca é fictícia e as contas de impacto e margem usam premissas declaradas. Isso está dito nos slides e nas notas.
@@ -21,7 +21,7 @@
 | 6 | Bula e governança | 1:57 a 2:20 | GRAVAÇÃO DE TELA 2 | 52 |
 | 7 | Impacto esperado | 2:20 a 2:46 | Slide | 61 |
 | 8 | Margem de lucro | 2:46 a 3:11 | Slide | 62 |
-| 9 | Viabilidade | 3:11 a 3:40 | Slide | 70 |
+| 9 | Viabilidade | 3:11 a 3:40 | Slide | 79 |
 | 10 | Fechamento | 3:40 a 3:56 | Slide | 26 |
 
 Os tempos são para ritmo normal de fala. No ritmo calmo, cada bloco cresce cerca de 15%, e ainda cabe nos 5 minutos.
@@ -112,7 +112,7 @@ Os números: mediana de 12,4 s em 10 briefings de teste (um caso passou de 55 s 
 
 > Cada peça sai com a sua bula: indicação, composição, evidências com origem, contraindicações e posologia. E aqui está o ponto mais sensível: um antibiótico, que só se vende com receita, é bloqueado automaticamente, com o motivo, a RDC 96/2008. A IA nunca aprova sozinha: só uma pessoa move a peça para aprovado.
 
-O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONAR; não é parecer jurídico. As duas imagens são capturas reais do site em produção, com dados de teste.
+O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONAR; não é parecer jurídico. A gravação mostra o site em produção, com dados de teste.
 
 ### 7. Impacto esperado (2:20 a 2:46)
 
@@ -137,7 +137,7 @@ Como as contas foram feitas (para responder à banca):
 
 ### 9. Viabilidade (3:11 a 3:40)
 
-> É viável hoje: o fluxo de briefing, contexto, geração, governança e aprovação roda em Next.js, TypeScript e Gemini, publicado na Vercel. Os dados de teste ficam atrás de um adaptador que troca por CSV da empresa, e o radar vem de fontes públicas, como o TikTok Creative Center. Riscos: dados sintéticos, cota gratuita da IA e radar de exemplo. Próximos passos: dados reais, radar verificado e banco para as aprovações.
+> É viável hoje: o fluxo de briefing, contexto, geração, governança e aprovação roda em Next.js, TypeScript e Gemini, publicado na Vercel. Os dados de teste ficam atrás de um adaptador que troca por CSV da empresa, e o radar vem de fontes públicas, como o TikTok Creative Center. Riscos: dados sintéticos, cota gratuita da IA, radar de exemplo e regras de governança ainda mínimas. Próximos passos: dados reais, radar verificado, banco para as aprovações e revisão jurídica das regras.
 
 *Direção:* Aponte a faixa de cima da esquerda para a direita e depois leia as três colunas.
 
@@ -156,7 +156,7 @@ Detalhes se perguntarem:
 
 Aviso para o ensaio: o site usa o plano gratuito do Gemini, que tem cota curta. Se muita gente testar ao mesmo tempo, algumas gerações saem dos moldes fixos, e a tela avisa. O site continua funcionando. Teste o QR code com o celular antes da gravação.
 
-Tempo total das falas: cerca de 560 palavras, ou 3 minutos e 45 segundos em ritmo normal e 4 minutos e 20 em ritmo calmo, com pelo menos 1 minuto de margem dentro dos 5 permitidos.
+Tempo total das falas: cerca de 570 palavras, ou 3 minutos e 50 segundos em ritmo normal e 4 minutos e 25 em ritmo calmo, com pelo menos 35 segundos de margem dentro dos 5 permitidos.
 
 ## Cobertura da rubrica (25 critérios)
 
@@ -200,7 +200,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 | 2. Como funciona tecnicamente | 3, 9 | "o fluxo de briefing, contexto, geração, governança e aprovação" |
 | 3. Fonte dos dados ou integrações | 9 | "adaptador que troca por CSV da empresa"; "o radar vem de fontes públicas, como o TikTok Creative Center" |
 | 4. Protótipo, MVP, teste ou resultado | 5, 6, 9 | as duas gravações do sistema; "em média doze segundos"; "noventa e cinco testes automáticos"; "publicado na Vercel" |
-| 5. Riscos, limitações, custos, próximos passos ou modelo de negócio | 8, 9, 10 | "Riscos: dados sintéticos, cota gratuita da IA e radar de exemplo. Próximos passos..."; "uma assinatura equivalente a dez por cento do valor poupado" |
+| 5. Riscos, limitações, custos, próximos passos ou modelo de negócio | 8, 9, 10 | "Riscos: dados sintéticos, cota gratuita da IA, radar de exemplo e regras de governança ainda mínimas. Próximos passos..."; "uma assinatura equivalente a dez por cento do valor poupado" |
 
 ### COMUNICAÇÃO
 
@@ -220,7 +220,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 |---|---|
 | Margem de lucro | Slide 8 e fala: ≈ R$ 18,50 poupados por peça menos ≈ R$ 0,01 de IA; assinatura de 10% do valor poupado dá margem bruta de ≈ 99%, antes dos custos fixos. Premissas declaradas |
 | Cores que incentivam a compra | Laranja e amarelo de etiqueta de oferta sobre o anil da marca, com fundo creme; sem nome nem marca da empresa |
-| No máximo 5 minutos, com margem | 10 slides, cerca de 3 min 45 s em ritmo normal e 4 min 20 s em ritmo calmo |
+| No máximo 5 minutos, com margem | 10 slides, cerca de 3 min 50 s em ritmo normal e 4 min 25 s em ritmo calmo |
 | QR code final | Slide 10, para https://capsula-mvp.vercel.app, com a URL escrita embaixo |
 | Problema, proposta, impacto, o que foi construído e viabilidade | Slides 2, 3, 7, 5 e 6, 9 |
 
