@@ -2,7 +2,7 @@ import "server-only";
 import { z } from "zod";
 import type { CampaignDataSource } from "@/lib/data/types";
 import { ADVERTENCIA_MIP, aplicarGovernanca, checarRoteiro } from "@/lib/governanca/checklist";
-import { completarJSON, lerJSON, temProvedor } from "@/lib/llm/client";
+import { completarJSON, lerJSON, ProvedoresFalharamError, temProvedor } from "@/lib/llm/client";
 import type { Briefing } from "@/types/briefing";
 import { roteiroSchema, variacaoSchema, type Evidencia, type RespostaGeracao, type Roteiro, type Variacao } from "@/types/variacao";
 import { calcularDose, evidenciaPorId, formatosPara, montarContexto, type Contexto } from "./contexto";
@@ -51,19 +51,27 @@ export async function gerar(briefing: Briefing, fonte: CampaignDataSource): Prom
     pedidos.map(async (pedido) => {
       // Pedido só de roteiro comercial: sai do molde, para gastar uma chamada ao modelo por público e não três.
       if (!usarIA || pedido.pecas.length === 0) return { pedido, ...gerarSemIA(briefing, ctx, pedido), ia: false };
-      try {
-        const r = await completarJSON([
-          { role: "system", content: SISTEMA },
-          { role: "user", content: montarPrompt(briefing, ctx, pedido) },
-        ]);
-        avisos.push(...r.avisos);
-        modelo = `${r.provedor}:${r.modelo}`;
-        const bruto = respostaLLM.parse(lerJSON(r.texto));
-        return { pedido, ...converterLLM(bruto, pedido, ctx, briefing), ia: true };
-      } catch (e) {
-        avisos.push(`O modelo falhou para "${pedido.publico}" (${e instanceof Error ? e.message.slice(0, 120) : "erro"}). Usamos os moldes fixos.`);
-        return { pedido, ...gerarSemIA(briefing, ctx, pedido), ia: false };
+      // O modelo às vezes devolve um JSON malformado ou fora do formato: uma segunda tentativa costuma resolver,
+      // e só depois disso o público cai nos moldes fixos.
+      let ultimoErro: unknown;
+      for (let tentativa = 0; tentativa < 2; tentativa++) {
+        try {
+          const r = await completarJSON([
+            { role: "system", content: SISTEMA },
+            { role: "user", content: montarPrompt(briefing, ctx, pedido) },
+          ]);
+          const bruto = respostaLLM.parse(lerJSON(r.texto));
+          avisos.push(...r.avisos);
+          modelo = `${r.provedor}:${r.modelo}`;
+          return { pedido, ...converterLLM(bruto, pedido, ctx, briefing), ia: true };
+        } catch (e) {
+          ultimoErro = e;
+          // Sem resposta de nenhum modelo (cota, rede): tentar de novo não ajuda.
+          if (e instanceof ProvedoresFalharamError) break;
+        }
       }
+      avisos.push(`O modelo falhou para "${pedido.publico}" (${ultimoErro instanceof Error ? ultimoErro.message.slice(0, 120) : "erro"}). Usamos os moldes fixos.`);
+      return { pedido, ...gerarSemIA(briefing, ctx, pedido), ia: false };
     }),
   );
   if (usarIA && resultados.some((r) => !r.ia && r.pedido.pecas.length > 0) && !modelo) modelo = "sem-ia";

@@ -66,3 +66,21 @@ describe("cache da geração", () => {
     expect(lerCache(k2)).toBeDefined();
   });
 });
+
+describe("modelo que devolve JSON malformado", () => {
+  it("tenta de novo antes de cair nos moldes fixos", async () => {
+    vi.resetModules();
+    const respostas = ['{"variacoes": [ {titulo: sem aspas} ', JSON.stringify({ variacoes: [] })];
+    vi.doMock("@/lib/llm/client", async () => {
+      const real = await vi.importActual<typeof import("@/lib/llm/client")>("@/lib/llm/client");
+      return { ...real, temProvedor: () => true, completarJSON: vi.fn(async () => ({ texto: respostas.shift()!, provedor: "gemini", modelo: "teste", avisos: [] })) };
+    });
+    const { gerar: gerarComModelo } = await import("@/lib/motor/gerar");
+    const { MockDataSource: Fonte } = await import("@/lib/data/mock");
+    const um = briefingSchema.parse({ ...briefing, publicos: [briefing.publicos[0]], incluirRoteiros: false });
+    const r = await gerarComModelo(um, new Fonte());
+    expect(r.avisos.join(" ")).not.toMatch(/moldes fixos/);
+    expect(r.modelo).toBe("gemini:teste");
+    vi.doUnmock("@/lib/llm/client");
+  });
+});
