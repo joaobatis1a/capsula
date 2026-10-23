@@ -4,7 +4,7 @@
 
 ## Em resumo
 
-- **Duração:** 503 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,4 min**; em ritmo calmo (130) são **3,9 min**. Com as pausas entre slides, fica em 3:35 no ritmo normal (1:24 de margem) e 4:06 num ritmo bem calmo (0:53 de margem). Ensaie no ritmo normal.
+- **Duração:** 495 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,3 min**; em ritmo calmo (130) são **3,8 min**. Com as pausas entre slides, fica em 3:32 no ritmo normal (1:27 de margem) e 4:03 num ritmo bem calmo (0:56 de margem). Ensaie no ritmo normal.
 - **10 slides.** Dois deles (5 e 6) são **gravações de tela do sistema** com a fala por cima; os outros oito são slides.
 - **Fechamento:** QR code para https://capsula-mvp.vercel.app, para a banca testar na hora.
 - **Honestidade:** os dados são de teste, a marca é fictícia e as contas de impacto e margem usam premissas declaradas. Isso está dito nos slides e nas notas.
@@ -20,9 +20,9 @@
 | 5 | Já funciona | 1:26 a 1:43 | GRAVAÇÃO DE TELA 1 | 38 |
 | 6 | Bula e governança | 1:43 a 2:02 | GRAVAÇÃO DE TELA 2 | 44 |
 | 7 | Impacto esperado | 2:02 a 2:29 | Slide | 63 |
-| 8 | Margem de lucro | 2:29 a 2:53 | Slide | 58 |
-| 9 | Viabilidade | 2:53 a 3:20 | Slide | 64 |
-| 10 | Fechamento | 3:20 a 3:35 | Slide | 34 |
+| 8 | Margem de lucro | 2:29 a 2:51 | Slide | 53 |
+| 9 | Viabilidade | 2:51 a 3:19 | Slide | 64 |
+| 10 | Fechamento | 3:19 a 3:32 | Slide | 31 |
 
 Os tempos são para ritmo normal de fala. No ritmo calmo, cada bloco cresce cerca de 15%, e ainda cabe nos 5 minutos.
 
@@ -122,20 +122,19 @@ O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONA
 
 A conta: o painel de ganho usa 40 minutos por peça hoje (premissa do time, a confirmar com a empresa) e 3 minutos de revisão por variação; a geração medida soma cerca de 12 segundos por briefing. (40 − 3,2) ÷ 40 = 92%. Os 40 minutos NÃO são dado da empresa. Antes da banca, se a organização informar o tempo real, troque o número.
 
-### 8. Margem de lucro (2:29 a 2:53)
+### 8. Margem de lucro (2:29 a 2:51)
 
-> Quanto isso rende? Cada peça economiza cerca de dezoito reais de trabalho, e a Cápsula cobra uma assinatura de dez por cento disso: um real e oitenta e cinco. A IA custa cerca de um centavo por peça. Sobra uma margem bruta de noventa e nove por cento, antes dos custos fixos. São estimativas, que o piloto valida.
+> E a margem de lucro? O nosso modelo é uma assinatura por marca. Cada peça custa cerca de um centavo de IA. Se cobrarmos, por exemplo, um real por peça, a margem bruta fica em noventa e nove por cento, antes dos custos fixos. O preço de verdade a gente define no piloto.
 
 *Direção:* Fale devagar, um número por vez: R$ 18,50, depois R$ 1,85, depois R$ 0,01. No fim, diga que são estimativas.
 
 Como as contas foram feitas (para responder à banca):
-- Tempo poupado: 40 min hoje menos cerca de 3 min de revisão = 37 min por peça (premissa do painel de ganho, não dado da empresa).
-- Valor da hora: R$ 30 é premissa NOSSA, conservadora, para validar. 37 min x R$ 30 ÷ 60 = R$ 18,50.
-- Custo de IA: o pedido ao modelo tem cerca de 6.300 caracteres (cerca de 1.800 tokens) e a resposta de 6 peças e 1 roteiro cerca de 800 tokens, mais raciocínio. Com preço de lista de terceiros do Gemini 3.5 Flash-Lite (US$ 0,30 por milhão de tokens de entrada, US$ 2,50 de saída, a confirmar na página oficial do Google), no pior caso são cerca de US$ 0,0075 por chamada, ou cerca de US$ 0,001 por peça: arredondado para R$ 0,01.
-- Preço hipotético: 10% de R$ 18,50 = R$ 1,85. Custo de IA / receita = 0,5%, então margem bruta cerca de 99%.
+- Custo de IA, só a estimativa que temos: o pedido ao modelo tem cerca de 6.300 caracteres (cerca de 1.800 tokens), e a resposta de 6 peças e 1 roteiro cerca de 800 tokens, mais raciocínio. Com preço de lista de terceiros do Gemini 3.5 Flash-Lite (US$ 0,30 por milhão de tokens de entrada e US$ 2,50 de saída, a confirmar na página oficial do Google), no pior caso são cerca de US$ 0,0075 por chamada, ou cerca de US$ 0,001 por peça: arredondado para R$ 0,01.
+- Preço: R$ 1,00 por peça é um EXEMPLO para a conta, não uma proposta de preço. O preço real depende do piloto com a empresa.
+- Conta: R$ 0,01 de custo de IA ÷ R$ 1,00 de preço = 1%; margem bruta cerca de 99%. Se perguntarem do tempo poupado (40 min para 3 min de revisão), é a premissa do slide 7, não dado da empresa.
 - Custos fixos (hospedagem, banco, equipe) ficam fora desta conta.
 
-### 9. Viabilidade (2:53 a 3:20)
+### 9. Viabilidade (2:51 a 3:19)
 
 > É viável hoje. O fluxo vai do briefing à aprovação e roda em Next.js, TypeScript e Gemini, na Vercel. Os dados de teste ficam atrás de um adaptador que troca por CSV da empresa, e o radar usa fontes públicas, como o TikTok Creative Center. Riscos: dados de teste, cota gratuita da IA e regras ainda mínimas. Próximos passos: dados reais e revisão jurídica.
 
@@ -148,15 +147,15 @@ Detalhes se perguntarem:
 - Gemini: modelo principal gemini-3.5-flash-lite, com reservas e, por último, moldes fixos, sempre com aviso na tela.
 - Banco (Supabase): ficou fora desta entrega; hoje a aprovação vive no navegador.
 
-### 10. Fechamento (3:20 a 3:35)
+### 10. Fechamento (3:19 a 3:32)
 
-> Resumindo: a Cápsula lembra o que funcionou, segue as regras da farmácia e deixa a decisão com uma pessoa. Agora é com vocês: aponte a câmera para o QR code e teste. Muito obrigado!
+> Lembram da oferta de amanhã? Com a Cápsula, ela sai mais rápido, dentro das regras e com uma pessoa decidindo. Escaneiem o QR code e testem agora. Muito obrigado pela atenção!
 
-*Direção:* Termine olhando para a câmera, sem pressa. Deixe o QR code na tela por alguns segundos depois do "muito obrigado".
+*Direção:* Termine olhando para a câmera, sem pressa. Faça uma pausa curta depois de "amanhã vem outra oferta", como se voltasse ao começo, e sorria no "muito obrigado". Deixe o QR code na tela por alguns segundos.
 
 Aviso para o ensaio: o site usa o plano gratuito do Gemini, que tem cota curta. Se muita gente testar ao mesmo tempo, algumas gerações saem dos moldes fixos, e a tela avisa. O site continua funcionando. Teste o QR code com o celular antes da gravação.
 
-Tempo total das falas: cerca de 500 palavras: 3:35 em ritmo normal, com as pausas entre slides (1:24 de margem nos 5 minutos), e 4:06 em ritmo bem calmo (0:53 de margem). Ensaie no ritmo normal.
+Tempo total das falas: cerca de 500 palavras: 3:32 em ritmo normal, com as pausas entre slides (1:27 de margem nos 5 minutos), e 4:03 em ritmo bem calmo (0:56 de margem). Ensaie no ritmo normal.
 
 ## Cobertura da rubrica (25 critérios)
 
@@ -200,7 +199,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 | 2. Como funciona tecnicamente | 3, 9 | "o fluxo vai do briefing à aprovação" |
 | 3. Fonte dos dados ou integrações | 9 | "um adaptador que troca por CSV da empresa"; "o radar usa fontes públicas, como o TikTok Creative Center" |
 | 4. Protótipo, MVP, teste ou resultado | 5, 6, 9 | "E já funciona"; "doze peças em cerca de doze segundos"; "dez briefings" e "noventa e seis testes" |
-| 5. Riscos, limitações, custos, próximos passos ou modelo de negócio | 8, 9, 10 | "Riscos: dados de teste, cota gratuita da IA e regras ainda mínimas. Próximos passos: dados reais e revisão jurídica"; "a Cápsula cobra uma assinatura de dez por cento disso: um real e oitenta e cinco" |
+| 5. Riscos, limitações, custos, próximos passos ou modelo de negócio | 8, 9, 10 | "Riscos: dados de teste, cota gratuita da IA e regras ainda mínimas. Próximos passos: dados reais e revisão jurídica"; "o nosso modelo é uma assinatura por marca... se cobrarmos, por exemplo, um real por peça, a margem bruta fica em noventa e nove por cento" |
 
 ### COMUNICAÇÃO
 
@@ -208,7 +207,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 |---|---|---|
 | 1. Abertura antes do conteúdo | 1 | "Boa tarde! Eu sou o João Batista e, com o Ivaldo e o Hector, apresento a Cápsula" |
 | 2. Problema antes da solução | 2 antes de 3 | a ordem dos slides: problema no 2, proposta no 3; a capa só traz o nome |
-| 3. Encerramento explícito | 10 | "Resumindo: a Cápsula lembra o que funcionou, segue as regras da farmácia e deixa a decisão com uma pessoa. Agora é com vocês: aponte a câmera para o QR code e teste. Muito obrigado!" |
+| 3. Encerramento explícito | 10 | "Lembram da oferta de amanhã? Com a Cápsula, ela sai mais rápido, dentro das regras e com uma pessoa decidindo. Escaneiem o QR code e testem agora. Muito obrigado pela atenção!" |
 | 4. Nome da solução e da equipe | 1, 10 | "Cápsula"; "João Batista, Ivaldo e Hector" |
 | 5. Passo a passo de uso | 3, 5 | "O usuário abre o app, informa produto, preços e públicos, e clica em gerar... e o usuário recebe as peças" |
 
@@ -218,16 +217,16 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 
 | Pedido | Como foi atendido |
 |---|---|
-| Margem de lucro | Slide 8 e fala: ≈ R$ 18,50 poupados por peça menos ≈ R$ 0,01 de IA; assinatura de 10% do valor poupado dá margem bruta de ≈ 99%, antes dos custos fixos. Premissas declaradas |
+| Margem de lucro | Slide 8 e fala: o custo de IA é de cerca de R$ 0,01 por peça; com um preço de exemplo de R$ 1,00 por peça a margem bruta é de ≈ 99%, antes dos custos fixos. O preço real fica para o piloto |
 | Cores que incentivam a compra | Laranja e amarelo de etiqueta de oferta sobre o anil da marca, com fundo creme; sem nome nem marca da empresa |
-| No máximo 5 minutos, com margem | 10 slides, cerca de 3:35 em ritmo normal e 4:06 em ritmo calmo |
+| No máximo 5 minutos, com margem | 10 slides, cerca de 3:32 em ritmo normal e 4:03 em ritmo calmo |
 | QR code final | Slide 10, para https://capsula-mvp.vercel.app, com a URL escrita embaixo |
 | Problema, proposta, impacto, o que foi construído e viabilidade | Slides 2, 3, 7, 5 e 6, 9 |
 
 ## Premissas que precisam de confirmação antes de apresentar
 
 - **40 minutos por peça hoje** e **3 minutos de revisão**: premissas do painel de ganho, não dado da empresa. Se a organização informar o tempo real, troque o número no slide 7 e na fala.
-- **R$ 30 por hora**: premissa nossa, conservadora.
+- **R$ 1,00 por peça** (slide 8): é um preço de exemplo para a conta da margem, não uma proposta. O preço real depende do piloto.
 - **US$ 0,001 de IA por peça**: estimativa com preço de lista de terceiros do Gemini 3.5 Flash-Lite (US$ 0,30 por milhão de tokens de entrada e US$ 2,50 de saída), a confirmar na página oficial do Google.
 - **Cerca de 90 mil farmácias**: Conselho Federal de Farmácia, citado pelo InfoMoney; a Abrafarma informou 93,7 mil em 2024.
 - **Dados de teste**: 300 campanhas sintéticas, marca fictícia "Farmácia Exemplo", radar de exemplo, 5 de 33 condições de saúde conferidas.
