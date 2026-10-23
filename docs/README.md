@@ -11,6 +11,7 @@ Atividades e entregas das aulas do Hackathon Avanade. Cada atividade ganha um ar
 | 14/10/2026 | Missão 5: Ambiente colaborativo | [ambiente-colaborativo.md](ambiente-colaborativo.md) |
 | 14/10/2026 | Missão 6: Sprint Planning 1 e tasks | [sprints/sprint-1-planning.md](sprints/sprint-1-planning.md) · [Tasks #17 a #32](https://github.com/joaobatis1a/capsula/issues?q=label%3Atask) |
 | 22/10/2026 | Qualidade e conferências: QA do motor (10 briefings), QA em produção, Ano da saúde, Sprint 1 Review/Retro e Planning 2 | [qa-motor.md](qa-motor.md) · [qa-producao.md](qa-producao.md) · [ano-da-saude-verificacao.md](ano-da-saude-verificacao.md) · [sprint-1-review.md](sprints/sprint-1-review.md) · [sprint-1-retrospective.md](sprints/sprint-1-retrospective.md) · [sprint-2-planning.md](sprints/sprint-2-planning.md) |
+| 22/10/2026 | Pitch: roteiro de falas, gravações de tela e cobertura da rubrica | [pitch-roteiro-de-falas.md](pitch-roteiro-de-falas.md) |
 | 15/10/2026 | Divisão do que falta para a entrega (prazo 22/10) | [guia-hector.md](guia-hector.md) · [guia-ivaldo.md](guia-ivaldo.md) |
 
 ## Checklist final da Sprint 0
