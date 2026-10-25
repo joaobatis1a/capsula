@@ -1,7 +1,7 @@
 # Visão do Produto e Product Goal
 
 **Produto:** Cápsula, *criatividade na dose certa*
-**Product Owner:** João Batista · **Atualizado em:** 14/10/2026 · **Status:** proposta para aprovação do time
+**Product Owner:** João Batista · **Criado em:** 14/10/2026 · **Atualizado em:** 25/10/2026, com o resultado do Product Goal
 
 ## Visão do produto
 
@@ -19,12 +19,14 @@
 
 > **Até 26/10/2026, ter publicado um protótipo funcional da Cápsula em que um briefing gera de 3 a 5 variações por canal nos formatos feed, story e banner, cada uma com Bula e checklist de governança, usando memória de campanhas sintéticas e radar de tendências, demonstrado no pitch de até 5 minutos.**
 
-Como saber que o objetivo foi atingido:
-- [ ] Um briefing gera variações nos 3 formatos, de ponta a ponta, no ambiente publicado na Vercel.
-- [ ] Toda variação exibe a Bula com dose, evidências com origem e resultado do checklist.
-- [ ] Uma peça com promessa de resultado é bloqueada com o motivo visível.
-- [ ] Uma peça só chega a "Aprovado" por ação de uma pessoa.
-- [ ] O pitch de até 5 minutos e a demonstração gravada são entregues até 26/10.
+Como saber que o objetivo foi atingido (situação em 25/10):
+- [x] Um briefing gera variações nos 3 formatos, de ponta a ponta, no ambiente publicado na Vercel. *3 variações por canal e público; 12 peças em 9,5 s no briefing de exemplo ([QA em produção](qa-producao.md)).*
+- [x] Toda variação exibe a Bula com dose, evidências com origem e resultado do checklist. *QA 3.1.*
+- [x] Uma peça com promessa de resultado é bloqueada com o motivo visível. *QA 3.3 e [QA do motor](qa-motor.md), casos 2 e 8 a 10.*
+- [x] Uma peça só chega a "Aprovado" por ação de uma pessoa. *Validado no servidor; QA 4.1 a 4.4.*
+- [x] O pitch de até 5 minutos e a demonstração são entregues até 26/10. *10 slides, falas de 3:58 e duas animações do sistema; a demonstração ao vivo é pelo QR code para o site ([roteiro](pitch-roteiro-de-falas.md)).*
+
+**Resultado:** Product Goal atingido. O que ficou de fora está em [Limitações e próximos passos](limitacoes-e-proximos-passos.md).
 
 ## Fatos, hipóteses, dúvidas e riscos
 
@@ -36,11 +38,11 @@ Como saber que o objetivo foi atingido:
 | **Fato** | O pitch tem até 5 minutos e é eliminatório. |
 | **Hipótese** | Hoje um briefing vira cerca de 3 peças (uma por formato). Com a Cápsula, vira até 15, ou 5× mais variações. |
 | **Hipótese** | Um histórico de cerca de 300 campanhas sintéticas basta para demonstrar o ranking de combinações. |
-| **Hipótese** | A camada gratuita da Groq (cerca de 1.000 requisições por dia) cobre o desenvolvimento e a demonstração. |
+| **Hipótese** | A camada gratuita da IA cobre o desenvolvimento e a demonstração. *Em 22/10: só em parte; o modelo maior falhou por cota, e o time passou a usar o Gemini 3.5 Flash-Lite com reservas.* |
 | **Dúvida** | Qual é o tempo atual de produção por peça? É preciso confirmar com a empresa na mentoria. |
 | **Dúvida** | Que regras de publicidade a empresa já aplica? O checklist do MVP é um conjunto mínimo. |
-| **Risco** | Cotas gratuitas mudarem ou acabarem. Mitigação: OpenRouter como reserva e cache das saídas. |
-| **Risco** | O Supabase gratuito pausar após 7 dias sem uso. Mitigação: acessar o projeto antes de cada apresentação. |
+| **Risco** | Cotas gratuitas mudarem ou acabarem. Mitigação: modelos de reserva, moldes fixos com aviso e cache das saídas. |
+| **Risco** | O Supabase gratuito pausar após 7 dias sem uso. *Encerrado em 22/10: o banco saiu da entrega.* |
 | **Risco** | O escopo crescer além de 12 dias com 3 pessoas. Mitigação: congelar o escopo em 24/10 e enviar em 25/10. |
 | **Risco** | Vazamento de informação confidencial. Mitigação: repositório privado, chaves só no `.env.local` e nada do enunciado fora do time. |
 
