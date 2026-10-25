@@ -41,7 +41,7 @@ Um item fechado por PR com `Closes #n` vai sozinho para **Pronto**.
 | João Batista ([@joaobatis1a](https://github.com/joaobatis1a)) | Product Owner | Dono | Dono |
 | Ivaldo ([@IvaldoMonteiro](https://github.com/IvaldoMonteiro)) | Developer | Write (aceito) | Write |
 | Hector ([@Hector-Borges](https://github.com/Hector-Borges)) | Scrum Master | Write (aceito) | Write |
-| Mentoria | Avaliação | Write (aceito) | — |
+| Mentoria | Acompanhamento | Write (aceito) | — |
 
 Integrantes entram como **Write** no repositório e no quadro. Repositório pessoal no GitHub não tem papel só de leitura para convidados, por isso a mentoria entrou como **Write**, com o acordo de não alterar nada.
 
