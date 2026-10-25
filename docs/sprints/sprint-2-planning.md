@@ -37,10 +37,10 @@ Entregas individuais com prazo em 22/10: #75 (Radar real), #76 (Ano da saúde), 
 
 ## Como saber que o Sprint Goal foi atingido
 
-- [ ] O roteiro de demonstração roda na URL da Vercel do começo ao fim (#14).
-- [ ] O Radar mostra itens com fonte e data, e os que ainda são exemplo estão marcados como "Exemplo ilustrativo".
-- [ ] O pitch de 5 minutos e o vídeo estão prontos (#16).
-- [ ] Os itens entregues cumprem a [Definition of Done](../definition-of-done.md).
+- [x] O roteiro de demonstração roda na URL da Vercel do começo ao fim (#14). *Resultado na [Review](sprint-2-review.md) e no [QA em produção](../qa-producao.md).*
+- [x] O Radar mostra itens com fonte e data, e os que ainda são exemplo estão marcados ("dados de teste").
+- [x] O pitch de 5 minutos e o vídeo estão prontos (#16). *10 slides, falas de 3:58 e duas animações do sistema.*
+- [x] Os itens entregues cumprem a [Definition of Done](../definition-of-done.md).
 
 ## Premissas e riscos
 
