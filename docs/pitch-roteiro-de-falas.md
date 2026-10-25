@@ -4,7 +4,7 @@
 
 ## Em resumo
 
-- **Duração:** 534 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,6 min**; em ritmo calmo (130) são **4,1 min**. Com as pausas entre slides, fica em 3:48 no ritmo normal (1:11 de margem) e 4:21 num ritmo bem calmo (0:38 de margem). Ensaie no ritmo normal.
+- **Duração:** 527 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,5 min**; em ritmo calmo (130) são **4,1 min**. Com as pausas entre slides, fica em 3:46 no ritmo normal (1:14 de margem) e 4:18 num ritmo bem calmo (0:42 de margem). Ensaie no ritmo normal.
 - **10 slides.** Dois deles (5 e 6) são **gravações de tela do sistema** com a fala por cima; os outros oito são slides.
 - **Fechamento:** QR code para https://capsula-mvp.vercel.app, para a banca testar na hora.
 - **Honestidade:** os dados são de teste, a marca é fictícia e as contas de impacto e margem usam premissas declaradas. Isso está dito nos slides e nas notas.
@@ -13,16 +13,16 @@
 
 | # | Slide | Tempo | Formato | Palavras |
 |---|---|---|---|---|
-| 1 | Capa | 0:00 a 0:11 | Slide | 24 |
-| 2 | O problema | 0:11 a 0:39 | Slide | 66 |
-| 3 | A proposta | 0:39 a 1:08 | Slide | 71 |
-| 4 | O diferencial | 1:08 a 1:36 | Slide | 64 |
-| 5 | Já funciona | 1:36 a 1:54 | GRAVAÇÃO DE TELA 1 | 42 |
-| 6 | Bula e governança | 1:54 a 2:16 | GRAVAÇÃO DE TELA 2 | 52 |
-| 7 | Impacto esperado | 2:16 a 2:42 | Slide | 60 |
-| 8 | Margem de lucro | 2:42 a 3:03 | Slide | 49 |
-| 9 | Viabilidade | 3:03 a 3:33 | Slide | 73 |
-| 10 | Fechamento | 3:33 a 3:48 | Slide | 33 |
+| 1 | Capa | 0:00 a 0:12 | Slide | 26 |
+| 2 | O problema | 0:12 a 0:35 | Slide | 55 |
+| 3 | A proposta | 0:35 a 1:05 | Slide | 71 |
+| 4 | O diferencial | 1:05 a 1:33 | Slide | 65 |
+| 5 | Já funciona | 1:33 a 1:51 | GRAVAÇÃO DE TELA 1 | 42 |
+| 6 | Bula e governança | 1:51 a 2:13 | GRAVAÇÃO DE TELA 2 | 52 |
+| 7 | Impacto esperado | 2:13 a 2:39 | Slide | 61 |
+| 8 | Margem de lucro | 2:39 a 3:00 | Slide | 49 |
+| 9 | Viabilidade | 3:00 a 3:31 | Slide | 73 |
+| 10 | Fechamento | 3:31 a 3:46 | Slide | 33 |
 
 Os tempos são para ritmo normal de fala. No ritmo calmo, cada bloco cresce cerca de 15%, e ainda cabe nos 5 minutos.
 
@@ -66,23 +66,21 @@ A fala nas gravações é a mesma do slide, dita por cima da tela em movimento. 
 
 ## Fala de cada slide
 
-### 1. Capa (0:00 a 0:11)
+### 1. Capa (0:00 a 0:12)
 
-> Boa tarde! Eu sou o João Batista e, com o Ivaldo e o Hector, vou apresentar a Cápsula, pensada para o marketing de farmácias.
+> Boa tarde! Eu sou o João Batista e, com o Ivaldo e o Hector, vou apresentar a Cápsula, pensada para o time de marketing da rede.
 
 *Direção:* Sorria, olhe para a câmera e fale devagar.
 
 Se perguntarem o que é "dose": é quanto de cada peça vem da memória do que funcionou e quanto vem da tendência do momento. Aparece no slide 4.
 
-### 2. O problema (0:11 a 0:39)
+### 2. O problema (0:12 a 0:35)
 
-> Imagine o time de marketing de uma rede de farmácias, uma das cerca de noventa mil do país. Chega uma oferta de protetor solar, que precisa sair em três formatos, para três públicos. São nove peças para uma ideia só, e amanhã chega outra. Hoje eles usam planilhas, agência e ferramentas como o ChatGPT, que não lembram o que funcionou nem conhecem as regras da farmácia.
+> Imagine o time de marketing da rede. Chega uma oferta de protetor solar, que precisa sair em três formatos, para três públicos. São nove peças para uma ideia só, e amanhã chega outra. Hoje eles usam planilhas, agência e ferramentas de IA genéricas, que não lembram o que funcionou nem conhecem as regras da farmácia.
 
 *Direção:* Aponte para a conta 1 × 3 × 3 = 9 enquanto fala.
 
-Fonte do número: cerca de 90 mil estabelecimentos segundo o Conselho Federal de Farmácia, citado pelo InfoMoney; a Abrafarma informou 93,7 mil em 2024.
-
-### 3. A proposta (0:39 a 1:08)
+### 3. A proposta (0:35 a 1:05)
 
 > Para esse time, criamos a Cápsula, um aplicativo web para analistas de marketing, designers e gestores de marca. A pessoa abre o app, informa produto, preços e públicos, e clica em gerar. A Cápsula olha o que já funcionou, o que está em alta e a época do ano. E a pessoa recebe as peças, cada uma com uma bula, como a de remédio, que explica de onde veio a ideia.
 
@@ -90,15 +88,15 @@ Fonte do número: cerca de 90 mil estabelecimentos segundo o Conselho Federal de
 
 Se perguntarem o que é a bula: é a ficha de cada peça, com para quem ela é, de onde veio cada ideia (campanha, tendência ou época do ano), o que foi checado e onde publicar. O nome brinca com a bula de remédio, porque o cliente é uma farmácia.
 
-### 4. O diferencial (1:08 a 1:36)
+### 4. O diferencial (1:05 a 1:33)
 
-> Por que não só o ChatGPT? Porque a Cápsula lembra: antes de escrever, a IA lê o que deu certo, uma técnica chamada RAG. Porque ela conhece a regra: barra promessa de cura e anúncio de remédio com receita. E porque tudo tem fonte. A dose certa do nome é isso: um pouco do que já funcionou, um pouco do que está em alta.
+> Por que não usar uma IA qualquer? Porque a Cápsula lembra: antes de escrever, a IA lê o que deu certo, uma técnica chamada RAG. Porque ela conhece a regra: barra promessa de cura e anúncio de remédio com receita. E porque tudo tem fonte. A dose certa do nome é isso: um pouco do que já funcionou, um pouco do que está em alta.
 
 *Direção:* Faça a pergunta do título olhando para a banca, como quem antecipa a dúvida dela. Faça uma pausa curta antes de "a dose certa do nome é isso".
 
 Se perguntarem o que é RAG: antes de pedir o texto ao modelo, a Cápsula busca no histórico de campanhas, no radar de tendências e no calendário de saúde, e manda essas evidências junto com o pedido. O histórico tem 300 campanhas sintéticas (dados de teste).
 
-### 5. Já funciona (1:36 a 1:54)
+### 5. Já funciona (1:33 a 1:51)
 
 **GRAVAÇÃO DE TELA 1.** O slide inteiro é trocado pela gravação do sistema.
 
@@ -106,7 +104,7 @@ Se perguntarem o que é RAG: antes de pedir o texto ao modelo, a Cápsula busca 
 
 Os números: mediana de 12,4 s em 10 briefings de teste (um caso passou de 55 s antes de limitarmos o tempo da geração, já corrigido). Testes: 96 no repositório em 22/10. As peças usam o manual de uma marca fictícia, "Farmácia Exemplo"; nenhuma imagem é gerada por IA.
 
-### 6. Bula e governança (1:54 a 2:16)
+### 6. Bula e governança (1:51 a 2:13)
 
 **GRAVAÇÃO DE TELA 2.** O slide inteiro é trocado pela gravação do sistema.
 
@@ -114,15 +112,15 @@ Os números: mediana de 12,4 s em 10 briefings de teste (um caso passou de 55 s 
 
 O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONAR; não é parecer jurídico. A gravação mostra o site em produção, com dados de teste.
 
-### 7. Impacto esperado (2:16 a 2:42)
+### 7. Impacto esperado (2:13 a 2:39)
 
-> E o que muda? Pela nossa estimativa, uma peça que hoje leva uns quarenta minutos passa a pedir uns três de revisão. Ganha o time, com mais tempo para criar, e o gestor, com menos risco. No piloto, a meta é comprovar noventa por cento menos tempo por peça. E isso serve para outras redes e outros setores com regras.
+> E o que muda? Pela nossa estimativa, uma peça que hoje leva uns quarenta minutos passa a pedir uns três de revisão. Ganha o time, com mais tempo para criar, e o gestor, com menos risco. No piloto, a meta é comprovar noventa por cento menos tempo por peça. E dá para levar a outras categorias, regiões e canais da rede.
 
 *Direção:* Diga "pela nossa estimativa" com clareza: a banca valoriza a estimativa honesta.
 
 A conta: 40 minutos por peça hoje é uma estimativa do time, a confirmar com a empresa (não é dado dela). Na Cápsula, cerca de 3 minutos de revisão por peça mais uns 12 segundos de geração. (40 − 3,2) ÷ 40 = 92%; a meta do piloto é comprovar pelo menos 90%. Se a organização informar o tempo real antes da banca, troque o número.
 
-### 8. Margem de lucro (2:42 a 3:03)
+### 8. Margem de lucro (2:39 a 3:00)
 
 > E a conta fecha? Cada peça custa cerca de um centavo de inteligência artificial. Se cobrarmos, por exemplo, um real por peça, numa assinatura por marca, a margem bruta fica em noventa e nove por cento, antes dos custos fixos. O preço de verdade a gente define no piloto.
 
@@ -134,7 +132,7 @@ Como as contas foram feitas (para responder à banca):
 - Conta: R$ 0,01 de custo de IA ÷ R$ 1,00 de preço = 1%; margem bruta cerca de 99%. Se perguntarem do tempo poupado (40 min para 3 min de revisão), é a premissa do slide 7, não dado da empresa.
 - Custos fixos (hospedagem, banco, equipe) ficam fora desta conta.
 
-### 9. Viabilidade (3:03 a 3:33)
+### 9. Viabilidade (3:00 a 3:31)
 
 > E dá para fazer de verdade? Já está no ar, com Next.js, TypeScript e a IA do Gemini, na Vercel. Funciona em etapas: briefing, busca nos dados, geração, checagem da regra e aprovação. Hoje usa dados de teste, mas a empresa liga os dela por planilha, sem mudar nada, e as tendências vêm de fontes públicas. O que falta são dados reais, um plano pago de IA e uma revisão jurídica das regras.
 
@@ -147,7 +145,7 @@ Detalhes se perguntarem:
 - Gemini: modelo principal gemini-3.5-flash-lite, com 2 modelos de reserva e, por último, moldes fixos, sempre com aviso na tela.
 - Banco (Supabase): ficou fora desta entrega; hoje a aprovação vive no navegador.
 
-### 10. Fechamento (3:33 a 3:48)
+### 10. Fechamento (3:31 a 3:46)
 
 > Então, lembra daquela oferta que chega amanhã? Com a Cápsula, ela sai mais rápido, dentro das regras e com uma pessoa decidindo. O QR code está na tela: testem agora mesmo. Muito obrigado!
 
@@ -155,7 +153,7 @@ Detalhes se perguntarem:
 
 Aviso para o ensaio: o site usa o plano gratuito do Gemini, que tem cota curta. Se muita gente testar ao mesmo tempo, algumas gerações saem dos moldes fixos, e a tela avisa. O site continua funcionando. Teste o QR code com o celular antes da gravação.
 
-Tempo total das falas: cerca de 530 palavras: 3:48 em ritmo normal, com as pausas entre slides (1:11 de margem nos 5 minutos), e 4:21 em ritmo bem calmo (0:38 de margem). Ensaie no ritmo normal.
+Tempo total das falas: cerca de 527 palavras: 3:46 em ritmo normal, com as pausas entre slides (1:14 de margem nos 5 minutos), e 4:18 em ritmo bem calmo (0:42 de margem). Ensaie no ritmo normal.
 
 ## Cobertura da rubrica (25 critérios)
 
@@ -165,7 +163,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 
 | Critério | Slide | Onde está na fala |
 |---|---|---|
-| 1. Problema com contexto concreto (quem é afetado e em que situação) | 2 | "Imagine o time de marketing de uma rede de farmácias... Chega uma oferta de protetor solar, que precisa sair em três formatos, para três públicos. São nove peças para uma ideia só" |
+| 1. Problema com contexto concreto (quem é afetado e em que situação) | 2 | "Imagine o time de marketing da rede. Chega uma oferta de protetor solar, que precisa sair em três formatos, para três públicos. São nove peças para uma ideia só" |
 | 2. Solução nomeada e descrita | 1, 3 | "criamos a Cápsula, um aplicativo web" |
 | 3. O que a solução faz | 3 | "A Cápsula olha o que já funcionou, o que está em alta e a época do ano. E a pessoa recebe as peças, cada uma com uma bula" |
 | 4. Público-alvo citado | 2, 3 | "para analistas de marketing, designers e gestores de marca" |
@@ -175,8 +173,8 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 
 | Critério | Slide | Onde está na fala |
 |---|---|---|
-| 1. Solução existente ou forma atual citada | 2, 4 | "Hoje eles usam planilhas, agência e ferramentas como o ChatGPT, que não lembram o que funcionou nem conhecem as regras" |
-| 2. Diferencial afirmado | 4 | "Por que não só o ChatGPT? Porque a Cápsula lembra... Porque ela conhece a regra... E porque tudo tem fonte" |
+| 1. Solução existente ou forma atual citada | 2, 4 | "Hoje eles usam planilhas, agência e ferramentas de IA genéricas, que não lembram o que funcionou nem conhecem as regras" |
+| 2. Diferencial afirmado | 4 | "Por que não usar uma IA qualquer? Porque a Cápsula lembra... Porque ela conhece a regra... E porque tudo tem fonte" |
 | 3. Funcionalidade além do básico | 3, 4, 6 | a bula de cada peça; o bloqueio de "promessa de cura e anúncio de remédio com receita"; a dose de cada peça |
 | 4. Tecnologia avançada | 4, 9 | "antes de escrever, a IA lê o que deu certo, uma técnica chamada RAG"; "a IA do Gemini" |
 | 5. Duas ou mais fontes combinadas | 3, 4, 9 | "o que já funcionou, o que está em alta e a época do ano"; "um pouco do que já funcionou, um pouco do que está em alta" |
@@ -187,9 +185,9 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 |---|---|---|
 | 1. Beneficiados identificados | 7 | "Ganha o time, com mais tempo para criar, e o gestor, com menos risco" |
 | 2. Benefício concreto | 7 | "uma peça que hoje leva uns quarenta minutos passa a pedir uns três de revisão" |
-| 3. Número sobre o problema ou o público | 2, 7 | "cerca de noventa mil" farmácias; "nove peças"; "quarenta minutos" |
+| 3. Número sobre o problema ou o público | 2, 7 | "três formatos, para três públicos"; "nove peças"; "quarenta minutos" |
 | 4. Meta ou métrica mensurável | 7 | "No piloto, a meta é comprovar noventa por cento menos tempo por peça" |
-| 5. Escala ou expansão | 7 | "isso serve para outras redes e outros setores com regras" |
+| 5. Escala ou expansão | 7 | "dá para levar a outras categorias, regiões e canais da rede" |
 
 ### VIABILIDADE
 
@@ -219,7 +217,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 |---|---|
 | Margem de lucro | Slide 8 e fala: o custo de IA é de cerca de R$ 0,01 por peça; com um preço de exemplo de R$ 1,00 por peça a margem bruta é de ≈ 99%, antes dos custos fixos. O preço real fica para o piloto |
 | Cores que incentivam a compra | Laranja e amarelo de etiqueta de oferta sobre o anil da marca, com fundo creme; sem nome nem marca da empresa |
-| No máximo 5 minutos, com margem | 10 slides, cerca de 3:48 em ritmo normal e 4:21 em ritmo calmo |
+| No máximo 5 minutos, com margem | 10 slides, cerca de 3:46 em ritmo normal e 4:18 em ritmo calmo |
 | QR code final | Slide 10, para https://capsula-mvp.vercel.app, com a URL escrita embaixo |
 | Problema, proposta, impacto, o que foi construído e viabilidade | Slides 2, 3, 7, 5 e 6, 9 |
 
@@ -228,7 +226,6 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 - **40 minutos por peça hoje** e **3 minutos de revisão**: premissas do painel de ganho, não dado da empresa. Se a organização informar o tempo real, troque o número no slide 7 e na fala.
 - **R$ 1,00 por peça** (slide 8): é um preço de exemplo para a conta da margem, não uma proposta. O preço real depende do piloto.
 - **US$ 0,001 de IA por peça**: estimativa com preço de lista de terceiros do Gemini 3.5 Flash-Lite (US$ 0,30 por milhão de tokens de entrada e US$ 2,50 de saída), a confirmar na página oficial do Google.
-- **Cerca de 90 mil farmácias**: Conselho Federal de Farmácia, citado pelo InfoMoney; a Abrafarma informou 93,7 mil em 2024.
 - **Dados de teste**: 300 campanhas sintéticas, marca fictícia "Farmácia Exemplo", radar de exemplo, 5 de 33 condições de saúde conferidas.
 
 ## Perguntas prováveis, com resposta curta
