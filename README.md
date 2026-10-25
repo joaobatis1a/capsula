@@ -184,7 +184,7 @@ O plano para cada uma está em [Limitações e próximos passos](docs/limitacoes
 | Ivaldo | Developer | [@IvaldoMonteiro](https://github.com/IvaldoMonteiro) |
 
 - **Duas sprints:** Sprint 1 de 15 a 20/10 (app, motor e interface) e Sprint 2 de 21 a 25/10 (governança, integração, QA e pitch), com Planning, Review e Retrospective registrados em [`docs/sprints/`](docs/sprints/).
-- **Backlog no GitHub:** 45 issues com critérios de aceitação, 40 fechadas com evidência ([quadro](https://github.com/users/joaobatis1a/projects/1)).
+- **Backlog no GitHub:** 45 issues com critérios de aceitação, 42 fechadas com evidência; as 3 abertas (Radar real e conferência completa do Ano da saúde) são a próxima fase ([quadro](https://github.com/users/joaobatis1a/projects/1)).
 - **Fluxo de Git:** ninguém commita na `main`; tudo entra por Pull Request com Squash and merge, no padrão `tipo(escopo): descrição`.
 - **Definition of Done** em cinco blocos: código, funcionamento, interface, dados e registro ([DoD](docs/definition-of-done.md)).
 - **Contribuições:** o escopo foi dividido entre os três em 15/10. Quem entregou cada parte, com a evidência no repositório, está em [Contribuições por integrante](docs/contribuicoes.md).
