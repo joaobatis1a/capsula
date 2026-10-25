@@ -22,7 +22,7 @@
 
 ## O que atrapalhou
 
-- **Entregas individuais não chegaram.** Radar real e a conferência completa do Ano da saúde ficaram para depois, e o QA foi assumido pelo Product Owner.
+- **Agenda apertada para todos.** Com os compromissos pessoais de cada um, o Radar real e a conferência completa do Ano da saúde ficaram para depois, e o Product Owner adiantou o QA. Na reta final, a participação de todos aumentou, com saldo positivo para o time.
 - **Cota gratuita da IA instável.** Exigiu trabalho extra em reservas e tempos, que um plano pago evitaria.
 - **Pitch reescrito muitas vezes.** As primeiras versões das falas estavam longas e técnicas; faltou ensaiar em voz alta mais cedo.
 

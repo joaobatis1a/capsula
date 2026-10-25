@@ -1,6 +1,6 @@
 # QA do motor com 10 briefings (I2, #80)
 
-**Executado em:** 22/10/2026, em produção (https://capsula-mvp.vercel.app, rota `POST /api/gerar`), com intervalo de 25 s entre os casos por causa da cota gratuita do Gemini. **Quem:** João Batista, com apoio de IA, porque a entrega do I2 não chegou até o prazo; o Ivaldo pode complementar e preencher o próprio registro de entregas no guia.
+**Executado em:** 22/10/2026, em produção (https://capsula-mvp.vercel.app, rota `POST /api/gerar`), com intervalo de 25 s entre os casos por causa da cota gratuita do Gemini. **Quem:** João Batista, com apoio de IA, que adiantou o I2 para não apertar o prazo.
 
 Cada caso gerou 3 variações por canal e público e os roteiros (Reels/TikTok 15 s, comercial 15 s e 30 s). "Bloqueadas" é o resultado do checklist de governança.
 
