@@ -8,7 +8,7 @@
 |---|---|
 | Testes automatizados | **98**, em 13 arquivos, todos passando |
 | Briefings testados em produção | **10**, um para cada tipo de produto e para os casos de bloqueio ([qa-motor.md](qa-motor.md)) |
-| Passos do QA em produção | 24, dos quais 21 executados com sucesso; 3 dependem de uma pessoa ou de um aparelho real ([QA em produção](qa-producao.md)) |
+| Passos do QA em produção | **24 de 24** executados com sucesso; o fluxo no celular foi por emulação, e o aparelho físico fica como complemento ([QA em produção](qa-producao.md)) |
 | Larguras de tela conferidas | 360, 390, 768 e 1280 px, sem rolagem horizontal |
 | Falhas encontradas em produção e corrigidas | 3: falso positivo do superlativo (PR #90), peças escuras no modo escuro do navegador (PR #93), id de evidência no texto do roteiro (PR #111) |
 
@@ -44,16 +44,14 @@ Os testes não chamam a IA nem a internet: o cliente do modelo é simulado e os 
 ## QA manual e em produção
 
 - **[QA do motor](qa-motor.md):** 10 briefings em produção, em 22/10. Todos saíram com IA (pelo modelo de reserva), e a governança acertou 9 de 10; o erro (falso positivo do superlativo) foi corrigido no mesmo dia.
-- **[QA em produção](qa-producao.md):** o percurso briefing → variações → Bula → governança → aprovação → Memória → Ganho, por API e em tela, no computador e no celular.
+- **[QA em produção](qa-producao.md):** o percurso briefing → variações → Bula → governança → aprovação → Memória → Ganho, por API e em tela, no computador e no celular, incluindo navegação só por teclado e o roteiro bloqueado em tela (24 de 24 passos).
 - **[Ano da saúde](ano-da-saude-verificacao.md):** 5 das 33 condições conferidas com fonte pública, todas consistentes; as outras 28 estão marcadas como aproximação.
 
 ## O que ainda não foi testado
 
 | Item | Por quê | Como fazer |
 |---|---|---|
-| Teclado nos seletores do briefing | Precisa de uma pessoa navegando só com o teclado | Passo 1.3 do QA em produção |
-| Roteiro bloqueado visto em tela | Coberto por testes automatizados; o briefing de exemplo não gera roteiro bloqueado | Passo 3.5 do QA em produção, com um briefing de medicamento com prescrição |
-| Fluxo completo num celular real | Conferido só em telas simuladas no navegador | Passo 6.4 do QA em produção |
+| Fluxo completo num aparelho físico | Feito por emulação de celular (390×844, toque), não num aparelho de verdade | Abrir o site num celular e repetir o passo 6.4 |
 | Qualidade do texto por mais de uma pessoa | A avaliação de leitura foi de uma pessoa só | Rodada com o time de marketing no piloto |
 | O modelo principal em condições normais | Na rodada de QA ele estava com cota esgotada ou sobrecarregado | Repetir a rodada com plano pago |
 | Teste de carga | O protótipo usa a camada gratuita da IA | Fora do escopo do hackathon |
