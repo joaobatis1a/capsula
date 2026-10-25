@@ -4,6 +4,14 @@
 
 O escopo foi dividido entre os três integrantes em 15/10, nos guias individuais ([Hector](guia-hector.md) e [Ivaldo](guia-ivaldo.md)), com prazo em 22/10. Este registro compara o que foi combinado com o que foi entregue. Ele se baseia só no que é verificável: commits, Pull Requests, issues e arquivos recebidos.
 
+## Contexto
+
+Os três conciliaram o hackathon com compromissos pessoais, e cada um teve uma disponibilidade diferente ao longo das duas semanas. Por isso, em vários momentos o João tomou a frente para adiantar partes do trabalho, para que o prazo não ficasse em risco.
+
+Em alguns momentos, o João e a mentoria conversaram sobre como trazer um pouco mais de envolvimento de todos. Isso fez o Hector e o Ivaldo participarem mais na reta final, com entregas, ajuda nas decisões e retorno sobre o pitch.
+
+**O saldo do time é positivo, e não há nada a criticar em nenhum dos integrantes.** As diferenças de volume abaixo refletem a disponibilidade de cada um, e não o compromisso com o projeto.
+
 ## Em números
 
 | | João Batista | Ivaldo | Hector |
@@ -44,7 +52,7 @@ Além da frente original, o João escreveu o restante do sistema e assumiu as en
 
 ## Fora do repositório
 
-O Hector e o Ivaldo ajudaram em decisões de apoio ao longo do projeto, nas conversas do time. Essas contribuições não aparecem no Git e não estão detalhadas aqui; o time pode acrescentá-las.
+O Hector e o Ivaldo ajudaram em decisões de apoio ao longo do projeto, nas conversas do time, e participaram das decisões sobre o pitch, tomadas em acordo com a maioria. Essas contribuições não aparecem no Git, mas fazem parte do resultado.
 
 ## Como este registro foi feito
 
@@ -52,4 +60,4 @@ O Hector e o Ivaldo ajudaram em decisões de apoio ao longo do projeto, nas conv
 - **Entregas:** as issues #74 a #83 e os guias individuais de 15/10.
 - **Pacote do Hector:** a lista de arquivos e o `LEIA-ME.md` do próprio pacote.
 
-Nenhuma avaliação pessoal entra aqui, só o que pode ser conferido.
+Os números servem para registrar quem fez cada parte, e não para avaliar as pessoas.

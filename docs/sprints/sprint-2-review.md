@@ -38,7 +38,7 @@ Também entraram: troca automática de modelo com orçamento de tempo (PRs #88, 
 
 | Issue | Item | Motivo | Destino |
 |---|---|---|---|
-| #9 e #75 | Radar com fontes reais | A entrega individual não chegou até o congelamento | Próxima fase: coleta automática |
+| #9 e #75 | Radar com fontes reais | Não coube na agenda do time até o congelamento | Próxima fase: coleta automática |
 | #76 | Conferência completa do Ano da saúde | 5 de 33 condições conferidas | Próxima fase: conferir as 28 restantes com os boletins |
 | #14 | Integração e deploy estável | Entregue na prática: os 24 passos do QA em produção passaram em 25/10, incluindo teclado, roteiro bloqueado em tela e o fluxo no celular por emulação. Fica aberta só por decisão do PO | Fechar com a evidência do [QA em produção](../qa-producao.md); aparelho físico como complemento |
 | #16 | Pitch e vídeo | Material pronto; falta o ensaio do time e a apresentação | Fecha em 26/10 |

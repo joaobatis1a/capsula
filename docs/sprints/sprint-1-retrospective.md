@@ -17,8 +17,8 @@ Primeira retrospectiva: não há ações anteriores.
 
 ## O que atrapalhou
 
-- **Trabalho concentrado em uma pessoa até 15/10.** Quase todo o código entrou por um único autor, e as entregas dos outros dois só chegaram em 22/10, depois do prazo combinado.
-- **Entrega sem contexto do repositório.** O backend enviado para a parte de dados foi escrito para outro contrato e só uma parte dele pôde ser aproveitada. Faltou alinhar o contrato (`lib/data/types.ts`) antes de codar.
+- **Disponibilidades diferentes no começo.** Os integrantes conciliaram o hackathon com compromissos pessoais. Até 15/10, o Product Owner tomou a frente e adiantou a maior parte do código, e as outras entregas chegaram em 22/10.
+- **Contrato alinhado tarde.** O backend preparado para a parte de dados foi escrito para outro contrato, e só uma parte dele pôde ser aproveitada. Alinhar o contrato (`lib/data/types.ts`) antes de codar teria poupado retrabalho.
 - **Premissas de stack nunca revistas.** O Supabase e o Groq estavam no plano desde o início e só foram retirados em 22/10, depois de a demonstração funcionar sem eles.
 - **Convites ao repositório atrasaram.** Um dos convites levou uma semana para ser aceito.
 
