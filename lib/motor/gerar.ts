@@ -8,6 +8,7 @@ import { roteiroSchema, variacaoSchema, type Evidencia, type RespostaGeracao, ty
 import { calcularDose, evidenciaPorId, formatosPara, montarContexto, type Contexto } from "./contexto";
 import { montarPrompt, SISTEMA, type Pedido } from "./prompt";
 import { gerarSemIA, type PecaBruta, type RoteiroBruto } from "./sem-ia";
+import { semIds } from "./texto";
 
 /* Motor de geração (#23): briefing + contexto → variações com Bula, dose e governança.
    Nunca quebra: se o modelo falha, aquele público sai pelo modo sem IA, com aviso. */
@@ -138,10 +139,10 @@ function converterLLM(bruto: z.infer<typeof respostaLLM>, pedido: Pedido, ctx: C
     return {
       canal: p.canal,
       formato: p.formato,
-      titulo: corte(v.titulo, p.formato === "banner" ? 40 : 90),
-      texto: corte(v.texto, 400),
-      cta: corte(v.cta, 40),
-      selo: v.selo ? corte(v.selo, 24) : undefined,
+      titulo: corte(semIds(v.titulo), p.formato === "banner" ? 40 : 90),
+      texto: corte(semIds(v.texto), 400),
+      cta: corte(semIds(v.cta), 40),
+      selo: v.selo ? corte(semIds(v.selo), 24) : undefined,
       hashtags: (v.hashtags ?? []).slice(0, 6),
       indicacao: v.indicacao || reserva.pecas[i].indicacao,
       composicao: v.composicao?.length ? v.composicao.slice(0, 5) : reserva.pecas[i].composicao,
@@ -153,8 +154,8 @@ function converterLLM(bruto: z.infer<typeof respostaLLM>, pedido: Pedido, ctx: C
   const r = bruto.roteiros?.[0];
   const roteiro = r
     ? {
-        titulo: r.titulo,
-        cenas: r.cenas.map((c) => ({ ...c, fala: c.fala ?? undefined, tela: c.tela ?? undefined })),
+        titulo: semIds(r.titulo),
+        cenas: r.cenas.map((c) => ({ ...c, visual: semIds(c.visual), fala: semIds(c.fala ?? undefined), tela: semIds(c.tela ?? undefined) })),
         evidencias: (r.evidencias ?? []).map((e) => evidenciaPorId(ctx, e.refId, e.texto, limitar(e.peso ?? 1, 0, 1))).filter((e): e is Evidencia => e !== null),
       }
     : reserva.roteiro;
