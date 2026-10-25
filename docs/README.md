@@ -51,6 +51,7 @@
 | [Sprint 1: Planning](sprints/sprint-1-planning.md) · [Review](sprints/sprint-1-review.md) · [Retrospective](sprints/sprint-1-retrospective.md) | App, motor e interface (15 a 20/10) |
 | [Sprint 2: Planning](sprints/sprint-2-planning.md) · [Review](sprints/sprint-2-review.md) · [Retrospective](sprints/sprint-2-retrospective.md) | Governança, integração, QA e pitch (21 a 25/10) |
 | [Modelos de Review](templates/sprint-review.md) e [de Retrospective](templates/sprint-retrospective.md) | Registros leves |
+| [Contribuições por integrante](contribuicoes.md) | O escopo combinado com cada pessoa e quem entregou cada parte, com evidência |
 | [Uso de IA generativa](uso-de-ia.md) | O que a IA fez no produto e no desenvolvimento, e o que o time corrigiu ou rejeitou |
 | [Product Backlog](https://github.com/joaobatis1a/capsula/issues) · [Quadro](https://github.com/users/joaobatis1a/projects/1) | 45 issues com critérios de aceitação |
 
