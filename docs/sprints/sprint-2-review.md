@@ -45,11 +45,11 @@ Também entraram: troca automática de modelo com orçamento de tempo (PRs #88, 
 
 ## Feedback recebido
 
-| De quem | Feedback | Ação |
+| De quem | Feedback | Decisão do time |
 |---|---|---|
-| Mentoria | Trocar a citação de uma ferramenta de IA específica por "IA em geral" | Aplicado nos slides 2 e 4 e nas falas (PR #107) |
-| Mentoria | Focar na rede e não em "farmácias em geral", para não soar como concorrência | Aplicado: "o time de marketing da rede"; escala por categorias, regiões e canais (PR #107) |
-| Mentoria | Reduzir o texto dos slides, mantendo a fala | Slides enxutos, com a explicação na fala (PRs #107 e #109) |
+| Mentoria (sugestão) | Considerar citar a IA em geral, em vez de uma ferramenta específica | Discutida pelos integrantes e adotada em acordo com a maioria: slides 2 e 4 e falas (PR #107) |
+| Mentoria (sugestão) | Considerar manter o foco na rede, em vez de "farmácias em geral" | Discutida pelos integrantes e adotada em acordo com a maioria: "o time de marketing da rede", com escala por categorias, regiões e canais (PR #107) |
+| Mentoria (sugestão) | Considerar menos texto nos slides, mantendo a fala | Discutida pelos integrantes e adotada em acordo com a maioria: slides enxutos, com a explicação na fala (PRs #107 e #109) |
 | Product Owner | Falas confusas e robóticas em versões anteriores | Reescritas em tom de conversa (PRs #102, #106, #108, #109) |
 | [time] | [a preencher] | [a preencher] |
 
