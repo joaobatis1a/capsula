@@ -1,8 +1,8 @@
 # Sprint Review: Sprint 2
 
-**Data:** 25/10/2026 · **Duração:** até 20 minutos · **Facilitação:** Scrum Master · **Presentes:** [a preencher pelo time]
+**Data:** 25/10/2026 · **Formato:** alinhamento pelo grupo do time, depois de uma reunião inicial com a mentoria · **Participaram:** os integrantes do time
 
-> **Rascunho** do Product Owner, montado a partir do histórico de PRs, issues e QA. O time confere e completa presentes e feedback.
+> Registro do Product Owner, montado a partir do histórico de PRs, issues e QA, e do alinhamento feito pelo grupo do time.
 
 ## Sprint Goal
 

@@ -1,8 +1,8 @@
 # Sprint Retrospective: Sprint 2
 
-**Data:** 25/10/2026 · **Duração:** até 15 minutos · **Facilitação:** Scrum Master · **Presentes:** [a preencher pelo time]
+**Data:** 25/10/2026 · **Formato:** alinhamento pelo grupo do time, depois de uma reunião inicial com a mentoria · **Participaram:** os integrantes do time
 
-> **Rascunho** do Product Owner com base em fatos do repositório. O time acrescenta o que sentiu e aceita ou rejeita as ações.
+> Registro do Product Owner com base em fatos do repositório e no alinhamento feito pelo grupo do time.
 
 ## Ações da retrospectiva anterior
 
@@ -36,4 +36,4 @@
 
 ## Mudanças no acordo de trabalho ou na DoD
 
-- Proposta da Sprint 1 ainda pendente: a DoD inclui "issue fechada com a evidência (teste, PR ou produção)". Na prática já foi seguida nesta sprint. Aceite dos três: [pendente].
+- Nenhuma mudança formal na Definition of Done. O critério prático foi o mesmo da Sprint 1: pronto é entregar o que foi proposto e estava no escopo congelado em 24/10. As issues foram fechadas com a evidência (teste, PR ou produção).

@@ -18,7 +18,7 @@ Em alguns momentos, o João e a mentoria conversaram sobre como trazer um pouco 
 
 ## Apoio da mentoria
 
-A mentoria entrou em contato com o time desde o começo e sempre se dispôs a ajudar, na medida do que podia, sempre que foi necessário. Esse acompanhamento foi essencial para o time se organizar, manter o ritmo e chegar à entrega. O time agradece.
+Houve uma reunião com a mentoria no início do projeto, e depois o time seguiu se alinhando pelo grupo. A mentoria entrou em contato com o time desde o começo e sempre se dispôs a ajudar, na medida do que podia, sempre que foi necessário. Esse acompanhamento foi essencial para o time se organizar, manter o ritmo e chegar à entrega. O time agradece.
 
 ## Em números
 

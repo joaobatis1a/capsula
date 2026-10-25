@@ -1,8 +1,8 @@
 # Sprint Retrospective: Sprint 1
 
-**Data:** 22/10/2026 · **Duração:** até 15 minutos · **Facilitação:** Scrum Master · **Presentes:** [a preencher pelo time]
+**Data:** 22/10/2026 · **Formato:** alinhamento pelo grupo do time, depois de uma reunião inicial com a mentoria · **Participaram:** os integrantes do time
 
-> **Rascunho** do Product Owner com base em fatos do repositório. O time acrescenta o que sentiu e aceita ou rejeita as ações.
+> Registro do Product Owner com base em fatos do repositório e no alinhamento feito pelo grupo do time.
 
 ## Ações da retrospectiva anterior
 
@@ -32,4 +32,4 @@ Primeira retrospectiva: não há ações anteriores.
 
 ## Mudanças no acordo de trabalho ou na DoD
 
-- Proposta: a Definition of Done passa a incluir "issue fechada com a evidência (teste, PR ou produção)". Aceite dos três: [pendente].
+- Nenhuma mudança formal na Definition of Done. Na prática, o time tratou como "pronto" entregar o que foi proposto e estava no escopo, alinhado pelo grupo. Como prática do Product Owner, as issues passaram a ser fechadas com a evidência (teste, PR ou produção).
