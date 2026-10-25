@@ -1,9 +1,9 @@
 # Sprint Planning: Sprint 2
 
-**Sprint:** 21/10 a 25/10/2026 · **Planning em:** 22/10/2026 (adiado do dia 21/10) · **Status:** proposta para aprovação do time
+**Sprint:** 21/10 a 25/10/2026 · **Planning em:** 22/10/2026 (adiado do dia 21/10) · **Status:** plano seguido pelo time na Sprint 2
 **Quadro:** [Cápsula: Product Backlog](https://github.com/users/joaobatis1a/projects/1), filtro `Sprint: Sprint 2`
 
-> **Rascunho** do Product Owner. A Sprint 2 já está em andamento: o planejamento registra o que já foi feito, o que resta e as decisões de escopo.
+> Registro do Product Owner. A Sprint 2 já estava em andamento: o planejamento registra o que já tinha sido feito, o que restava e as decisões de escopo.
 
 ## Sprint Goal
 

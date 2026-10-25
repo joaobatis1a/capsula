@@ -1,8 +1,8 @@
 # Sprint Review: Sprint 1
 
-**Data:** 22/10/2026 (adiada do dia 20/10) · **Duração:** até 20 minutos · **Facilitação:** Scrum Master · **Presentes:** [a preencher pelo time]
+**Data:** 22/10/2026 (adiada do dia 20/10) · **Formato:** alinhamento pelo grupo do time, depois de uma reunião inicial com a mentoria · **Participaram:** os integrantes do time
 
-> **Rascunho.** Preparado pelo Product Owner a partir do histórico de PRs e issues, para o time conferir e completar (presentes, feedback). O que não está comprovado no repositório ficou marcado.
+> Registro preparado pelo Product Owner a partir do histórico de PRs e issues. O que não está comprovado no repositório ficou marcado.
 
 ## Sprint Goal
 

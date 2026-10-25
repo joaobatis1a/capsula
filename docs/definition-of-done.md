@@ -1,6 +1,8 @@
 # Definition of Done
 
-**Atualizado em:** 14/10/2026 · **Status:** proposta para aprovação do time
+**Atualizado em:** 14/10/2026 · **Status:** em uso pelo time
+
+> **Como a DoD foi usada.** A lista abaixo é a referência do time. Na prática, o critério de pronto foi entregar o que foi proposto e estava no escopo, alinhado pelo grupo do time. As issues foram fechadas com a evidência (teste, PR ou produção).
 
 Um item do Product Backlog só está **pronto** quando cumpre **todos** os pontos abaixo, além dos critérios de aceitação da própria issue. Item que não cumpre a DoD não é apresentado na Sprint Review e volta para o Product Backlog.
 

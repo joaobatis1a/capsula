@@ -1,6 +1,6 @@
 # Sprint Planning: Sprint 1
 
-**Sprint:** 15/10 a 20/10/2026 (6 dias) · **Planning em:** 14/10/2026 · **Status:** proposta para aprovação do time
+**Sprint:** 15/10 a 20/10/2026 (6 dias) · **Planning em:** 14/10/2026 · **Status:** plano seguido pelo time na Sprint 1
 **Quadro:** [Cápsula: Product Backlog](https://github.com/users/joaobatis1a/projects/1), filtro `Sprint: Sprint 1`
 
 ## Sprint Goal
