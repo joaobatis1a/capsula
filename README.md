@@ -1,155 +1,202 @@
 # Cápsula
 
-**Estúdio criativo com memória para o marketing** · Next.js · TypeScript · Gemini
+**Estúdio criativo com memória para o marketing** · *Criatividade na dose certa*
 
-[![Status](https://img.shields.io/badge/status-em_desenvolvimento-FF5A1F?style=flat-square)](#status-atual)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![No ar](https://img.shields.io/badge/no_ar-capsula--mvp.vercel.app-FF5A1F?style=flat-square)](https://capsula-mvp.vercel.app)
+[![Testes](https://img.shields.io/badge/testes-98_passando-087449?style=flat-square)](#qualidade)
+[![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com)
-[![Gemini](https://img.shields.io/badge/Gemini-4285F4?style=flat-square)](https://ai.google.dev)
+[![Gemini](https://img.shields.io/badge/IA-Gemini-4C4FE8?style=flat-square)](https://ai.google.dev)
+[![Vercel](https://img.shields.io/badge/deploy-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com)
 
-*Criatividade na dose certa.* A Cápsula transforma um briefing de campanha em variações de peças prontas para revisão: consulta o histórico do que funcionou e do que falhou, lê o que está em alta no TikTok e no Instagram e entrega cada peça com a sua **Bula**, que explica de onde veio cada escolha.
+A Cápsula transforma um briefing de campanha em peças prontas para revisão nos formatos feed, story e banner. Antes de escrever, ela consulta o que já funcionou nas campanhas anteriores, o que está em alta e a época do ano na saúde. Cada peça sai com uma **Bula**, que mostra de onde veio cada ideia, e passa por um checklist das regras da Anvisa antes de chegar a uma pessoa, que é quem aprova.
 
-> Projeto do Hackathon Avanade, construído em equipe de três pessoas. **Entrega: 26/10/2026.**
-> Repositório privado: o enunciado do desafio é confidencial. Não publique trechos dele nem identifique a empresa cliente fora do time.
+> **Projeto do Hackathon Avanade · Desafio 1, Creative AI.** Entrega em 26/10/2026, por um time de três pessoas.
+> **Confidencial:** o enunciado do desafio não é publicado e a empresa cliente não é identificada. Todos os dados do protótipo são de teste ou de fontes públicas, e a marca das peças é fictícia ("Farmácia Exemplo").
 
-## Sobre o projeto
+**Teste agora:** https://capsula-mvp.vercel.app (clique em "Preencher exemplo" e em "Gerar variações")
 
-O marketing de uma grande rede de farmácias precisa de cada vez mais peças: uma única oferta vira feed, story e banner, para vários públicos. A demanda cresce mais rápido que o time, e há dois custos escondidos: o que funcionou na campanha passada fica na cabeça de alguém, e toda peça precisa de revisão, porque publicidade de farmácia tem regra.
+![Tela inicial do Estúdio](docs/img/estudio.jpg)
 
-A Cápsula fecha esse ciclo:
+## Sumário
 
-1. **Briefing**: a pessoa descreve produto, oferta, público, canal e objetivo.
-2. **Memória**: o sistema busca no histórico as combinações de gancho, formato e tom que funcionaram (e as que falharam).
-3. **Radar**: junta as tendências em alta e as datas sazonais, sempre com fonte e data.
-4. **Geração**: o modelo de linguagem escreve as variações em cima dessas evidências (RAG sobre dados estruturados).
-5. **Governança**: o checklist automático barra o que não pode sair, e uma pessoa aprova.
-6. **Aprendizado**: o resultado da campanha volta para a memória e orienta a próxima.
+- [O problema](#o-problema)
+- [A solução](#a-solução)
+- [O que já funciona](#o-que-já-funciona)
+- [Como funciona por dentro](#como-funciona-por-dentro)
+- [Stack](#stack)
+- [Como rodar localmente](#como-rodar-localmente)
+- [Qualidade](#qualidade)
+- [Documentação](#documentação)
+- [Limitações conhecidas](#limitações-conhecidas)
+- [Time e processo](#time-e-processo)
+- [Uso de IA generativa](#uso-de-ia-generativa)
+- [Dados e confidencialidade](#dados-e-confidencialidade)
 
-O nome tem três sentidos: cápsula de remédio (o cliente é uma farmácia), cápsula do tempo (o histórico) e cápsula de conteúdo (o vídeo curto que viraliza). A metade anil da marca é a memória, e a metade brasa é a tendência.
+## O problema
 
-## Funcionalidades (planejadas)
+O time de marketing da rede recebe uma oferta, como um protetor solar com desconto, e precisa transformá-la em peças para três formatos e três públicos. São **nove peças para uma ideia só**, e amanhã chega outra. Hoje esse trabalho passa por planilhas, agência e ferramentas de IA genéricas, que têm dois problemas:
 
-- Estúdio de briefing com geração de variações em três formatos: feed (1:1), story (9:16) e banner (16:9)
-- Galeria de variações com templates da marca (HTML/CSS convertido em imagem), sem imagem inventada por IA
-- **Bula** em cada peça: indicação, composição (dose de memória × tendência), evidências com origem, contraindicações e posologia
-- **Radar de tendências** do TikTok Creative Center e da Biblioteca de Anúncios da Meta, mais datas sazonais (São João, Natal…)
-- Roteiros de Reels e TikTok cena a cena, com o gancho dos 3 primeiros segundos, e roteiros de comercial de 15 e 30 segundos
-- Governança com estados Rascunho → Em revisão → Aprovado → Publicado e bloqueio com motivo
-- Memória de campanhas com métricas e painel de ganho (tempo por peça, variações por briefing, peças barradas)
-- Adaptador de dados (`CampaignDataSource`): hoje lê dados sintéticos; depois lê CSV ou API sem mudar o resto do sistema
+1. **Não lembram o que funcionou.** O que deu certo na campanha passada fica na cabeça de alguém.
+2. **Não conhecem as regras da farmácia.** Publicidade de medicamento tem regra (RDC 96/2008 da Anvisa), e toda peça precisa de revisão.
 
-## Status atual
+## A solução
 
-**Sprint 0 concluída** (14/10): Scrum Team, visão, Product Backlog, Definition of Done, ambiente e Sprint Planning 1 estão em [`docs/`](docs/) e no [quadro do projeto](https://github.com/users/joaobatis1a/projects/1). A **Sprint 1** vai de 15/10 a 20/10 e começa pelo scaffold do Next.js.
+Um aplicativo web para analistas de marketing, designers e gestores de marca. A pessoa informa produto, preços e públicos e clica em gerar:
 
-## Scrum Team
+| Passo | O que acontece |
+|---|---|
+| 1. **Briefing** | Produto, tipo de produto, preço normal e da oferta (o desconto é calculado sozinho), públicos, canais e objetivo |
+| 2. **Memória** | O sistema busca no histórico as combinações de gancho, tom, formato e público que renderam acima e abaixo da média |
+| 3. **Radar e Ano da saúde** | Junta o que está em alta (formatos, hashtags, músicas liberadas) e as condições de saúde em pico no mês, sempre com fonte e data |
+| 4. **Geração** | O modelo de linguagem (Gemini) escreve as peças em cima dessas evidências, uma técnica chamada RAG |
+| 5. **Governança** | O checklist bloqueia o que não pode sair (promessa de cura, remédio com receita, oferta sem validade) e explica o motivo |
+| 6. **Aprovação** | Uma pessoa leva cada peça de rascunho a revisão, aprovado e publicado. Nada vai ao ar sem ela |
+| 7. **Aprendizado** | A peça publicada volta para a Memória e orienta a próxima geração |
 
-| Pessoa | Responsabilidade no Scrum | Frente como Developer | GitHub |
-|---|---|---|---|
-| João Batista | **Product Owner** | Frontend: Estúdio, galeria, Memória, aprovação, painel de ganho e pitch | [@joaobatis1a](https://github.com/joaobatis1a) |
-| Hector | **Scrum Master** | Backend de dados: Supabase, adaptador de dados, Radar e governança | — |
-| Ivaldo | Developer | Motor criativo, templates e rotas de API (back e front) | — |
+O nome vem da **dose**: cada peça mostra quanto veio do que já funcionou (memória) e quanto veio do que está em alta (tendência). A metade anil da marca é a memória, e a metade brasa é a tendência.
 
-Num time de três, os três são Developers. PO e Scrum Master acumulam essas responsabilidades com a sua frente técnica.
+## O que já funciona
 
-### Responsabilidades
+Tudo abaixo está no ar em https://capsula-mvp.vercel.app e foi conferido em produção ([QA em produção](docs/qa-producao.md)).
 
-- **Product Owner (João Batista):** mantém e ordena o Product Backlog, escreve os critérios de aceitação com o time, aceita ou recusa os itens na Sprint Review e responde pelo valor do produto diante da banca, inclusive no pitch.
-- **Scrum Master (Hector):** facilita Planning, Review e Retrospective, acompanha a daily, remove impedimentos e garante que o acordo de trabalho e a Definition of Done sejam seguidos.
-- **Developers (os três):** definem como o trabalho é feito, quebram os itens em tasks, estimam e entregam incrementos que cumprem a Definition of Done.
+| Tela | O que faz |
+|---|---|
+| **Estúdio** (`/`) | Briefing com exemplo pronto, desconto automático, até 4 públicos e geração de 3 variações por canal e público. Sugere temas da época ("Agora na saúde") que preenchem o briefing |
+| **Galeria** | Peças em feed 1:1, story 9:16 e banner 16:9 com o manual da marca fictícia, filtros por público e canal e download em PNG no tamanho real (1080×1080, 1080×1920 e 1920×1080) |
+| **Bula** | Indicação, composição, dose (memória × tendência), evidências com fonte e data, contraindicações (resultado do checklist) e posologia |
+| **Aprovação** | Quatro estados (rascunho, em revisão, aprovado, publicado), com o nome de quem mudou e o histórico. Peça bloqueada não avança, e o servidor confere de novo a cada mudança |
+| **Roteiros** | Reels ou TikTok de 15 s e comercial de 15 s e 30 s, cena a cena, com gancho nos 3 primeiros segundos e música liberada para uso comercial |
+| **Memória** (`/memoria`) | 300 campanhas de teste, filtros por canal e público e as combinações que renderam mais e menos, com explicação |
+| **Radar** (`/radar`) | Tendências e sazonalidade de saúde com fonte, data e validade |
+| **Ano da saúde** (`/saude`) | 33 condições com intensidade por mês, filtros por tema, causa e região e ficha com produtos da farmácia |
+| **Painel de ganho** (`/ganho`) | Mede tempo de geração, variações e peças barradas e compara com o processo de hoje por premissas declaradas e editáveis |
+| **Design system** (`/design-system`) | Os componentes da Cápsula e a linguagem das formas farmacêuticas |
 
-### Acordo de trabalho
+Funciona no computador e no celular, sem rolagem horizontal de 360 a 1280 px. O passo a passo com telas está no [Guia de uso](docs/guia-de-uso.md).
 
-- **Daily assíncrona no grupo do WhatsApp**, todo dia até as 10h: o que fiz, o que vou fazer e o que me bloqueia. Bloqueio é marcado como **[BLOQUEIO]** e o Scrum Master responde no mesmo dia.
-- **Decisão só vale no grupo do time.** Decisão por mensagem privada não conta.
-- **Cada task tem um dono só** e fica no quadro do GitHub Projects com status atualizado.
-- **Ninguém commita direto na `main`.** Tudo entra por Pull Request revisado, no padrão descrito em [Fluxo de trabalho](#fluxo-de-trabalho-git).
-- **Revisão de PR no mesmo dia** em que ele é aberto, seguindo o rodízio João → Ivaldo → Hector → João.
-- **Travou por mais de 2 horas?** Avise no grupo em vez de esperar a daily seguinte.
-- **Confidencialidade:** nada do enunciado, nem o nome da empresa cliente, sai do time. Nenhum dado real entra no repositório e nenhuma chave entra em commit.
-- **Mudança neste acordo** é proposta na Retrospective e só vale com o aceite dos três.
+## Como funciona por dentro
+
+```
+ Navegador (Next.js · React)                       Servidor (rotas de API na Vercel)
+ ─────────────────────────────                     ─────────────────────────────────────────────
+ Estúdio ── briefing ──► POST /api/gerar ──► valida (Zod) ──► cache? ──► motor
+                                                                          │
+                       CampaignDataSource (mock | csv) ──► contexto ◄─────┤ memória (ranking)
+                                                                          │ radar + Ano da saúde
+                                                                          ▼
+                                                     prompt ──► Gemini (principal + reservas)
+                                                                          │   └─ falhou? moldes fixos
+                                                                          ▼
+                                       montagem: fonte das evidências pelo sistema, dose, ids limpos
+                                                                          ▼
+                                                     governança: checklist RDC 96/2008 e marca
+ Galeria + Bula ◄──────────────────────────────────── variações + roteiros + avisos
+ Aprovação ── POST /api/pecas/status ──► refaz o checklist ──► transição válida?
+ Memória ── GET /api/memoria/ranking        Radar ── GET /api/radar        Ganho ── navegador
+```
+
+Detalhes em [Arquitetura](docs/arquitetura.md), [Motor criativo](docs/motor.md) e [API](docs/api.md).
 
 ## Stack
 
-Tudo em planos gratuitos:
-
-- **[Next.js](https://nextjs.org)** (App Router) + **TypeScript**: front e rotas de API num único projeto
-- **Dados de teste** atrás de um adaptador (`CampaignDataSource`): a demonstração roda sem banco, e a fonte CSV ([docs/dados-reais.md](docs/dados-reais.md)) prova que trocar de fonte não muda o sistema. O **Supabase** (Postgres) é a próxima fase, para a aprovação persistir entre sessões
-- **[Gemini](https://ai.google.dev)**: modelo de linguagem na camada gratuita; sem chave, o motor gera por moldes fixos ("modo sem IA")
-- **[Vercel](https://vercel.com)**: deploy conectado ao repositório, com preview a cada PR
-
-## Estrutura de pastas
-
-```
-.github/        # modelos de PR e de issue
-docs/
-  visao-produto.md          # visão e Product Goal
-  definition-of-done.md     # DoD
-  ambiente-colaborativo.md  # acessos e quadro
-  sprints/                  # planning, review e retro de cada sprint
-  templates/                # modelos de Review e Retrospective
-```
-
-A estrutura do código (`app/`, `lib/`, `supabase/`) entra junto com o scaffold do Next.js.
+| Camada | Escolha | Por quê |
+|---|---|---|
+| Aplicação | **Next.js 16** (App Router) + **React 19** + **TypeScript** | Tela e API num projeto só, com deploy direto |
+| Contratos | **Zod 4** | A mesma validação roda no navegador e no servidor |
+| IA | **Gemini** (`gemini-3.5-flash-lite`, com `gemini-3.5-flash` e `gemini-3.1-flash-lite` de reserva) | Camada gratuita e resposta em 6 a 15 s nos testes em produção |
+| Peças | Templates HTML/CSS + `html-to-image` | PNG no tamanho real, sem imagem inventada por IA |
+| Dados | Adaptador `CampaignDataSource` (dados de teste ou CSV) | Trocar a fonte não muda tela nem motor |
+| Testes | **Vitest** | 98 testes em 13 arquivos |
+| Deploy | **Vercel** | Publicação automática a cada merge na `main` |
 
 ## Como rodar localmente
 
-Disponível depois do scaffold. O fluxo previsto é:
+Requisitos: Node.js 20 ou mais recente e npm.
 
 ```bash
 git clone https://github.com/joaobatis1a/capsula.git
 cd capsula
 npm install
-cp .env.example .env.local   # só a chave do Gemini é necessária (opcional)
-npm run dev
+cp .env.example .env.local   # opcional: coloque a GEMINI_API_KEY
+npm run dev                  # http://localhost:3000
 ```
 
-Chaves ficam só no `.env.local`, que nunca entra em commit.
+Sem chave, a Cápsula gera pelos **moldes fixos** ("modo sem IA") e avisa na tela. Com a `GEMINI_API_KEY`, gera com o modelo.
 
-## Fluxo de trabalho (Git)
+| Comando | O que faz |
+|---|---|
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm test` | Os 98 testes automatizados |
+| `npm run lint` | ESLint |
+| `npx tsc --noEmit` | Checagem de tipos |
+| `npm run build` | Build de produção |
 
-**Ninguém commita direto na `main`.** Toda tarefa nasce numa branch própria e entra por Pull Request revisado.
+| Variável | Para quê | Padrão |
+|---|---|---|
+| `GEMINI_API_KEY` | Chave do Gemini | vazia (modo sem IA) |
+| `GEMINI_MODEL` | Modelo principal | `gemini-3.5-flash-lite` |
+| `GEMINI_FALLBACK_MODELS` | Reservas, na ordem | `gemini-3.5-flash,gemini-3.1-flash-lite` |
+| `DATA_SOURCE` | `mock` (dados de teste) ou `csv` | `mock` |
+| `CSV_CAMPANHAS`, `CSV_MAPPING` | Arquivo de campanhas e o mapa das colunas, com `DATA_SOURCE=csv` | exemplos em `mocks/` |
 
-- **Branches:** `tipo/tarefa-descricao`, por exemplo `feat/1.4-galeria-variacoes` ou `fix/2.1-bula-evidencias`
-- **Commits:** `tipo(escopo): descrição`, por exemplo `feat(galeria): gera variações nos três formatos`
-- **Tipos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-- **Revisão:** rodízio João → Ivaldo → Hector → João; merge com **Squash and merge**
-O passo a passo completo (primeiro acesso, branches, commits, PRs e problemas comuns) está no Manual do Colaborador, nos documentos de planejamento do time.
+Chaves ficam só no `.env.local` (fora do Git) e nas variáveis da Vercel. Para ligar os dados da empresa, veja [Dados reais](docs/dados-reais.md).
 
-## Documentação do projeto
+## Qualidade
 
-- [`docs/`](docs/) — atividades das aulas do hackathon
-- Escopo geral, guias individuais, manual do colaborador, design system e pitch — fora deste repositório, nos documentos de planejamento do time
+- **98 testes automatizados** cobrindo contratos, adaptador de dados (mock e CSV com a mesma suíte), ranking da Memória, motor, troca de modelo, governança, fluxo de aprovação, roteiros, oferta, painel de ganho e Ano da saúde. Resumo em [Qualidade e testes](docs/qualidade.md).
+- **QA do motor com 10 briefings** em produção, um por tipo de produto, incluindo os casos que precisam ser bloqueados ([qa-motor.md](docs/qa-motor.md)).
+- **QA em produção** do fluxo completo, por API e em tela, no computador e no celular ([qa-producao.md](docs/qa-producao.md)).
+- Cada mudança entrou por Pull Request, e cada merge na `main` publicou sozinho na Vercel.
+
+## Documentação
+
+O índice completo está em [`docs/README.md`](docs/README.md).
+
+| Para | Leia |
+|---|---|
+| Entender o produto | [Visão do produto](docs/visao-produto.md) · [Guia de uso](docs/guia-de-uso.md) · [Manual de marca](docs/manual-de-marca.md) |
+| Entender o código | [Arquitetura](docs/arquitetura.md) · [Motor criativo](docs/motor.md) · [API](docs/api.md) · [Dados reais](docs/dados-reais.md) |
+| Conferir a qualidade | [Qualidade e testes](docs/qualidade.md) · [QA do motor](docs/qa-motor.md) · [QA em produção](docs/qa-producao.md) · [Ano da saúde](docs/ano-da-saude-verificacao.md) |
+| Ver o processo | [Definition of Done](docs/definition-of-done.md) · [Sprints](docs/sprints/) · [Uso de IA](docs/uso-de-ia.md) |
+| Próximos passos | [Limitações e próximos passos](docs/limitacoes-e-proximos-passos.md) |
+| O pitch | [Roteiro de falas e cobertura da rubrica](docs/pitch-roteiro-de-falas.md) |
+
+## Limitações conhecidas
+
+Ditas com a mesma clareza no pitch e na tela:
+
+- **Dados de teste.** O histórico de 300 campanhas é sintético, e os padrões que o ranking encontra foram plantados para provar que ele funciona. A tela marca tudo como "dados de teste".
+- **Regras mínimas.** O checklist cobre o essencial da RDC 96/2008 e do CONAR, mas **não é parecer jurídico** e precisa de revisão jurídica antes de uso real.
+- **Ano da saúde aproximado.** 5 das 33 condições foram conferidas com fonte pública; as outras são aproximações ([conferência](docs/ano-da-saude-verificacao.md)).
+- **Radar ilustrativo.** Os itens de tendência são exemplos com fonte e data; a coleta automática é a próxima fase.
+- **Sem banco.** A aprovação vive na sessão do navegador; persistência e permissões por papel vêm depois.
+- **IA em plano gratuito.** O Gemini pode responder com cota esgotada; o motor troca de modelo e, no limite, usa os moldes fixos, sempre com aviso.
+
+O plano para cada uma está em [Limitações e próximos passos](docs/limitacoes-e-proximos-passos.md).
+
+## Time e processo
+
+| Pessoa | Papel no Scrum | GitHub |
+|---|---|---|
+| João Batista | Product Owner e Developer | [@joaobatis1a](https://github.com/joaobatis1a) |
+| Hector | Scrum Master e Developer | — |
+| Ivaldo | Developer | — |
+
+- **Duas sprints:** Sprint 1 de 15 a 20/10 (app, motor e interface) e Sprint 2 de 21 a 25/10 (governança, integração, QA e pitch), com Planning, Review e Retrospective registrados em [`docs/sprints/`](docs/sprints/).
+- **Backlog no GitHub:** 45 issues com critérios de aceitação, 40 fechadas com evidência ([quadro](https://github.com/users/joaobatis1a/projects/1)).
+- **Fluxo de Git:** ninguém commita na `main`; tudo entra por Pull Request com Squash and merge, no padrão `tipo(escopo): descrição`.
+- **Definition of Done** em cinco blocos: código, funcionamento, interface, dados e registro ([DoD](docs/definition-of-done.md)).
 
 ## Uso de IA generativa
 
-Registro exigido pelo workshop de Scrum (Sprint 0). Ferramenta usada: **Claude (Anthropic)**, no claude.ai e no Claude Code.
+A IA aparece em dois lugares, e os dois estão registrados:
 
-| Missão | Em que a IA ajudou | O que foi corrigido ou rejeitado pelo time |
-|---|---|---|
-| 1. Organização do Scrum Team | Explicou as responsabilidades do Scrum, propôs a divisão PO/SM e redigiu o acordo de trabalho a partir do manual do colaborador | O time escolheu PO, SM e canal da daily. A IA sugeriu acumular PO e SM numa pessoa só como opção, e a ideia foi rejeitada para separar valor de processo |
-| 2. Visão do Produto e Product Goal | Redigiu a visão e o Product Goal a partir do escopo do projeto e separou fatos, hipóteses, dúvidas e riscos | Pendente de validação do time |
-| 3. Product Backlog e critérios de aceitação | Converteu as tarefas dos guias individuais em 16 itens com critérios no formato Dado/Quando/Então, propôs a ordem e criou as issues e labels | Ordem pendente de validação do PO. O pitch entrou no backlog marcado como entrega final, fora da Sprint 1 |
-| 4. Definition of Done e registros leves | Ampliou a definição de pronto do manual do colaborador para uma DoD em cinco blocos e redigiu os modelos de Review e Retrospective | Pendente de validação do time |
-| 5. Ambiente colaborativo | Configurou o quadro do GitHub Projects com colunas do Scrum, criou os modelos de PR e issue e documentou acessos | A proteção da `main` sugerida no manual não está disponível no GitHub Free para repositório privado. Virou acordo do time |
-| 6. Sprint Planning 1 e tasks | Propôs as datas das sprints e o Sprint Goal 1, quebrou os itens #1 a #5 em 16 tasks com dono e criou o campo Sprint no quadro | Datas aprovadas pelo PO. As tasks precisam do aceite dos Developers, que são donos do plano de execução |
-
-### Sprint 1: app, motor e interface
-
-Ferramenta: **Claude Code** (Anthropic), escrevendo e testando o código junto com o PO. Toda mudança entrou por Pull Request, e o PO decidiu o que ficava.
-
-| Entrega | Em que a IA ajudou | O que foi corrigido ou rejeitado |
-|---|---|---|
-| Contratos, adaptador e motor (#20 a #26, #30 a #32) | Escreveu os contratos de dados, o adaptador com mock, o histórico sintético de 300 campanhas, o ranking da memória e o motor com cadeia Groq, OpenRouter e Gemini, com modo sem IA | O motor com modelo real **ainda não foi testado**: não há chave configurada. Só o modo sem IA e o contrato foram verificados |
-| Governança e aprovação (#7, #8) | Escreveu o checklist (RDC 96/2008 e termos proibidos) e o fluxo de quatro estados validado no servidor | O conjunto de regras é mínimo e **não é parecer jurídico**. A IA pesquisou a norma, mas o texto oficial da RDC 96/2008 precisa ser lido pelo time |
-| Peças e marca (#27, #28, #29) | Criou a marca fictícia "Farmácia Exemplo" e os templates nos três formatos | O PO pediu marca fictícia por confidencialidade. Nenhuma imagem é gerada por IA |
-| Ano da saúde (#36) | Montou a base de 33 condições com intensidade por mês, a partir de fontes públicas | As faixas de intensidade são **aproximadas** e a IA não conseguiu abrir o InfoGripe. O time deve conferir nos boletins vigentes antes de apresentar |
-| Interface e movimento | Propôs e implementou animações, cabeçalho, rodapé e formas farmacêuticas | O PO **rejeitou** o fundo de bolinhas, a cartela do hero, a faixa de bula em carrossel e o seletor de segmentos, e pediu a base de saúde muito mais ampla. Bugs achados e corrigidos na revisão: uma animação que sumiu e sobra horizontal no celular |
-| Painel de ganho (#12) | Escreveu a medição e a comparação | A comparação com o processo de hoje usa **premissas declaradas e editáveis**, e não são dado da empresa |
+1. **No produto:** o Gemini escreve as peças e os roteiros. O sistema, e não o modelo, escreve a fonte de cada evidência, calcula a dose, roda o checklist e exige uma pessoa para aprovar.
+2. **No desenvolvimento:** o time usou o Claude (Anthropic) para escrever código, testes e documentação, sempre por Pull Request revisado. O registro por missão e por sprint, com o que a IA fez e o que o time corrigiu ou rejeitou, está em [Uso de IA generativa](docs/uso-de-ia.md).
 
 ## Dados e confidencialidade
 
-- Nenhum dado real da empresa cliente é usado: tudo é público ou sintético, com a origem marcada.
-- Dados sintéticos são gerados por script e identificados como tal na interface ("nos dados de teste").
-- O repositório é privado e de uso restrito ao time durante o hackathon.
+- Nenhum dado real da empresa cliente é usado: tudo é sintético ou público, com a origem marcada na tela.
+- A marca das peças é fictícia ("Farmácia Exemplo"), definida em `lib/marca/marca.json`.
+- Nenhuma chave entra em commit; o repositório é privado e de acesso restrito ao time e aos avaliadores.
