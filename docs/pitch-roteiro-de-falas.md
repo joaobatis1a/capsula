@@ -4,7 +4,7 @@
 
 ## Em resumo
 
-- **Duração:** 527 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,5 min**; em ritmo calmo (130) são **4,1 min**. Com as pausas entre slides, fica em 3:46 no ritmo normal (1:14 de margem) e 4:18 num ritmo bem calmo (0:42 de margem). Ensaie no ritmo normal.
+- **Duração:** 543 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,6 min**; em ritmo calmo (130) são **4,2 min**. Com as pausas entre slides, fica em 3:52 no ritmo normal (1:08 de margem) e 4:26 num ritmo bem calmo (0:34 de margem). Ensaie no ritmo normal.
 - **10 slides.** Dois deles (5 e 6) são **gravações de tela do sistema** com a fala por cima; os outros oito são slides.
 - **Fechamento:** QR code para https://capsula-mvp.vercel.app, para a banca testar na hora.
 - **Honestidade:** os dados são de teste, a marca é fictícia e as contas de impacto e margem usam premissas declaradas. Isso está dito nos slides e nas notas.
@@ -16,13 +16,13 @@
 | 1 | Capa | 0:00 a 0:12 | Slide | 26 |
 | 2 | O problema | 0:12 a 0:35 | Slide | 55 |
 | 3 | A proposta | 0:35 a 1:05 | Slide | 71 |
-| 4 | O diferencial | 1:05 a 1:33 | Slide | 65 |
-| 5 | Já funciona | 1:33 a 1:51 | GRAVAÇÃO DE TELA 1 | 42 |
-| 6 | Bula e governança | 1:51 a 2:13 | GRAVAÇÃO DE TELA 2 | 52 |
-| 7 | Impacto esperado | 2:13 a 2:39 | Slide | 61 |
-| 8 | Margem de lucro | 2:39 a 3:00 | Slide | 49 |
-| 9 | Viabilidade | 3:00 a 3:31 | Slide | 73 |
-| 10 | Fechamento | 3:31 a 3:46 | Slide | 33 |
+| 4 | O diferencial | 1:05 a 1:39 | Slide | 81 |
+| 5 | Já funciona | 1:39 a 1:58 | GRAVAÇÃO DE TELA 1 | 42 |
+| 6 | Bula e governança | 1:58 a 2:20 | GRAVAÇÃO DE TELA 2 | 52 |
+| 7 | Impacto esperado | 2:20 a 2:46 | Slide | 61 |
+| 8 | Margem de lucro | 2:46 a 3:07 | Slide | 49 |
+| 9 | Viabilidade | 3:07 a 3:38 | Slide | 73 |
+| 10 | Fechamento | 3:38 a 3:52 | Slide | 33 |
 
 Os tempos são para ritmo normal de fala. No ritmo calmo, cada bloco cresce cerca de 15%, e ainda cabe nos 5 minutos.
 
@@ -88,15 +88,15 @@ Se perguntarem o que é "dose": é quanto de cada peça vem da memória do que f
 
 Se perguntarem o que é a bula: é a ficha de cada peça, com para quem ela é, de onde veio cada ideia (campanha, tendência ou época do ano), o que foi checado e onde publicar. O nome brinca com a bula de remédio, porque o cliente é uma farmácia.
 
-### 4. O diferencial (1:05 a 1:33)
+### 4. O diferencial (1:05 a 1:39)
 
-> Por que não usar uma IA qualquer? Porque a Cápsula lembra: antes de escrever, a IA lê o que deu certo, uma técnica chamada RAG. Porque ela conhece a regra: barra promessa de cura e anúncio de remédio com receita. E porque tudo tem fonte. A dose certa do nome é isso: um pouco do que já funcionou, um pouco do que está em alta.
+> E por que não usar uma IA qualquer? Por três motivos. Primeiro, a Cápsula tem memória: antes de escrever, ela consulta as campanhas que deram certo. Essa técnica se chama RAG. Segundo, ela conhece as regras da Anvisa: barra promessa de cura e anúncio de remédio que precisa de receita. Terceiro, cada peça mostra de onde veio a ideia. E daí vem o nome, criatividade na dose certa: um pouco do que já funcionou, um pouco do que está em alta.
 
-*Direção:* Faça a pergunta do título olhando para a banca, como quem antecipa a dúvida dela. Faça uma pausa curta antes de "a dose certa do nome é isso".
+*Direção:* Faça a pergunta do título olhando para a banca, como quem antecipa a dúvida dela. Conte nos dedos: primeiro, segundo, terceiro, apontando para cada cartão. Faça uma pausa curta antes de "e daí vem o nome".
 
 Se perguntarem o que é RAG: antes de pedir o texto ao modelo, a Cápsula busca no histórico de campanhas, no radar de tendências e no calendário de saúde, e manda essas evidências junto com o pedido. O histórico tem 300 campanhas sintéticas (dados de teste).
 
-### 5. Já funciona (1:33 a 1:51)
+### 5. Já funciona (1:39 a 1:58)
 
 **GRAVAÇÃO DE TELA 1.** O slide inteiro é trocado pela gravação do sistema.
 
@@ -104,7 +104,7 @@ Se perguntarem o que é RAG: antes de pedir o texto ao modelo, a Cápsula busca 
 
 Os números: mediana de 12,4 s em 10 briefings de teste (um caso passou de 55 s antes de limitarmos o tempo da geração, já corrigido). Testes: 96 no repositório em 22/10. As peças usam o manual de uma marca fictícia, "Farmácia Exemplo"; nenhuma imagem é gerada por IA.
 
-### 6. Bula e governança (1:51 a 2:13)
+### 6. Bula e governança (1:58 a 2:20)
 
 **GRAVAÇÃO DE TELA 2.** O slide inteiro é trocado pela gravação do sistema.
 
@@ -112,7 +112,7 @@ Os números: mediana de 12,4 s em 10 briefings de teste (um caso passou de 55 s 
 
 O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONAR; não é parecer jurídico. A gravação mostra o site em produção, com dados de teste.
 
-### 7. Impacto esperado (2:13 a 2:39)
+### 7. Impacto esperado (2:20 a 2:46)
 
 > E o que muda? Pela nossa estimativa, uma peça que hoje leva uns quarenta minutos passa a pedir uns três de revisão. Ganha o time, com mais tempo para criar, e o gestor, com menos risco. No piloto, a meta é comprovar noventa por cento menos tempo por peça. E dá para levar a outras categorias, regiões e canais da rede.
 
@@ -120,7 +120,7 @@ O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONA
 
 A conta: 40 minutos por peça hoje é uma estimativa do time, a confirmar com a empresa (não é dado dela). Na Cápsula, cerca de 3 minutos de revisão por peça mais uns 12 segundos de geração. (40 − 3,2) ÷ 40 = 92%; a meta do piloto é comprovar pelo menos 90%. Se a organização informar o tempo real antes da banca, troque o número.
 
-### 8. Margem de lucro (2:39 a 3:00)
+### 8. Margem de lucro (2:46 a 3:07)
 
 > E a conta fecha? Cada peça custa cerca de um centavo de inteligência artificial. Se cobrarmos, por exemplo, um real por peça, numa assinatura por marca, a margem bruta fica em noventa e nove por cento, antes dos custos fixos. O preço de verdade a gente define no piloto.
 
@@ -132,7 +132,7 @@ Como as contas foram feitas (para responder à banca):
 - Conta: R$ 0,01 de custo de IA ÷ R$ 1,00 de preço = 1%; margem bruta cerca de 99%. Se perguntarem do tempo poupado (40 min para 3 min de revisão), é a premissa do slide 7, não dado da empresa.
 - Custos fixos (hospedagem, banco, equipe) ficam fora desta conta.
 
-### 9. Viabilidade (3:00 a 3:31)
+### 9. Viabilidade (3:07 a 3:38)
 
 > E dá para fazer de verdade? Já está no ar, com Next.js, TypeScript e a IA do Gemini, na Vercel. Funciona em etapas: briefing, busca nos dados, geração, checagem da regra e aprovação. Hoje usa dados de teste, mas a empresa liga os dela por planilha, sem mudar nada, e as tendências vêm de fontes públicas. O que falta são dados reais, um plano pago de IA e uma revisão jurídica das regras.
 
@@ -145,7 +145,7 @@ Detalhes se perguntarem:
 - Gemini: modelo principal gemini-3.5-flash-lite, com 2 modelos de reserva e, por último, moldes fixos, sempre com aviso na tela.
 - Banco (Supabase): ficou fora desta entrega; hoje a aprovação vive no navegador.
 
-### 10. Fechamento (3:31 a 3:46)
+### 10. Fechamento (3:38 a 3:52)
 
 > Então, lembra daquela oferta que chega amanhã? Com a Cápsula, ela sai mais rápido, dentro das regras e com uma pessoa decidindo. O QR code está na tela: testem agora mesmo. Muito obrigado!
 
@@ -153,7 +153,7 @@ Detalhes se perguntarem:
 
 Aviso para o ensaio: o site usa o plano gratuito do Gemini, que tem cota curta. Se muita gente testar ao mesmo tempo, algumas gerações saem dos moldes fixos, e a tela avisa. O site continua funcionando. Teste o QR code com o celular antes da gravação.
 
-Tempo total das falas: cerca de 527 palavras: 3:46 em ritmo normal, com as pausas entre slides (1:14 de margem nos 5 minutos), e 4:18 em ritmo bem calmo (0:42 de margem). Ensaie no ritmo normal.
+Tempo total das falas: cerca de 543 palavras: 3:52 em ritmo normal, com as pausas entre slides (1:08 de margem nos 5 minutos), e 4:26 em ritmo bem calmo (0:34 de margem). Ensaie no ritmo normal.
 
 ## Cobertura da rubrica (25 critérios)
 
@@ -174,9 +174,9 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 | Critério | Slide | Onde está na fala |
 |---|---|---|
 | 1. Solução existente ou forma atual citada | 2, 4 | "Hoje eles usam planilhas, agência e ferramentas de IA genéricas, que não lembram o que funcionou nem conhecem as regras" |
-| 2. Diferencial afirmado | 4 | "Por que não usar uma IA qualquer? Porque a Cápsula lembra... Porque ela conhece a regra... E porque tudo tem fonte" |
+| 2. Diferencial afirmado | 4 | "E por que não usar uma IA qualquer? Por três motivos. Primeiro, a Cápsula tem memória... Segundo, ela conhece as regras da Anvisa... Terceiro, cada peça mostra de onde veio a ideia" |
 | 3. Funcionalidade além do básico | 3, 4, 6 | a bula de cada peça; o bloqueio de "promessa de cura e anúncio de remédio com receita"; a dose de cada peça |
-| 4. Tecnologia avançada | 4, 9 | "antes de escrever, a IA lê o que deu certo, uma técnica chamada RAG"; "a IA do Gemini" |
+| 4. Tecnologia avançada | 4, 9 | "antes de escrever, ela consulta as campanhas que deram certo. Essa técnica se chama RAG"; "a IA do Gemini" |
 | 5. Duas ou mais fontes combinadas | 3, 4, 9 | "o que já funcionou, o que está em alta e a época do ano"; "um pouco do que já funcionou, um pouco do que está em alta" |
 
 ### IMPACTO
@@ -217,7 +217,7 @@ Conferido contra os slides **e** contra a fala. O que a banca avalia é o que é
 |---|---|
 | Margem de lucro | Slide 8 e fala: o custo de IA é de cerca de R$ 0,01 por peça; com um preço de exemplo de R$ 1,00 por peça a margem bruta é de ≈ 99%, antes dos custos fixos. O preço real fica para o piloto |
 | Cores que incentivam a compra | Laranja e amarelo de etiqueta de oferta sobre o anil da marca, com fundo creme; sem nome nem marca da empresa |
-| No máximo 5 minutos, com margem | 10 slides, cerca de 3:46 em ritmo normal e 4:18 em ritmo calmo |
+| No máximo 5 minutos, com margem | 10 slides, cerca de 3:52 em ritmo normal e 4:26 em ritmo calmo |
 | QR code final | Slide 10, para https://capsula-mvp.vercel.app, com a URL escrita embaixo |
 | Problema, proposta, impacto, o que foi construído e viabilidade | Slides 2, 3, 7, 5 e 6, 9 |
 
