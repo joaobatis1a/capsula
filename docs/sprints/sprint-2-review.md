@@ -30,6 +30,8 @@
 | #13 | Testes e guia para dados reais | Fonte CSV com a mesma suíte do adaptador ([dados-reais.md](../dados-reais.md)) |
 | #15 | Responsividade e acabamento | 360, 768 e 1280 px sem rolagem lateral |
 | #37 | Música liberada nos roteiros | Só música com uso comercial é sugerida |
+| #14 | Integração e deploy estável | 24 de 24 passos do QA em produção ([qa-producao.md](../qa-producao.md)); fechada em 25/10 |
+| #16 | Pitch de 5 minutos | 10 slides, falas de 3:58 e duas animações do sistema ([roteiro](../pitch-roteiro-de-falas.md)); fechada em 25/10 |
 | #80, #83 | QA do motor e em produção | [qa-motor.md](../qa-motor.md) · [qa-producao.md](../qa-producao.md) |
 
 Também entraram: troca automática de modelo com orçamento de tempo (PRs #88, #90, #92, #98), briefing mais enxuto com desconto calculado pelos preços (PRs #95, #96) e, depois do congelamento, uma correção de erro (PR #111: id interno aparecia na fala do roteiro).
@@ -40,8 +42,6 @@ Também entraram: troca automática de modelo com orçamento de tempo (PRs #88, 
 |---|---|---|---|
 | #9 e #75 | Radar com fontes reais | Não coube na agenda do time até o congelamento | Próxima fase: coleta automática |
 | #76 | Conferência completa do Ano da saúde | 5 de 33 condições conferidas | Próxima fase: conferir as 28 restantes com os boletins |
-| #14 | Integração e deploy estável | Entregue na prática: os 24 passos do QA em produção passaram em 25/10, incluindo teclado, roteiro bloqueado em tela e o fluxo no celular por emulação. Fica aberta só por decisão do PO | Fechar com a evidência do [QA em produção](../qa-producao.md); aparelho físico como complemento |
-| #16 | Pitch e vídeo | Material pronto; falta o ensaio do time e a apresentação | Fecha em 26/10 |
 
 ## Feedback recebido
 
