@@ -1,11 +1,11 @@
-# Pitch da Cápsula: roteiro de falas, gravações e cobertura da rubrica
+# Pitch da Cápsula: roteiro de falas, animações e cobertura da rubrica
 
-Última atualização: 22/10/2026. Slides: https://claude.ai/artifact/Rq8MbmpRLwmiz9FdGx9nem (as notas de cada slide trazem a mesma fala).
+Última atualização: 25/10/2026. Slides: https://claude.ai/artifact/Rq8MbmpRLwmiz9FdGx9nem (as notas de cada slide trazem a mesma fala).
 
 ## Em resumo
 
 - **Duração:** 558 palavras de fala. Em ritmo normal (150 palavras por minuto) são **3,7 min**; em ritmo calmo (130) são **4,3 min**. Com as pausas entre slides, fica em 3:58 no ritmo normal (1:02 de margem) e 4:33 num ritmo bem calmo (0:27 de margem). Ensaie no ritmo normal.
-- **10 slides.** Dois deles (5 e 6) são **gravações de tela do sistema** com a fala por cima; os outros oito são slides.
+- **10 slides.** Dois deles (5 e 6) trazem **animações do sistema em motion**, que repetem em laço enquanto você fala; os MP4 em alta estão em Downloads.
 - **Fechamento:** QR code para https://capsula-mvp.vercel.app, para a banca testar na hora.
 - **Honestidade:** os dados são de teste, a marca é fictícia e as contas de impacto e margem usam premissas declaradas. Isso está dito nos slides e nas notas.
 
@@ -17,8 +17,8 @@
 | 2 | O problema | 0:12 a 0:35 | Slide | 55 |
 | 3 | A proposta | 0:35 a 1:05 | Slide | 71 |
 | 4 | O diferencial | 1:05 a 1:40 | Slide | 84 |
-| 5 | Já funciona | 1:40 a 1:59 | GRAVAÇÃO DE TELA 1 | 42 |
-| 6 | Bula e governança | 1:59 a 2:21 | GRAVAÇÃO DE TELA 2 | 52 |
+| 5 | Já funciona | 1:40 a 1:59 | ANIMAÇÃO DO SISTEMA 1 | 42 |
+| 6 | Bula e governança | 1:59 a 2:21 | ANIMAÇÃO DO SISTEMA 2 | 52 |
 | 7 | Impacto esperado | 2:21 a 2:51 | Slide | 72 |
 | 8 | Margem de lucro | 2:51 a 3:13 | Slide | 50 |
 | 9 | Viabilidade | 3:13 a 3:44 | Slide | 73 |
@@ -26,43 +26,30 @@
 
 Os tempos são para ritmo normal de fala. No ritmo calmo, cada bloco cresce cerca de 15%, e ainda cabe nos 5 minutos.
 
-## O que é slide e o que é gravação do sistema
+## As animações dos slides 5 e 6
 
-| Trecho | No vídeo aparece | Quando fica o slide |
-|---|---|---|
-| Slides 1 a 4 | Slide | sempre |
-| **Slide 5, "Já funciona"** | **Gravação de tela 1** (24 s) | o slide é a reserva se a gravação falhar |
-| **Slide 6, "Bula e governança"** | **Gravação de tela 2** (23 s) | o slide é a reserva se a gravação falhar |
-| Slides 7 a 10 | Slide | sempre; no 10 o QR code fica na tela até o fim |
+São animações em motion feitas a partir do fluxo real do app, com dados de teste. Ficam dentro dos slides e repetem em laço; a fala vai por cima, na mesma ordem do que aparece.
 
-A fala nas gravações é a mesma do slide, dita por cima da tela em movimento. Os slides 5 e 6 trazem capturas reais do sistema em produção, então também funcionam sozinhos.
+### Animação 1 (16 s, slide 5)
 
-### Gravação de tela 1 (24 s, slide 5)
-
-| Tempo | O que mostrar |
+| Tempo | O que aparece |
 |---|---|
-| 0:00 | Estúdio aberto em capsula-mvp.vercel.app; clique em "Preencher exemplo" |
-| 0:05 | Cursor em Preço normal (79,90) e Preço da oferta (55,90): o campo Desconto mostra 30%, "economiza R$ 24,00" |
-| 0:11 | Clique em "Gerar variações" (a tela de dosagem aparece por 2 s) |
-| 0:15 | A galeria com 12 peças; rolar devagar mostrando feed, story e banner |
+| 0:00 | O formulário de nova campanha; o produto é digitado |
+| 0:02 | Preço normal R$ 79,90 e preço da oferta R$ 55,90 |
+| 0:04 | O desconto de 30% aparece sozinho |
+| 0:05 | Os três públicos são escolhidos e a pessoa clica em gerar |
+| 0:09 | As 12 peças surgem em cascata, com os números 12 peças, 3 formatos e 12 s |
 
-### Gravação de tela 2 (23 s, slide 6)
+### Animação 2 (22 s, slide 6)
 
-| Tempo | O que mostrar |
+| Tempo | O que aparece |
 |---|---|
-| 0:00 | Na galeria do protetor solar, clique em "Ver bula" na primeira peça |
-| 0:05 | Rolar até "Evidências": uma etiqueta Memória e uma Sazonalidade, cada uma com origem e data |
-| 0:11 | Fechar e abrir uma peça do briefing do antibiótico (tipo "Medicamento com prescrição"), marcada "Bloqueado" |
-| 0:15 | Rolar até "Contraindicações": a caixa vermelha "Medicamento com prescrição não pode ter propaganda para o público em geral (RDC 96/2008)" |
-| 0:20 | Voltar ao topo: o cartão de Aprovação diz "Bloqueada pelo checklist. Uma peça bloqueada não avança" |
+| 0:00 | A peça e a bula dela: memória, tendência, calendário e regras, cada item destacando a parte da peça que explica |
+| 0:09 | Um pedido de antibiótico é digitado e bloqueado, com a regra da Anvisa (RDC 96/2008) |
+| 0:15 | O fluxo rascunho, em revisão, aprovado por uma pessoa e publicado |
+| 0:19 | "Nada vai ao ar sem uma pessoa aprovar." |
 
-### Antes de gravar
-
-- Gere os dois briefings (protetor solar e antibiótico) **antes**, fora do take. Assim a gravação não gasta cota do Gemini nem espera resposta.
-- Confirme que a peça não diz "Molde fixo" na bula e que o canto do site mostra "IA: Gemini". Se disser molde fixo, refaça a geração (o Gemini às vezes falha; o sistema avisa).
-- Grave em 1920×1080, com o zoom do navegador em 125% a 150%, para a letra ficar legível no vídeo.
-- Use uma janela limpa, sem outras abas, sem dados pessoais, e só dados de teste.
-- A voz pode ser gravada depois e colocada por cima, para a fala não atropelar o cursor.
+Se a banca perguntar: é uma animação do fluxo, não uma captura de tela. O sistema de verdade está no QR code do último slide.
 
 ## Fala de cada slide
 
@@ -98,7 +85,7 @@ Se perguntarem o que é RAG: antes de pedir o texto ao modelo, a Cápsula busca 
 
 ### 5. Já funciona (1:40 a 1:59)
 
-**GRAVAÇÃO DE TELA 1.** O slide inteiro é trocado pela gravação do sistema.
+**ANIMAÇÃO DO SISTEMA 1.** A animação roda dentro do slide enquanto você fala.
 
 > E já está funcionando. A pessoa digita o preço normal e o da oferta, e o desconto de trinta por cento aparece sozinho. Um clique, e em uns doze segundos saem doze peças nos três formatos. Já testamos com dez campanhas diferentes.
 
@@ -106,11 +93,11 @@ Os números: mediana de 12,4 s em 10 briefings de teste (um caso passou de 55 s 
 
 ### 6. Bula e governança (1:59 a 2:21)
 
-**GRAVAÇÃO DE TELA 2.** O slide inteiro é trocado pela gravação do sistema.
+**ANIMAÇÃO DO SISTEMA 2.** A animação roda dentro do slide enquanto você fala.
 
 > Esta é a bula de uma peça: ela mostra de onde veio cada ideia. Agora, o mais importante: se alguém tenta anunciar um antibiótico, que só se vende com receita, a Cápsula bloqueia na hora e explica o motivo, a regra da Anvisa. E nada vai ao ar sem uma pessoa aprovar.
 
-O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONAR; não é parecer jurídico. A gravação mostra o site em produção, com dados de teste.
+O checklist é mínimo e inspirado na RDC 96/2008 da Anvisa e no código do CONAR; não é parecer jurídico. A animação reproduz o fluxo do site em produção, com dados de teste.
 
 ### 7. Impacto esperado (2:21 a 2:51)
 
