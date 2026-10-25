@@ -36,7 +36,7 @@ Um item do Product Backlog só está **pronto** quando cumpre **todos** os ponto
 
 - [ ] A issue foi movida para **Done** no quadro do GitHub Projects, com o PR vinculado (`Closes #n`).
 - [ ] Se o item mudou alguma premissa, a decisão foi registrada no README ou em `docs/`.
-- [ ] Se a IA ajudou no item, o uso foi registrado na seção "Uso de IA generativa" do README.
+- [ ] Se a IA ajudou no item, o uso foi registrado em [Uso de IA generativa](uso-de-ia.md).
 
 ## Como a DoD muda
 

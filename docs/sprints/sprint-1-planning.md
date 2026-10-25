@@ -32,10 +32,10 @@ Itens escolhidos pelo Product Owner, na ordem do backlog. O plano de execução 
 
 ## Como saber que o Sprint Goal foi atingido
 
-- [ ] Na URL da Vercel, um briefing gera de 3 a 5 variações por canal com o modelo real.
-- [ ] As variações aparecem na galeria em feed, story e banner com o manual de marca sintético.
-- [ ] O motor recebe as combinações do ranking no contexto, e elas vêm marcadas como sintéticas.
-- [ ] Todos os itens entregues cumprem a [Definition of Done](../definition-of-done.md).
+- [x] Na URL da Vercel, um briefing gera de 3 a 5 variações por canal com o modelo real. *Resultado na [Review](sprint-1-review.md).*
+- [x] As variações aparecem na galeria em feed, story e banner com o manual de marca sintético.
+- [x] O motor recebe as combinações do ranking no contexto, e elas vêm marcadas como sintéticas.
+- [x] Todos os itens entregues cumprem a [Definition of Done](../definition-of-done.md).
 
 ## Premissas e riscos
 
