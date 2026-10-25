@@ -51,7 +51,8 @@ Também entraram: troca automática de modelo com orçamento de tempo (PRs #88, 
 | Mentoria (sugestão) | Considerar manter o foco na rede, em vez de "farmácias em geral" | Discutida pelos integrantes e adotada em acordo com a maioria: "o time de marketing da rede", com escala por categorias, regiões e canais (PR #107) |
 | Mentoria (sugestão) | Considerar menos texto nos slides, mantendo a fala | Discutida pelos integrantes e adotada em acordo com a maioria: slides enxutos, com a explicação na fala (PRs #107 e #109) |
 | Product Owner | Falas confusas e robóticas em versões anteriores | Reescritas em tom de conversa (PRs #102, #106, #108, #109) |
-| [time] | [a preencher] | [a preencher] |
+| Time | Saldo positivo e bom trabalho, mesmo com pequenos contratempos pelo caminho | Registrado; os aprendizados estão na [Retrospective](sprint-2-retrospective.md) |
+| Mentoria | Acompanhamento desde o começo, com disponibilidade sempre que o time precisou | O time agradece; esse apoio foi essencial |
 
 ## Mudanças no Product Backlog
 

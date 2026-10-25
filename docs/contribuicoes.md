@@ -4,6 +4,10 @@
 
 O escopo foi dividido entre os três integrantes em 15/10, nos guias individuais ([Hector](guia-hector.md) e [Ivaldo](guia-ivaldo.md)), com prazo em 22/10. Este registro compara o que foi combinado com o que foi entregue. Ele se baseia só no que é verificável: commits, Pull Requests, issues e arquivos recebidos.
 
+## Formação do time
+
+O time começou com **cinco pessoas** e terminou com **três**. Nos primeiros dias do hackathon, uma pessoa desistiu e outra não foi possível contatar. A divisão de papéis e de entregas já foi feita para os três integrantes que seguiram, o que explica o volume de trabalho de cada um.
+
 ## Contexto
 
 Os três conciliaram o hackathon com compromissos pessoais, e cada um teve uma disponibilidade diferente ao longo das duas semanas. Por isso, em vários momentos o João tomou a frente para adiantar partes do trabalho, para que o prazo não ficasse em risco.
@@ -11,6 +15,10 @@ Os três conciliaram o hackathon com compromissos pessoais, e cada um teve uma d
 Em alguns momentos, o João e a mentoria conversaram sobre como trazer um pouco mais de envolvimento de todos. Isso fez o Hector e o Ivaldo participarem mais na reta final, com entregas, ajuda nas decisões e retorno sobre o pitch.
 
 **O saldo do time é positivo, e não há nada a criticar em nenhum dos integrantes.** As diferenças de volume abaixo refletem a disponibilidade de cada um, e não o compromisso com o projeto.
+
+## Apoio da mentoria
+
+A mentoria entrou em contato com o time desde o começo e sempre se dispôs a ajudar, na medida do que podia, sempre que foi necessário. Esse acompanhamento foi essencial para o time se organizar, manter o ritmo e chegar à entrega. O time agradece.
 
 ## Em números
 
@@ -36,7 +44,7 @@ Em alguns momentos, o João e a mentoria conversaram sobre como trazer um pouco 
 
 ### Hector (H1 a H5)
 
-O Hector enviou, em 22/10 às 19:59, um pacote de arquivos (`backend_hector.zip`, cerca de 3.500 linhas). Segundo o próprio pacote, o código foi escrito com IA, num ambiente sem rede: as migrations não foram executadas contra um banco de verdade, e os 74 testes rodaram com bibliotecas simuladas. O pacote foi escrito para um contrato de dados diferente do que o repositório já usava desde 15/10.
+O Hector enviou, em 22/10, um pacote de arquivos (`backend_hector.zip`, cerca de 3.500 linhas). Segundo o próprio pacote, o código foi escrito com IA, num ambiente sem rede: as migrations não foram executadas contra um banco de verdade, e os 74 testes rodaram com bibliotecas simuladas. O pacote foi escrito para um contrato de dados diferente do que o repositório já usava desde 15/10.
 
 | Entrega | Situação | Evidência |
 |---|---|---|
