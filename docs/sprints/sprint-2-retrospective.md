@@ -9,7 +9,7 @@
 | Ação | Resultado |
 |---|---|
 | Cada entrega começa com um PR aberto em rascunho no primeiro dia | **Não cumprida.** As entregas individuais abertas na Sprint 2 (#75, #76) não ganharam PR até o congelamento |
-| Daily no grupo até as 10h | **Parcial.** [o time confirma] |
+| Daily no grupo até as 10h | **Cumprida, em geral com saldo positivo.** A daily assíncrona no grupo ajudou a manter o alinhamento mesmo com agendas diferentes |
 | Quem entrega algo escrito fora do repositório confere antes com o contrato e os testes | **Sem caso novo** nesta sprint |
 
 ## O que funcionou

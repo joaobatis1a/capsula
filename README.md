@@ -11,7 +11,7 @@
 
 A Cápsula transforma um briefing de campanha em peças prontas para revisão nos formatos feed, story e banner. Antes de escrever, ela consulta o que já funcionou nas campanhas anteriores, o que está em alta e a época do ano na saúde. Cada peça sai com uma **Bula**, que mostra de onde veio cada ideia, e passa por um checklist das regras da Anvisa antes de chegar a uma pessoa, que é quem aprova.
 
-> **Projeto do Hackathon Avanade · Desafio 1, Creative AI.** Entrega em 26/10/2026, por um time de três pessoas.
+> **Projeto do Hackathon Avanade · Desafio 1, Creative AI.** Entrega em 26/10/2026, por um time de três pessoas (o time começou com cinco).
 > **Confidencial:** o enunciado do desafio não é publicado e a empresa cliente não é identificada. Todos os dados do protótipo são de teste ou de fontes públicas, e a marca das peças é fictícia ("Farmácia Exemplo").
 
 **Teste agora:** https://capsula-mvp.vercel.app (clique em "Preencher exemplo" e em "Gerar variações")
@@ -183,6 +183,7 @@ O plano para cada uma está em [Limitações e próximos passos](docs/limitacoes
 | Hector | Scrum Master e Developer | [@Hector-Borges](https://github.com/Hector-Borges) |
 | Ivaldo | Developer | [@IvaldoMonteiro](https://github.com/IvaldoMonteiro) |
 
+- **Formação do time:** o time começou com cinco pessoas e terminou com três, porque uma desistiu e outra não foi possível contatar nos primeiros dias. O acompanhamento da mentoria desde o começo foi essencial para o time se organizar e chegar à entrega.
 - **Duas sprints:** Sprint 1 de 15 a 20/10 (app, motor e interface) e Sprint 2 de 21 a 25/10 (governança, integração, QA e pitch), com Planning, Review e Retrospective registrados em [`docs/sprints/`](docs/sprints/).
 - **Backlog no GitHub:** 45 issues com critérios de aceitação, 42 fechadas com evidência; as 3 abertas (Radar real e conferência completa do Ano da saúde) são a próxima fase ([quadro](https://github.com/users/joaobatis1a/projects/1)).
 - **Fluxo de Git:** ninguém commita na `main`; tudo entra por Pull Request com Squash and merge, no padrão `tipo(escopo): descrição`.

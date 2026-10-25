@@ -33,7 +33,8 @@ Também entraram nesta janela, de itens da Sprint 2: #6 Bula, #10 Roteiros, #13 
 
 ## Feedback recebido
 
-- **De quem:** [time, professor, mentoria] · **Feedback:** [a preencher] · **Ação:** [a preencher]
+- **Time:** saldo positivo e bom trabalho, mesmo com pequenos contratempos pelo caminho. **Ação:** registrado; os aprendizados estão na [Retrospective](sprint-1-retrospective.md).
+- **Mentoria:** acompanhamento desde o começo, com disponibilidade sempre que o time precisou. **Ação:** o time agradece; esse apoio foi essencial.
 
 ## Mudanças no Product Backlog
 
