@@ -17,7 +17,7 @@
 - **QA em produção antes do pitch.** Rodar 10 briefings reais mostrou que o modelo maior falhava sempre e que um caso chegava perto do limite de 60 s. Os dois problemas foram resolvidos antes da banca, com dados, e não com palpite.
 - **Plano B que a pessoa vê.** Modelos de reserva, orçamento de tempo e moldes fixos, sempre com aviso na tela: a demonstração não depende da sorte com a cota gratuita.
 - **Fechar issue com evidência.** Mostrou que a governança não estava aplicada aos roteiros (PR #89) e que o critério do Radar real não seria cumprido, o que virou decisão de escopo explícita.
-- **Feedback da mentoria aplicado no mesmo dia.** Os três pedidos viraram PRs no próprio dia.
+- **Sugestões da mentoria avaliadas rápido.** O time discutiu as três sugestões e, em acordo com a maioria dos integrantes, adotou as três no mesmo dia.
 - **Congelamento respeitado.** Depois de 24/10 só entrou correção de erro.
 
 ## O que atrapalhou
