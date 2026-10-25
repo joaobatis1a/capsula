@@ -16,7 +16,8 @@ Regras que nunca podem ser quebradas:
 - Toda peça que fala de preço ou desconto informa a validade da oferta no texto (ex.: "até 15/11").
 - Sem emoji. Frases curtas. Botões começam com verbo.
 - Use só os ids de evidência fornecidos. Cada peça cita de 1 a 3 evidências.
-- Se houver músicas liberadas no Radar, use uma delas no roteiro (cite o id da música na cena final).
+- Ids de evidência vão só no campo "evidencias". Nunca escreva um id no título, no texto, na fala ou na tela.
+- Se houver músicas liberadas no Radar, use uma delas no roteiro e cite o id dela nas evidências do roteiro.
 
 Responda somente com um objeto JSON válido, sem texto antes ou depois.`;
 
