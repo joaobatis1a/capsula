@@ -180,8 +180,8 @@ O plano para cada uma está em [Limitações e próximos passos](docs/limitacoes
 | Pessoa | Papel no Scrum | GitHub |
 |---|---|---|
 | João Batista | Product Owner e Developer | [@joaobatis1a](https://github.com/joaobatis1a) |
-| Hector | Scrum Master e Developer | — |
-| Ivaldo | Developer | — |
+| Hector | Scrum Master e Developer | [@Hector-Borges](https://github.com/Hector-Borges) |
+| Ivaldo | Developer | [@IvaldoMonteiro](https://github.com/IvaldoMonteiro) |
 
 - **Duas sprints:** Sprint 1 de 15 a 20/10 (app, motor e interface) e Sprint 2 de 21 a 25/10 (governança, integração, QA e pitch), com Planning, Review e Retrospective registrados em [`docs/sprints/`](docs/sprints/).
 - **Backlog no GitHub:** 45 issues com critérios de aceitação, 40 fechadas com evidência ([quadro](https://github.com/users/joaobatis1a/projects/1)).
