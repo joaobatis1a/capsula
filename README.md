@@ -187,6 +187,7 @@ O plano para cada uma está em [Limitações e próximos passos](docs/limitacoes
 - **Backlog no GitHub:** 45 issues com critérios de aceitação, 40 fechadas com evidência ([quadro](https://github.com/users/joaobatis1a/projects/1)).
 - **Fluxo de Git:** ninguém commita na `main`; tudo entra por Pull Request com Squash and merge, no padrão `tipo(escopo): descrição`.
 - **Definition of Done** em cinco blocos: código, funcionamento, interface, dados e registro ([DoD](docs/definition-of-done.md)).
+- **Contribuições:** o escopo foi dividido entre os três em 15/10. Quem entregou cada parte, com a evidência no repositório, está em [Contribuições por integrante](docs/contribuicoes.md).
 
 ## Uso de IA generativa
 
