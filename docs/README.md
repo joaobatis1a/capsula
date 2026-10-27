@@ -59,7 +59,7 @@
 
 | Documento | Conteúdo |
 |---|---|
-| [Roteiro de falas](pitch-roteiro-de-falas.md) | Os 10 slides, a fala de cada um, as animações do sistema e a cobertura dos 25 critérios da rubrica |
+| [Roteiro de falas](pitch-roteiro-de-falas.md) · [vídeo gravado](https://drive.google.com/file/d/1AvHGMe0L-eU0a4wTjmnpy4tsK1Twsqg5/view?usp=drive_link) | O vídeo do pitch (4:27), os 10 slides, a fala de cada um, as animações do sistema e a cobertura dos 25 critérios da rubrica |
 
 ## 6. Registro das atividades do workshop
 

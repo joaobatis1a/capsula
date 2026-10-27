@@ -1,6 +1,8 @@
 # Pitch da Cápsula: roteiro de falas, animações e cobertura da rubrica
 
-Última atualização: 25/10/2026. Slides: https://claude.ai/artifact/Rq8MbmpRLwmiz9FdGx9nem (as notas de cada slide trazem a mesma fala).
+Última atualização: 26/10/2026. Slides: https://claude.ai/artifact/Rq8MbmpRLwmiz9FdGx9nem (as notas de cada slide trazem a mesma fala).
+
+**Vídeo do pitch gravado (4:27, dentro dos 5 minutos):** https://drive.google.com/file/d/1AvHGMe0L-eU0a4wTjmnpy4tsK1Twsqg5/view?usp=drive_link
 
 ## Em resumo
 
