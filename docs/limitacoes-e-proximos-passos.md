@@ -1,6 +1,6 @@
 # Limitações e próximos passos
 
-**Atualizado em:** 25/10/2026 · O que o protótipo ainda não faz, o que falta para virar produto e como medir se valeu a pena.
+**Atualizado em:** 26/10/2026 · O que o protótipo ainda não faz, o que falta para virar produto e como medir se valeu a pena.
 
 > Tudo o que está aqui é **fora do escopo da entrega de 26/10**. O protótipo foi congelado em 24/10; depois disso só entraram correções de erro.
 
@@ -14,7 +14,7 @@
 | **Ano da saúde** | 33 condições; 5 conferidas com fonte pública, 28 aproximadas | Conferir todas exige os boletins oficiais à mão | Conferência das 28 restantes com InfoGripe e boletins do Ministério da Saúde, com recorte por região |
 | **Persistência** | Aprovação, histórico e métricas vivem no navegador | Banco tirado do escopo em 22/10, porque não mudava a demonstração | Banco (Supabase/Postgres) para peças, status, histórico e cache compartilhados entre pessoas |
 | **Permissões** | Qualquer pessoa aprova informando o nome | Sem login no protótipo | Login e papéis: quem cria, quem revisa, quem aprova e o jurídico |
-| **IA** | Gemini na camada gratuita, com reservas e moldes fixos | Custo zero no hackathon | Plano pago, com cota estável e o modelo principal respondendo sempre |
+| **IA** | Gemini na camada gratuita, com reservas e moldes fixos. Quando o modelo principal demora, a geração pode levar cerca de um minuto (o teste do Ivaldo no celular, em 26/10, mostrou isso) | Custo zero no hackathon, e a função da Vercel tem limite de 60 s | Plano pago, com cota estável e o modelo principal respondendo sempre |
 | **Imagem das peças** | Templates com a arte da marca; a IA só escreve o texto | Fidelidade à marca e nenhum risco de imagem inventada | Banco de imagens aprovadas da marca, escolhidas pelo contexto |
 | **Aprendizado** | A peça publicada aparece na Memória da sessão | Sem banco, o resultado não volta ao ranking | Métricas reais da peça publicada (impressões, cliques, vendas) voltando ao ranking |
 | **Dose** | Heurística: peso das evidências de memória sobre o total | O peso de cada evidência é declarado pelo modelo | Calibrar a dose com o resultado real das campanhas |

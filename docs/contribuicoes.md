@@ -60,7 +60,7 @@ Além da frente original, o João escreveu o restante do sistema e assumiu as en
 
 ## Fora do repositório
 
-O Hector e o Ivaldo ajudaram em decisões de apoio ao longo do projeto, nas conversas do time, e participaram das decisões sobre o pitch, tomadas em acordo com a maioria. Essas contribuições não aparecem no Git, mas fazem parte do resultado.
+O Hector e o Ivaldo ajudaram em decisões de apoio ao longo do projeto, nas conversas do time, e participaram das decisões sobre o pitch, tomadas em acordo com a maioria. Em 26/10, o Ivaldo testou o sistema no celular e no computador, na produção, e enviou gravações e capturas ao João. O teste achou três falhas, que o João corrigiu no mesmo dia (PR #121), e está registrado no [QA em produção](qa-producao.md#teste-em-aparelho-físico-feito-pelo-ivaldo-2610). Essas contribuições não aparecem no Git, mas fazem parte do resultado.
 
 ## Como este registro foi feito
 

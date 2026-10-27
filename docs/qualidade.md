@@ -8,7 +8,7 @@
 |---|---|
 | Testes automatizados | **98**, em 13 arquivos, todos passando |
 | Briefings testados em produção | **10**, um para cada tipo de produto e para os casos de bloqueio ([qa-motor.md](qa-motor.md)) |
-| Passos do QA em produção | **24 de 24** executados com sucesso; o fluxo no celular foi por emulação, e o aparelho físico fica como complemento ([QA em produção](qa-producao.md)) |
+| Passos do QA em produção | **24 de 24** executados com sucesso; o fluxo no celular foi por emulação, e o Ivaldo testou a geração e a galeria em um aparelho físico em 26/10, o que achou 3 falhas, corrigidas no PR #121 ([QA em produção](qa-producao.md)) |
 | Larguras de tela conferidas | 360, 390, 768 e 1280 px, sem rolagem horizontal |
 | Falhas encontradas em produção e corrigidas | 3: falso positivo do superlativo (PR #90), peças escuras no modo escuro do navegador (PR #93), id de evidência no texto do roteiro (PR #111) |
 
@@ -51,7 +51,7 @@ Os testes não chamam a IA nem a internet: o cliente do modelo é simulado e os 
 
 | Item | Por quê | Como fazer |
 |---|---|---|
-| Fluxo completo num aparelho físico | Feito por emulação de celular (390×844, toque), não num aparelho de verdade | Abrir o site num celular e repetir o passo 6.4 |
+| Aprovação e publicação num aparelho físico | Feitas por emulação de celular (390×844, toque). No aparelho físico, o Ivaldo testou até a geração e a galeria (26/10) | Abrir o site num celular e repetir o passo 6.4 até "Publicar" |
 | Qualidade do texto por mais de uma pessoa | A avaliação de leitura foi de uma pessoa só | Rodada com o time de marketing no piloto |
 | O modelo principal em condições normais | Na rodada de QA ele estava com cota esgotada ou sobrecarregado | Repetir a rodada com plano pago |
 | Teste de carga | O protótipo usa a camada gratuita da IA | Fora do escopo do hackathon |

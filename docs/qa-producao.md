@@ -57,11 +57,29 @@ Legenda: ✅ passou · ⬜ ainda não executado · ❌ falhou (vira issue com pa
 |---|---|---|---|
 | 6.1 | Sem rolagem horizontal em 360, 768 e 1280px em nenhuma das 5 telas | Chrome (22/10) | ✅ |
 | 6.2 | Barra de baixo no celular recolhe ao rolar; alvos de toque de 44px | Chrome (15/10) | ✅ |
-| 6.3 | Tabela do Ano da saúde legível no celular depois do PR #73 | Chrome, tela de 390 px (iframe) | ✅ nome de 112 px, cabeçalho preso, meses legíveis. ⬜ aparelho real |
-| 6.4 | Fluxo completo no celular | Emulação de iPhone 13 (390×844, toque), 25/10 · Aparelho real | ✅ emulação: "Preencher exemplo" → gerar (15,1 s) → Ver bula → nome → Enviar para revisão → Aprovar → Publicar, com o carimbo PUBLICADO ([captura](img/qa-celular-publicado.jpg)); a peça aparece na Memória em "Publicadas pelo Estúdio"; página com 390 px para tela de 390 px, sem rolagem lateral. ⬜ aparelho físico, que só uma pessoa pode fazer |
+| 6.3 | Tabela do Ano da saúde legível no celular depois do PR #73 | Chrome, tela de 390 px (iframe) | ✅ nome de 112 px, cabeçalho preso, meses legíveis. ⬜ aparelho real (o Ivaldo testou a tela de geração no celular em 26/10; ver abaixo) |
+| 6.4 | Fluxo completo no celular | Emulação de iPhone 13 (390×844, toque), 25/10 · Aparelho real | ✅ emulação: "Preencher exemplo" → gerar (15,1 s) → Ver bula → nome → Enviar para revisão → Aprovar → Publicar, com o carimbo PUBLICADO ([captura](img/qa-celular-publicado.jpg)); a peça aparece na Memória em "Publicadas pelo Estúdio"; página com 390 px para tela de 390 px, sem rolagem lateral. Aparelho físico: o Ivaldo testou a geração e a galeria em 26/10 ([resultado abaixo](#teste-em-aparelho-físico-feito-pelo-ivaldo-2610)); a aprovação até "Publicar" em aparelho físico segue só por emulação |
+
+## Teste em aparelho físico, feito pelo Ivaldo (26/10)
+
+Em 26/10, o Ivaldo testou o sistema na produção, no celular e no computador, e enviou gravações e capturas de tela ao João. É o complemento que o [passo 6.4](#6-computador-e-celular) deixava em aberto (a execução de 25/10 foi por emulação). O teste usou a versão `2cac5dd`, a da época do envio, e achou três problemas. Os três foram corrigidos no mesmo dia, no PR #121.
+
+| # | O que o Ivaldo viu | Evidência | Causa | Correção (PR #121) |
+|---|---|---|---|---|
+| 1 | No celular, o briefing de 4 públicos e 1 canal (12 peças) ficou cerca de 1 minuto com a tela de "Dosando 12 peças" e terminou em "Unexpected token 'A', "An error o"… is not valid JSON" | ![Erro no celular](img/qa-ivaldo-celular-erro.jpg) | A função da Vercel passou do limite de 60 s e devolveu texto puro, não JSON. Os modelos demoraram para responder, e uma tentativa começada perto do limite não tinha tempo de acabar | Teto de 54 s contado desde o início: cada tentativa recebe só o tempo que resta. A tela mostra uma mensagem clara com "Tentar de novo" quando a resposta não é JSON |
+| 2 | No computador, o modelo falhou para "Jovens de 18 a 24" com "Unexpected non-whitespace character after JSON at position 1143", e o sistema usou os moldes fixos nesse público | ![Erro de JSON](img/qa-ivaldo-json.jpg) | O modelo escreveu texto depois do objeto JSON, com outra chave `}`, e o leitor cortava até a última chave do texto | O leitor percorre as chaves, respeitando as aspas, e para onde o primeiro objeto fecha. Três testes novos cobrem o caso |
+| 3 | O aviso saía como "Usamos **O** Gemini (…) como reserva", com o artigo em maiúscula no meio da frase | ![Aviso de reserva](img/qa-ivaldo-reserva.jpg) | O mesmo texto servia para começo e meio de frase | O artigo vai em minúscula no meio da frase |
+
+O teste também confirmou o que o sistema faz por projeto:
+
+- **Reserva de modelo:** quando o `gemini-3.5-flash-lite` e o `gemini-3.5-flash` não responderam a tempo, o `gemini-3.1-flash-lite` assumiu, e a galeria mostrou as 12 variações com o aviso do que aconteceu.
+- **Limite de cota:** com 3 públicos, 4 canais e 3 formatos, o sistema avisou "Para caber na cota, geramos 2 variação(ões) por canal e público, em vez de 3" e entregou 24 variações, uma delas bloqueada pela governança ([captura](img/qa-ivaldo-cota.jpg)).
+- **Navegação no celular:** o menu inferior (Estúdio, Memória, Radar, Saúde, Ganho), o formulário e o botão de gerar funcionaram no aparelho dele.
+
+Nas gravações do Ivaldo, o fluxo foi até a geração e a galeria. A aprovação até "Publicar" em aparelho físico não aparece nelas e continua conferida só por emulação. A espera pela geração depende do modelo e pode chegar a cerca de um minuto quando os modelos principais demoram; a [lista de limitações](limitacoes-e-proximos-passos.md) trata disso.
 
 ## Falhas registradas
 
-Duas falhas encontradas em tela e corrigidas no mesmo dia: peças pretas no navegador em modo escuro (PR #93, 22/10) e o id interno de uma evidência aparecendo na fala de um roteiro (PR #111, 25/10). Nenhuma outra falha de produto nas execuções por API e em tela. Os 24 passos foram executados; o único complemento possível é repetir o 6.3 e o 6.4 num aparelho físico. Se alguém fizer, anotar a data e abrir uma issue por falha, com passos e print.
+Cinco falhas encontradas em tela e corrigidas no mesmo dia: três no teste do Ivaldo em aparelho físico (26/10, PR #121, descritas acima), peças pretas no navegador em modo escuro (PR #93, 22/10) e o id interno de uma evidência aparecendo na fala de um roteiro (PR #111, 25/10). Nenhuma outra falha de produto nas execuções por API e em tela. Os 24 passos foram executados, e o fluxo no celular teve também o teste do Ivaldo em aparelho físico (26/10). Novas falhas devem ser anotadas com data, passos e print.
 
 Observação de risco já conhecida: o Gemini responde 503 ou 429 com alguma frequência no plano gratuito. O sistema avisa e usa reserva, mas o texto pode sair de molde fixo. Antes da banca, gerar uma vez no horário para o cache guardar uma resposta com IA.
