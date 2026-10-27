@@ -70,6 +70,10 @@ Em 26/10, o Ivaldo testou o sistema na produção, no celular e no computador, e
 | 2 | No computador, o modelo falhou para "Jovens de 18 a 24" com "Unexpected non-whitespace character after JSON at position 1143", e o sistema usou os moldes fixos nesse público | ![Erro de JSON](img/qa-ivaldo-json.jpg) | O modelo escreveu texto depois do objeto JSON, com outra chave `}`, e o leitor cortava até a última chave do texto | O leitor percorre as chaves, respeitando as aspas, e para onde o primeiro objeto fecha. Três testes novos cobrem o caso |
 | 3 | O aviso saía como "Usamos **O** Gemini (…) como reserva", com o artigo em maiúscula no meio da frase | ![Aviso de reserva](img/qa-ivaldo-reserva.jpg) | O mesmo texto servia para começo e meio de frase | O artigo vai em minúscula no meio da frase |
 
+Uma revisão do mesmo código achou uma sobra da correção 1: quando o modelo devolvia JSON malformado, a repetição do motor começava com um relógio novo, e duas tentativas lentas ainda podiam passar dos 60 s. Foi corrigida em seguida, com um prazo único para a geração toda (PR #124).
+
+Uma geração de 24 peças no celular (Pixel 7 emulado, 3 públicos e 4 canais), feita na produção depois da primeira correção, levou 15,5 s e respondeu com o modelo principal. Nesse dia o modelo estava rápido, então o caminho lento só está coberto por testes automatizados.
+
 O teste também confirmou o que o sistema faz por projeto:
 
 - **Reserva de modelo:** quando o `gemini-3.5-flash-lite` e o `gemini-3.5-flash` não responderam a tempo, o `gemini-3.1-flash-lite` assumiu, e a galeria mostrou as 12 variações com o aviso do que aconteceu.

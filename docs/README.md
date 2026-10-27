@@ -36,7 +36,7 @@
 
 | Documento | Conteúdo |
 |---|---|
-| [Qualidade e testes](qualidade.md) | Os 98 testes, o que cobrem e o que ainda não foi testado |
+| [Qualidade e testes](qualidade.md) | Os 102 testes, o que cobrem e o que ainda não foi testado |
 | [QA do motor](qa-motor.md) | 10 briefings em produção, um por tipo de produto, e os problemas achados |
 | [QA em produção](qa-producao.md) | O fluxo completo conferido por API e em tela, no computador e no celular |
 | [Ano da saúde](ano-da-saude-verificacao.md) | Conferência das intensidades por mês com fontes públicas |
