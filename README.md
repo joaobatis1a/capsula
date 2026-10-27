@@ -107,7 +107,7 @@ Detalhes em [Arquitetura](docs/arquitetura.md), [Motor criativo](docs/motor.md) 
 | IA | **Gemini** (`gemini-3.5-flash-lite`, com `gemini-3.5-flash` e `gemini-3.1-flash-lite` de reserva) | Camada gratuita e resposta em 6 a 15 s nos testes em produção |
 | Peças | Templates HTML/CSS + `html-to-image` | PNG no tamanho real, sem imagem inventada por IA |
 | Dados | Adaptador `CampaignDataSource` (dados de teste ou CSV) | Trocar a fonte não muda tela nem motor |
-| Testes | **Vitest** | 98 testes em 13 arquivos |
+| Testes | **Vitest** | 102 testes em 13 arquivos |
 | Deploy | **Vercel** | Publicação automática a cada merge na `main` |
 
 ## Como rodar localmente
@@ -127,7 +127,7 @@ Sem chave, a Cápsula gera pelos **moldes fixos** ("modo sem IA") e avisa na tel
 | Comando | O que faz |
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento |
-| `npm test` | Os 98 testes automatizados |
+| `npm test` | Os 102 testes automatizados |
 | `npm run lint` | ESLint |
 | `npx tsc --noEmit` | Checagem de tipos |
 | `npm run build` | Build de produção |
@@ -144,7 +144,7 @@ Chaves ficam só no `.env.local` (fora do Git) e nas variáveis da Vercel. Para 
 
 ## Qualidade
 
-- **98 testes automatizados** cobrindo contratos, adaptador de dados (mock e CSV com a mesma suíte), ranking da Memória, motor, troca de modelo, governança, fluxo de aprovação, roteiros, oferta, painel de ganho e Ano da saúde. Resumo em [Qualidade e testes](docs/qualidade.md).
+- **102 testes automatizados** cobrindo contratos, adaptador de dados (mock e CSV com a mesma suíte), ranking da Memória, motor, troca de modelo, governança, fluxo de aprovação, roteiros, oferta, painel de ganho e Ano da saúde. Resumo em [Qualidade e testes](docs/qualidade.md).
 - **QA do motor com 10 briefings** em produção, um por tipo de produto, incluindo os casos que precisam ser bloqueados ([qa-motor.md](docs/qa-motor.md)).
 - **QA em produção** do fluxo completo, por API e em tela, no computador e no celular ([qa-producao.md](docs/qa-producao.md)).
 - Cada mudança entrou por Pull Request, e cada merge na `main` publicou sozinho na Vercel.

@@ -2,7 +2,7 @@ import "server-only";
 import { z } from "zod";
 import type { CampaignDataSource } from "@/lib/data/types";
 import { ADVERTENCIA_MIP, aplicarGovernanca, checarRoteiro } from "@/lib/governanca/checklist";
-import { completarJSON, lerJSON, ProvedoresFalharamError, temProvedor } from "@/lib/llm/client";
+import { completarJSON, lerJSON, ProvedoresFalharamError, temProvedor, TETO_MS } from "@/lib/llm/client";
 import type { Briefing } from "@/types/briefing";
 import { roteiroSchema, variacaoSchema, type Evidencia, type RespostaGeracao, type Roteiro, type Variacao } from "@/types/variacao";
 import { calcularDose, evidenciaPorId, formatosPara, montarContexto, type Contexto } from "./contexto";
@@ -48,6 +48,8 @@ export async function gerar(briefing: Briefing, fonte: CampaignDataSource): Prom
   if (!usarIA) avisos.push("Nenhuma chave de modelo configurada: as peças vieram de moldes fixos, sem IA.");
 
   let modelo = usarIA ? "" : "sem-ia";
+  // Um só prazo para todas as chamadas ao modelo (inclusive as repetidas), para a função da Vercel não passar de 60s.
+  const prazo = Date.now() + TETO_MS;
   const resultados = await Promise.all(
     pedidos.map(async (pedido) => {
       // Pedido só de roteiro comercial: sai do molde, para gastar uma chamada ao modelo por público e não três.
@@ -60,7 +62,7 @@ export async function gerar(briefing: Briefing, fonte: CampaignDataSource): Prom
           const r = await completarJSON([
             { role: "system", content: SISTEMA },
             { role: "user", content: montarPrompt(briefing, ctx, pedido) },
-          ]);
+          ], { prazo });
           const bruto = respostaLLM.parse(lerJSON(r.texto));
           avisos.push(...r.avisos);
           modelo = `${r.provedor}:${r.modelo}`;

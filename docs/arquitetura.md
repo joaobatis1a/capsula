@@ -48,7 +48,7 @@ A Cápsula é **um projeto Next.js só**: as telas (React) e as rotas de API (fu
 | `lib/ganho/` | Métricas do painel de ganho e premissas editáveis | `metricas.ts` |
 | `lib/oferta.ts` | Leitura de preço em formato brasileiro, cálculo do desconto e texto da oferta | |
 | `components/` | Interface: design system (`ds/`), Estúdio, peças, Memória, Ano da saúde, Ganho, movimento | `estudio/Estudio.tsx`, `estudio/Galeria.tsx`, `ds/Bula.tsx`, `pecas/Peca.tsx` |
-| `tests/` | 98 testes automatizados (Vitest) | ver [qualidade.md](qualidade.md) |
+| `tests/` | 102 testes automatizados (Vitest) | ver [qualidade.md](qualidade.md) |
 | `mocks/` | CSV de exemplo, o `mapping.yaml` e o JSON de exemplo do contrato | |
 
 ## O caminho de uma geração
@@ -58,7 +58,7 @@ A Cápsula é **um projeto Next.js só**: as telas (React) e as rotas de API (fu
 3. **Cache.** Se o briefing já foi gerado nesta instância do servidor, a resposta volta em menos de 1 s, sem gastar cota.
 4. **Contexto.** `montarContexto` pede ao `CampaignDataSource` as campanhas, o Radar e a sazonalidade do mês e dos dois seguintes, e o ranking da Memória filtrado pelos públicos e canais do briefing.
 5. **Plano.** Uma chamada ao modelo por público, em paralelo, com 3 variações por canal nos formatos que o canal aceita (até 24 peças).
-6. **IA.** O cliente tenta o modelo principal 2 vezes, depois os de reserva. Cada tentativa espera até 20 s; passados 45 s no total, não começa outra, para a função da Vercel (limite de 60 s) não morrer. JSON malformado ganha uma nova tentativa.
+6. **IA.** O cliente tenta o modelo principal 2 vezes, depois os de reserva. Cada tentativa espera até 20 s; passados 45 s no total, não começa outra, e nenhuma passa de 54 s desde o início da geração, para a função da Vercel (limite de 60 s) não morrer. JSON malformado ganha uma nova tentativa, que divide o mesmo prazo da primeira.
 7. **Montagem.** O modelo só cita evidências por **id**. O sistema troca cada id pela fonte real ("9 campanhas · 11/2025 a 09/2026 · nos dados de teste"), descarta ids inventados, calcula a dose e limpa ids que escaparam para o texto. Peça fora do contrato vira molde fixo.
 8. **Governança.** O checklist roda em cada peça e em cada roteiro. Regra que falha deixa a peça **Bloqueada**, com o motivo nas contraindicações.
 9. **Resposta.** Variações, roteiros, modelo usado e avisos voltam para a tela. Respostas em que algum público caiu nos moldes fixos não entram no cache.
@@ -75,7 +75,7 @@ A Cápsula é **um projeto Next.js só**: as telas (React) e as rotas de API (fu
 | 22/10 | A fonte de cada evidência é escrita pelo sistema, não pelo modelo | O modelo pode inventar fontes; o id só aponta para o que existe | Toda evidência na Bula é rastreável |
 | 22/10 | Sem banco na entrega (Supabase fora do escopo) | A demonstração funciona com dados de teste atrás do adaptador; o banco não mudaria o que a banca vê | A aprovação vive na sessão do navegador; persistência é a próxima fase |
 | 22/10 | Só o Gemini, com `gemini-3.5-flash-lite` como principal e duas reservas | Em produção, o `gemini-3.5-flash` falhou 10 de 10 vezes por cota ou sobrecarga, e o lite respondeu todas em 6 a 15 s ([qa-motor.md](qa-motor.md)) | Groq e OpenRouter continuam suportados pelo cliente, mas sem chave |
-| 22/10 | Orçamento de 20 s por tentativa e 45 s no total | Um caso levou 55 s, perto do limite de 60 s da função | No pior caso, a pessoa recebe moldes fixos com aviso, nunca um erro |
+| 22/10 | Orçamento de 20 s por tentativa e 45 s no total (em 26/10, teto de 54 s com prazo único para a geração toda, depois do teste do Ivaldo no celular) | Um caso levou 55 s, perto do limite de 60 s da função | No pior caso, a pessoa recebe moldes fixos com aviso, nunca um erro |
 | 22/10 | Checklist refeito no servidor a cada mudança de status | O status que vem da tela não é confiável | Uma peça bloqueada nunca avança, mesmo com a tela adulterada |
 | 22/10 | Cache não guarda respostas com moldes fixos | Uma falha passageira da IA não deve ficar presa no cache | A próxima tentativa do mesmo briefing chama a IA de novo |
 | 25/10 | Ids de evidência fora do texto das peças e roteiros | Em produção, uma fala de roteiro saiu com "[rad-musica-1]" | Prompt corrigido e limpeza no servidor, com teste (PR #111) |
@@ -102,7 +102,7 @@ A Cápsula é **um projeto Next.js só**: as telas (React) e as rotas de API (fu
 | Geração com IA, um público | 6 a 15 s na maioria dos casos | [qa-motor.md](qa-motor.md), 10 briefings em 22/10 |
 | Briefing de exemplo, 2 públicos e 12 peças | 9,5 s | captura em produção, 25/10 |
 | Mesmo briefing de novo (cache) | 0 a 1 s | [qa-motor.md](qa-motor.md) |
-| Pior caso registrado | 55,5 s, antes do orçamento de tempo (hoje limitado a 45 s) | [qa-motor.md](qa-motor.md) |
+| Pior caso registrado | 55,5 s, antes do orçamento de tempo (hoje limitado a 54 s, com prazo único para a geração toda) | [qa-motor.md](qa-motor.md) |
 
 ## Onde mexer
 

@@ -15,7 +15,7 @@
 ## Como rodar
 
 ```bash
-npm test            # os 98 testes (Vitest), em cerca de 5 s
+npm test            # os 102 testes (Vitest), em cerca de 5 s
 npx tsc --noEmit    # checagem de tipos
 npm run lint        # ESLint
 npm run build       # build de produção
@@ -32,7 +32,7 @@ Os testes não chamam a IA nem a internet: o cliente do modelo é simulado e os 
 | `csv.test.ts` | 12 | **A mesma suíte do adaptador** roda contra o CSV de exemplo; as 300 campanhas do CSV alimentam o ranking sem mudar nada nele; linha inválida é ignorada com o motivo |
 | `ranking.test.ts` | 5 | As 5 melhores e as 5 piores combinações; encontra os padrões plantados; escreve o texto da Bula com número, contagem e fonte; ignora combinações com poucas campanhas |
 | `motor.test.ts` | 4 | Sem chave, gera variações válidas para cada público e canal com aviso; públicos em outra ordem dão a mesma chave de cache; não guarda no cache resposta com moldes fixos; tenta de novo antes de cair nos moldes |
-| `llm.test.ts` | 5 | Troca de modelo quando o principal responde 503 duas vezes; não troca quando responde; falha com a lista de avisos quando todos recusam; respeita `GEMINI_FALLBACK_MODELS`; para de tentar depois de 45 s |
+| `llm.test.ts` | 9 | Troca de modelo quando o principal responde 503 duas vezes; não troca quando responde; falha com a lista de avisos quando todos recusam; respeita `GEMINI_FALLBACK_MODELS`; para de tentar depois de 45 s; o prazo único da geração vale também para a segunda chamada; leitura de JSON com texto depois do objeto e com chaves dentro de textos |
 | `governanca.test.ts` | 13 | Bloqueia promessa de cura, promessa de resultado, medicamento com prescrição, diagnóstico, alegação terapêutica e superlativo; exige validade quando fala de desconto e a advertência em medicamento isento; não confunde palavras parecidas nem "o melhor horário" |
 | `fluxo.test.ts` | 4 | Rascunho → Em revisão → Aprovado → Publicado com responsável e data; não aprova direto do rascunho; exige nome e motivo para devolver; peça bloqueada não avança mesmo que a tela diga o contrário |
 | `roteiros.test.ts` | 21 | Reels, TikTok e comercial de 15 e 30 s para cada público, com estrutura de cenas, gancho, evidências do Radar, música liberada e checklist aplicado ao texto |

@@ -30,8 +30,8 @@ const TENTATIVAS = 2;
    melhor devolver os moldes fixos, com aviso, do que perder a resposta inteira. */
 const TIMEOUT_TENTATIVA_MS = 20_000;
 const ORCAMENTO_TOTAL_MS = 45_000;
-/* Teto absoluto, contado do início: nenhuma tentativa pode passar disso, para a resposta sair antes dos 60s da função. */
-const TETO_MS = 54_000;
+/* Teto absoluto da geração inteira: nenhuma tentativa pode passar disso, para a resposta sair antes dos 60s da função. */
+export const TETO_MS = 54_000;
 const GEMINI_PRINCIPAL = "gemini-3.5-flash-lite";
 const GEMINI_RESERVAS = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
 
@@ -73,15 +73,18 @@ export function provedorAtivo(): "Groq" | "OpenRouter" | "Gemini" | null {
 }
 
 /** Pede uma resposta em JSON. Tenta cada provedor (e, no Gemini, cada modelo) até 2 vezes quando há cota ou sobrecarga passageira. */
-export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura?: number; timeoutMs?: number } = {}): Promise<RespostaLLM> {
+export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura?: number; timeoutMs?: number; prazo?: number } = {}): Promise<RespostaLLM> {
   const lista = provedores();
   if (lista.length === 0) throw new SemProvedorError("Nenhuma chave de modelo configurada.");
 
   const avisos: string[] = [];
   const inicio = Date.now();
+  // Prazo único: quem chama várias vezes (como o motor, que repete quando o JSON vem malformado) passa o mesmo prazo.
+  const prazo = opcoes.prazo ?? inicio + TETO_MS;
+  const orcamento = Math.min(inicio + ORCAMENTO_TOTAL_MS, prazo - (TETO_MS - ORCAMENTO_TOTAL_MS));
   for (const p of lista) {
     for (let tentativa = 0; tentativa < TENTATIVAS; tentativa++) {
-      if (Date.now() - inicio > ORCAMENTO_TOTAL_MS) {
+      if (Date.now() > orcamento) {
         avisos.push("O tempo para gerar com o modelo acabou.");
         throw new ProvedoresFalharamError(avisos.join(" "));
       }
@@ -99,7 +102,7 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
             temperature: opcoes.temperatura ?? 0.8,
             response_format: { type: "json_object" },
           }),
-          signal: AbortSignal.timeout(Math.max(1_000, Math.min(opcoes.timeoutMs ?? TIMEOUT_TENTATIVA_MS, TETO_MS - (Date.now() - inicio)))),
+          signal: AbortSignal.timeout(Math.max(1_000, Math.min(opcoes.timeoutMs ?? TIMEOUT_TENTATIVA_MS, prazo - Date.now()))),
         });
 
         // Cota (429) ou sobrecarga passageira (503, 502, 504): espera um pouco e tenta de novo no mesmo provedor.
