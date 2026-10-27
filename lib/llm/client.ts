@@ -30,6 +30,8 @@ const TENTATIVAS = 2;
    melhor devolver os moldes fixos, com aviso, do que perder a resposta inteira. */
 const TIMEOUT_TENTATIVA_MS = 20_000;
 const ORCAMENTO_TOTAL_MS = 45_000;
+/* Teto absoluto, contado do início: nenhuma tentativa pode passar disso, para a resposta sair antes dos 60s da função. */
+const TETO_MS = 54_000;
 const GEMINI_PRINCIPAL = "gemini-3.5-flash-lite";
 const GEMINI_RESERVAS = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
 
@@ -97,7 +99,7 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
             temperature: opcoes.temperatura ?? 0.8,
             response_format: { type: "json_object" },
           }),
-          signal: AbortSignal.timeout(opcoes.timeoutMs ?? TIMEOUT_TENTATIVA_MS),
+          signal: AbortSignal.timeout(Math.max(1_000, Math.min(opcoes.timeoutMs ?? TIMEOUT_TENTATIVA_MS, TETO_MS - (Date.now() - inicio)))),
         });
 
         // Cota (429) ou sobrecarga passageira (503, 502, 504): espera um pouco e tenta de novo no mesmo provedor.
@@ -115,7 +117,7 @@ export async function completarJSON(mensagens: Mensagem[], opcoes: { temperatura
           avisos.push(`${nome(p)} devolveu uma resposta vazia.`);
           break;
         }
-        if (avisos.length) avisos.push(`Usamos ${nome(p)} como reserva.`);
+        if (avisos.length) avisos.push(`Usamos ${nomeNoMeio(p)} como reserva.`);
         return { texto, provedor: p.id, modelo: p.modelo, avisos };
       } catch (e) {
         avisos.push(`${nome(p)} não respondeu (${e instanceof Error && e.name === "TimeoutError" ? "tempo esgotado" : "erro de rede"}).`);
@@ -131,10 +133,28 @@ function nome(p: Provedor) {
   return p.id === "gemini" ? `${base} (${p.modelo})` : base;
 }
 
-/** Extrai o primeiro objeto JSON de um texto (alguns modelos cercam o JSON com crases). */
+/** O nome no meio da frase, com o artigo em minúscula: "Usamos o Gemini (...) como reserva." */
+function nomeNoMeio(p: Provedor) {
+  return nome(p).replace(/^O /, "o ");
+}
+
+/** Extrai o primeiro objeto JSON de um texto (alguns modelos cercam o JSON com crases ou deixam texto depois dele). */
 export function lerJSON(texto: string): unknown {
   const inicio = texto.indexOf("{");
-  const fim = texto.lastIndexOf("}");
-  if (inicio < 0 || fim <= inicio) throw new Error("Resposta sem JSON.");
-  return JSON.parse(texto.slice(inicio, fim + 1));
+  if (inicio < 0) throw new Error("Resposta sem JSON.");
+  // Percorre as chaves, ignorando as que estão dentro de strings, até fechar o primeiro objeto.
+  let nivel = 0;
+  let emTexto = false;
+  let escape = false;
+  for (let i = inicio; i < texto.length; i++) {
+    const c = texto[i];
+    if (emTexto) {
+      if (escape) escape = false;
+      else if (c === "\\") escape = true;
+      else if (c === '"') emTexto = false;
+    } else if (c === '"') emTexto = true;
+    else if (c === "{") nivel++;
+    else if (c === "}" && --nivel === 0) return JSON.parse(texto.slice(inicio, i + 1));
+  }
+  throw new Error("Resposta sem JSON.");
 }
