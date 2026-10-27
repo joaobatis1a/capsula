@@ -160,7 +160,7 @@ O índice completo está em [`docs/README.md`](docs/README.md).
 | Conferir a qualidade | [Qualidade e testes](docs/qualidade.md) · [QA do motor](docs/qa-motor.md) · [QA em produção](docs/qa-producao.md) · [Ano da saúde](docs/ano-da-saude-verificacao.md) |
 | Ver o processo | [Definition of Done](docs/definition-of-done.md) · [Sprints](docs/sprints/) · [Uso de IA](docs/uso-de-ia.md) |
 | Próximos passos | [Limitações e próximos passos](docs/limitacoes-e-proximos-passos.md) |
-| O pitch | [Roteiro de falas e cobertura da rubrica](docs/pitch-roteiro-de-falas.md) |
+| O pitch | [Roteiro de falas e cobertura da rubrica](docs/pitch-roteiro-de-falas.md) · [Vídeo do pitch gravado (4:27)](https://drive.google.com/file/d/1AvHGMe0L-eU0a4wTjmnpy4tsK1Twsqg5/view?usp=drive_link) |
 
 ## Limitações conhecidas
 
