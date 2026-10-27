@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { completarJSON } from "@/lib/llm/client";
+import { completarJSON, lerJSON } from "@/lib/llm/client";
 
 vi.mock("server-only", () => ({}));
 
@@ -39,7 +39,7 @@ describe("cliente do modelo", () => {
     expect(usados).toEqual(["gemini-3.5-flash-lite", "gemini-3.5-flash-lite", "gemini-3.5-flash"]);
     expect(r.modelo).toBe("gemini-3.5-flash");
     expect(r.avisos.join(" ")).toMatch(/gemini-3\.5-flash-lite\) respondeu 503/);
-    expect(r.avisos.join(" ")).toMatch(/Usamos O Gemini \(gemini-3\.5-flash\) como reserva/);
+    expect(r.avisos.join(" ")).toMatch(/Usamos o Gemini \(gemini-3\.5-flash\) como reserva/);
   });
 
   it("não troca de modelo quando o principal responde", async () => {
@@ -78,5 +78,17 @@ describe("cliente do modelo", () => {
     });
     await expect(pedir()).rejects.toThrow(/O tempo para gerar com o modelo acabou/);
     expect(chamadas).toBe(1);
+  });
+});
+
+describe("lerJSON", () => {
+  it("ignora texto depois do objeto, mesmo com outra chave", () => {
+    expect(lerJSON('{"a":1}'+"\n"+'Observação {extra}')).toEqual({ a: 1 });
+  });
+  it("não se confunde com chaves dentro de textos", () => {
+    expect(lerJSON("```json"+"\n"+'{"t":"abre { e fecha }"}'+"\n"+"```")).toEqual({ t: "abre { e fecha }" });
+  });
+  it("falha quando não há objeto", () => {
+    expect(() => lerJSON("sem json")).toThrow();
   });
 });
