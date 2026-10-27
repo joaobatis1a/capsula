@@ -195,7 +195,9 @@ export function Estudio({ publicos, agora, temaInicial, mes }: { publicos: Publi
         }),
         new Promise((r) => setTimeout(r, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800)),
       ]);
-      const json = await res.json();
+      // Quando a função estoura o tempo, a Vercel devolve texto puro (não JSON): trata como erro de geração.
+      const json = await res.json().catch(() => null);
+      if (!json) throw new Error("A geração demorou mais do que o esperado. Toque em \"Tentar de novo\".");
       if (!res.ok) {
         const err = json as ErroApi;
         if (err.campos) setErros(err.campos);
