@@ -81,6 +81,21 @@ describe("cliente do modelo", () => {
   });
 });
 
+describe("prazo único da geração", () => {
+  it("uma segunda chamada com o mesmo prazo não começa quando o tempo já passou", async () => {
+    let chamadas = 0;
+    vi.stubGlobal("fetch", async () => {
+      chamadas++;
+      vi.setSystemTime(Date.now() + 47_000);
+      return resposta(200, '{"ok":true}');
+    });
+    const prazo = Date.now() + 54_000;
+    await completarJSON([{ role: "user", content: "oi" }], { prazo });
+    await expect(completarJSON([{ role: "user", content: "oi" }], { prazo })).rejects.toThrow(/O tempo para gerar com o modelo acabou/);
+    expect(chamadas).toBe(1);
+  });
+});
+
 describe("lerJSON", () => {
   it("ignora texto depois do objeto, mesmo com outra chave", () => {
     expect(lerJSON('{"a":1}'+"\n"+'Observação {extra}')).toEqual({ a: 1 });
