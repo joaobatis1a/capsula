@@ -201,4 +201,4 @@ A IA aparece em dois lugares, e os dois estão registrados:
 
 - Nenhum dado real da empresa cliente é usado: tudo é sintético ou público, com a origem marcada na tela.
 - A marca das peças é fictícia ("Farmácia Exemplo"), definida em `lib/marca/marca.json`.
-- Nenhuma chave entra em commit; o repositório é privado e de acesso restrito ao time e aos avaliadores.
+- O repositório é público; nenhuma chave entra em commit.
